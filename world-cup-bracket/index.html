@@ -105,7 +105,7 @@
 <header>
   <h1>🏆 2026 World Cup — Projected Knockout Bracket</h1>
   <div class="sub">
-    Updated <strong>June 26, 2026</strong> — Groups <strong>A–F, H and I are final</strong> (Spain won Group H, Cape Verde 2nd; Uruguay's 3rd is out). Only <strong>G, J, K, L</strong> remain — and the last two best-third spots are a coin-flip between Groups A, G, J and K.
+    Updated <strong>June 26, 2026</strong> — Groups <strong>A–I are final</strong> (Belgium won Group G ahead of Egypt; Iran takes 3rd). Only <strong>J, K, L</strong> remain — and the last best-third spot is a coin-flip between South Korea, Congo DR and Algeria.
     Percentages come from a 300k-run Monte Carlo (head-to-head tiebreakers, softened favourites) over FIFA's full Annex C table.
     Round-of-32 slotting follows the official bracket; the third-place region is genuinely volatile.
   </div>
@@ -130,14 +130,14 @@
 
 <footer>
   How the percentages work — all from a <strong>300,000-run Monte Carlo</strong> that simulates the remaining group games (with head-to-head tiebreakers and softened favourites), ranks the third-place teams, and looks up FIFA's full 495-row Annex C table every run.
-  <strong>1st / 2nd place (%):</strong> the chance that team finishes in that group position. 🔒 100% = group complete — all teams from Groups A–F, H and I (incl. Spain &amp; Cape Verde) plus Argentina (won Group J) — 18 positions locked.
-  <strong>3rd place (~%):</strong> the chance this exact team fills this exact slot. With six 3rd-place teams now locked — four of them on 4 points (Bosnia, Paraguay, Ecuador, Sweden) — three pairings are near-certain: <strong>USA–Bosnia, Germany–Paraguay and France–Sweden all ≈99%</strong> (USA–Bosnia matches The Athletic). The rest stay volatile (Switzerland's and England's 3rd-place opponents are still wide open) because the draw depends on which of the G–L thirds qualify.
-  Title odds re-pulled June 26 PM (France shortened to +340; Spain +550; Argentina +600 and England +650 essentially level — books split) — Argentina narrowly <strong>edges England into the final</strong> (a true coin-flip), with Spain beating England for third. Knockout winners follow these current title odds; my model leans Portugal over Colombia for Group K. Sources: ESPN standings, schedule &amp; bracket, FOX Sports / FanDuel, Kalshi/Polymarket &amp; BetMGM odds, The Athletic tracker, FIFA &amp; Wikipedia Annex C.
+  <strong>1st / 2nd place (%):</strong> the chance that team finishes in that group position. 🔒 100% = group complete — all top-two finishers from Groups A–I (incl. Belgium &amp; Egypt) plus Argentina (won Group J).
+  <strong>3rd place (~%):</strong> the chance this exact team fills this exact slot. Five 3rd-place pairings are now near-locked: <strong>USA–Bosnia, Germany–Paraguay, France–Sweden, Mexico–Ecuador and Switzerland–Iran (all ≈99–100%)</strong> (USA–Bosnia matches The Athletic). Only Belgium's, England's and Portugal's 3rd-place opponents stay open, because they hinge on which of the J/K/L thirds grab the last spot.
+  Title odds re-pulled June 26 (France +360; Spain +500; Argentina +550 and England +650 — Argentina still narrowly ahead) — Argentina <strong>edges England into the final</strong> (a coin-flip), with Spain beating England for third. Knockout winners follow these current title odds; my model leans Portugal over Colombia for Group K. Sources: ESPN standings, schedule &amp; bracket, FOX Sports / FanDuel, Kalshi/Polymarket &amp; BetMGM odds, The Athletic tracker, FIFA &amp; Wikipedia Annex C.
 </footer>
 
 <script>
 const F={Germany:"🇩🇪","Türkiye":"🇹🇷",France:"🇫🇷",Sweden:"🇸🇪","South Korea":"🇰🇷",Canada:"🇨🇦",Netherlands:"🇳🇱",Morocco:"🇲🇦",Colombia:"🇨🇴",Croatia:"🇭🇷",Spain:"🇪🇸",Austria:"🇦🇹",USA:"🇺🇸",Bosnia:"🇧🇦",Belgium:"🇧🇪",Czechia:"🇨🇿",Brazil:"🇧🇷",Japan:"🇯🇵","Ivory Coast":"🇨🇮",Norway:"🇳🇴",Mexico:"🇲🇽",Scotland:"🏴󠁧󠁢󠁳󠁣󠁴󠁿",England:"🏴󠁧󠁢󠁥󠁮󠁧󠁿",Senegal:"🇸🇳",Argentina:"🇦🇷",Uruguay:"🇺🇾",Australia:"🇦🇺",Egypt:"🇪🇬",Switzerland:"🇨🇭",Algeria:"🇩🇿",Portugal:"🇵🇹",Ecuador:"🇪🇨",Iran:"🇮🇷",Ghana:"🇬🇭","Cape Verde":"🇨🇻","Congo DR":"🇨🇩","South Africa":"🇿🇦",Paraguay:"🇵🇾"};
-const O={France:"+340",Spain:"+550",England:"+650",Argentina:"+600",Portugal:"+1000",Brazil:"+1100",Germany:"+1600",Netherlands:"+1500",Norway:"+2800",USA:"+3300",Belgium:"+3500",Colombia:"+4000",Mexico:"+5000",Morocco:"+5000",Japan:"+5000",Uruguay:"+5500",Switzerland:"+7000",Croatia:"+8000",Ecuador:"+8000","Ivory Coast":"+10000",Sweden:"+12500",Senegal:"+12500",Australia:"+12500",Egypt:"+15000",Austria:"+15000",Canada:"+15000",Scotland:"+20000","South Korea":"+25000",Algeria:"+25000",Bosnia:"+30000","Cape Verde":"+30000",Czechia:"+40000",Ghana:"+50000",Iran:"+50000","South Africa":"+50000","Congo DR":"+75000","Paraguay":"+30000"};
+const O={France:"+360",Spain:"+500",England:"+650",Argentina:"+550",Portugal:"+1000",Brazil:"+1100",Germany:"+1600",Netherlands:"+1500",Norway:"+2800",USA:"+3300",Belgium:"+5000",Colombia:"+4000",Mexico:"+5000",Morocco:"+5000",Japan:"+5000",Uruguay:"+5500",Switzerland:"+7000",Croatia:"+8000",Ecuador:"+8000","Ivory Coast":"+10000",Sweden:"+12500",Senegal:"+12500",Australia:"+12500",Egypt:"+15000",Austria:"+15000",Canada:"+15000",Scotland:"+20000","South Korea":"+25000",Algeria:"+25000",Bosnia:"+30000","Cape Verde":"+30000",Czechia:"+40000",Ghana:"+50000",Iran:"+50000","South Africa":"+50000","Congo DR":"+75000","Paraguay":"+30000"};
 F["Paraguay"]="🇵🇾";
 
 // each match: [teamA, teamB, winner], note label, host city
@@ -152,13 +152,13 @@ const L32=[
  M("Colombia","Croatia","Colombia","M83 · 2K v 2L","Toronto · Jul 2","59%","55%"),
  M("Spain","Austria","Spain","M84 · 1H v 2J","Los Angeles · Jul 2","100%","68%"),
  M("USA","Bosnia","USA","M81 · 1D v 3B","San Francisco Bay · Jul 1","100%","~99%"),
- M("Egypt","South Korea","Egypt","M82 · 1G v 3A","Seattle · Jul 1","56%","~40%"),
+ M("Belgium","South Korea","Belgium","M82 · 1G v 3A","Seattle · Jul 1","100%","~40%"),
 ];
 const L16=[
  M("Germany","France","France","M89","Houston · Jul 4"),
  M("Canada","Netherlands","Netherlands","M90","Philadelphia · Jul 4"),
  M("Colombia","Spain","Spain","M93","Dallas · Jul 6"),
- M("USA","Egypt","USA","M94","Seattle · Jul 6"),
+ M("USA","Belgium","USA","M94","Seattle · Jul 6"),
 ];
 const LQF=[ M("France","Netherlands","France","M97","Boston · Jul 9"), M("Spain","USA","Spain","M98","Los Angeles · Jul 10") ];
 const LSF=[ M("France","Spain","France","M101","Dallas · Jul 14") ];
@@ -167,17 +167,17 @@ const LSF=[ M("France","Spain","France","M101","Dallas · Jul 14") ];
 const R32=[
  M("Brazil","Japan","Brazil","M76 · 1C v 2F","Houston · Jun 29","100%","100%"),
  M("Ivory Coast","Norway","Norway","M78 · 2E v 2I","Dallas · Jun 30","100%","100%"),
- M("Mexico","Ecuador","Mexico","M79 · 1A v 3E","Mexico City · Jun 30","100%","~95%"),
+ M("Mexico","Ecuador","Mexico","M79 · 1A v 3E","Mexico City · Jun 30","100%","~99%"),
  M("England","Senegal","England","M80 · 1L v 3I","Atlanta · Jul 1","91%","~50%"),
  M("Argentina","Cape Verde","Argentina","M86 · 1J v 2H","Miami · Jul 3","100%","100%"),
- M("Australia","Belgium","Belgium","M88 · 2D v 2G","Dallas · Jul 3","100%","58%"),
- M("Switzerland","Iran","Switzerland","M85 · 1B v 3G","Vancouver · Jul 2","100%","~21%"),
+ M("Australia","Egypt","Australia","M88 · 2D v 2G","Dallas · Jul 3","100%","100%"),
+ M("Switzerland","Iran","Switzerland","M85 · 1B v 3G","Vancouver · Jul 2","100%","~91%"),
  M("Portugal","Ghana","Portugal","M87 · 1K v 3L","Kansas City · Jul 3","59%","~62%"),
 ];
 const R16=[
  M("Brazil","Norway","Brazil","M91","New York · Jul 5"),
  M("Mexico","England","England","M92","Mexico City · Jul 5"),
- M("Argentina","Belgium","Argentina","M95","Atlanta · Jul 7"),
+ M("Argentina","Australia","Argentina","M95","Atlanta · Jul 7"),
  M("Switzerland","Portugal","Portugal","M96","Vancouver · Jul 7"),
 ];
 const RQF=[ M("Brazil","England","England","M99","Miami · Jul 11"), M("Argentina","Portugal","Argentina","M100","Kansas City · Jul 11") ];
