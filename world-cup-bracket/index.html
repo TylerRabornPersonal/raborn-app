@@ -3,20 +3,20 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>2026 World Cup — Projected Bracket (with confidence %)</title>
-<meta name="description" content="Odds-driven 2026 World Cup knockout bracket projection — France projected champion, Argentina runner-up. Updated through the group stage.">
+<title>2026 World Cup — Projected Bracket (advancement odds)</title>
+<meta name="description" content="Odds-driven 2026 World Cup knockout bracket — every team's gambling-implied chance to win its match and advance. France projected champion.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://raborn.app/world-cup-bracket">
 <meta property="og:site_name" content="raborn.app">
 <meta property="og:title" content="2026 World Cup — Projected Knockout Bracket">
-<meta property="og:description" content="Odds-driven projection: France projected champion, Argentina runner-up, Spain third. Updated through the group stage.">
+<meta property="og:description" content="Round of 32 locked. Every team's gambling-implied chance to advance, all the way to the final. France projected champion.">
 <meta property="og:image" content="https://raborn.app/world-cup-bracket/og.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="2026 World Cup projected bracket — France projected champion">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="2026 World Cup — Projected Knockout Bracket">
-<meta name="twitter:description" content="Odds-driven projection: France projected champion, Argentina runner-up.">
+<meta name="twitter:description" content="Round of 32 locked — every team's gambling-implied chance to advance.">
 <meta name="twitter:image" content="https://raborn.app/world-cup-bracket/og.png">
 <style>
   :root{
@@ -32,7 +32,7 @@
   }
   header{text-align:center; margin-bottom:8px}
   h1{margin:0; font-size:26px; letter-spacing:.3px}
-  .sub{color:var(--muted); font-size:13px; margin-top:6px; max-width:760px; margin-left:auto; margin-right:auto; line-height:1.5}
+  .sub{color:var(--muted); font-size:13px; margin-top:6px; max-width:780px; margin-left:auto; margin-right:auto; line-height:1.5}
   .legend{display:flex; gap:18px; justify-content:center; flex-wrap:wrap; margin:14px 0 6px; font-size:12px; color:var(--muted)}
   .legend span{display:inline-flex; align-items:center; gap:6px}
   .swatch{width:12px;height:12px;border-radius:3px;display:inline-block}
@@ -64,17 +64,11 @@
   .team:last-child{border-bottom:none}
   .team .flag{font-size:14px; width:18px; text-align:center}
   .team .name{flex:1; overflow:hidden; text-overflow:ellipsis}
-  .team .odds{color:var(--muted); font-size:10.5px; font-variant-numeric:tabular-nums}
-  .team .conf{font-size:9px; color:#7e90c0; font-weight:400; font-variant-numeric:tabular-nums}
-  .team.win .conf{color:#9fe9c2}
-  .team .conf-lock{color:#ffe07a; font-weight:700; background:rgba(245,197,66,.16); padding:0 5px; border-radius:5px}
-  .team.win .conf-lock{color:#ffe892}
-  .team .conf-prov{color:#b79ce8; font-style:italic}
-  .team.win .conf-prov{color:#cdb6ff}
+  .team .adv{color:var(--muted); font-size:11px; font-weight:600; font-variant-numeric:tabular-nums}
   .team.win{background:var(--win); color:#fff; font-weight:700}
-  .team.win .odds{color:#bdfcd9}
+  .team.win .adv{color:#7fe9b0}
   .team.win .name::after{content:" ▸"; color:var(--green)}
-  .team.lose{opacity:.55}
+  .team.lose{opacity:.5}
   .final-wrap{display:flex; flex-direction:column; justify-content:center; align-items:center; gap:12px}
   .champ{
     background:linear-gradient(160deg,#ffe28a,#f5c542 60%,#d99c1f);
@@ -91,7 +85,7 @@
   .loc-hot{color:#ffe07a; font-weight:700; background:rgba(245,197,66,.18); padding:1px 6px; border-radius:5px; box-shadow:0 0 0 1px rgba(245,197,66,.25) inset}
   .loc-warm{color:#aedaff; font-weight:600; background:rgba(120,178,255,.13); padding:1px 6px; border-radius:5px}
   .third{
-    margin:14px auto 0; max-width:330px; background:var(--panel); border:1px solid var(--line);
+    margin:14px auto 0; max-width:340px; background:var(--panel); border:1px solid var(--line);
     border-radius:10px; padding:10px 12px; text-align:center; font-size:12px;
   }
   .third .h{font-size:10px; letter-spacing:1.5px; text-transform:uppercase; color:var(--muted); margin-bottom:6px}
@@ -105,17 +99,15 @@
 <header>
   <h1>🏆 2026 World Cup — Projected Knockout Bracket</h1>
   <div class="sub">
-    Updated <strong>June 26, 2026</strong> — Groups <strong>A–I are final</strong> (Belgium won Group G ahead of Egypt; Iran takes 3rd). Only <strong>J, K, L</strong> remain — and the last best-third spot is a coin-flip between South Korea, Congo DR and Algeria.
-    Percentages come from a 300k-run Monte Carlo (head-to-head tiebreakers, softened favourites) over FIFA's full Annex C table.
-    Round-of-32 slotting follows the official bracket; the third-place region is genuinely volatile.
+    Updated <strong>June 28, 2026</strong> — the <strong>Round of 32 is locked</strong>. Each percentage is that team's
+    <strong>gambling-implied chance to win its match and advance</strong>. The bracket is filled by carrying the favourite
+    forward every round (so the % at each stage is the chance of winning that specific game).
   </div>
   <div class="legend">
     <span><i class="swatch" style="background:#1fd97b"></i>Projected to advance</span>
     <span><i class="swatch" style="background:#f5c542"></i>Projected champion</span>
-    <span style="color:#6f80b0">Odds = current title odds</span>
-    <span style="color:#6f80b0">(%) on 1st/2nd = chance of that group finish</span>
-    <span style="color:#ffe07a">🔒 = clinched / locked</span>
-    <span style="color:#b79ce8; font-style:italic">~% = provisional 3rd-place pairing (see note)</span>
+    <span style="color:#6f80b0">% = implied chance to win that match</span>
+    <span style="color:#ffe07a">📍 Dallas/Houston/Atlanta host cities highlighted</span>
   </div>
 </header>
 
@@ -125,72 +117,64 @@
 
 <div class="third">
   <div class="h">3rd-Place Play-off (proj.) · <span class="loc loc-warm">📍 Miami · Jul 18</span></div>
-  <div class="row"><span>🇪🇸 <span class="w">Spain</span></span> <span style="color:#6f80b0">def.</span> <span>🏴󠁧󠁢󠁥󠁮󠁧󠁿 England</span></div>
+  <div class="row"><span>🇪🇸 <span class="w">Spain</span> <span style="color:#7fe9b0">53%</span></span> <span style="color:#6f80b0">def.</span> <span>🏴󠁧󠁢󠁥󠁮󠁧󠁿 England 47%</span></div>
 </div>
 
 <footer>
-  How the percentages work — all from a <strong>300,000-run Monte Carlo</strong> that simulates the remaining group games (with head-to-head tiebreakers and softened favourites), ranks the third-place teams, and looks up FIFA's full 495-row Annex C table every run.
-  <strong>1st / 2nd place (%):</strong> the chance that team finishes in that group position. 🔒 100% = group complete — all top-two finishers from Groups A–I (incl. Belgium &amp; Egypt) plus Argentina (won Group J).
-  <strong>3rd place (~%):</strong> the chance this exact team fills this exact slot. Five 3rd-place pairings are now near-locked: <strong>USA–Bosnia, Germany–Paraguay, France–Sweden, Mexico–Ecuador and Switzerland–Iran (all ≈99–100%)</strong> (USA–Bosnia matches The Athletic). Only Belgium's, England's and Portugal's 3rd-place opponents stay open, because they hinge on which of the J/K/L thirds grab the last spot.
-  Title odds re-pulled June 26 (France +360; Spain +500; Argentina +550 and England +650 — Argentina still narrowly ahead) — Argentina <strong>edges England into the final</strong> (a coin-flip), with Spain beating England for third. Knockout winners follow these current title odds; my model leans Portugal over Colombia for Group K. Sources: ESPN standings, schedule &amp; bracket, FOX Sports / FanDuel, Kalshi/Polymarket &amp; BetMGM odds, The Athletic tracker, FIFA &amp; Wikipedia Annex C.
+  How the percentages work: each number is a team's implied probability to <strong>win that specific match and advance</strong>, derived from current title-odds-implied team strength and calibrated so a clear favourite (e.g. France over Sweden) sits ≈85%. Note that a single knockout game is far less lopsided than tournament-win odds — even strong favourites rarely clear ~90%. The bracket carries the favourite forward each round: <strong>France def. Argentina in the final</strong>, with Spain over England for third. Round-of-32 matchups and venues are official (FIFA / ESPN / Yahoo); title odds via FanDuel &amp; FOX Sports as of June 28, 2026.
 </footer>
 
 <script>
-const F={Germany:"🇩🇪","Türkiye":"🇹🇷",France:"🇫🇷",Sweden:"🇸🇪","South Korea":"🇰🇷",Canada:"🇨🇦",Netherlands:"🇳🇱",Morocco:"🇲🇦",Colombia:"🇨🇴",Croatia:"🇭🇷",Spain:"🇪🇸",Austria:"🇦🇹",USA:"🇺🇸",Bosnia:"🇧🇦",Belgium:"🇧🇪",Czechia:"🇨🇿",Brazil:"🇧🇷",Japan:"🇯🇵","Ivory Coast":"🇨🇮",Norway:"🇳🇴",Mexico:"🇲🇽",Scotland:"🏴󠁧󠁢󠁳󠁣󠁴󠁿",England:"🏴󠁧󠁢󠁥󠁮󠁧󠁿",Senegal:"🇸🇳",Argentina:"🇦🇷",Uruguay:"🇺🇾",Australia:"🇦🇺",Egypt:"🇪🇬",Switzerland:"🇨🇭",Algeria:"🇩🇿",Portugal:"🇵🇹",Ecuador:"🇪🇨",Iran:"🇮🇷",Ghana:"🇬🇭","Cape Verde":"🇨🇻","Congo DR":"🇨🇩","South Africa":"🇿🇦",Paraguay:"🇵🇾"};
-const O={France:"+360",Spain:"+500",England:"+650",Argentina:"+550",Portugal:"+1000",Brazil:"+1100",Germany:"+1600",Netherlands:"+1500",Norway:"+2800",USA:"+3300",Belgium:"+5000",Colombia:"+4000",Mexico:"+5000",Morocco:"+5000",Japan:"+5000",Uruguay:"+5500",Switzerland:"+7000",Croatia:"+8000",Ecuador:"+8000","Ivory Coast":"+10000",Sweden:"+12500",Senegal:"+12500",Australia:"+12500",Egypt:"+15000",Austria:"+15000",Canada:"+15000",Scotland:"+20000","South Korea":"+25000",Algeria:"+25000",Bosnia:"+30000","Cape Verde":"+30000",Czechia:"+40000",Ghana:"+50000",Iran:"+50000","South Africa":"+50000","Congo DR":"+75000","Paraguay":"+30000"};
-F["Paraguay"]="🇵🇾";
+const F={Germany:"🇩🇪",France:"🇫🇷",Sweden:"🇸🇪",Canada:"🇨🇦",Netherlands:"🇳🇱",Morocco:"🇲🇦",Colombia:"🇨🇴",Croatia:"🇭🇷",Spain:"🇪🇸",Austria:"🇦🇹",USA:"🇺🇸",Bosnia:"🇧🇦",Belgium:"🇧🇪",Brazil:"🇧🇷",Japan:"🇯🇵","Ivory Coast":"🇨🇮",Norway:"🇳🇴",Mexico:"🇲🇽",England:"🏴󠁧󠁢󠁥󠁮󠁧󠁿",Senegal:"🇸🇳",Argentina:"🇦🇷",Australia:"🇦🇺",Egypt:"🇪🇬",Switzerland:"🇨🇭",Algeria:"🇩🇿",Portugal:"🇵🇹",Ecuador:"🇪🇨","Cape Verde":"🇨🇻","Congo DR":"🇨🇩","South Africa":"🇿🇦",Paraguay:"🇵🇾",Ghana:"🇬🇭"};
 
-// each match: [teamA, teamB, winner], note label, host city
+// each match: teamA, teamB, winner, label, host city · date, A advance %, B advance %
 function M(a,b,w,lbl,loc,ca,cb){return{a,b,w,lbl,loc,ca,cb}}
 
 // LEFT R32 (top->bottom)
 const L32=[
- M("Germany","Paraguay","Germany","M74 · 1E v 3D","Boston · Jun 29","100%","~99%"),
- M("France","Sweden","France","M77 · 1I v 3F","New York · Jun 30","100%","~99%"),
- M("South Africa","Canada","Canada","M73 · 2A v 2B","Los Angeles · Jun 28","100%","100%"),
- M("Netherlands","Morocco","Netherlands","M75 · 1F v 2C","Monterrey · Jun 29","100%","100%"),
- M("Colombia","Croatia","Colombia","M83 · 2K v 2L","Toronto · Jul 2","59%","55%"),
- M("Spain","Austria","Spain","M84 · 1H v 2J","Los Angeles · Jul 2","100%","68%"),
- M("USA","Bosnia","USA","M81 · 1D v 3B","San Francisco Bay · Jul 1","100%","~99%"),
- M("Belgium","South Korea","Belgium","M82 · 1G v 3A","Seattle · Jul 1","100%","~40%"),
+ M("Germany","Paraguay","Germany","M74","Boston · Jun 29","82%","18%"),
+ M("France","Sweden","France","M77","New York · Jun 30","85%","15%"),
+ M("South Africa","Canada","Canada","M73","Los Angeles · Jun 28","35%","65%"),
+ M("Netherlands","Morocco","Netherlands","M75","Monterrey · Jun 29","65%","35%"),
+ M("Portugal","Croatia","Portugal","M83","Toronto · Jul 2","74%","26%"),
+ M("Spain","Austria","Spain","M84","Los Angeles · Jul 2","84%","16%"),
+ M("USA","Bosnia","USA","M81","San Francisco Bay · Jul 1","76%","24%"),
+ M("Belgium","Senegal","Belgium","M82","Seattle · Jul 1","62%","38%"),
 ];
 const L16=[
- M("Germany","France","France","M89","Philadelphia · Jul 4"),
- M("Canada","Netherlands","Netherlands","M90","Houston · Jul 4"),
- M("Colombia","Spain","Spain","M93","Dallas · Jul 6"),
- M("USA","Belgium","USA","M94","Seattle · Jul 6"),
+ M("Germany","France","France","M89","Philadelphia · Jul 4","34%","66%"),
+ M("Canada","Netherlands","Netherlands","M90","Houston · Jul 4","24%","76%"),
+ M("Portugal","Spain","Spain","M93","Dallas · Jul 6","42%","58%"),
+ M("USA","Belgium","USA","M94","Seattle · Jul 6","55%","45%"),
 ];
-const LQF=[ M("France","Netherlands","France","M97","Boston · Jul 9"), M("Spain","USA","Spain","M98","Los Angeles · Jul 10") ];
-const LSF=[ M("France","Spain","France","M101","Dallas · Jul 14") ];
+const LQF=[ M("France","Netherlands","France","M97","Boston · Jul 9","66%","34%"), M("Spain","USA","Spain","M98","Los Angeles · Jul 10","71%","29%") ];
+const LSF=[ M("France","Spain","France","M101","Dallas · Jul 14","53%","47%") ];
 
 // RIGHT R32 (top->bottom)
 const R32=[
- M("Brazil","Japan","Brazil","M76 · 1C v 2F","Houston · Jun 29","100%","100%"),
- M("Ivory Coast","Norway","Norway","M78 · 2E v 2I","Dallas · Jun 30","100%","100%"),
- M("Mexico","Ecuador","Mexico","M79 · 1A v 3E","Mexico City · Jun 30","100%","~99%"),
- M("England","Senegal","England","M80 · 1L v 3I","Atlanta · Jul 1","91%","~50%"),
- M("Argentina","Cape Verde","Argentina","M86 · 1J v 2H","Miami · Jul 3","100%","100%"),
- M("Australia","Egypt","Australia","M88 · 2D v 2G","Dallas · Jul 3","100%","100%"),
- M("Switzerland","Iran","Switzerland","M85 · 1B v 3G","Vancouver · Jul 2","100%","~91%"),
- M("Portugal","Ghana","Portugal","M87 · 1K v 3L","Kansas City · Jul 3","59%","~62%"),
+ M("Brazil","Japan","Brazil","M76","Houston · Jun 29","68%","32%"),
+ M("Ivory Coast","Norway","Norway","M78","Dallas · Jun 30","34%","66%"),
+ M("Mexico","Ecuador","Mexico","M79","Mexico City · Jun 30","56%","44%"),
+ M("England","Congo DR","England","M80","Atlanta · Jul 1","92%","8%"),
+ M("Argentina","Cape Verde","Argentina","M86","Miami · Jul 3","88%","12%"),
+ M("Australia","Egypt","Australia","M88","Dallas · Jul 3","52%","48%"),
+ M("Switzerland","Algeria","Switzerland","M85","Vancouver · Jul 2","66%","34%"),
+ M("Colombia","Ghana","Colombia","M87","Kansas City · Jul 3","79%","21%"),
 ];
 const R16=[
- M("Brazil","Norway","Brazil","M91","New York · Jul 5"),
- M("Mexico","England","England","M92","Mexico City · Jul 5"),
- M("Argentina","Australia","Argentina","M95","Atlanta · Jul 7"),
- M("Switzerland","Portugal","Portugal","M96","Vancouver · Jul 7"),
+ M("Brazil","Norway","Brazil","M91","New York · Jul 5","61%","39%"),
+ M("Mexico","England","England","M92","Mexico City · Jul 5","27%","73%"),
+ M("Argentina","Australia","Argentina","M95","Atlanta · Jul 7","82%","18%"),
+ M("Switzerland","Colombia","Colombia","M96","Vancouver · Jul 7","43%","57%"),
 ];
-const RQF=[ M("Brazil","England","England","M99","Miami · Jul 11"), M("Argentina","Portugal","Argentina","M100","Kansas City · Jul 11") ];
-const RSF=[ M("England","Argentina","Argentina","M102","Atlanta · Jul 15") ];
+const RQF=[ M("Brazil","England","England","M99","Miami · Jul 11","44%","56%"), M("Argentina","Colombia","Argentina","M100","Kansas City · Jul 11","72%","28%") ];
+const RSF=[ M("England","Argentina","Argentina","M102","Atlanta · Jul 15","48%","52%") ];
 
-const FINAL=M("France","Argentina","France","M104 · FINAL","New York · Jul 19");
+const FINAL=M("France","Argentina","France","M104 · FINAL","New York · Jul 19","54%","46%");
 
-function teamRow(name,win,conf){
+function teamRow(name,win,adv){
   const cls = win===null ? "" : (win?"win":"lose");
-  const locked = conf==="100%";
-  const prov = !!conf && conf.charAt(0)==="~";
-  const c = conf ? ` <span class="conf${locked?" conf-lock":""}${prov?" conf-prov":""}">${locked?"🔒 ":""}(${conf})</span>` : "";
-  return `<div class="team ${cls}"><span class="flag">${F[name]||"⚽"}</span><span class="name">${name}${c}</span><span class="odds">${O[name]||""}</span></div>`;
+  return `<div class="team ${cls}"><span class="flag">${F[name]||"⚽"}</span><span class="name">${name}</span><span class="adv">${adv||""}</span></div>`;
 }
 function locHtml(loc){
   if(!loc) return "";
