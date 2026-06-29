@@ -107,9 +107,9 @@
 <header>
   <h1>🏆 2026 World Cup — Projected Knockout Bracket</h1>
   <div class="sub">
-    Updated <strong>June 29, 2026</strong> — <strong>Round of 32 underway</strong>. Final results are locked in green with a ✓ and <span class="ft">FT</span>
-    (Canada 1–0 South Africa; Brazil 2–1 Japan). Every other number is that team's <strong>gambling-implied chance to win its match and advance</strong>;
-    the bracket is filled by carrying the favourite forward each round.
+    Updated <strong>June 30, 2026</strong> — <strong>Round of 32 underway</strong>. Final results are locked in green with a ✓ and <span class="ft">FT</span>
+    (Canada 1–0 South Africa; Brazil 2–1 Japan; <strong>Paraguay stun Germany</strong> 1–1, 4–3 pens). Every other number is that team's
+    <strong>gambling-implied chance to win its match and advance</strong>; the bracket is filled by carrying the favourite forward each round.
   </div>
   <div class="legend">
     <span><i class="swatch" style="background:#1fd97b"></i>Projected to advance</span>
@@ -136,11 +136,11 @@
 const F={Germany:"🇩🇪",France:"🇫🇷",Sweden:"🇸🇪",Canada:"🇨🇦",Netherlands:"🇳🇱",Morocco:"🇲🇦",Colombia:"🇨🇴",Croatia:"🇭🇷",Spain:"🇪🇸",Austria:"🇦🇹",USA:"🇺🇸",Bosnia:"🇧🇦",Belgium:"🇧🇪",Brazil:"🇧🇷",Japan:"🇯🇵","Ivory Coast":"🇨🇮",Norway:"🇳🇴",Mexico:"🇲🇽",England:"🏴󠁧󠁢󠁥󠁮󠁧󠁿",Senegal:"🇸🇳",Argentina:"🇦🇷",Australia:"🇦🇺",Egypt:"🇪🇬",Switzerland:"🇨🇭",Algeria:"🇩🇿",Portugal:"🇵🇹",Ecuador:"🇪🇨","Cape Verde":"🇨🇻","Congo DR":"🇨🇩","South Africa":"🇿🇦",Paraguay:"🇵🇾",Ghana:"🇬🇭"};
 
 // each match: teamA, teamB, winner, label, host city · date, A advance %, B advance %
-function M(a,b,w,lbl,loc,ca,cb,sc){return{a,b,w,lbl,loc,ca,cb,sc}}
+function M(a,b,w,lbl,loc,ca,cb,sc,pen){return{a,b,w,lbl,loc,ca,cb,sc,pen}}
 
 // LEFT R32 (top->bottom)
 const L32=[
- M("Germany","Paraguay","Germany","M74","Boston · Jun 29","82%","18%"),
+ M("Germany","Paraguay","Paraguay","M74","Boston · Jun 29","82%","18%","1-1","3-4"),
  M("France","Sweden","France","M77","New York · Jun 30","85%","15%"),
  M("South Africa","Canada","Canada","M73","Los Angeles · Jun 28","35%","65%","0-1"),
  M("Netherlands","Morocco","Netherlands","M75","Monterrey · Jun 29","65%","35%"),
@@ -150,7 +150,7 @@ const L32=[
  M("Belgium","Senegal","Belgium","M82","Seattle · Jul 1","62%","38%"),
 ];
 const L16=[
- M("Germany","France","France","M89","Philadelphia · Jul 4","34%","66%"),
+ M("Paraguay","France","France","M89","Philadelphia · Jul 4","10%","90%"),
  M("Canada","Netherlands","Netherlands","M90","Houston · Jul 4","24%","76%"),
  M("Portugal","Spain","Spain","M93","Dallas · Jul 6","42%","58%"),
  M("USA","Belgium","USA","M94","Seattle · Jul 6","55%","45%"),
@@ -195,13 +195,14 @@ function locHtml(loc){
 }
 function matchBox(m,finalCls){
   const played=!!m.sc; let va=m.ca,vb=m.cb;
-  if(played){const p=m.sc.split("-");va=p[0];vb=p[1];}
+  if(played){const p=m.sc.split("-");va=p[0];vb=p[1];
+    if(m.pen){const q=m.pen.split("-");va=va+" ("+q[0]+")";vb=vb+" ("+q[1]+")";}}
   return `<div class="match-wrap">
     <div class="match ${finalCls||""} ${played?"played":""}">
       ${teamRow(m.a, m.w===m.a, va, played, played && m.w===m.a)}
       ${teamRow(m.b, m.w===m.b, vb, played, played && m.w===m.b)}
     </div>
-    <div class="mlabel">${m.lbl}${played?' · <span class="ft">FT</span>':''}${locHtml(m.loc)}</div>
+    <div class="mlabel">${m.lbl}${played?(' · <span class="ft">FT'+(m.pen?' · pens':'')+'</span>'):''}${locHtml(m.loc)}</div>
   </div>`;
 }
 function col(label,matches,finalCls){
