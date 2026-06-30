@@ -108,7 +108,7 @@
   <h1>🏆 2026 World Cup — Projected Knockout Bracket</h1>
   <div class="sub">
     Updated <strong>June 30, 2026</strong> — <strong>Round of 32 underway</strong>. Final results are locked in green with a ✓ and <span class="ft">FT</span>
-    (Canada 1–0 South Africa; Brazil 2–1 Japan; <strong>Paraguay stun Germany</strong> 1–1, 4–3 pens). Every other number is that team's
+    (Canada 1–0 South Africa; Brazil 2–1 Japan; <strong>Paraguay stun Germany</strong> 1–1, 4–3 pens; <strong>Morocco oust Netherlands</strong> on pens). Every other number is that team's
     <strong>gambling-implied chance to win its match and advance</strong>; the bracket is filled by carrying the favourite forward each round.
   </div>
   <div class="legend">
@@ -143,7 +143,7 @@ const L32=[
  M("Germany","Paraguay","Paraguay","M74","Boston · Jun 29","82%","18%","1-1","3-4"),
  M("France","Sweden","France","M77","New York · Jun 30","85%","15%"),
  M("South Africa","Canada","Canada","M73","Los Angeles · Jun 28","35%","65%","0-1"),
- M("Netherlands","Morocco","Netherlands","M75","Monterrey · Jun 29","65%","35%"),
+ M("Netherlands","Morocco","Morocco","M75","Monterrey · Jun 29","65%","35%","1-1","2-3"),
  M("Portugal","Croatia","Portugal","M83","Toronto · Jul 2","74%","26%"),
  M("Spain","Austria","Spain","M84","Los Angeles · Jul 2","84%","16%"),
  M("USA","Bosnia","USA","M81","San Francisco Bay · Jul 1","76%","24%"),
@@ -151,11 +151,11 @@ const L32=[
 ];
 const L16=[
  M("Paraguay","France","France","M89","Philadelphia · Jul 4","10%","90%"),
- M("Canada","Netherlands","Netherlands","M90","Houston · Jul 4","24%","76%"),
+ M("Canada","Morocco","Morocco","M90","Houston · Jul 4","36%","64%"),
  M("Portugal","Spain","Spain","M93","Dallas · Jul 6","42%","58%"),
  M("USA","Belgium","USA","M94","Seattle · Jul 6","55%","45%"),
 ];
-const LQF=[ M("France","Netherlands","France","M97","Boston · Jul 9","66%","34%"), M("Spain","USA","Spain","M98","Los Angeles · Jul 10","71%","29%") ];
+const LQF=[ M("France","Morocco","France","M97","Boston · Jul 9","78%","22%"), M("Spain","USA","Spain","M98","Los Angeles · Jul 10","71%","29%") ];
 const LSF=[ M("France","Spain","France","M101","Dallas · Jul 14","53%","47%") ];
 
 // RIGHT R32 (top->bottom)
@@ -196,7 +196,7 @@ function locHtml(loc){
 function matchBox(m,finalCls){
   const played=!!m.sc; let va=m.ca,vb=m.cb;
   if(played){const p=m.sc.split("-");va=p[0];vb=p[1];
-    if(m.pen){const q=m.pen.split("-");va=va+" ("+q[0]+")";vb=vb+" ("+q[1]+")";}}
+    if(m.pen && m.pen.indexOf("-")>-1){const q=m.pen.split("-");va=va+" ("+q[0]+")";vb=vb+" ("+q[1]+")";}}
   return `<div class="match-wrap">
     <div class="match ${finalCls||""} ${played?"played":""}">
       ${teamRow(m.a, m.w===m.a, va, played, played && m.w===m.a)}
