@@ -108,7 +108,7 @@
   <h1>🏆 2026 World Cup — Projected Knockout Bracket</h1>
   <div class="sub">
     Updated <strong>June 30, 2026</strong> — <strong>Round of 32 underway</strong>. Final results are locked in green with a ✓ and <span class="ft">FT</span>
-    (Canada 1–0 South Africa; Brazil 2–1 Japan; <strong>Paraguay stun Germany</strong> 1–1, 4–3 pens; <strong>Morocco oust Netherlands</strong> 1–1, 2–3 pens; Norway 2–1; France 3–0; Mexico 2–0; England 2–1).
+    Ten of 16 games in (marked <span class="ft">FT</span>) — headlined by <strong>Paraguay stunning Germany</strong> and <strong>Morocco ousting the Netherlands</strong>, both on penalties; USA beat Bosnia 2–0, Belgium edged Senegal 3–2 (AET).
     Every other number is that team's <strong>gambling-implied chance to win its match and advance</strong>, recomputed from the <strong>live title odds</strong> (France +180, Argentina +410, Morocco surged to +950). The bracket carries the favourite forward each round.
   </div>
   <div class="legend">
@@ -146,8 +146,8 @@ const L32=[
  M("Netherlands","Morocco","Morocco","M75","Monterrey · Jun 29","65%","35%","1-1","2-3"),
  M("Portugal","Croatia","Portugal","M83","Toronto · Jul 2","75%","25%"),
  M("Spain","Austria","Spain","M84","Los Angeles · Jul 2","86%","14%"),
- M("USA","Bosnia","USA","M81","San Francisco Bay · Jul 1","82%","18%"),
- M("Belgium","Senegal","Belgium","M82","Seattle · Jul 1","62%","38%"),
+ M("USA","Bosnia","USA","M81","San Francisco Bay · Jul 1","82%","18%","2-0"),
+ M("Belgium","Senegal","Belgium","M82","Seattle · Jul 1","62%","38%","3-2","aet"),
 ];
 const L16=[
  M("Paraguay","France","France","M89","Philadelphia · Jul 4","7%","93%"),
@@ -202,7 +202,7 @@ function matchBox(m,finalCls){
       ${teamRow(m.a, m.w===m.a, va, played, played && m.w===m.a)}
       ${teamRow(m.b, m.w===m.b, vb, played, played && m.w===m.b)}
     </div>
-    <div class="mlabel">${m.lbl}${played?(' · <span class="ft">FT'+(m.pen?' · pens':'')+'</span>'):''}${locHtml(m.loc)}</div>
+    <div class="mlabel">${m.lbl}${played?(' · <span class="ft">FT'+(m.pen?(m.pen==="aet"?" · AET":" · pens"):"")+'</span>'):''}${locHtml(m.loc)}</div>
   </div>`;
 }
 function col(label,matches,finalCls){
