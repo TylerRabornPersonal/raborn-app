@@ -107,8 +107,8 @@
 <header>
   <h1>🏆 2026 World Cup — Projected Knockout Bracket</h1>
   <div class="sub">
-    Updated <strong>July 14, 2026</strong> — <strong>Spain shocked France 2–0</strong> in the semifinal, dumping out the tournament favourite and reaching the final. All quarterfinals and the first semi are locked (✓ / <span class="ft">FT</span>).
-    Remaining games use each team's <strong>gambling-implied chance to win and advance</strong>. It's wide open now: <strong>England–Argentina</strong> (Jul 15) decides Spain's final opponent, and all three of the projected champion (Spain), the England–Argentina winner, and the final are near coin-flips.
+    Updated <strong>July 15, 2026</strong> — <strong>the final is set: Spain vs Argentina</strong> (Jul 19, New York). Spain reached it by stunning France 2–0; Argentina beat England 2–1 in the other semi. All knockout results are locked (✓ / <span class="ft">FT</span>).
+    The lone projected number left is the final: the market makes <strong>Spain a clear favourite (~63%, about −170)</strong> to lift the trophy, with France beating England for third place.
   </div>
   <div class="legend">
     <span><i class="swatch" style="background:#1fd97b"></i>Projected to advance</span>
@@ -124,7 +124,7 @@
 
 <div class="third">
   <div class="h">3rd-Place Play-off (proj.) · <span class="loc loc-warm">📍 Miami · Jul 18</span></div>
-  <div class="row"><span>🇫🇷 <span class="w">France</span> <span style="color:#7fe9b0">58%</span></span> <span style="color:#6f80b0">def.</span> <span>🇦🇷 Argentina 42%</span></div>
+  <div class="row"><span>🇫🇷 <span class="w">France</span> <span style="color:#7fe9b0">55%</span></span> <span style="color:#6f80b0">def.</span> <span>🏴󠁧󠁢󠁥󠁮󠁧󠁿 England 45%</span></div>
 </div>
 
 <footer>
@@ -175,9 +175,9 @@ const R16=[
  M("Switzerland","Colombia","Switzerland","M96","Vancouver · Jul 7","36%","64%","0-0","4-3"),
 ];
 const RQF=[ M("Norway","England","England","M99","Miami · Jul 11","43%","57%","1-2"), M("Argentina","Switzerland","Argentina","M100","Kansas City · Jul 11","76%","24%","3-1") ];
-const RSF=[ M("England","Argentina","England","M102","Atlanta · Jul 15","51%","49%") ];
+const RSF=[ M("England","Argentina","Argentina","M102","Atlanta · Jul 15","51%","49%","1-2") ];
 
-const FINAL=M("Spain","England","Spain","M104 · FINAL","New York · Jul 19","51%","49%");
+const FINAL=M("Spain","Argentina","Spain","M104 · FINAL","New York · Jul 19","63%","37%");
 
 function teamRow(name,win,val,isScore,actual){
   let cls = win===null ? "" : (win?"win":"lose");
@@ -212,7 +212,7 @@ const champBox = `<div class="final-wrap">
   <div class="champ"><div class="crown">👑</div><div class="lbl">Projected Champion</div><div class="team-name">🇪🇸 Spain</div></div>
   <div class="round-label" style="margin:0">Final</div>
   ${matchBox(FINAL,"finalbox")}
-  <div class="round-label" style="margin-top:4px">Runner-up: 🏴󠁧󠁢󠁥󠁮󠁧󠁿 England</div>
+  <div class="round-label" style="margin-top:4px">Runner-up: 🇦🇷 Argentina</div>
 </div>`;
 
 document.getElementById("bracket").innerHTML =
