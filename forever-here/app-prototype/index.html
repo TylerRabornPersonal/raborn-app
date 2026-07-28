@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<title>Forever Here — Prototype</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..600&family=Mulish:ital,wght@0,300..800&family=Michroma&family=Great+Vibes&display=swap" rel="stylesheet">
+<!--
+  FOREVER HERE — CLICKABLE PROTOTYPE (non-working demo)
+  A sales walkthrough of the customer experience. It does NOT place real calls,
+  verify a passing, or use a backend. Voice recording IS real (uses the browser mic)
+  so a prospect can record and immediately "receive the call" and hear it back.
+  Mic requires HTTPS or localhost — works on Vercel; if unavailable, the app
+  falls back to a simulated recording so the walkthrough never breaks.
+-->
+<style>
+  :root{
+    --night-900:#0A0E16;--night-800:#10151F;--night-700:#171E2B;--night-600:#212A3A;--night-500:#2E3A4E;--night-400:#48566C;
+    --frost-700:#175A8F;--frost-600:#2277B4;--frost-500:#3D97D6;--frost-400:#6FB4E4;--frost-300:#A3D0EE;--frost-100:#E8F3FB;
+    --ember-700:#B83A12;--ember-600:#E14E1B;--ember-500:#FF6A2B;--ember-400:#FF8C55;--ember-200:#FFD2BB;--ember-100:#FFE9DE;
+    --plum-800:#3A1029;--linen:#F6F2EC;--bone:#EDE7DD;--sand:#DED6C8;
+    --ink:#11131A;--slate-700:#353B47;--slate-600:#494F5B;--slate-500:#5C6470;--slate-400:#7C8492;--slate-300:#A6ADB8;--slate-200:#C9CED6;--slate-100:#E9ECF0;--white:#fff;
+    --answer:#34C759;--decline:#FF3B30;
+    --grad-ember:linear-gradient(160deg,#FF6A2B,#B83A12);
+    --grad-fireice:linear-gradient(135deg,#3D97D6 0%,#6FB4E4 32%,#FF8C55 68%,#FF6A2B 100%);
+    --font-display:'Fraunces',Georgia,serif;--font-body:'Mulish',system-ui,sans-serif;--font-wm:'Michroma',sans-serif;--font-script:'Great Vibes',cursive;
+    --font-ios:-apple-system,'SF Pro Display','Helvetica Neue',Arial,sans-serif;
+    --r-md:10px;--r-lg:16px;--r-xl:22px;--r-pill:999px;
+  }
+  *,*::before,*::after{box-sizing:border-box;}
+  html,body{margin:0;height:100%;}
+  body{font-family:var(--font-body);background:#1a1d24;display:flex;align-items:center;justify-content:center;min-height:100vh;color:var(--ink);-webkit-font-smoothing:antialiased;padding:20px;}
+  h1,h2,h3{font-family:var(--font-display);margin:0;line-height:1.1;letter-spacing:-0.01em;}
+  p{margin:0;}
+  button{font-family:var(--font-body);cursor:pointer;}
+
+  /* DEVICE FRAME */
+  .device{width:390px;max-width:100%;height:844px;max-height:96vh;background:#000;border-radius:46px;padding:12px;box-shadow:0 30px 80px rgba(0,0,0,.6);position:relative;}
+  .screenwrap{position:relative;width:100%;height:100%;border-radius:36px;overflow:hidden;background:var(--linen);}
+  .island{position:absolute;top:12px;left:50%;transform:translateX(-50%);width:104px;height:30px;background:#000;border-radius:var(--r-pill);z-index:60;}
+
+  /* SCREEN SYSTEM */
+  .screen{position:absolute;inset:0;display:none;flex-direction:column;overflow:hidden;}
+  .screen.active{display:flex;}
+  .body{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;}
+  .pad{padding:20px 22px;}
+
+  /* TOP BAR */
+  .topbar{padding:52px 18px 12px;display:flex;align-items:center;gap:12px;flex-shrink:0;}
+  .back{width:38px;height:38px;border-radius:50%;border:none;background:var(--slate-100);color:var(--night-700);font-size:20px;display:flex;align-items:center;justify-content:center;}
+  .topbar h2{font-size:1.25rem;font-family:var(--font-display);}
+  .topbar.on-night{background:transparent;}
+  .on-night .topbar h2, .topbar.dark h2{color:var(--linen);}
+  .topbar.dark .back{background:rgba(255,255,255,.12);color:#fff;}
+
+  /* COMMON */
+  .btn{border:0;border-radius:var(--r-pill);padding:15px 22px;font-weight:800;font-size:1rem;width:100%;display:flex;align-items:center;justify-content:center;gap:8px;transition:transform .15s;}
+  .btn:active{transform:scale(.98);}
+  .btn-primary{background:var(--grad-ember);color:#fff;box-shadow:0 10px 24px rgba(225,78,27,.35);}
+  .btn-frost{background:var(--frost-600);color:#fff;}
+  .btn-quiet{background:var(--slate-100);color:var(--slate-700);}
+  .btn-ghost{background:transparent;color:var(--linen);border:1.5px solid rgba(255,255,255,.4);}
+  .btn-danger{background:transparent;color:var(--decline);border:1.5px solid var(--decline);}
+  .stack>*{margin-bottom:12px;}
+  .field{margin-bottom:16px;}
+  .field label{display:block;font-size:.82rem;font-weight:800;color:var(--slate-700);margin-bottom:6px;}
+  .field input,.field select{width:100%;padding:13px 14px;border:1.5px solid var(--slate-200);border-radius:var(--r-md);font-family:var(--font-body);font-size:1rem;background:var(--white);color:var(--ink);}
+  .field input:focus,.field select:focus{outline:2px solid var(--frost-500);outline-offset:1px;border-color:var(--frost-500);}
+  .hint{font-size:.8rem;color:var(--slate-400);margin-top:6px;}
+  .row2{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+  .check{display:flex;gap:10px;align-items:flex-start;font-size:.86rem;color:var(--slate-600);}
+  .check input{margin-top:3px;}
+
+  /* SPLASH */
+  #splash{background:radial-gradient(600px 400px at 72% 6%,rgba(255,106,43,.26),transparent 60%),radial-gradient(600px 460px at 10% 108%,rgba(61,151,214,.24),transparent 60%),var(--night-900);color:var(--linen);align-items:center;justify-content:center;text-align:center;}
+  #splash .wm{font-family:var(--font-wm);font-size:1.5rem;letter-spacing:.08em;line-height:1.18;text-shadow:0 0 34px rgba(255,106,43,.3);}
+  #splash .scr{font-family:var(--font-script);font-size:2.4rem;color:var(--ember-400);margin-top:2px;}
+  #splash .tag{font-family:var(--font-display);font-style:italic;font-weight:300;color:var(--slate-200);margin:16px auto 0;font-size:1.1rem;max-width:24ch;}
+  #splash .sp-actions{position:absolute;left:26px;right:26px;bottom:56px;}
+  .mark8{filter:drop-shadow(0 0 24px rgba(255,106,43,.4));margin-bottom:8px;}
+
+  /* HOME */
+  #home{background:var(--linen);}
+  .greet{font-family:var(--font-display);font-size:1.7rem;color:var(--night-800);}
+  .greet .sub{font-family:var(--font-body);font-size:.95rem;color:var(--slate-500);font-weight:600;margin-top:4px;}
+  .home-card{border-radius:var(--r-xl);padding:22px;margin-bottom:14px;color:#fff;position:relative;overflow:hidden;display:block;border:none;width:100%;text-align:left;}
+  .home-card h3{font-size:1.4rem;color:#fff;margin-bottom:6px;}
+  .home-card p{font-size:.9rem;opacity:.9;}
+  .home-card.make{background:var(--grad-ember);}
+  .home-card.calls{background:linear-gradient(160deg,#2277B4,#0B2C4A);}
+  .home-card .ico{position:absolute;right:18px;top:18px;opacity:.85;}
+  .demo-banner{margin-top:8px;background:var(--night-900);border-radius:var(--r-lg);padding:16px 18px;color:var(--linen);display:flex;align-items:center;gap:12px;width:100%;border:none;text-align:left;}
+  .demo-banner .lab{font-size:.7rem;text-transform:uppercase;letter-spacing:.14em;color:var(--ember-400);font-weight:800;}
+  .demo-banner h4{color:#fff;font-family:var(--font-display);font-size:1.05rem;margin:2px 0;}
+  .demo-banner p{font-size:.8rem;color:var(--slate-300);}
+
+  /* CHOOSE TYPE */
+  .type-card{border:1.5px solid var(--slate-200);border-radius:var(--r-xl);padding:22px;margin-bottom:14px;width:100%;text-align:left;background:var(--white);display:flex;gap:16px;align-items:flex-start;}
+  .type-card .tc-ico{width:52px;height:52px;border-radius:14px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .type-card.sched .tc-ico{background:var(--ember-100);}
+  .type-card.pass .tc-ico{background:var(--frost-100);}
+  .type-card h3{font-size:1.2rem;margin-bottom:4px;}
+  .type-card p{font-size:.86rem;color:var(--slate-500);}
+
+  /* CHIPS */
+  .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px;}
+  .chip{background:var(--frost-100);border:1px solid var(--frost-300);color:var(--frost-700);border-radius:var(--r-pill);padding:6px 14px;font-size:.82rem;font-weight:700;display:flex;align-items:center;gap:6px;}
+  .chip button{border:none;background:none;color:var(--frost-600);font-size:1rem;line-height:1;cursor:pointer;}
+
+  /* RECORD */
+  #record{background:var(--night-900);color:var(--linen);align-items:center;text-align:center;}
+  #record .recip{font-family:var(--font-display);font-size:1.5rem;color:var(--linen);margin-top:8px;}
+  #record .lab{font-size:.75rem;text-transform:uppercase;letter-spacing:.14em;color:var(--frost-300);font-weight:700;}
+  .rec-btn{width:110px;height:110px;border-radius:50%;border:4px solid var(--ember-500);background:transparent;display:flex;align-items:center;justify-content:center;margin:34px auto 20px;transition:all .2s;}
+  .rec-btn .dot{width:64px;height:64px;border-radius:50%;background:var(--ember-500);transition:all .25s;}
+  .rec-btn.recording{box-shadow:0 0 0 8px rgba(255,106,43,.16);}
+  .rec-btn.recording .dot{border-radius:14px;width:40px;height:40px;}
+  .rec-time{font-family:var(--font-ios);font-variant-numeric:tabular-nums;font-size:2rem;color:var(--linen);letter-spacing:.04em;}
+  .wave{display:flex;gap:4px;align-items:center;justify-content:center;height:44px;margin-top:18px;}
+  .wave span{width:4px;background:var(--frost-400);border-radius:2px;height:8px;transition:height .15s;}
+  .wave.on span{animation:pulse 1s ease-in-out infinite;}
+  @keyframes pulse{0%,100%{height:8px;}50%{height:34px;}}
+  .wave span:nth-child(2n){animation-delay:.15s;}
+  .wave span:nth-child(3n){animation-delay:.3s;}
+  .wave span:nth-child(4n){animation-delay:.45s;}
+  #record .rec-hint{color:var(--slate-400);font-size:.85rem;margin-top:auto;}
+
+  /* REVIEW */
+  #review{background:var(--linen);}
+  .player{background:var(--white);border:1px solid var(--slate-100);border-radius:var(--r-xl);padding:22px;text-align:center;box-shadow:0 6px 18px rgba(10,14,22,.06);}
+  .play-circle{width:78px;height:78px;border-radius:50%;background:var(--grad-fireice);border:none;display:flex;align-items:center;justify-content:center;margin:0 auto 14px;color:#fff;}
+  .msg-summary{background:var(--bone);border-radius:var(--r-lg);padding:16px 18px;margin-top:18px;font-size:.9rem;color:var(--slate-600);}
+  .msg-summary b{color:var(--night-800);}
+
+  /* MY CALLS */
+  #mycalls{background:var(--linen);}
+  .call-item{background:var(--white);border:1px solid var(--slate-100);border-radius:var(--r-lg);padding:16px 18px;margin-bottom:12px;}
+  .call-item .badge{font-size:.66rem;text-transform:uppercase;letter-spacing:.1em;font-weight:800;padding:3px 9px;border-radius:var(--r-pill);display:inline-block;margin-bottom:8px;}
+  .badge.sched{background:var(--ember-100);color:var(--ember-700);}
+  .badge.pass{background:var(--frost-100);color:var(--frost-700);}
+  .call-item h3{font-size:1.15rem;margin-bottom:3px;}
+  .call-item .when{font-size:.84rem;color:var(--slate-500);}
+  .call-item .actions{display:flex;gap:8px;margin-top:14px;}
+  .call-item .actions button{flex:1;padding:10px;border-radius:var(--r-md);font-size:.85rem;font-weight:800;border:none;}
+  .mini-primary{background:var(--night-900);color:#fff;}
+  .mini-quiet{background:var(--slate-100);color:var(--slate-600);}
+  .empty{text-align:center;color:var(--slate-400);padding:60px 20px;}
+
+  /* iOS INCOMING CALL */
+  #incoming{font-family:var(--font-ios);background:linear-gradient(180deg,#23232a,#101014 55%,#0b0b0e);color:#fff;}
+  #incoming .stat{padding:52px 24px 0;display:flex;justify-content:space-between;font-size:14px;font-weight:600;}
+  #incoming .caller{text-align:center;margin-top:60px;}
+  #incoming .caller .n{font-size:32px;font-weight:500;}
+  #incoming .caller .s{font-size:15px;color:rgba(255,255,255,.72);margin-top:8px;}
+  #incoming .acts{margin-top:auto;padding:0 30px 34px;}
+  #incoming .sec{display:flex;justify-content:space-between;margin-bottom:30px;padding:0 10px;}
+  #incoming .mini{text-align:center;}
+  #incoming .mini .b{width:58px;height:58px;border-radius:50%;background:rgba(255,255,255,.16);display:flex;align-items:center;justify-content:center;margin:0 auto 8px;}
+  #incoming .mini label{font-size:12px;}
+  #incoming .prim{display:flex;justify-content:space-between;padding:0 8px;}
+  #incoming .pcol{text-align:center;}
+  #incoming .round{width:72px;height:72px;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 9px;}
+  #incoming .round.decline{background:var(--decline);}
+  #incoming .round.accept{background:var(--answer);}
+  #incoming .round.accept{animation:jiggle 1.4s ease-in-out infinite;}
+  @keyframes jiggle{0%,100%{transform:translateY(0);}50%{transform:translateY(-6px);}}
+  #incoming .pcol label{font-size:13px;}
+
+  /* IN CALL */
+  #incall{font-family:var(--font-ios);background:radial-gradient(500px 380px at 50% 20%,rgba(255,106,43,.24),transparent 62%),var(--night-900);color:#fff;align-items:center;text-align:center;}
+  #incall .avatar{width:110px;height:110px;border-radius:50%;background:var(--grad-fireice);display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-size:2.6rem;margin:70px auto 18px;}
+  #incall .n{font-size:26px;font-weight:500;}
+  #incall .status{color:var(--frost-300);font-size:14px;margin-top:6px;letter-spacing:.03em;}
+  #incall .transcript{margin:26px 26px 0;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:var(--r-lg);padding:18px;font-family:var(--font-display);font-style:italic;font-size:1.05rem;line-height:1.5;color:var(--linen);min-height:60px;}
+  #incall .end{width:66px;height:66px;border-radius:50%;background:var(--decline);border:none;display:flex;align-items:center;justify-content:center;margin:auto auto 40px;}
+
+  /* TOAST */
+  .toast{position:absolute;left:20px;right:20px;bottom:26px;background:var(--night-900);color:#fff;border-radius:var(--r-lg);padding:15px 18px;font-size:.9rem;font-weight:700;text-align:center;z-index:80;opacity:0;transform:translateY(12px);transition:all .3s;pointer-events:none;}
+  .toast.show{opacity:1;transform:translateY(0);}
+  .toast .accent{color:var(--ember-400);}
+
+  .svg-ico{stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+</style>
+</head>
+<body>
+<style id="fh-gate-style">
+  #fh-gate{position:fixed;inset:0;z-index:2147483647;display:flex;align-items:center;justify-content:center;
+    background:radial-gradient(700px 500px at 70% 8%,rgba(255,106,43,.18),transparent 60%),radial-gradient(700px 560px at 8% 112%,rgba(61,151,214,.18),transparent 60%),#0A0E16;
+    font-family:'Mulish',system-ui,-apple-system,sans-serif;color:#F6F2EC;}
+  #fh-gate .box{width:min(360px,88vw);text-align:center;padding:0 20px;}
+  #fh-gate .wm{font-family:'Michroma',sans-serif;letter-spacing:.12em;font-size:1.05rem;color:#F6F2EC;}
+  #fh-gate h1{font-family:'Fraunces',Georgia,serif;font-weight:400;font-size:1.5rem;margin:18px 0 6px;color:#F6F2EC;letter-spacing:-.01em;}
+  #fh-gate p{color:#A6ADB8;font-size:.9rem;margin:0 0 22px;line-height:1.5;}
+  #fh-gate input{width:100%;padding:14px 16px;border-radius:999px;border:1.5px solid rgba(255,255,255,.2);background:rgba(255,255,255,.06);color:#fff;font-size:1rem;text-align:center;font-family:inherit;}
+  #fh-gate input:focus{outline:2px solid #3D97D6;border-color:#3D97D6;}
+  #fh-gate button{width:100%;margin-top:12px;padding:14px;border:0;border-radius:999px;font-weight:800;font-size:1rem;color:#fff;cursor:pointer;background:linear-gradient(160deg,#FF6A2B,#B83A12);}
+  #fh-gate .err{color:#ffb3ab;font-size:.85rem;margin-top:12px;min-height:1em;}
+  #fh-gate .nda{margin-top:22px;font-size:.72rem;color:#7C8492;letter-spacing:.02em;}
+  html.fh-locked,body.fh-locked{overflow:hidden !important;}
+</style>
+<div id="fh-gate" role="dialog" aria-modal="true" aria-label="Password required">
+  <div class="box">
+    <svg width="86" height="53" viewBox="0 0 150 92" aria-hidden="true" style="margin:0 auto 4px;display:block;">
+      <defs>
+        <linearGradient id="fhgi" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#A3D0EE"/><stop offset="1" stop-color="#2277B4"/></linearGradient>
+        <linearGradient id="fhgf" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#B83A12"/><stop offset="1" stop-color="#FF8C55"/></linearGradient>
+      </defs>
+      <path d="M75 46 C 60 20, 22 22, 22 46 C 22 70, 60 72, 75 46 Z" stroke="url(#fhgi)" stroke-width="9" fill="none" stroke-linecap="round"/>
+      <path d="M75 46 C 90 72, 128 70, 128 46 C 128 22, 90 20, 75 46 Z" stroke="url(#fhgf)" stroke-width="9" fill="none" stroke-linecap="round"/>
+    </svg>
+    <div class="wm">FOREVER HERE</div>
+    <h1>Private preview</h1>
+    <p>This material is confidential and shared under NDA. Enter the password to continue.</p>
+    <form id="fh-gate-form" autocomplete="off">
+      <input id="fh-pw" type="password" placeholder="Password" aria-label="Password" autofocus>
+      <button type="submit">Enter</button>
+      <div class="err" id="fh-err" role="alert"></div>
+    </form>
+    <div class="nda">Please do not share.</div>
+  </div>
+</div>
+<script>
+(function(){
+  var KEY='fh_unlocked_v1', PW='king';
+  var gate=document.getElementById('fh-gate');
+  function unlock(){ if(gate&&gate.parentNode) gate.parentNode.removeChild(gate); document.documentElement.classList.remove('fh-locked'); document.body.classList.remove('fh-locked'); }
+  try{ if(sessionStorage.getItem(KEY)==='1'){ unlock(); return; } }catch(e){}
+  document.documentElement.classList.add('fh-locked'); document.body.classList.add('fh-locked');
+  var form=document.getElementById('fh-gate-form');
+  form.addEventListener('submit',function(e){
+    e.preventDefault();
+    var v=(document.getElementById('fh-pw').value||'').trim().toLowerCase();
+    if(v===PW){ try{ sessionStorage.setItem(KEY,'1'); }catch(e){} unlock(); }
+    else{ document.getElementById('fh-err').textContent='Incorrect password. Please try again.'; document.getElementById('fh-pw').value=''; }
+  });
+})();
+</script>
+
+<div class="device">
+  <div class="island"></div>
+  <div class="screenwrap" id="app">
+
+    <!-- SPLASH -->
+    <section class="screen active" id="splash">
+      <div style="text-align:center;padding:0 20px;max-width:100%;">
+        <svg class="mark8" width="120" height="74" viewBox="0 0 150 92" aria-hidden="true">
+          <defs>
+            <linearGradient id="ice" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#A3D0EE"/><stop offset="1" stop-color="#2277B4"/></linearGradient>
+            <linearGradient id="fire" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#B83A12"/><stop offset="1" stop-color="#FF8C55"/></linearGradient>
+          </defs>
+          <path d="M75 46 C 60 20, 22 22, 22 46 C 22 70, 60 72, 75 46 Z" stroke="url(#ice)" stroke-width="9" fill="none" stroke-linecap="round"/>
+          <path d="M75 46 C 90 72, 128 70, 128 46 C 128 22, 90 20, 75 46 Z" stroke="url(#fire)" stroke-width="9" fill="none" stroke-linecap="round"/>
+        </svg>
+        <div class="wm">FOREVER HERE</div>
+        <div class="scr">Forever Here</div>
+        <div class="tag">Be there for life's biggest moments. Forever.</div>
+      </div>
+      <div class="sp-actions stack">
+        <button class="btn btn-primary" onclick="go('signup')">Create account</button>
+        <button class="btn btn-ghost" onclick="go('login')">Log in</button>
+      </div>
+    </section>
+
+    <!-- SIGNUP -->
+    <section class="screen" id="signup">
+      <div class="topbar"><button class="back" onclick="back()">‹</button><h2>Create your account</h2></div>
+      <div class="body pad">
+        <div class="field"><label for="su-name">Your name</label><input id="su-name" type="text" placeholder="Robert King" value="Robert King"></div>
+        <div class="field"><label for="su-cell">Cell number</label><input id="su-cell" type="tel" placeholder="(601) 555-0142" value="(601) 555-0142"></div>
+        <div class="field"><label for="su-email">Email</label><input id="su-email" type="email" placeholder="you@email.com" value="robert@email.com"></div>
+        <label class="check"><input type="checkbox" id="su-terms" checked><span>I agree to the Terms of Service and Privacy Policy, and I understand my messages are stored securely.</span></label>
+      </div>
+      <div class="pad"><button class="btn btn-primary" onclick="go('verify')">Continue</button></div>
+    </section>
+
+    <!-- VERIFY 2FA -->
+    <section class="screen" id="verify">
+      <div class="topbar"><button class="back" onclick="back()">‹</button><h2>Verify it's you</h2></div>
+      <div class="body pad">
+        <p style="color:var(--slate-500);margin-bottom:22px;">We sent a 6-digit code to your cell to confirm the number that your calls will come from.</p>
+        <div class="field"><label for="code">Enter code</label><input id="code" type="text" inputmode="numeric" maxlength="6" placeholder="••••••" value="123456" style="letter-spacing:.4em;text-align:center;font-size:1.4rem;"></div>
+        <p class="hint">Demo code is pre-filled. Tap Verify to continue.</p>
+      </div>
+      <div class="pad"><button class="btn btn-primary" onclick="go('home')">Verify &amp; continue</button></div>
+    </section>
+
+    <!-- LOGIN -->
+    <section class="screen" id="login">
+      <div class="topbar"><button class="back" onclick="back()">‹</button><h2>Welcome back</h2></div>
+      <div class="body pad">
+        <div class="field"><label for="li-email">Email</label><input id="li-email" type="email" value="robert@email.com"></div>
+        <div class="field"><label for="li-pass">Password</label><input id="li-pass" type="password" value="password"></div>
+      </div>
+      <div class="pad"><button class="btn btn-primary" onclick="go('home')">Log in</button></div>
+    </section>
+
+    <!-- HOME -->
+    <section class="screen" id="home">
+      <div class="topbar" style="justify-content:space-between;"><h2 style="font-family:var(--font-wm);font-size:.95rem;letter-spacing:.18em;">FOREVER&nbsp;HERE</h2><button class="back" onclick="go('settings')" aria-label="Account settings"><svg width="20" height="20" viewBox="0 0 24 24" class="svg-ico" style="stroke:var(--night-700)"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.6 1.6 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.6 1.6 0 0 0-1.8-.3 1.6 1.6 0 0 0-1 1.5V21a2 2 0 0 1-4 0v-.1a1.6 1.6 0 0 0-1-1.5 1.6 1.6 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.6 1.6 0 0 0 .3-1.8 1.6 1.6 0 0 0-1.5-1H3a2 2 0 0 1 0-4h.1a1.6 1.6 0 0 0 1.5-1 1.6 1.6 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.6 1.6 0 0 0 1.8.3H9a1.6 1.6 0 0 0 1-1.5V3a2 2 0 0 1 4 0v.1a1.6 1.6 0 0 0 1 1.5 1.6 1.6 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.6 1.6 0 0 0-.3 1.8V9a1.6 1.6 0 0 0 1.5 1H21a2 2 0 0 1 0 4h-.1a1.6 1.6 0 0 0-1.5 1Z"/></svg></button></div>
+      <div class="body pad">
+        <div class="greet">Hello, <span id="home-name">Robert</span><div class="sub">What would you like to leave behind today?</div></div>
+        <div style="height:20px;"></div>
+        <button class="home-card make" onclick="startNew()">
+          <svg class="ico svg-ico" width="26" height="26" viewBox="0 0 24 24"><path d="M12 15a3 3 0 0 0 3-3V6a3 3 0 0 0-6 0v6a3 3 0 0 0 3 3Z"/><path d="M19 11a7 7 0 0 1-14 0M12 18v3"/></svg>
+          <h3>Make a Call</h3><p>Record a message to be delivered on the day it matters.</p>
+        </button>
+        <button class="home-card calls" onclick="go('mycalls')">
+          <svg class="ico svg-ico" width="26" height="26" viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3-8.6A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.3 1.8.6 2.6a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.5-1.1a2 2 0 0 1 2.1-.5c.8.3 1.7.5 2.6.6a2 2 0 0 1 1.7 2Z"/></svg>
+          <h3>My Calls</h3><p>See and manage the messages you've scheduled.</p>
+        </button>
+        <button class="demo-banner" onclick="previewSeed()">
+          <div style="flex:1;"><span class="lab">Try the demo</span><h4>See a delivered call</h4><p>Watch a scheduled message arrive as a real phone call.</p></div>
+          <span style="font-size:1.6rem;">›</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- ACCOUNT SETTINGS -->
+    <section class="screen" id="settings">
+      <div class="topbar"><button class="back" onclick="back()">‹</button><h2>Account settings</h2></div>
+      <div class="body pad">
+        <div class="field"><label for="set-name">Your name</label><input id="set-name" type="text"></div>
+        <div class="field"><label for="set-cell">Your number</label><input id="set-cell" type="tel"></div>
+        <p class="hint" style="margin-bottom:20px;">This is the number your calls are delivered from.</p>
+        <div style="background:var(--frost-100);border:1px solid var(--frost-300);border-radius:var(--r-lg);padding:16px;">
+          <h3 style="font-size:1.05rem;color:var(--frost-700);margin-bottom:4px;">Account Access</h3>
+          <p style="font-size:.84rem;color:var(--slate-600);">Give up to 3 people you trust access to your account. They can confirm your passing and schedule deliveries when the time comes. No one is notified of anything; they simply have access.</p>
+          <div class="chips" id="access-list" style="margin-top:12px;"></div>
+          <button class="btn btn-quiet" style="margin-top:12px;" onclick="addAccess()">+ Add a person</button>
+        </div>
+      </div>
+      <div class="pad"><button class="btn btn-primary" onclick="saveSettings()">Save</button></div>
+    </section>
+
+    <!-- COMPOSE / RECIPIENT -->
+    <section class="screen" id="sched">
+      <div class="topbar"><button class="back" onclick="back()">‹</button><h2>Who is it for?</h2></div>
+      <div class="body pad">
+        <div class="field"><label for="s-name">Recipient's name</label><input id="s-name" type="text" placeholder="Emma"></div>
+        <div class="field"><label for="s-rel">Relationship</label><input id="s-rel" type="text" placeholder="Daughter"></div>
+        <div class="field"><label for="s-cell">Their cell number</label><input id="s-cell" type="tel" placeholder="(601) 555-0188"></div>
+        <div class="field"><label for="s-email">Their email (optional)</label><input id="s-email" type="email" placeholder="emma@email.com"><p class="hint">If the call can't get through, say they changed their number, we'll email them the message as a link they can play.</p></div>
+        <div class="field"><label for="s-mode">When should it be delivered?</label>
+          <select id="s-mode" onchange="toggleMode()">
+            <option value="guardian">Delivery date to be scheduled by a guardian</option>
+            <option value="date">On a specific date I choose</option>
+          </select>
+        </div>
+        <div id="date-fields" style="display:none;">
+          <div class="row2">
+            <div class="field"><label for="s-date">Deliver on</label><input id="s-date" type="date"></div>
+            <div class="field"><label for="s-time">Time</label><input id="s-time" type="time" value="09:00"></div>
+          </div>
+        </div>
+        <div id="guardian-note" style="background:var(--bone);border-radius:var(--r-md);padding:14px 16px;font-size:.85rem;color:var(--slate-600);margin-bottom:16px;">For moments you can't date yet, like a future wedding, or for after you're gone, one of your Account Access guardians sets the delivery date when the time comes.</div>
+        <div class="field"><label for="s-label">Occasion (optional)</label><input id="s-label" type="text" placeholder="On her wedding day"></div>
+        <label style="font-size:.82rem;font-weight:800;color:var(--slate-700);">Also deliver to</label>
+        <div class="chips" id="s-people"></div>
+        <button class="btn btn-quiet" style="margin-top:12px;" onclick="addPerson()">+ Add another person</button>
+      </div>
+      <div class="pad"><button class="btn btn-primary" onclick="toRecord()">Next: Record Message</button></div>
+    </section>
+
+    <!-- RECORD -->
+    <section class="screen" id="record">
+      <div class="topbar dark"><button class="back" onclick="back()">‹</button><h2>Record</h2></div>
+      <div class="body pad" style="display:flex;flex-direction:column;text-align:center;">
+        <div class="lab">Recording for</div>
+        <div class="recip" id="rec-recip">Emma</div>
+        <button class="rec-btn" id="recBtn" onclick="toggleRec()"><span class="dot"></span></button>
+        <div class="rec-time" id="recTime">00:00</div>
+        <div class="wave" id="wave">
+          <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+        </div>
+        <div class="rec-hint" id="recHint">Tap the circle to start recording. Take your time.</div>
+      </div>
+    </section>
+
+    <!-- REVIEW -->
+    <section class="screen" id="review">
+      <div class="topbar"><button class="back" onclick="back()">‹</button><h2>Listen back</h2></div>
+      <div class="body pad">
+        <div class="player">
+          <button class="play-circle" onclick="playReview()"><svg width="30" height="30" viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"/></svg></button>
+          <h3 style="font-size:1.2rem;">Your message</h3>
+          <p style="color:var(--slate-500);font-size:.9rem;margin-top:4px;" id="review-len">Tap to play what you recorded</p>
+        </div>
+        <div class="msg-summary" id="review-summary"></div>
+        <div style="height:16px;"></div>
+        <button class="btn btn-quiet" onclick="go('record')">↺ Re-record</button>
+      </div>
+      <div class="pad"><button class="btn btn-primary" onclick="saveMessage()">Save message</button></div>
+    </section>
+
+    <!-- MY CALLS -->
+    <section class="screen" id="mycalls">
+      <div class="topbar"><button class="back" onclick="go('home')">‹</button><h2>My Calls</h2></div>
+      <div class="body pad" id="calls-list"></div>
+      <div class="pad"><button class="btn btn-frost" onclick="startNew()">+ New message</button></div>
+    </section>
+
+    <!-- INCOMING CALL -->
+    <section class="screen" id="incoming">
+      <div class="stat"><span>9:41</span><span>􀙇 􀖀 􀛨</span></div>
+      <div class="caller"><div class="n" id="in-name">Dad</div><div class="s">Forever Here Audio</div></div>
+      <div class="acts">
+        <div class="sec">
+          <div class="mini"><div class="b"><svg width="22" height="22" viewBox="0 0 24 24" class="svg-ico" style="stroke:#fff"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 1.5M9 2h6"/></svg></div><label>Remind Me</label></div>
+          <div class="mini"><div class="b"><svg width="22" height="22" viewBox="0 0 24 24" class="svg-ico" style="stroke:#fff"><path d="M21 11.5a8.5 8.5 0 0 1-12.3 7.6L3 21l1.9-5.7A8.5 8.5 0 1 1 21 11.5Z"/></svg></div><label>Message</label></div>
+        </div>
+        <div class="prim">
+          <div class="pcol"><button class="round decline" onclick="go('mycalls')"><svg width="30" height="30" viewBox="0 0 24 24" fill="#fff" style="transform:rotate(135deg)"><path d="M20 15.5c-1.2 0-2.4-.2-3.5-.6-.35-.12-.75-.03-1.02.24l-2.2 2.2c-2.83-1.44-5.15-3.76-6.59-6.59l2.2-2.2c.27-.27.36-.67.24-1.02C8.7 6.4 8.5 5.2 8.5 4c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1 0 9.39 7.61 17 17 17 .55 0 1-.45 1-1v-3.5c0-.55-.45-1-1-1z"/></svg></button><label>Decline</label></div>
+          <div class="pcol"><button class="round accept" onclick="answerCall()"><svg width="30" height="30" viewBox="0 0 24 24" fill="#fff"><path d="M20 15.5c-1.2 0-2.4-.2-3.5-.6-.35-.12-.75-.03-1.02.24l-2.2 2.2c-2.83-1.44-5.15-3.76-6.59-6.59l2.2-2.2c.27-.27.36-.67.24-1.02C8.7 6.4 8.5 5.2 8.5 4c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1 0 9.39 7.61 17 17 17 .55 0 1-.45 1-1v-3.5c0-.55-.45-1-1-1z"/></svg></button><label>Accept</label></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- IN CALL -->
+    <section class="screen" id="incall">
+      <div class="avatar" id="ic-avatar">D</div>
+      <div class="n" id="ic-name">Dad</div>
+      <div class="status" id="ic-status">Forever Here message · connecting…</div>
+      <div class="transcript" id="ic-transcript"></div>
+      <button class="end" onclick="endCall()"><svg width="30" height="30" viewBox="0 0 24 24" fill="#fff" style="transform:rotate(135deg)"><path d="M20 15.5c-1.2 0-2.4-.2-3.5-.6-.35-.12-.75-.03-1.02.24l-2.2 2.2c-2.83-1.44-5.15-3.76-6.59-6.59l2.2-2.2c.27-.27.36-.67.24-1.02C8.7 6.4 8.5 5.2 8.5 4c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1 0 9.39 7.61 17 17 17 .55 0 1-.45 1-1v-3.5c0-.55-.45-1-1-1z"/></svg></button>
+    </section>
+
+    <div class="toast" id="toast"></div>
+  </div>
+</div>
+
+<audio id="player" style="display:none"></audio>
+
+<script>
+(function(){
+  "use strict";
+  // ── STATE ──────────────────────────────────────────────
+  var history = ['splash'];
+  var user = { name:'Robert', cell:'(601) 555-0142', accessPeople:['Lea Ann King','Mike (brother)'] };
+  var draft = null;
+  var messages = [{
+    id:'seed', type:'scheduled', mode:'guardian', senderName:'Dad', recipient:'Emma', relation:'Daughter',
+    when:'Date set by a guardian', label:'On her wedding day', people:[], email:'',
+    audioUrl:null, seeded:true,
+    voiceText:"Emma, if you're hearing this, it's your wedding day, and I want you to know I'm so proud of the woman you've become. I love you more than words. Go be happy."
+  }];
+
+  // ── NAV ────────────────────────────────────────────────
+  function show(id){
+    document.querySelectorAll('.screen').forEach(function(s){ s.classList.remove('active'); });
+    document.getElementById(id).classList.add('active');
+    var b = document.querySelector('#'+id+' .body'); if(b) b.scrollTop = 0;
+  }
+  window.go = function(id){ if(history[history.length-1]!==id) history.push(id); show(id); afterEnter(id); };
+  window.back = function(){ if(history.length>1){ history.pop(); var id=history[history.length-1]; show(id); afterEnter(id);} };
+
+  function afterEnter(id){
+    if(id==='home'){ document.getElementById('home-name').textContent = user.name.split(' ')[0]; }
+    if(id==='mycalls'){ renderCalls(); }
+    if(id==='record'){ resetRecorder(); }
+    if(id==='sched'){ toggleMode(); renderChips('s-people', draft.people, 'people'); }
+    if(id==='settings'){ document.getElementById('set-name').value=user.name; document.getElementById('set-cell').value=user.cell||''; renderAccess(); }
+  }
+
+  // ── SIGNUP name capture ────────────────────────────────
+  function captureName(){ var n=document.getElementById('su-name').value.trim(); if(n) user.name=n; }
+  document.getElementById('su-name').addEventListener('change', captureName);
+
+  // ── CREATE FLOW ────────────────────────────────────────
+  window.startNew = function(){ captureName(); draft={ type:'scheduled', mode:'guardian', recipient:'', relation:'', email:'', people:[], audioUrl:null, seconds:0 }; go('sched'); };
+  window.toggleMode = function(){
+    var mode = document.getElementById('s-mode').value;
+    document.getElementById('date-fields').style.display = mode==='date' ? 'block' : 'none';
+    document.getElementById('guardian-note').style.display = mode==='date' ? 'none' : 'block';
+  };
+
+  window.addPerson = function(){
+    var name = prompt('Name of the additional person:');
+    if(!name) return;
+    draft.people.push(name); renderChips('s-people', draft.people, 'people');
+  };
+
+  // Account Access (settings)
+  window.addAccess = function(){
+    if(user.accessPeople.length>=3){ toast('You can add up to 3 people.'); return; }
+    var name = prompt('Name of the person to give account access:');
+    if(!name) return;
+    user.accessPeople.push(name); renderAccess();
+  };
+  function renderAccess(){
+    var el=document.getElementById('access-list'); el.innerHTML='';
+    user.accessPeople.forEach(function(name,i){
+      var c=document.createElement('span'); c.className='chip';
+      c.innerHTML = name+' <button aria-label="remove">×</button>';
+      c.querySelector('button').onclick=function(){ user.accessPeople.splice(i,1); renderAccess(); };
+      el.appendChild(c);
+    });
+  }
+  window.saveSettings = function(){
+    var n=document.getElementById('set-name').value.trim(); if(n) user.name=n;
+    var c=document.getElementById('set-cell').value.trim(); if(c) user.cell=c;
+    go('home'); toast('Account settings saved.');
+  };
+  function renderChips(elId, arr, key){
+    var el=document.getElementById(elId); el.innerHTML='';
+    arr.forEach(function(name,i){
+      var c=document.createElement('span'); c.className='chip';
+      c.innerHTML = name+' <button aria-label="remove">×</button>';
+      c.querySelector('button').onclick=function(){ arr.splice(i,1); renderChips(elId,arr,key); };
+      el.appendChild(c);
+    });
+  }
+
+  window.toRecord = function(){
+    draft.recipient = document.getElementById('s-name').value.trim() || 'your recipient';
+    draft.relation = document.getElementById('s-rel').value.trim();
+    draft.email = document.getElementById('s-email').value.trim();
+    draft.mode = document.getElementById('s-mode').value;
+    draft.label = document.getElementById('s-label').value.trim();
+    if(draft.mode==='date'){
+      var d=document.getElementById('s-date').value, t=document.getElementById('s-time').value;
+      draft.when = formatWhen(d,t) || (draft.label || 'A scheduled date');
+    } else {
+      draft.when = 'Date set by a guardian';
+    }
+    document.getElementById('rec-recip').textContent = draft.recipient;
+    go('record');
+  };
+  function formatWhen(d,t){
+    if(!d) return null;
+    try{
+      var dt=new Date(d+'T'+(t||'09:00'));
+      var opts={month:'long',day:'numeric',year:'numeric'};
+      var time=dt.toLocaleTimeString([], {hour:'numeric',minute:'2-digit'});
+      return dt.toLocaleDateString(undefined,opts)+' · '+time;
+    }catch(e){ return d; }
+  }
+
+  // ── RECORDING (real mic, graceful fallback) ────────────
+  var mediaRecorder=null, chunks=[], stream=null, timer=null, secs=0, recording=false, simulated=false;
+  var recBtn, recTime, wave, recHint;
+  function els(){ recBtn=document.getElementById('recBtn'); recTime=document.getElementById('recTime'); wave=document.getElementById('wave'); recHint=document.getElementById('recHint'); }
+  function resetRecorder(){ els(); recording=false; secs=0; simulated=false; if(timer) clearInterval(timer);
+    recBtn.classList.remove('recording'); wave.classList.remove('on'); recTime.textContent='00:00';
+    recHint.textContent='Tap the circle to start recording. Take your time.';
+  }
+  function fmt(s){ var m=Math.floor(s/60), ss=s%60; return (m<10?'0':'')+m+':'+(ss<10?'0':'')+ss; }
+  window.toggleRec = async function(){
+    els();
+    if(!recording){
+      // start
+      try{
+        stream = await navigator.mediaDevices.getUserMedia({audio:true});
+        chunks=[]; mediaRecorder=new MediaRecorder(stream);
+        mediaRecorder.ondataavailable=function(e){ if(e.data.size>0) chunks.push(e.data); };
+        mediaRecorder.onstop=function(){
+          var blob=new Blob(chunks,{type: mediaRecorder.mimeType||'audio/webm'});
+          draft.audioUrl=URL.createObjectURL(blob);
+          if(stream) stream.getTracks().forEach(function(t){t.stop();});
+        };
+        mediaRecorder.start();
+      }catch(err){
+        simulated=true; recHint.textContent='(Mic unavailable here — simulating a recording for the demo.)';
+      }
+      recording=true; recBtn.classList.add('recording'); wave.classList.add('on');
+      if(!simulated) recHint.textContent='Recording… tap again to stop.';
+      timer=setInterval(function(){ secs++; recTime.textContent=fmt(secs); }, 1000);
+    } else {
+      // stop
+      recording=false; recBtn.classList.remove('recording'); wave.classList.remove('on'); clearInterval(timer);
+      if(mediaRecorder && mediaRecorder.state!=='inactive'){ try{ mediaRecorder.stop(); }catch(e){} }
+      if(simulated){ draft.audioUrl=null; }
+      draft.seconds=secs || 4;
+      document.getElementById('review-len').textContent='A '+fmt(draft.seconds)+' message · tap to play';
+      document.getElementById('review-summary').innerHTML =
+        '<b>For '+draft.recipient+'</b>'+(draft.relation?' ('+draft.relation+')':'')+'<br>'+
+        (draft.mode==='date' ? 'Delivers '+draft.when : 'Delivery scheduled by a guardian'+(draft.label?' · '+draft.label:''))+
+        (draft.email ? '<br>Backup email: '+draft.email : '')+
+        (draft.people && draft.people.length ? '<br>Also to: '+draft.people.join(', ') : '');
+      go('review');
+    }
+  };
+
+  // ── REVIEW playback ────────────────────────────────────
+  var player=document.getElementById('player');
+  window.playReview = function(){
+    if(draft.audioUrl){ player.src=draft.audioUrl; player.play(); }
+    else speak("This is a preview of your recorded message."); // simulated
+  };
+
+  // ── SAVE ───────────────────────────────────────────────
+  window.saveMessage = function(){
+    var m={ id:'m'+Date.now(), type:'scheduled', mode:draft.mode, senderName:user.name.split(' ')[0], recipient:draft.recipient,
+      relation:draft.relation, when:draft.when, label:draft.label, people:draft.people||[], email:draft.email||'',
+      audioUrl:draft.audioUrl, voiceText:null, seeded:false };
+    messages.unshift(m);
+    go('mycalls');
+    toast('Saved. <span class="accent">'+m.recipient+'</span> will get your call.');
+  };
+
+  // ── MY CALLS render ────────────────────────────────────
+  function renderCalls(){
+    var list=document.getElementById('calls-list');
+    if(!messages.length){ list.innerHTML='<div class="empty">No messages yet. When you\'re ready, record the first thing you\'d want them to hear.</div>'; return; }
+    list.innerHTML='';
+    messages.forEach(function(m){
+      var d=document.createElement('div'); d.className='call-item';
+      var badge = m.mode==='date' ? '<span class="badge sched">Scheduled</span>' : '<span class="badge pass">Guardian-scheduled</span>';
+      d.innerHTML = badge +
+        '<h3>For '+m.recipient+(m.relation?' · '+m.relation:'')+'</h3>'+
+        '<div class="when">'+(m.label ? m.label+' · ' : '')+m.when+'</div>'+
+        '<div class="actions">'+
+          '<button class="mini-primary">▶ Preview the call</button>'+
+          '<button class="mini-quiet">Cancel</button>'+
+        '</div>';
+      d.querySelector('.mini-primary').onclick=function(){ preview(m); };
+      d.querySelector('.mini-quiet').onclick=function(){ cancelMsg(m.id); };
+      list.appendChild(d);
+    });
+  }
+  function cancelMsg(id){
+    if(!confirm('Cancel this scheduled message?')) return;
+    messages = messages.filter(function(m){ return m.id!==id; });
+    renderCalls(); toast('Message canceled.');
+  }
+
+  // ── INCOMING CALL / PLAYBACK ───────────────────────────
+  var activeMsg=null;
+  function preview(m){
+    activeMsg=m;
+    document.getElementById('in-name').textContent = m.senderName || user.name.split(' ')[0];
+    go('incoming');
+  }
+  window.previewSeed = function(){ preview(messages.find(function(m){return m.seeded;}) || messages[0]); };
+
+  window.answerCall = function(){
+    go('incall');
+    var m=activeMsg;
+    document.getElementById('ic-avatar').textContent = (m.senderName||'F').charAt(0);
+    document.getElementById('ic-name').textContent = m.senderName || 'Forever Here';
+    var status=document.getElementById('ic-status');
+    var transcript=document.getElementById('ic-transcript');
+    transcript.textContent='';
+    status.textContent='Forever Here message · connecting…';
+    // Spoken intro (matches the real product's intro line), then the message.
+    setTimeout(function(){
+      status.textContent='Playing message';
+      speak('You have a Forever Here message, recorded by '+(m.senderName||'a loved one')+'.', function(){
+        if(m.audioUrl){ player.src=m.audioUrl; player.play();
+          transcript.textContent='♪ Playing '+m.recipient+'\'s message in your recorded voice…';
+        } else if(m.voiceText){ transcript.textContent='“'+m.voiceText+'”'; speak(m.voiceText); }
+        else { transcript.textContent='♪ Playing the recorded message…'; }
+      });
+    }, 900);
+  };
+  window.endCall = function(){ try{ player.pause(); }catch(e){} if(window.speechSynthesis) speechSynthesis.cancel(); go('mycalls'); };
+
+  // ── speech helper ──────────────────────────────────────
+  function speak(text, onend){
+    if(!('speechSynthesis' in window)){ if(onend) setTimeout(onend,600); return; }
+    try{
+      var u=new SpeechSynthesisUtterance(text); u.rate=0.94; u.pitch=1;
+      if(onend) u.onend=onend;
+      speechSynthesis.cancel(); speechSynthesis.speak(u);
+    }catch(e){ if(onend) setTimeout(onend,600); }
+  }
+
+  // ── TOAST ──────────────────────────────────────────────
+  var toastEl=document.getElementById('toast'), toastTimer=null;
+  function toast(html){ toastEl.innerHTML=html; toastEl.classList.add('show'); clearTimeout(toastTimer); toastTimer=setTimeout(function(){ toastEl.classList.remove('show'); },2600); }
+  window.toast=toast;
+})();
+</script>
+</body>
+</html>
