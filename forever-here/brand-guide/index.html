@@ -4,456 +4,190 @@
 <meta charset="UTF-8" />
 <meta name="robots" content="noindex, nofollow, noarchive, nosnippet" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Forever Here, Brand Guide v1</title>
+<title>Forever Here — Brand Guide v2</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..600&family=Mulish:ital,wght@0,300..800;1,300..600&family=Michroma&family=Great+Vibes&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,600&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-  /* ─────────────────────────────────────────────────────────────
-     FOREVER HERE — BRAND TOKENS
-     Fire & ice on a night sky. Warm memory, cool trust.
-     ───────────────────────────────────────────────────────────── */
-  :root {
-    /* Night — the base. A cool near-black the brand lives on. */
-    --night-900: #0A0E16;
-    --night-800: #10151F;
-    --night-700: #171E2B;
-    --night-600: #212A3A;
-    --night-500: #2E3A4E;
-    --night-400: #48566C;
+  /* ═══════════════════════════════════════════════════
+     FOREVER HERE — BRAND TOKENS  (per Brand Development Handoff v1.0)
+     ═══════════════════════════════════════════════════ */
+  :root{
+    /* Palette */
+    --ink-950:#02050B;
+    --midnight-900:#071323;
+    --deep-800:#0D1C33;
+    --divider-650:#23334D;
+    --ice-400:#5BD6FF;
+    --electric-600:#178BFF;
+    --fire-500:#FF681F;
+    --ember-400:#FFB45B;
+    --gold-350:#E6BA71;
+    --cloud:#F7FAFF;
+    --gray-300:#AEB9C9;
+    --gray-500:#7E8A9E;
 
-    /* Frost — the ice. Trust, calm, permanence. */
-    --frost-900: #0B2C4A;
-    --frost-800: #12406A;
-    --frost-700: #175A8F;
-    --frost-600: #2277B4;
-    --frost-500: #3D97D6;
-    --frost-400: #6FB4E4;
-    --frost-300: #A3D0EE;
-    --frost-200: #CDE5F6;
-    --frost-100: #E8F3FB;
+    /* Gradients */
+    --gradient-fire-ice:linear-gradient(110deg,#FF681F 0%,#FFB45B 34%,#F7FAFF 50%,#5BD6FF 66%,#178BFF 100%);
+    --gradient-card:linear-gradient(145deg,rgba(13,28,51,.92),rgba(7,19,35,.78));
 
-    /* Ember — the fire. Warmth, love, the human voice. */
-    --ember-900: #5E1B08;
-    --ember-800: #8A2A0C;
-    --ember-700: #B83A12;
-    --ember-600: #E14E1B;
-    --ember-500: #FF6A2B;
-    --ember-400: #FF8C55;
-    --ember-300: #FFB088;
-    --ember-200: #FFD2BB;
-    --ember-100: #FFE9DE;
+    /* Type */
+    --font-display:"Cormorant Garamond",Georgia,"Times New Roman",serif;
+    --font-sans:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    --font-mono:"IBM Plex Mono",Menlo,monospace;
+    --text-hero:clamp(3.5rem,7.5vw,7.75rem);
+    --text-h1:clamp(2.75rem,5.5vw,5.5rem);
+    --text-h2:clamp(2.1rem,4vw,4rem);
+    --text-h3:clamp(1.45rem,2.3vw,2rem);
+    --text-lead:clamp(1.08rem,1.4vw,1.35rem);
+    --text-body:1rem; --text-small:.875rem; --text-label:.75rem;
 
-    /* Plum — a deep, reverent alternate surface (for grief-adjacent moments). */
-    --plum-900: #24091A;
-    --plum-800: #3A1029;
-    --plum-700: #551A3C;
-
-    /* Warm neutrals — linen and bone for light surfaces. */
-    --linen: #F6F2EC;
-    --bone: #EDE7DD;
-    --sand: #DED6C8;
-
-    /* Ink & UI grays (cool-warm balanced). */
-    --ink: #11131A;
-    --charcoal: #20242E;
-    --slate-700: #353B47;
-    --slate-500: #5C6470;
-    --slate-400: #7C8492;
-    --slate-300: #A6ADB8;
-    --slate-200: #C9CED6;
-    --slate-100: #E9ECF0;
-    --white: #FFFFFF;
-
-    /* Functional */
-    --answer: #2E9E6B;   /* green — accept the call */
-    --decline: #D4483B;  /* red — decline the call */
-    --warning: #E1A33A;
-    --info: #3D97D6;
-
-    /* Signature gradients */
-    --grad-fireice: linear-gradient(135deg, var(--frost-500) 0%, var(--frost-400) 32%, var(--ember-400) 68%, var(--ember-500) 100%);
-    --grad-ember: linear-gradient(160deg, var(--ember-500), var(--ember-700));
-    --grad-frost: linear-gradient(160deg, var(--frost-400), var(--frost-700));
-
-    /* Typography */
-    --font-display: 'Fraunces', Georgia, 'Times New Roman', serif;
-    --font-body: 'Mulish', system-ui, -apple-system, sans-serif;
-    --font-wordmark: 'Michroma', 'Arial Narrow', sans-serif;
-    --font-script: 'Great Vibes', 'Segoe Script', cursive;
-    --font-mono: 'IBM Plex Mono', 'Menlo', monospace;
-
-    /* Type scale — perfect fourth */
-    --fs-micro: 0.6875rem;
-    --fs-caption: 0.8125rem;
-    --fs-sm: 0.875rem;
-    --fs-base: 1rem;
-    --fs-lg: 1.125rem;
-    --fs-xl: 1.375rem;
-    --fs-2xl: 1.75rem;
-    --fs-3xl: 2.25rem;
-    --fs-4xl: 2.75rem;
-    --fs-5xl: 3.5rem;
-    --fs-6xl: 4.5rem;
-    --fs-7xl: 6rem;
-
-    /* Spacing (4px base) */
-    --s-1: 4px;  --s-2: 8px;  --s-3: 12px; --s-4: 16px; --s-5: 20px;
-    --s-6: 24px; --s-8: 32px; --s-10: 40px; --s-12: 48px; --s-16: 64px;
-    --s-20: 80px; --s-24: 96px; --s-32: 128px; --s-40: 160px;
-
-    /* Radius */
-    --r-sm: 3px; --r-md: 6px; --r-lg: 10px; --r-xl: 16px; --r-2xl: 24px; --r-pill: 999px;
-
-    /* Shadow */
-    --shadow-sm: 0 1px 2px rgba(10,14,22,0.08);
-    --shadow-md: 0 4px 14px rgba(10,14,22,0.10), 0 1px 3px rgba(10,14,22,0.06);
-    --shadow-lg: 0 16px 40px rgba(10,14,22,0.18), 0 4px 10px rgba(10,14,22,0.08);
-    --shadow-glow: 0 0 60px rgba(255,106,43,0.28);
-
-    /* Motion */
-    --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
-    --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
-    --dur-fast: 160ms; --dur-base: 260ms; --dur-slow: 460ms;
-
-    /* Layout */
-    --container: 1240px;
-    --container-narrow: 860px;
+    /* Space + radius */
+    --space-2:.5rem; --space-3:.75rem; --space-4:1rem; --space-6:1.5rem;
+    --space-8:2rem; --space-12:3rem; --space-16:4rem; --space-24:6rem; --space-32:8rem;
+    --radius-control:14px; --radius-card:24px; --radius-pill:999px;
+    --content-max:1200px; --copy-max:66ch;
   }
+  *,*::before,*::after{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{margin:0;background:var(--ink-950);color:var(--cloud);font-family:var(--font-sans);font-size:var(--text-body);line-height:1.62;-webkit-font-smoothing:antialiased;}
+  h1,h2,h3,h4{font-family:var(--font-display);font-weight:700;margin:0;line-height:1.05;}
+  p{margin:0;}
+  a{color:var(--ice-400);}
+  img{max-width:100%;display:block;}
+  code{font-family:var(--font-mono);font-size:.86em;}
 
-  /* RESET + BASE */
-  *, *::before, *::after { box-sizing: border-box; }
-  html { scroll-behavior: smooth; }
-  body {
-    margin: 0;
-    font-family: var(--font-body);
-    font-size: var(--fs-base);
-    line-height: 1.62;
-    color: var(--ink);
-    background: var(--linen);
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
-  h1,h2,h3,h4,h5,h6 {
-    font-family: var(--font-display);
-    font-weight: 420;
-    color: var(--night-800);
-    margin: 0;
-    line-height: 1.08;
-    letter-spacing: -0.015em;
-  }
-  p { margin: 0; }
-  a { color: var(--frost-700); text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
-  a:hover { color: var(--ember-600); }
-  ::selection { background: var(--ember-200); color: var(--night-900); }
-  img { max-width: 100%; display: block; }
+  .wrap{max-width:var(--content-max);margin:0 auto;padding:0 var(--space-8);}
+  section{padding:var(--space-32) 0;border-top:1px solid rgba(35,51,77,.6);}
 
-  /* LAYOUT PRIMITIVES */
-  .container { max-width: var(--container); margin: 0 auto; padding: 0 var(--s-8); }
-  .container-narrow { max-width: var(--container-narrow); margin: 0 auto; padding: 0 var(--s-8); }
-  section { padding: var(--s-32) 0; }
-  .on-night { background: var(--night-900); color: var(--linen); }
-  .on-night h2, .on-night h3, .on-night h4 { color: var(--linen); }
+  /* Editorial furniture */
+  .eyebrow{font-family:var(--font-sans);font-size:var(--text-label);text-transform:uppercase;letter-spacing:.2em;font-weight:700;color:var(--gold-350);display:block;margin-bottom:var(--space-3);}
+  .snum{font-family:var(--font-display);font-style:italic;font-size:1.6rem;color:var(--ice-400);display:block;margin-bottom:var(--space-2);}
+  .stitle{font-size:var(--text-h3);margin-bottom:var(--space-4);}
+  .slede{color:var(--gray-300);max-width:52ch;font-size:var(--text-lead);}
+  .rule{width:70px;height:3px;background:var(--gradient-fire-ice);border:0;border-radius:2px;margin:0 0 var(--space-6);}
+  .shead{margin-bottom:var(--space-16);}
 
-  /* EDITORIAL SYSTEM */
-  .eyebrow {
-    font-family: var(--font-body);
-    font-size: var(--fs-caption);
-    text-transform: uppercase;
-    letter-spacing: 0.2em;
-    color: var(--ember-600);
-    font-weight: 700;
-    margin-bottom: var(--s-4);
-    display: block;
-  }
-  .eyebrow.on-dark { color: var(--ember-400); }
-  .section-number {
-    font-family: var(--font-display);
-    font-style: italic;
-    font-size: var(--fs-2xl);
-    color: var(--frost-600);
-    margin-bottom: var(--s-3);
-    display: block;
-  }
-  .section-title { font-size: var(--fs-4xl); margin-bottom: var(--s-4); }
-  .section-lede {
-    font-size: var(--fs-xl);
-    color: var(--slate-500);
-    max-width: 46ch;
-    line-height: 1.4;
-    font-weight: 300;
-  }
-  .on-night .section-lede { color: var(--slate-300); }
-  .section-rule { width: 64px; height: 3px; background: var(--grad-fireice); border: 0; margin: 0 0 var(--s-6); border-radius: 2px; }
-  .section-head { margin-bottom: var(--s-16); }
+  .card{background:var(--gradient-card);border:1px solid rgba(91,214,255,.14);border-radius:var(--radius-card);box-shadow:0 24px 70px rgba(0,0,0,.28);padding:var(--space-8);}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:var(--space-6);}
+  .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--space-6);}
+  .grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--space-4);}
+  @media(max-width:900px){.grid2,.grid3,.grid4{grid-template-columns:1fr;}}
 
   /* NAV */
-  .nav {
-    position: sticky; top: 0; z-index: 50;
-    background: rgba(10,14,22,0.82);
-    backdrop-filter: blur(14px);
-    border-bottom: 1px solid rgba(255,255,255,0.08);
-  }
-  .nav-inner { display: flex; align-items: center; justify-content: space-between; height: 60px; }
-  .nav-brand { font-family: var(--font-wordmark); font-size: 0.8rem; letter-spacing: 0.22em; color: var(--linen); text-decoration: none; }
-  .nav-brand span { color: var(--ember-500); }
-  .nav-links { display: flex; gap: var(--s-6); }
-  .nav-links a { color: var(--slate-300); text-decoration: none; font-size: var(--fs-sm); font-weight: 600; }
-  .nav-links a:hover { color: var(--ember-400); }
-  @media (max-width: 820px){ .nav-links { display: none; } }
+  .nav{position:sticky;top:0;z-index:50;background:rgba(2,5,11,.86);backdrop-filter:blur(14px);border-bottom:1px solid rgba(35,51,77,.6);}
+  .nav-in{display:flex;align-items:center;justify-content:space-between;height:62px;}
+  .nav-wm{font-family:var(--font-display);font-weight:600;letter-spacing:.2em;font-size:.95rem;text-decoration:none;color:var(--cloud);}
+  .nav-links{display:flex;gap:var(--space-6);}
+  .nav-links a{color:var(--gray-300);text-decoration:none;font-size:var(--text-small);font-weight:600;}
+  .nav-links a:hover{color:var(--ice-400);}
+  @media(max-width:820px){.nav-links{display:none;}}
 
   /* HERO */
-  .hero {
-    position: relative; overflow: hidden;
-    background: radial-gradient(1200px 700px at 72% -10%, rgba(255,106,43,0.20), transparent 60%),
-                radial-gradient(1100px 800px at 12% 110%, rgba(61,151,214,0.22), transparent 60%),
-                var(--night-900);
-    color: var(--linen);
-    min-height: 92vh;
-    display: flex; flex-direction: column; justify-content: space-between;
-    padding: var(--s-16) 0 var(--s-12);
-  }
-  .hero-cloud {
-    position: absolute; inset: 0; pointer-events: none; opacity: 0.9;
-  }
-  .hero-top { display: flex; justify-content: space-between; align-items: flex-start; }
-  .hero-kicker { font-family: var(--font-mono); font-size: var(--fs-caption); letter-spacing: 0.14em; color: var(--frost-300); text-transform: uppercase; }
-  .hero-center { text-align: center; padding: var(--s-12) 0; }
-  .hero-wordmark {
-    font-family: var(--font-wordmark);
-    font-size: clamp(2.1rem, 8vw, 5.4rem);
-    letter-spacing: 0.14em;
-    color: var(--linen);
-    line-height: 1;
-    margin: 0;
-    text-shadow: 0 0 44px rgba(255,106,43,0.25);
-  }
-  .hero-script { font-family: var(--font-script); font-size: clamp(2rem, 6vw, 3.6rem); color: var(--ember-400); line-height: 1; margin-top: var(--s-4); }
-  .hero-tagline { font-family: var(--font-display); font-style: italic; font-weight: 300; font-size: clamp(1.1rem,2.4vw,1.6rem); color: var(--slate-200); margin-top: var(--s-6); }
-  .hero-meta { display: flex; flex-wrap: wrap; gap: var(--s-8); font-size: var(--fs-sm); color: var(--slate-400); }
-  .hero-meta strong { color: var(--slate-200); font-weight: 700; display: block; font-size: var(--fs-caption); text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 2px; }
+  .hero{min-height:88vh;display:flex;flex-direction:column;justify-content:center;text-align:center;
+    background:radial-gradient(900px 600px at 22% 12%,rgba(255,104,31,.16),transparent 62%),
+               radial-gradient(900px 620px at 78% 88%,rgba(23,139,255,.18),transparent 62%),var(--ink-950);
+    padding:var(--space-32) 0;border-top:0;}
+  .hero .wm{font-family:var(--font-display);font-weight:600;font-size:clamp(2.2rem,6vw,4.4rem);letter-spacing:.16em;margin-top:var(--space-6);}
+  .hero .sayhello{font-family:var(--font-sans);font-size:.8rem;letter-spacing:.34em;color:var(--ice-400);font-weight:700;margin-top:var(--space-3);}
+  .hero .promise{font-family:var(--font-display);font-style:italic;font-size:var(--text-h3);color:var(--gray-300);margin-top:var(--space-8);}
+  .hero-meta{display:flex;gap:var(--space-8);justify-content:center;flex-wrap:wrap;margin-top:var(--space-16);font-size:var(--text-small);color:var(--gray-500);}
+  .hero-meta strong{display:block;color:var(--gray-300);font-size:var(--text-label);text-transform:uppercase;letter-spacing:.14em;margin-bottom:3px;}
+  .logo-glow{filter:drop-shadow(0 0 14px rgba(91,214,255,.28)) drop-shadow(0 0 18px rgba(255,104,31,.24));}
 
   /* TOC */
-  .toc-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--s-2) var(--s-10); }
-  @media (max-width: 820px){ .toc-grid { grid-template-columns: 1fr; } }
-  .toc-item { display: flex; gap: var(--s-4); padding: var(--s-4) 0; border-bottom: 1px solid var(--slate-100); text-decoration: none; color: var(--night-800); align-items: baseline; }
-  .toc-item:hover { color: var(--ember-600); }
-  .toc-num { font-family: var(--font-mono); font-size: var(--fs-caption); color: var(--frost-600); min-width: 34px; }
-  .toc-label { font-weight: 600; font-size: var(--fs-base); }
+  .toc{display:grid;grid-template-columns:repeat(3,1fr);gap:0 var(--space-12);}
+  @media(max-width:820px){.toc{grid-template-columns:1fr;}}
+  .toc a{display:flex;gap:var(--space-4);padding:var(--space-4) 0;border-bottom:1px solid rgba(35,51,77,.6);text-decoration:none;color:var(--cloud);align-items:baseline;}
+  .toc a:hover{color:var(--ice-400);}
+  .toc .n{font-family:var(--font-mono);font-size:var(--text-small);color:var(--ice-400);min-width:34px;}
+  .toc .l{font-weight:600;}
 
-  /* CARDS / GRID */
-  .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--s-6); }
-  .grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--s-6); }
-  @media (max-width: 820px){ .grid-3, .grid-2 { grid-template-columns: 1fr; } }
-  .card {
-    background: var(--white); border: 1px solid var(--slate-100);
-    border-radius: var(--r-xl); padding: var(--s-8);
-    box-shadow: var(--shadow-sm);
-  }
-  .card h3 { font-size: var(--fs-2xl); margin-bottom: var(--s-3); }
-  .card .kicker { font-family: var(--font-mono); font-size: var(--fs-caption); color: var(--ember-600); letter-spacing: 0.1em; text-transform: uppercase; display: block; margin-bottom: var(--s-3); }
-  .card p { color: var(--slate-500); font-size: var(--fs-sm); }
+  /* SWATCHES */
+  .sw{border-radius:14px;overflow:hidden;border:1px solid rgba(35,51,77,.8);background:var(--deep-800);}
+  .sw .chip{height:90px;}
+  .sw .meta{padding:12px 14px;}
+  .sw .nm{font-weight:700;font-size:var(--text-small);}
+  .sw .hx{font-family:var(--font-mono);font-size:.76rem;color:var(--gray-500);text-transform:uppercase;}
+  .sw .use{font-size:.74rem;color:var(--gray-300);margin-top:4px;line-height:1.4;}
 
-  /* PILLAR */
-  .pillar { border-top: 3px solid; padding-top: var(--s-5); }
-  .pillar.f-1 { border-color: var(--ember-500); }
-  .pillar.f-2 { border-color: var(--frost-500); }
-  .pillar.f-3 { border-color: var(--plum-700); }
-  .pillar h3 { font-size: var(--fs-2xl); margin-bottom: var(--s-3); }
-  .pillar p { color: var(--slate-500); }
-
-  /* VOICE — word lists + sliders */
-  .word-cols { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s-8); }
-  @media (max-width:820px){ .word-cols { grid-template-columns: 1fr; } }
-  .word-box { border-radius: var(--r-lg); padding: var(--s-6); }
-  .word-box.use { background: var(--frost-100); border: 1px solid var(--frost-200); }
-  .word-box.avoid { background: var(--ember-100); border: 1px solid var(--ember-200); }
-  .word-box h4 { font-family: var(--font-body); font-weight: 800; font-size: var(--fs-sm); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: var(--s-4); }
-  .word-box.use h4 { color: var(--frost-700); }
-  .word-box.avoid h4 { color: var(--ember-700); }
-  .chips { display: flex; flex-wrap: wrap; gap: var(--s-2); }
-  .chip { background: var(--white); border: 1px solid var(--slate-200); border-radius: var(--r-pill); padding: 5px 12px; font-size: var(--fs-sm); font-weight: 600; color: var(--slate-700); }
-  .slider { margin-bottom: var(--s-5); }
-  .slider-labels { display: flex; justify-content: space-between; font-size: var(--fs-caption); color: var(--slate-400); margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.08em; }
-  .slider-track { height: 6px; background: var(--slate-100); border-radius: var(--r-pill); position: relative; }
-  .slider-fill { position: absolute; top: -3px; height: 12px; width: 12px; border-radius: 50%; background: var(--grad-fireice); box-shadow: 0 0 0 4px rgba(255,106,43,0.14); }
-
-  /* AUDIENCE */
-  .aud { display: flex; gap: var(--s-5); padding: var(--s-6) 0; border-bottom: 1px solid var(--slate-100); }
-  .aud-num { font-family: var(--font-display); font-style: italic; font-size: var(--fs-3xl); color: var(--frost-500); min-width: 60px; }
-  .aud h3 { font-size: var(--fs-xl); margin-bottom: 4px; }
-  .aud p { color: var(--slate-500); font-size: var(--fs-sm); }
-  .aud .tag { font-family: var(--font-mono); font-size: var(--fs-micro); text-transform: uppercase; letter-spacing: 0.1em; color: var(--ember-600); }
-
-  /* LOGO */
-  .logo-stage { background: var(--night-900); border-radius: var(--r-2xl); padding: var(--s-24) var(--s-8); text-align: center; position: relative; overflow: hidden; }
-  .logo-stage::after { content:""; position:absolute; inset:0; background: radial-gradient(500px 300px at 50% 40%, rgba(255,106,43,0.16), transparent 70%); }
-  .placeholder-tag { position: absolute; top: var(--s-4); left: var(--s-4); font-family: var(--font-mono); font-size: var(--fs-micro); letter-spacing: 0.1em; text-transform: uppercase; color: var(--night-900); background: var(--warning); padding: 4px 10px; border-radius: var(--r-pill); z-index: 2; }
-  .lockup { position: relative; z-index: 1; display: inline-flex; flex-direction: column; align-items: center; gap: var(--s-4); }
-  .lockup .mark { filter: drop-shadow(0 0 30px rgba(255,106,43,0.35)); }
-  .lockup .wm { font-family: var(--font-wordmark); font-size: 1.7rem; letter-spacing: 0.2em; color: var(--linen); }
-  .lockup .scr { font-family: var(--font-script); font-size: 2.6rem; color: var(--ember-400); margin-top: -8px; }
-  .logo-rules { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s-6); margin-top: var(--s-8); }
-  @media (max-width:820px){ .logo-rules { grid-template-columns: 1fr; } }
-  .rule-do, .rule-dont { border-radius: var(--r-lg); padding: var(--s-5); font-size: var(--fs-sm); }
-  .rule-do { background: var(--frost-100); border: 1px solid var(--frost-200); }
-  .rule-dont { background: var(--ember-100); border: 1px solid var(--ember-200); }
-  .rule-do b, .rule-dont b { display:block; margin-bottom: var(--s-2); font-family: var(--font-body); }
-
-  /* PALETTE */
-  .swatch-row { display: grid; grid-template-columns: repeat(5, 1fr); gap: var(--s-3); }
-  @media (max-width: 820px){ .swatch-row { grid-template-columns: repeat(2,1fr);} }
-  .swatch { border-radius: var(--r-lg); overflow: hidden; border: 1px solid var(--slate-100); background: var(--white); box-shadow: var(--shadow-sm); }
-  .swatch .chipc { height: 84px; }
-  .swatch .meta { padding: var(--s-3) var(--s-4); }
-  .swatch .name { font-weight: 800; font-size: var(--fs-sm); }
-  .swatch .hex { font-family: var(--font-mono); font-size: var(--fs-caption); color: var(--slate-400); text-transform: uppercase; }
-  .scale-row { display: grid; grid-template-columns: repeat(9,1fr); gap: 4px; margin-bottom: var(--s-2); }
-  @media (max-width:820px){ .scale-row { grid-template-columns: repeat(5,1fr);} }
-  .scale-cell { height: 52px; border-radius: var(--r-sm); display: flex; align-items: flex-end; padding: 4px 6px; font-family: var(--font-mono); font-size: 9px; }
-  .scale-name { font-weight: 800; font-size: var(--fs-sm); margin-bottom: 6px; display: block; }
-  .atmos { height: 240px; border-radius: var(--r-xl); position: relative; overflow: hidden; display: flex; align-items: flex-end; padding: var(--s-8); }
-  .atmos .q { font-family: var(--font-display); font-style: italic; font-size: var(--fs-2xl); color: var(--linen); max-width: 30ch; position: relative; z-index: 1; }
-  .pairing { display: flex; align-items: center; gap: var(--s-4); padding: var(--s-4); border-radius: var(--r-md); font-weight: 700; }
-  .pair-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s-3); }
-  @media (max-width:820px){ .pair-grid { grid-template-columns: 1fr; } }
-  .ratio { margin-left: auto; font-family: var(--font-mono); font-size: var(--fs-caption); opacity: 0.8; }
-
-  /* TYPE SPECIMENS */
-  .specimen { border: 1px solid var(--slate-100); border-radius: var(--r-xl); padding: var(--s-8); background: var(--white); margin-bottom: var(--s-6); }
-  .specimen .big { font-size: clamp(2.4rem, 6vw, 4.2rem); line-height: 1; margin-bottom: var(--s-4); color: var(--night-800); }
-  .specimen .lab { font-family: var(--font-mono); font-size: var(--fs-caption); color: var(--slate-400); text-transform: uppercase; letter-spacing: 0.08em; }
-  .type-row { display: flex; align-items: baseline; gap: var(--s-6); padding: var(--s-4) 0; border-bottom: 1px solid var(--slate-100); }
-  .type-row .val { font-family: var(--font-mono); font-size: var(--fs-caption); color: var(--slate-400); min-width: 120px; }
-
-  /* SPACING */
-  .space-bar { background: var(--frost-200); height: 22px; border-radius: 3px; margin-bottom: 6px; }
-  .space-row { display: flex; align-items: center; gap: var(--s-4); }
-  .space-row .lab { font-family: var(--font-mono); font-size: var(--fs-caption); color: var(--slate-500); min-width: 130px; }
+  /* TYPE SPECIMEN */
+  .spec{border:1px solid rgba(35,51,77,.8);border-radius:var(--radius-card);padding:var(--space-8);margin-bottom:var(--space-6);background:var(--midnight-900);}
+  .spec .big{font-family:var(--font-display);font-weight:700;font-size:clamp(2.2rem,5.5vw,4rem);line-height:.98;margin-bottom:var(--space-4);}
+  .spec .lab{font-family:var(--font-mono);font-size:.76rem;color:var(--gray-500);text-transform:uppercase;letter-spacing:.08em;}
+  .trow{display:flex;gap:var(--space-6);align-items:baseline;padding:var(--space-4) 0;border-bottom:1px solid rgba(35,51,77,.5);}
+  .trow .v{font-family:var(--font-mono);font-size:.76rem;color:var(--gray-500);min-width:150px;}
 
   /* COMPONENTS */
-  .btn { font-family: var(--font-body); font-weight: 700; font-size: var(--fs-base); border-radius: var(--r-pill); padding: 13px 28px; border: 0; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; transition: transform var(--dur-fast) var(--ease-out), box-shadow var(--dur-base); }
-  .btn:hover { transform: translateY(-1px); }
-  .btn-primary { background: var(--grad-ember); color: var(--white); box-shadow: 0 6px 18px rgba(225,78,27,0.32); }
-  .btn-frost { background: var(--frost-600); color: var(--white); }
-  .btn-ghost { background: transparent; color: var(--linen); border: 1.5px solid rgba(255,255,255,0.5); }
-  .btn-ghost.on-light { color: var(--night-800); border-color: var(--slate-300); }
-  .btn-quiet { background: var(--slate-100); color: var(--slate-700); }
-  .comp-frame { background: var(--night-800); border-radius: var(--r-xl); padding: var(--s-8); display: flex; flex-wrap: wrap; gap: var(--s-4); align-items: center; }
-  .comp-frame.light { background: var(--bone); }
-  .input-demo { max-width: 380px; }
-  .input-demo label { display: block; font-size: var(--fs-sm); font-weight: 700; color: var(--slate-700); margin-bottom: 6px; }
-  .input-demo input { width: 100%; padding: 12px 14px; border-radius: var(--r-md); border: 1.5px solid var(--slate-200); font-family: var(--font-body); font-size: var(--fs-base); background: var(--white); }
-  .input-demo input:focus { outline: 2px solid var(--frost-500); outline-offset: 1px; border-color: var(--frost-500); }
-  .hint { font-size: var(--fs-caption); color: var(--slate-400); margin-top: 6px; }
+  .btn{font-family:var(--font-sans);font-weight:700;letter-spacing:.06em;border:0;border-radius:var(--radius-pill);height:54px;padding:0 28px;cursor:pointer;display:inline-flex;align-items:center;gap:8px;transition:transform .16s,box-shadow .24s;}
+  .btn:hover{transform:translateY(-1px);}
+  .btn-primary{background:var(--electric-600);color:#fff;box-shadow:0 0 32px rgba(23,139,255,.28);}
+  .btn-fire{background:var(--fire-500);color:#fff;box-shadow:0 0 32px rgba(255,104,31,.2);}
+  .btn-grad{background:var(--gradient-fire-ice);color:var(--ink-950);}
+  .btn-secondary{background:rgba(7,19,35,.6);color:var(--cloud);border:1px solid var(--divider-650);}
+  .demo-row{display:flex;gap:var(--space-4);flex-wrap:wrap;align-items:center;}
 
-  /* PHONE MOCKS */
-  .phones { display: flex; gap: var(--s-8); flex-wrap: wrap; justify-content: center; }
-  .phone { width: 260px; background: var(--night-900); border-radius: 34px; padding: 14px; box-shadow: var(--shadow-lg); border: 1px solid var(--night-600); }
-  .phone-screen { border-radius: 24px; overflow: hidden; background: var(--night-800); height: 520px; position: relative; display: flex; flex-direction: column; }
-  .notch { position: absolute; top: 8px; left: 50%; transform: translateX(-50%); width: 90px; height: 20px; background: #000; border-radius: var(--r-pill); z-index: 3; }
-  /* Faithful iOS incoming-call recreation (system fonts + iOS system colors) */
-  .ios-call { font-family: -apple-system, 'SF Pro Display', 'Helvetica Neue', Arial, sans-serif;
-    background: linear-gradient(180deg, #23232a 0%, #101014 55%, #0b0b0e 100%); color: #fff; padding: 0; }
-  .ios-call::before { content: ""; position: absolute; inset: 0; pointer-events: none;
-    background: radial-gradient(300px 240px at 50% 10%, rgba(255,106,43,0.14), transparent 60%),
-                radial-gradient(320px 300px at 50% 108%, rgba(61,151,214,0.16), transparent 60%); }
-  .ios-statusbar { position: relative; z-index: 2; display: flex; justify-content: space-between; align-items: center; padding: 13px 22px 0; }
-  .ios-statusbar .t { font-size: 14px; font-weight: 600; letter-spacing: 0.02em; }
-  .ios-statusbar .icons { display: flex; gap: 6px; align-items: center; }
-  .ios-caller { position: relative; z-index: 2; text-align: center; margin-top: 62px; padding: 0 16px; }
-  .ios-caller .name { font-size: 30px; font-weight: 500; line-height: 1.1; letter-spacing: 0.01em; }
-  .ios-caller .sub { font-size: 14px; color: rgba(255,255,255,0.72); margin-top: 7px; }
-  .ios-actions { position: relative; z-index: 2; margin-top: auto; padding: 0 26px 22px; }
-  .ios-secondary { display: flex; justify-content: space-between; margin-bottom: 26px; padding: 0 8px; }
-  .ios-mini { text-align: center; }
-  .ios-mini .b { width: 54px; height: 54px; border-radius: 50%; background: rgba(255,255,255,0.16);
-    backdrop-filter: blur(8px); display: flex; align-items: center; justify-content: center; margin: 0 auto 7px; color: #fff; }
-  .ios-mini label { font-size: 12px; color: #fff; }
-  .ios-primary { display: flex; justify-content: space-between; padding: 0 6px; }
-  .ios-pcol { text-align: center; }
-  .ios-round { width: 68px; height: 68px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 9px; }
-  .ios-round.decline { background: #FF3B30; }
-  .ios-round.accept { background: #34C759; }
-  .ios-round svg { width: 30px; height: 30px; }
-  .ios-pcol label { font-size: 13px; color: #fff; }
-  .scr-record { padding: 40px 20px; align-items: center; text-align:center; }
-  .scr-record .lab { color: var(--slate-300); font-size: var(--fs-sm); font-weight: 700; }
-  .scr-record .recipient { color: var(--linen); font-family: var(--font-display); font-size: 1.3rem; margin-top: 6px; }
-  .rec-ring { width: 120px; height: 120px; border-radius: 50%; margin: 40px auto; border: 3px solid var(--ember-500); display:flex; align-items:center; justify-content:center; box-shadow: var(--shadow-glow); }
-  .rec-dot { width: 44px; height: 44px; border-radius: 12px; background: var(--ember-500); }
-  .rec-time { font-family: var(--font-mono); color: var(--linen); font-size: 1.4rem; letter-spacing: 0.08em; }
-  .wave { display:flex; gap: 4px; align-items: center; justify-content: center; height: 40px; margin-top: 18px; }
-  .wave span { width: 4px; background: var(--frost-400); border-radius: 2px; }
+  .fld{max-width:400px;}
+  .fld label{display:block;font-size:var(--text-label);text-transform:uppercase;letter-spacing:.1em;font-weight:700;color:var(--gray-300);margin-bottom:7px;}
+  .fld input,.fld select{width:100%;min-height:50px;border-radius:var(--radius-control);background:rgba(2,5,11,.68);border:1px solid var(--divider-650);color:var(--cloud);padding:0 15px;font-family:var(--font-sans);font-size:1rem;}
+  .fld input:focus,.fld select:focus{outline:none;border-color:var(--ice-400);box-shadow:0 0 0 3px rgba(91,214,255,.18);}
+  .fld input::placeholder{color:var(--gray-500);}
 
   /* ICONS */
-  .icon-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: var(--s-4); }
-  @media (max-width:820px){ .icon-grid { grid-template-columns: repeat(3,1fr);} }
-  .icon-cell { background: var(--white); border: 1px solid var(--slate-100); border-radius: var(--r-lg); aspect-ratio: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; color: var(--night-700); }
-  .icon-cell span { font-size: var(--fs-micro); color: var(--slate-400); font-family: var(--font-mono); text-transform: uppercase; letter-spacing: 0.06em; }
-  .icon-cell svg { stroke: var(--frost-700); }
+  .icons{display:grid;grid-template-columns:repeat(6,1fr);gap:var(--space-4);}
+  @media(max-width:820px){.icons{grid-template-columns:repeat(3,1fr);}}
+  .ic{border:1px solid rgba(35,51,77,.8);border-radius:16px;aspect-ratio:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:9px;background:var(--midnight-900);}
+  .ic svg{stroke:var(--ice-400);fill:none;stroke-width:1.85;stroke-linecap:round;stroke-linejoin:round;}
+  .ic span{font-family:var(--font-mono);font-size:.66rem;color:var(--gray-500);text-transform:uppercase;letter-spacing:.06em;text-align:center;padding:0 6px;}
 
-  /* PHOTO */
-  .photo-do, .photo-avoid { border-radius: var(--r-lg); overflow: hidden; position: relative; height: 220px; display: flex; align-items: flex-end; padding: var(--s-4); color: #fff; font-weight: 700; }
-  .photo-do { background: linear-gradient(0deg, rgba(10,14,22,0.85), transparent), var(--grad-frost); }
-  .photo-avoid { background: linear-gradient(0deg, rgba(10,14,22,0.85), transparent), var(--slate-400); }
-  .photo-tag { position:absolute; top: var(--s-3); left: var(--s-3); font-family: var(--font-mono); font-size: var(--fs-micro); padding: 3px 8px; border-radius: var(--r-pill); text-transform: uppercase; letter-spacing: 0.08em; }
-  .photo-tag.do { background: var(--answer); color: #fff; }
-  .photo-tag.no { background: var(--decline); color: #fff; }
+  /* DO / DONT */
+  .dd{border-radius:16px;padding:var(--space-6);font-size:var(--text-small);}
+  .dd.do{background:rgba(23,139,255,.09);border:1px solid rgba(23,139,255,.34);}
+  .dd.no{background:rgba(255,104,31,.09);border:1px solid rgba(255,104,31,.34);}
+  .dd b{display:block;margin-bottom:var(--space-2);font-family:var(--font-sans);letter-spacing:.08em;text-transform:uppercase;font-size:var(--text-label);}
+  .dd.do b{color:var(--ice-400);} .dd.no b{color:var(--ember-400);}
 
-  /* MOTION */
-  .motion-demo { background: var(--night-800); border-radius: var(--r-lg); height: 8px; overflow: hidden; margin: var(--s-3) 0; }
-  .motion-fill { height: 100%; width: 0; background: var(--grad-fireice); }
-  .motion-fill.run { width: 100%; transition: width var(--dur-slow) var(--ease-out); }
+  .codeblock{background:var(--ink-950);border:1px solid var(--divider-650);border-radius:14px;padding:var(--space-6);overflow-x:auto;font-family:var(--font-mono);font-size:.8rem;color:var(--gray-300);line-height:1.7;white-space:pre;}
 
-  /* EXAMPLES */
-  .example { background: var(--white); border: 1px solid var(--slate-100); border-left: 3px solid var(--ember-500); border-radius: var(--r-lg); padding: var(--s-6); margin-bottom: var(--s-4); }
-  .example .ctx { font-family: var(--font-mono); font-size: var(--fs-caption); text-transform: uppercase; letter-spacing: 0.1em; color: var(--frost-600); margin-bottom: var(--s-3); }
-  .example .quote { font-family: var(--font-display); font-size: var(--fs-xl); color: var(--night-800); line-height: 1.35; }
+  .checklist li{margin-bottom:var(--space-3);color:var(--gray-300);}
+  .status{display:inline-block;font-family:var(--font-mono);font-size:.68rem;text-transform:uppercase;letter-spacing:.1em;padding:4px 10px;border-radius:var(--radius-pill);margin-left:8px;vertical-align:middle;}
+  .status.conf{background:rgba(23,139,255,.16);color:var(--ice-400);}
+  .status.rec{background:rgba(230,186,113,.16);color:var(--gold-350);}
+  .status.need{background:rgba(255,104,31,.16);color:var(--ember-400);}
 
-  /* ACCESSIBILITY LIST */
-  .acc-item { display: flex; gap: var(--s-4); padding: var(--s-5) 0; border-bottom: 1px solid rgba(255,255,255,0.1); }
-  .acc-check { color: var(--answer); font-size: 1.3rem; }
-  .acc-item h4 { color: var(--linen); font-family: var(--font-body); font-weight: 800; font-size: var(--fs-base); margin-bottom: 4px; }
-  .acc-item p { color: var(--slate-300); font-size: var(--fs-sm); }
-
-  /* FOOTER */
-  .footer { background: var(--night-900); color: var(--slate-300); padding: var(--s-20) 0 var(--s-10); }
-  .footer-grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: var(--s-10); }
-  @media (max-width:820px){ .footer-grid { grid-template-columns: 1fr; } }
-  .footer h5 { color: var(--linen); font-family: var(--font-body); font-weight: 800; font-size: var(--fs-caption); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: var(--s-4); }
-  .footer a { color: var(--slate-300); text-decoration: none; display: block; margin-bottom: 6px; font-size: var(--fs-sm); }
-  .footer a:hover { color: var(--ember-400); }
-  .footer-brand { font-family: var(--font-wordmark); font-size: 1.1rem; letter-spacing: 0.2em; color: var(--linen); margin-bottom: var(--s-4); }
-  .footer-brand span { color: var(--ember-500); }
-  .footer-base { margin-top: var(--s-12); padding-top: var(--s-6); border-top: 1px solid rgba(255,255,255,0.1); font-size: var(--fs-caption); color: var(--slate-400); display:flex; justify-content: space-between; flex-wrap: wrap; gap: var(--s-3); }
+  footer{background:var(--midnight-900);padding:var(--space-24) 0 var(--space-12);border-top:1px solid rgba(35,51,77,.6);}
+  .fclose{font-family:var(--font-display);font-weight:700;font-size:var(--text-h3);text-align:center;letter-spacing:.02em;}
+  .fclose .b{color:var(--electric-600);}
+  .fbase{margin-top:var(--space-12);padding-top:var(--space-6);border-top:1px solid rgba(35,51,77,.6);display:flex;justify-content:space-between;flex-wrap:wrap;gap:var(--space-3);font-size:.78rem;color:var(--gray-500);}
 </style>
 </head>
 <body>
 <style id="fh-gate-style">
   #fh-gate{position:fixed;inset:0;z-index:2147483647;display:flex;align-items:center;justify-content:center;
-    background:radial-gradient(700px 500px at 70% 8%,rgba(255,106,43,.18),transparent 60%),radial-gradient(700px 560px at 8% 112%,rgba(61,151,214,.18),transparent 60%),#0A0E16;
-    font-family:'Mulish',system-ui,-apple-system,sans-serif;color:#F6F2EC;}
+    background:radial-gradient(700px 500px at 70% 8%,rgba(255,104,31,.16),transparent 60%),radial-gradient(700px 560px at 8% 112%,rgba(23,139,255,.16),transparent 60%),#02050B;
+    font-family:'Inter',system-ui,-apple-system,sans-serif;color:#F7FAFF;}
   #fh-gate .box{width:min(360px,88vw);text-align:center;padding:0 20px;}
-  #fh-gate .wm{font-family:'Michroma',sans-serif;letter-spacing:.12em;font-size:1.05rem;color:#F6F2EC;}
-  #fh-gate h1{font-family:'Fraunces',Georgia,serif;font-weight:400;font-size:1.5rem;margin:18px 0 6px;color:#F6F2EC;letter-spacing:-.01em;}
-  #fh-gate p{color:#A6ADB8;font-size:.9rem;margin:0 0 22px;line-height:1.5;}
-  #fh-gate input{width:100%;padding:14px 16px;border-radius:999px;border:1.5px solid rgba(255,255,255,.2);background:rgba(255,255,255,.06);color:#fff;font-size:1rem;text-align:center;font-family:inherit;}
-  #fh-gate input:focus{outline:2px solid #3D97D6;border-color:#3D97D6;}
-  #fh-gate button{width:100%;margin-top:12px;padding:14px;border:0;border-radius:999px;font-weight:800;font-size:1rem;color:#fff;cursor:pointer;background:linear-gradient(160deg,#FF6A2B,#B83A12);}
-  #fh-gate .err{color:#ffb3ab;font-size:.85rem;margin-top:12px;min-height:1em;}
-  #fh-gate .nda{margin-top:22px;font-size:.72rem;color:#7C8492;letter-spacing:.02em;}
-  html.fh-locked,body.fh-locked{overflow:hidden !important;}
+  #fh-gate .wm{font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;letter-spacing:.22em;font-size:1.15rem;}
+  #fh-gate h1{font-family:'Cormorant Garamond',Georgia,serif;font-weight:700;font-size:1.6rem;margin:16px 0 6px;}
+  #fh-gate p{color:#AEB9C9;font-size:.88rem;margin:0 0 22px;line-height:1.55;}
+  #fh-gate input{width:100%;min-height:50px;border-radius:14px;border:1px solid #23334D;background:rgba(2,5,11,.68);color:#F7FAFF;font-size:1rem;text-align:center;font-family:inherit;padding:0 15px;}
+  #fh-gate input:focus{outline:none;border-color:#5BD6FF;box-shadow:0 0 0 3px rgba(91,214,255,.18);}
+  #fh-gate button{width:100%;margin-top:12px;height:52px;border:0;border-radius:14px;font-weight:700;font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;color:#fff;cursor:pointer;background:linear-gradient(180deg,#2E9BFF,#1268D8);}
+  #fh-gate .err{color:#FFB0A8;font-size:.84rem;margin-top:12px;min-height:1em;}
+  #fh-gate .nda{margin-top:22px;font-size:.72rem;color:#7E8A9E;}
+  html.fh-locked,body.fh-locked{overflow:hidden!important;}
 </style>
 <div id="fh-gate" role="dialog" aria-modal="true" aria-label="Password required">
   <div class="box">
-    <svg width="86" height="53" viewBox="0 0 150 92" aria-hidden="true" style="margin:0 auto 4px;display:block;">
+    <svg width="110" height="55" viewBox="0 0 200 100" aria-hidden="true" style="margin:0 auto 6px;display:block;filter:drop-shadow(0 0 14px rgba(91,214,255,.28)) drop-shadow(0 0 18px rgba(255,104,31,.24));">
       <defs>
-        <linearGradient id="fhgi" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#A3D0EE"/><stop offset="1" stop-color="#2277B4"/></linearGradient>
-        <linearGradient id="fhgf" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#B83A12"/><stop offset="1" stop-color="#FF8C55"/></linearGradient>
+        <linearGradient id="gFire" x1="0%" y1="50%" x2="100%" y2="50%"><stop offset="0%" stop-color="#FF681F"/><stop offset="55%" stop-color="#FFB45B"/><stop offset="100%" stop-color="#F7FAFF"/></linearGradient>
+        <linearGradient id="gIce" x1="0%" y1="50%" x2="100%" y2="50%"><stop offset="0%" stop-color="#F7FAFF"/><stop offset="45%" stop-color="#5BD6FF"/><stop offset="100%" stop-color="#178BFF"/></linearGradient>
       </defs>
-      <path d="M75 46 C 60 20, 22 22, 22 46 C 22 70, 60 72, 75 46 Z" stroke="url(#fhgi)" stroke-width="9" fill="none" stroke-linecap="round"/>
-      <path d="M75 46 C 90 72, 128 70, 128 46 C 128 22, 90 20, 75 46 Z" stroke="url(#fhgf)" stroke-width="9" fill="none" stroke-linecap="round"/>
+      <g fill="none" stroke-linecap="round" stroke-width="13">
+        <path d="M100 50 C 84 18, 40 16, 24 50 C 40 84, 84 82, 100 50 Z" stroke="url(#gFire)"/>
+        <path d="M100 50 C 116 18, 160 16, 176 50 C 160 84, 116 82, 100 50 Z" stroke="url(#gIce)"/>
+      </g>
     </svg>
     <div class="wm">FOREVER HERE</div>
     <h1>Private preview</h1>
@@ -473,8 +207,7 @@
   function unlock(){ if(gate&&gate.parentNode) gate.parentNode.removeChild(gate); document.documentElement.classList.remove('fh-locked'); document.body.classList.remove('fh-locked'); }
   try{ if(sessionStorage.getItem(KEY)==='1'){ unlock(); return; } }catch(e){}
   document.documentElement.classList.add('fh-locked'); document.body.classList.add('fh-locked');
-  var form=document.getElementById('fh-gate-form');
-  form.addEventListener('submit',function(e){
+  document.getElementById('fh-gate-form').addEventListener('submit',function(e){
     e.preventDefault();
     var v=(document.getElementById('fh-pw').value||'').trim().toLowerCase();
     if(v===PW){ try{ sessionStorage.setItem(KEY,'1'); }catch(e){} unlock(); }
@@ -484,724 +217,507 @@
 </script>
 
 
-<!-- NAV -->
-<nav class="nav">
-  <div class="container nav-inner">
-    <a href="#top" class="nav-brand">FOREVER<span>·</span>HERE</a>
-    <div class="nav-links">
-      <a href="#foundation">Foundation</a>
-      <a href="#voice">Voice</a>
-      <a href="#palette">Color</a>
-      <a href="#type">Type</a>
-      <a href="#components">Components</a>
-      <a href="#imagery">Imagery</a>
-    </div>
+<nav class="nav"><div class="wrap nav-in">
+  <a href="#top" class="nav-wm">FOREVER HERE</a>
+  <div class="nav-links">
+    <a href="#logo">Logo</a><a href="#color">Color</a><a href="#type">Type</a>
+    <a href="#components">Components</a><a href="#voice">Voice</a><a href="#access">Accessibility</a>
   </div>
-</nav>
+</div></nav>
 
 <!-- HERO -->
 <header class="hero" id="top">
-  <svg class="hero-cloud" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
-    <defs>
-      <radialGradient id="emberGlow" cx="50%" cy="30%" r="60%">
-        <stop offset="0%" stop-color="#FF6A2B" stop-opacity="0.5"/>
-        <stop offset="100%" stop-color="#FF6A2B" stop-opacity="0"/>
-      </radialGradient>
-      <radialGradient id="frostGlow" cx="50%" cy="70%" r="60%">
-        <stop offset="0%" stop-color="#3D97D6" stop-opacity="0.45"/>
-        <stop offset="100%" stop-color="#3D97D6" stop-opacity="0"/>
-      </radialGradient>
-    </defs>
-    <path d="M720 250 C 620 150, 470 180, 470 320 C 470 470, 720 600, 720 600 C 720 600, 970 470, 970 320 C 970 180, 820 150, 720 250 Z"
-          fill="url(#emberGlow)" opacity="0.9"/>
-    <path d="M720 300 C 640 220, 520 245, 520 355 C 520 470, 720 560, 720 560 C 720 560, 920 470, 920 355 C 920 245, 800 220, 720 300 Z"
-          fill="url(#frostGlow)"/>
-  </svg>
-  <div class="container hero-top">
-    <div class="hero-kicker">Brand Guide · Edition One</div>
-    <div class="hero-kicker">v1 · Working Draft</div>
-  </div>
-  <div class="container hero-center">
-    <h1 class="hero-wordmark">FOREVER&nbsp;HERE</h1>
-    <div class="hero-script">Forever Here</div>
-    <p class="hero-tagline">Be there for life's biggest moments. Forever.</p>
-  </div>
-  <div class="container hero-meta">
-    <div><strong>Product</strong>Voice messages, delivered as a call, on the day they matter</div>
-    <div><strong>Platforms</strong>Mobile &amp; web application</div>
-    <div><strong>Identity by</strong>Raborn Media</div>
-    <div><strong>Status</strong>Logo &amp; imagery in development</div>
+  <div class="wrap">
+    <span class="eyebrow">Brand Guide · Version 2 · July 2026</span>
+    <svg class="logo-glow" width="260" height="130" viewBox="0 0 200 100" style="margin:0 auto;" aria-label="Forever Here fire-and-ice infinity symbol">
+      <defs>
+        <linearGradient id="fhFire" x1="0%" y1="50%" x2="100%" y2="50%">
+          <stop offset="0%" stop-color="#FF681F"/><stop offset="55%" stop-color="#FFB45B"/><stop offset="100%" stop-color="#F7FAFF"/>
+        </linearGradient>
+        <linearGradient id="fhIce" x1="0%" y1="50%" x2="100%" y2="50%">
+          <stop offset="0%" stop-color="#F7FAFF"/><stop offset="45%" stop-color="#5BD6FF"/><stop offset="100%" stop-color="#178BFF"/>
+        </linearGradient>
+      </defs>
+      <g fill="none" stroke-linecap="round" stroke-width="13">
+        <path d="M100 50 C 84 18, 40 16, 24 50 C 40 84, 84 82, 100 50 Z" stroke="url(#fhFire)"/>
+        <path d="M100 50 C 116 18, 160 16, 176 50 C 160 84, 116 82, 100 50 Z" stroke="url(#fhIce)"/>
+      </g>
+    </svg>
+    <div class="wm">FOREVER HERE</div>
+    <div class="sayhello">SAY HELLO FOREVER</div>
+    <p class="promise">Stay connected forever.</p>
+    <div class="hero-meta">
+      <div><strong>Product</strong>Voice &amp; video messages, delivered as a call</div>
+      <div><strong>Platforms</strong>Mobile &amp; web application</div>
+      <div><strong>Domain</strong>ForeverHereCall.com</div>
+      <div><strong>Source of truth</strong>Brand Development Handoff v1.0</div>
+    </div>
   </div>
 </header>
 
-<!-- TOC -->
+<!-- HOW TO READ -->
 <section>
-  <div class="container">
-    <span class="eyebrow">Contents</span>
-    <h2 class="section-title" style="margin-bottom:var(--s-2)">Thirteen sections, one system</h2>
-    <p class="section-lede" style="margin-bottom:var(--s-12)">Everything a designer, developer, or partner needs to build Forever Here so it looks and feels like one product across app and web.</p>
-    <div class="toc-grid">
-      <a class="toc-item" href="#foundation"><span class="toc-num">1.0</span><span class="toc-label">Foundation</span></a>
-      <a class="toc-item" href="#voice"><span class="toc-num">2.0</span><span class="toc-label">Voice &amp; personality</span></a>
-      <a class="toc-item" href="#audiences"><span class="toc-num">3.0</span><span class="toc-label">Who we serve</span></a>
-      <a class="toc-item" href="#logo"><span class="toc-num">4.0</span><span class="toc-label">Logo system</span></a>
-      <a class="toc-item" href="#palette"><span class="toc-num">5.0</span><span class="toc-label">Palette</span></a>
-      <a class="toc-item" href="#type"><span class="toc-num">6.0</span><span class="toc-label">Typography</span></a>
-      <a class="toc-item" href="#scale"><span class="toc-num">6.1</span><span class="toc-label">Modular scale</span></a>
-      <a class="toc-item" href="#spacing"><span class="toc-num">7.0</span><span class="toc-label">Spacing &amp; layout</span></a>
-      <a class="toc-item" href="#components"><span class="toc-num">8.0</span><span class="toc-label">Component library</span></a>
-      <a class="toc-item" href="#icons"><span class="toc-num">9.0</span><span class="toc-label">Iconography</span></a>
-      <a class="toc-item" href="#imagery"><span class="toc-num">10.0</span><span class="toc-label">Photography</span></a>
-      <a class="toc-item" href="#motion"><span class="toc-num">11.0</span><span class="toc-label">Motion</span></a>
-      <a class="toc-item" href="#practice"><span class="toc-num">12.0</span><span class="toc-label">Voice in practice</span></a>
-      <a class="toc-item" href="#access"><span class="toc-num">13.0</span><span class="toc-label">Accessibility</span></a>
+  <div class="wrap">
+    <div class="shead">
+      <span class="snum">0.0</span><span class="eyebrow">How to read this guide</span>
+      <h2 class="stitle">Confirmed, recommended, and open.</h2><hr class="rule">
+      <p class="slede">The landing-page artwork is a flattened raster mockup. It carries no font metadata, editable layers, or vector logo. Everything below is labeled so nobody mistakes a production match for a recovered source file.</p>
+    </div>
+    <div class="grid3">
+      <div class="card"><span class="status conf">Confirmed</span><p style="margin-top:14px;color:var(--gray-300);font-size:var(--text-small);">Explicitly requested, or consistently shown across the mockups. Build to this.</p></div>
+      <div class="card"><span class="status rec">Recommended</span><p style="margin-top:14px;color:var(--gray-300);font-size:var(--text-small);">Implementation-ready values chosen to reproduce the mockup faithfully in code. Adjustable after visual QA.</p></div>
+      <div class="card"><span class="status need">Needs source</span><p style="margin-top:14px;color:var(--gray-300);font-size:var(--text-small);">Cannot be recovered from a flattened AI-generated image. Requires original files or a decision.</p></div>
+    </div>
+    <div style="margin-top:var(--space-12);" class="toc">
+      <a href="#foundation"><span class="n">1.0</span><span class="l">Foundation</span></a>
+      <a href="#logo"><span class="n">2.0</span><span class="l">Logo system</span></a>
+      <a href="#color"><span class="n">3.0</span><span class="l">Color</span></a>
+      <a href="#type"><span class="n">4.0</span><span class="l">Typography</span></a>
+      <a href="#imagery"><span class="n">5.0</span><span class="l">Imagery</span></a>
+      <a href="#icons"><span class="n">6.0</span><span class="l">Iconography</span></a>
+      <a href="#components"><span class="n">7.0</span><span class="l">Components</span></a>
+      <a href="#voice"><span class="n">8.0</span><span class="l">Voice &amp; copy</span></a>
+      <a href="#motion"><span class="n">9.0</span><span class="l">Motion</span></a>
+      <a href="#access"><span class="n">10.0</span><span class="l">Accessibility</span></a>
+      <a href="#claims"><span class="n">11.0</span><span class="l">Claims review</span></a>
+      <a href="#open"><span class="n">12.0</span><span class="l">Open items</span></a>
     </div>
   </div>
 </section>
-
-<hr style="border:0;border-top:1px solid var(--slate-100)">
 
 <!-- 1.0 FOUNDATION -->
 <section id="foundation">
-  <div class="container">
-    <div class="section-head">
-      <span class="section-number">1.0</span>
-      <span class="eyebrow">The starting point</span>
-      <h2 class="section-title">Foundation. What Forever Here exists to do.</h2>
-      <hr class="section-rule">
-      <p class="section-lede">We turn a recorded message into a phone call that arrives on the exact day it means the most, even years from now, even after someone is gone.</p>
+  <div class="wrap">
+    <div class="shead">
+      <span class="snum">1.0</span><span class="eyebrow">The starting point</span>
+      <h2 class="stitle">Foundation.</h2><hr class="rule">
+      <p class="slede">Forever Here records personal voice and video messages and delivers them on a chosen date and time, including after the sender has passed.</p>
     </div>
-
-    <div class="grid-2" style="margin-bottom:var(--s-16)">
+    <div class="grid2" style="margin-bottom:var(--space-16);">
       <div>
-        <span class="eyebrow">Mission</span>
-        <p style="font-family:var(--font-display);font-size:var(--fs-2xl);line-height:1.3;color:var(--night-800)">A father records a message today. On his daughter's wedding day, her phone rings and it is his voice. Forever Here makes sure the people we love can still show up for the moments that matter.</p>
+        <span class="eyebrow">Brand promise</span>
+        <p style="font-family:var(--font-display);font-size:var(--text-h3);line-height:1.25;">Stay connected forever.</p>
+        <p style="color:var(--gray-300);margin-top:var(--space-4);">The differentiator is arrival. Messages are intended to reach the recipient from the sender's verified phone number, so the moment feels familiar and personal rather than administrative.</p>
       </div>
       <div>
-        <span class="eyebrow">Why it is different</span>
-        <p style="color:var(--slate-500);margin-bottom:var(--s-4)">Other services store files in a vault that someone has to remember to open. Forever Here does not wait to be opened. It <b>rings</b>. A scheduled message becomes a real, incoming phone call, introduced gently, delivered on a date, a milestone, or upon a verified passing.</p>
-        <p style="color:var(--slate-500)">That is the whole promise: presence, not preservation.</p>
+        <span class="eyebrow">Emotional tone</span>
+        <p style="color:var(--gray-300);">Compassionate, reassuring, premium, intimate, hopeful, respectful. Never morbid, frightening, or overly sentimental.</p>
+        <span class="eyebrow" style="margin-top:var(--space-6);">Visual tone</span>
+        <p style="color:var(--gray-300);">Cinematic dusk imagery, deep navy and black surfaces, glowing fire-and-ice accents, restrained glass effects, spacious editorial typography.</p>
       </div>
     </div>
-
-    <span class="eyebrow">Pillars</span>
-    <h3 style="font-size:var(--fs-2xl);margin-bottom:var(--s-8)">Three commitments that shape every decision.</h3>
-    <div class="grid-3">
-      <div class="pillar f-1">
-        <h3>Presence over preservation</h3>
-        <p>We are not a storage locker for memories. We are the moment a phone rings and a voice is there. Every design choice should serve that arrival, and make it feel real.</p>
-      </div>
-      <div class="pillar f-2">
-        <h3>Emotion with dignity</h3>
-        <p>We work in the territory of love, grief, and legacy. We are warm and hopeful, never morbid, never a gimmick. We treat a person's last words with the care they deserve.</p>
-      </div>
-      <div class="pillar f-3">
-        <h3>Trust by design</h3>
-        <p>People hand us the most important thing they will ever say. Verified identity, secure storage, and guardian confirmation are not features. They are the reason anyone believes us.</p>
-      </div>
+    <div class="grid3">
+      <div class="card"><h3 style="font-size:var(--text-h3);margin-bottom:10px;">Presence, not storage</h3><p style="color:var(--gray-300);font-size:var(--text-small);">We are not a vault someone has to remember to open. The phone rings. Every design decision should serve that arrival.</p></div>
+      <div class="card"><h3 style="font-size:var(--text-h3);margin-bottom:10px;">Warmth with dignity</h3><p style="color:var(--gray-300);font-size:var(--text-small);">We work in love, grief, and legacy. Hopeful and human, never a gimmick, never fear-based.</p></div>
+      <div class="card"><h3 style="font-size:var(--text-h3);margin-bottom:10px;">Trust by design</h3><p style="color:var(--gray-300);font-size:var(--text-small);">People hand us the most important thing they will ever say. Verification and safeguards are the reason anyone believes us.</p></div>
     </div>
   </div>
 </section>
 
-<hr style="border:0;border-top:1px solid var(--slate-100)">
-
-<!-- 2.0 VOICE -->
-<section id="voice">
-  <div class="container">
-    <div class="section-head">
-      <span class="section-number">2.0</span>
-      <span class="eyebrow">How Forever Here sounds</span>
-      <h2 class="section-title">Voice &amp; personality.</h2>
-      <hr class="section-rule">
-      <p class="section-lede">Warm, plainspoken, and reverent, the way a trusted friend speaks at an important moment. We carry weight without becoming heavy.</p>
-    </div>
-
-    <div class="word-cols" style="margin-bottom:var(--s-16)">
-      <div class="word-box use">
-        <h4>Words we reach for</h4>
-        <div class="chips">
-          <span class="chip">be there</span><span class="chip">your voice</span><span class="chip">moments</span>
-          <span class="chip">when it matters</span><span class="chip">still here</span><span class="chip">someday</span>
-          <span class="chip">keep</span><span class="chip">deliver</span><span class="chip">safe</span><span class="chip">for them</span>
-        </div>
-      </div>
-      <div class="word-box avoid">
-        <h4>Words we avoid</h4>
-        <div class="chips">
-          <span class="chip">death</span><span class="chip">deceased</span><span class="chip">the vault (as jargon)</span>
-          <span class="chip">disruptive</span><span class="chip">AI-powered</span><span class="chip">spooky</span>
-          <span class="chip">from beyond</span><span class="chip">users</span><span class="chip">ping</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="grid-2">
-      <div>
-        <span class="eyebrow">Personality, dialed in</span>
-        <div class="slider">
-          <div class="slider-labels"><span>Clinical</span><span>Warm</span></div>
-          <div class="slider-track"><span class="slider-fill" style="left:82%"></span></div>
-        </div>
-        <div class="slider">
-          <div class="slider-labels"><span>Somber</span><span>Hopeful</span></div>
-          <div class="slider-track"><span class="slider-fill" style="left:74%"></span></div>
-        </div>
-        <div class="slider">
-          <div class="slider-labels"><span>Playful</span><span>Reverent</span></div>
-          <div class="slider-track"><span class="slider-fill" style="left:68%"></span></div>
-        </div>
-        <div class="slider">
-          <div class="slider-labels"><span>Salesy</span><span>Sincere</span></div>
-          <div class="slider-track"><span class="slider-fill" style="left:90%"></span></div>
-        </div>
-      </div>
-      <div>
-        <span class="eyebrow">The test</span>
-        <p style="font-family:var(--font-display);font-size:var(--fs-xl);color:var(--night-800);line-height:1.4;margin-bottom:var(--s-4)">Before anything ships, read it aloud as if you were speaking to someone who just lost a parent.</p>
-        <p style="color:var(--slate-500)">If it would sound cold, cute, or salesy in that room, rewrite it. Sincerity is the brand's whole competitive edge. Protect it in every line of copy.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<hr style="border:0;border-top:1px solid var(--slate-100)">
-
-<!-- 3.0 AUDIENCES -->
-<section id="audiences">
-  <div class="container">
-    <div class="section-head">
-      <span class="section-number">3.0</span>
-      <span class="eyebrow">Who we serve</span>
-      <h2 class="section-title">Four audiences, one brand.</h2>
-      <hr class="section-rule">
-      <p class="section-lede">The same promise reaches very different people. The voice stays constant; the emphasis shifts.</p>
-    </div>
-
-    <div class="aud">
-      <div class="aud-num">01</div>
-      <div>
-        <span class="tag">Primary early market</span>
-        <h3>First responders &amp; military</h3>
-        <p>People who run toward danger and want a safeguard for the family they might not come home to. The pitch is protection and peace of mind. Sober, respectful, never fear-mongering.</p>
-      </div>
-    </div>
-    <div class="aud">
-      <div class="aud-num">02</div>
-      <div>
-        <span class="tag">Everyday heart of the product</span>
-        <h3>Families &amp; individuals</h3>
-        <p>Parents, spouses, grandparents. Messages for weddings, birthdays, graduations, and the ordinary "just wanted to hear my voice." Warm, hopeful, celebratory.</p>
-      </div>
-    </div>
-    <div class="aud">
-      <div class="aud-num">03</div>
-      <div>
-        <span class="tag">End-of-life &amp; legacy</span>
-        <h3>Aging, hospice &amp; care partners</h3>
-        <p>Seniors, terminally ill patients, and the nursing homes, hospitals, and hospice teams who serve them. The most tender context we work in. Gentle, unhurried, dignified.</p>
-      </div>
-    </div>
-    <div class="aud">
-      <div class="aud-num">04</div>
-      <div>
-        <span class="tag">Channel &amp; partners</span>
-        <h3>Institutions &amp; sponsors</h3>
-        <p>Departments, unions, funeral homes, life insurers, and faith communities who offer Forever Here to the people they serve. Credible, clear, trustworthy. This is where B2B commitments come from.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<hr style="border:0;border-top:1px solid var(--slate-100)">
-
-<!-- 4.0 LOGO -->
+<!-- 2.0 LOGO -->
 <section id="logo">
-  <div class="container">
-    <div class="section-head">
-      <span class="section-number">4.0</span>
-      <span class="eyebrow">Mark &amp; wordmark</span>
-      <h2 class="section-title">Logo system. In development.</h2>
-      <hr class="section-rule">
-      <p class="section-lede">The final artwork is being finalized. Below is a placeholder lockup that captures the intended concept: a fire-and-ice infinity mark, a block wordmark, and a signature script.</p>
+  <div class="wrap">
+    <div class="shead">
+      <span class="snum">2.0</span><span class="eyebrow">Mark &amp; wordmark</span>
+      <h2 class="stitle">Logo system.<span class="status need">Vector needed</span></h2><hr class="rule">
+      <p class="slede">A fire-and-ice infinity symbol paired with the Forever Here wordmark. Fire on one side, ice on the other, transitioning through soft white so the two energies stay distinct.</p>
     </div>
 
-    <div class="logo-stage">
-      <span class="placeholder-tag">Placeholder · final mark pending</span>
-      <div class="lockup">
-        <svg class="mark" width="150" height="92" viewBox="0 0 150 92" fill="none" aria-label="Forever Here infinity mark placeholder">
-          <defs>
-            <linearGradient id="ice" x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0" stop-color="#A3D0EE"/><stop offset="1" stop-color="#2277B4"/>
-            </linearGradient>
-            <linearGradient id="fire" x1="0" y1="1" x2="1" y2="0">
-              <stop offset="0" stop-color="#B83A12"/><stop offset="1" stop-color="#FF8C55"/>
-            </linearGradient>
-          </defs>
-          <path d="M75 46 C 60 20, 22 22, 22 46 C 22 70, 60 72, 75 46 Z" stroke="url(#ice)" stroke-width="9" fill="none" stroke-linecap="round"/>
-          <path d="M75 46 C 90 72, 128 70, 128 46 C 128 22, 90 20, 75 46 Z" stroke="url(#fire)" stroke-width="9" fill="none" stroke-linecap="round"/>
-        </svg>
-        <div class="wm">FOREVER HERE</div>
-        <div class="scr">Forever Here</div>
+    <div class="card" style="text-align:center;padding:var(--space-24) var(--space-8);background:var(--ink-950);position:relative;">
+      <span class="status need" style="position:absolute;top:16px;left:16px;margin:0;">Coded recreation · awaiting source vector</span>
+      <svg class="logo-glow" width="300" height="150" viewBox="0 0 200 100" style="margin:0 auto;" aria-label="Forever Here">
+        <g fill="none" stroke-linecap="round" stroke-width="13">
+          <path d="M100 50 C 84 18, 40 16, 24 50 C 40 84, 84 82, 100 50 Z" stroke="url(#fhFire)"/>
+          <path d="M100 50 C 116 18, 160 16, 176 50 C 160 84, 116 82, 100 50 Z" stroke="url(#fhIce)"/>
+        </g>
+      </svg>
+      <div style="font-family:var(--font-display);font-weight:600;font-size:2rem;letter-spacing:.2em;margin-top:var(--space-4);">FOREVER HERE</div>
+      <div style="font-family:var(--font-sans);font-size:.72rem;letter-spacing:.34em;color:var(--ice-400);font-weight:700;margin-top:10px;">SAY HELLO FOREVER</div>
+    </div>
+
+    <div class="grid2" style="margin-top:var(--space-8);">
+      <div class="dd do"><b>Do</b>
+        Keep clear space of at least the height of the mark's center crossing on all sides. Minimum width: 140px for the full horizontal lockup, 28px for the mark alone. Place over a dark overlay when it sits on imagery.
       </div>
-    </div>
-
-    <div class="logo-rules">
-      <div class="rule-do">
-        <b>Do</b>
-        Give the mark room to breathe (clear space equal to the height of the "8"). Use the block wordmark for app and product UI. Reserve the script for emotional, hero moments.
-      </div>
-      <div class="rule-dont">
-        <b>Do not</b>
-        Recolor the fire/ice gradient, stretch or rotate the mark, add drop shadows to the wordmark in body UI, or set the script at small sizes where it becomes unreadable.
-      </div>
-    </div>
-    <p class="hint" style="margin-top:var(--s-4)">When final logo files arrive (vector preferred), they drop in here and everywhere the placeholder appears. No other section needs to change.</p>
-  </div>
-</section>
-
-<hr style="border:0;border-top:1px solid var(--slate-100)">
-
-<!-- 5.0 PALETTE -->
-<section id="palette">
-  <div class="container">
-    <div class="section-head">
-      <span class="section-number">5.0</span>
-      <span class="eyebrow">Color</span>
-      <h2 class="section-title">Palette. Fire and ice on a night sky.</h2>
-      <hr class="section-rule">
-      <p class="section-lede">Two brand hues carry the meaning. Ember is the warmth of a human voice. Frost is trust and permanence. They live on a deep night base with warm neutrals for calm.</p>
-    </div>
-
-    <span class="eyebrow">Primary palette</span>
-    <div class="swatch-row" style="margin-bottom:var(--s-12)">
-      <div class="swatch"><div class="chipc" style="background:var(--night-900)"></div><div class="meta"><div class="name">Night</div><div class="hex">#0A0E16</div></div></div>
-      <div class="swatch"><div class="chipc" style="background:var(--ember-500)"></div><div class="meta"><div class="name">Ember</div><div class="hex">#FF6A2B</div></div></div>
-      <div class="swatch"><div class="chipc" style="background:var(--frost-500)"></div><div class="meta"><div class="name">Frost</div><div class="hex">#3D97D6</div></div></div>
-      <div class="swatch"><div class="chipc" style="background:var(--plum-800)"></div><div class="meta"><div class="name">Plum</div><div class="hex">#3A1029</div></div></div>
-      <div class="swatch"><div class="chipc" style="background:var(--linen);border:1px solid var(--slate-200)"></div><div class="meta"><div class="name">Linen</div><div class="hex">#F6F2EC</div></div></div>
-    </div>
-
-    <span class="eyebrow">In atmosphere</span>
-    <div class="grid-2" style="margin:var(--s-3) 0 var(--s-12)">
-      <div class="atmos" style="background:radial-gradient(400px 260px at 30% 20%, rgba(255,106,43,0.4), transparent 60%), var(--night-900)">
-        <div class="q">"Her phone lit up. It was Dad's name."</div>
-      </div>
-      <div class="atmos" style="background:radial-gradient(400px 260px at 70% 80%, rgba(61,151,214,0.4), transparent 60%), var(--night-800)">
-        <div class="q">Kept safe. Delivered exactly when it should be.</div>
+      <div class="dd no"><b>Do not</b>
+        Stretch, rotate, outline, recolor into unrelated hues, or add a hard drop shadow. Do not place the full-color logo over busy, high-contrast imagery without an overlay.
       </div>
     </div>
 
-    <span class="eyebrow">Tonal scales</span>
-    <div style="margin:var(--s-3) 0 var(--s-12)">
-      <span class="scale-name">Frost</span>
-      <div class="scale-row">
-        <div class="scale-cell" style="background:var(--frost-900);color:#fff">900</div>
-        <div class="scale-cell" style="background:var(--frost-800);color:#fff">800</div>
-        <div class="scale-cell" style="background:var(--frost-700);color:#fff">700</div>
-        <div class="scale-cell" style="background:var(--frost-600);color:#fff">600</div>
-        <div class="scale-cell" style="background:var(--frost-500);color:#fff">500</div>
-        <div class="scale-cell" style="background:var(--frost-400)">400</div>
-        <div class="scale-cell" style="background:var(--frost-300)">300</div>
-        <div class="scale-cell" style="background:var(--frost-200)">200</div>
-        <div class="scale-cell" style="background:var(--frost-100)">100</div>
-      </div>
-      <span class="scale-name">Ember</span>
-      <div class="scale-row">
-        <div class="scale-cell" style="background:var(--ember-900);color:#fff">900</div>
-        <div class="scale-cell" style="background:var(--ember-800);color:#fff">800</div>
-        <div class="scale-cell" style="background:var(--ember-700);color:#fff">700</div>
-        <div class="scale-cell" style="background:var(--ember-600);color:#fff">600</div>
-        <div class="scale-cell" style="background:var(--ember-500);color:#fff">500</div>
-        <div class="scale-cell" style="background:var(--ember-400)">400</div>
-        <div class="scale-cell" style="background:var(--ember-300)">300</div>
-        <div class="scale-cell" style="background:var(--ember-200)">200</div>
-        <div class="scale-cell" style="background:var(--ember-100)">100</div>
-      </div>
-      <span class="scale-name">Night</span>
-      <div class="scale-row">
-        <div class="scale-cell" style="background:var(--night-900);color:#fff">900</div>
-        <div class="scale-cell" style="background:var(--night-800);color:#fff">800</div>
-        <div class="scale-cell" style="background:var(--night-700);color:#fff">700</div>
-        <div class="scale-cell" style="background:var(--night-600);color:#fff">600</div>
-        <div class="scale-cell" style="background:var(--night-500);color:#fff">500</div>
-        <div class="scale-cell" style="background:var(--night-400);color:#fff">400</div>
-        <div class="scale-cell" style="background:var(--slate-300)">300</div>
-        <div class="scale-cell" style="background:var(--slate-200)">200</div>
-        <div class="scale-cell" style="background:var(--slate-100)">100</div>
-      </div>
-    </div>
-
-    <div class="grid-2">
+    <div style="margin-top:var(--space-8);" class="grid2">
       <div>
-        <span class="eyebrow">Usage proportion</span>
-        <p style="color:var(--slate-500);margin-bottom:var(--s-4)">Roughly 60% night and neutrals, 25% frost, 12% ember, 3% plum. Ember is an accent, the moment of warmth. If everything glows, nothing does.</p>
-        <div style="display:flex;height:34px;border-radius:var(--r-md);overflow:hidden">
-          <div style="flex:60;background:var(--night-900)"></div>
-          <div style="flex:25;background:var(--frost-500)"></div>
-          <div style="flex:12;background:var(--ember-500)"></div>
-          <div style="flex:3;background:var(--plum-800)"></div>
-        </div>
+        <span class="eyebrow">Required production files</span>
+        <div class="codeblock">forever-here-logo-horizontal.svg
+forever-here-logo-stacked.svg
+forever-here-infinity-mark.svg
+forever-here-logo-white.svg
+forever-here-logo-dark.svg
+forever-here-favicon.svg
++ PNG exports at 1x, 2x, 3x</div>
       </div>
       <div>
-        <span class="eyebrow">Verified contrast pairings</span>
-        <div class="pair-grid">
-          <div class="pairing" style="background:var(--night-900);color:var(--linen)">Linen on Night<span class="ratio">15.8:1</span></div>
-          <div class="pairing" style="background:var(--night-900);color:var(--ember-400)">Ember-400 on Night<span class="ratio">6.9:1</span></div>
-          <div class="pairing" style="background:var(--linen);color:var(--frost-700)">Frost-700 on Linen<span class="ratio">5.3:1</span></div>
-          <div class="pairing" style="background:var(--ember-600);color:#fff">White on Ember-600<span class="ratio">4.6:1</span></div>
-        </div>
+        <span class="eyebrow">Accessible alt text</span>
+        <div class="codeblock">Full lockup:
+  alt="Forever Here"
+
+Mark alone, name visible nearby:
+  alt=""
+
+Mark alone, used by itself:
+  alt="Forever Here fire-and-ice
+       infinity symbol"</div>
       </div>
     </div>
   </div>
 </section>
 
-<hr style="border:0;border-top:1px solid var(--slate-100)">
+<!-- 3.0 COLOR -->
+<section id="color">
+  <div class="wrap">
+    <div class="shead">
+      <span class="snum">3.0</span><span class="eyebrow">Palette</span>
+      <h2 class="stitle">Color.<span class="status rec">Production match</span></h2><hr class="rule">
+      <p class="slede">Deep navy and black surfaces carry the brand. Fire and ice are accents that mark the moments that matter. Keep these centralized as design variables so the palette can be tuned globally after visual QA.</p>
+    </div>
 
-<!-- 6.0 TYPE -->
+    <div class="grid4" style="margin-bottom:var(--space-6);">
+      <div class="sw"><div class="chip" style="background:#02050B;border-bottom:1px solid #23334D;"></div><div class="meta"><div class="nm">Ink 950</div><div class="hx">#02050B</div><div class="use">Page background, deepest shadows</div></div></div>
+      <div class="sw"><div class="chip" style="background:#071323;"></div><div class="meta"><div class="nm">Midnight Navy 900</div><div class="hx">#071323</div><div class="use">Hero and footer surfaces</div></div></div>
+      <div class="sw"><div class="chip" style="background:#0D1C33;"></div><div class="meta"><div class="nm">Deep Navy 800</div><div class="hx">#0D1C33</div><div class="use">Cards, form panels, overlays</div></div></div>
+      <div class="sw"><div class="chip" style="background:#23334D;"></div><div class="meta"><div class="nm">Divider Navy 650</div><div class="hx">#23334D</div><div class="use">Hairlines, borders, inactive controls</div></div></div>
+    </div>
+    <div class="grid4" style="margin-bottom:var(--space-6);">
+      <div class="sw"><div class="chip" style="background:#5BD6FF;"></div><div class="meta"><div class="nm">Ice Blue 400</div><div class="hx">#5BD6FF</div><div class="use">Ice glow, links, highlights</div></div></div>
+      <div class="sw"><div class="chip" style="background:#178BFF;"></div><div class="meta"><div class="nm">Electric Blue 600</div><div class="hx">#178BFF</div><div class="use">Primary interactive accent</div></div></div>
+      <div class="sw"><div class="chip" style="background:#FF681F;"></div><div class="meta"><div class="nm">Fire Orange 500</div><div class="hx">#FF681F</div><div class="use">Fire glow, CTA emphasis, "COMING SOON" eyebrow</div></div></div>
+      <div class="sw"><div class="chip" style="background:#FFB45B;"></div><div class="meta"><div class="nm">Ember Gold 400</div><div class="hx">#FFB45B</div><div class="use">Warm gradient transition</div></div></div>
+    </div>
+    <div class="grid4">
+      <div class="sw"><div class="chip" style="background:#E6BA71;"></div><div class="meta"><div class="nm">Premium Gold 350</div><div class="hx">#E6BA71</div><div class="use">Restrained premium accent. Superseded by Fire Orange for "COMING SOON" (see note)</div></div></div>
+      <div class="sw"><div class="chip" style="background:#F7FAFF;"></div><div class="meta"><div class="nm">Cloud White</div><div class="hx">#F7FAFF</div><div class="use">Headlines and primary text</div></div></div>
+      <div class="sw"><div class="chip" style="background:#AEB9C9;"></div><div class="meta"><div class="nm">Cool Gray 300</div><div class="hx">#AEB9C9</div><div class="use">Supporting copy and labels</div></div></div>
+      <div class="sw"><div class="chip" style="background:var(--gradient-fire-ice);"></div><div class="meta"><div class="nm">Fire → Ice</div><div class="hx">gradient</div><div class="use">Signature brand gradient</div></div></div>
+    </div>
+
+    <div class="card" style="margin-top:var(--space-8);border-color:rgba(255,104,31,.3);">
+      <span class="eyebrow">Decision note · supersedes the handoff</span>
+      <p style="color:var(--gray-300);font-size:var(--text-small);">The handoff assigns <b>Premium Gold 350</b> to the "COMING SOON" eyebrow. Rob's later landing-page mockup renders it in <b>orange</b>, and the live page follows the mockup: <code>#FF8A2E</code> with a warm glow and a lens-flare rule beneath. Premium Gold remains available as a restrained accent elsewhere. Confirm before launch.</p>
+    </div>
+
+    <div class="grid2" style="margin-top:var(--space-12);">
+      <div>
+        <span class="eyebrow">Core gradients</span>
+        <div class="codeblock">--gradient-fire-ice: linear-gradient(
+  110deg,
+  #FF681F 0%,
+  #FFB45B 34%,
+  #F7FAFF 50%,
+  #5BD6FF 66%,
+  #178BFF 100%
+);
+
+--gradient-card: linear-gradient(145deg,
+  rgba(13,28,51,.92),
+  rgba(7,19,35,.78));</div>
+      </div>
+      <div>
+        <span class="eyebrow">Glow treatments · use sparingly</span>
+        <div class="codeblock">.logo-glow{
+  filter:
+    drop-shadow(0 0 14px rgba(91,214,255,.28))
+    drop-shadow(0 0 18px rgba(255,104,31,.24));
+}
+.ice-glow{ box-shadow:0 0 32px rgba(91,214,255,.22); }
+.fire-glow{ box-shadow:0 0 32px rgba(255,104,31,.20); }</div>
+        <p style="color:var(--gray-300);font-size:var(--text-small);margin-top:var(--space-4);">Body text, form fields, and long passages never glow.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 4.0 TYPE -->
 <section id="type">
-  <div class="container">
-    <div class="section-head">
-      <span class="section-number">6.0</span>
-      <span class="eyebrow">Typefaces</span>
-      <h2 class="section-title">Typography. Where the brand lives.</h2>
-      <hr class="section-rule">
-      <p class="section-lede">A warm, emotional serif for the things that move people. A clean, legible sans for everything they read and tap. Two accents for identity.</p>
+  <div class="wrap">
+    <div class="shead">
+      <span class="snum">4.0</span><span class="eyebrow">Typefaces</span>
+      <h2 class="stitle">Typography.<span class="status rec">Production match</span></h2><hr class="rule">
+      <p class="slede">An editorial serif for the emotional statements, a clean sans for everything people read and tap. The raster mockup does not expose the original font names; this pairing reproduces the look faithfully.</p>
     </div>
 
-    <div class="specimen">
-      <div class="big" style="font-family:var(--font-display)">Some voices deserve to keep calling.</div>
-      <div class="lab">Fraunces · Display &amp; headlines · 300–600 · soft, human serif (placeholder for final display face)</div>
+    <div class="spec">
+      <div class="big">They'll hear you. Forever.</div>
+      <div class="lab">Cormorant Garamond · 600, 700 · hero headlines, emotional statements, closing line · line-height 0.92–1.0</div>
     </div>
-    <div class="specimen">
-      <div class="big" style="font-family:var(--font-body);font-weight:700">Record it once. We deliver it right on time.</div>
-      <div class="lab">Mulish · Body, UI, buttons · 300–800 · warm humanist sans</div>
+    <div class="spec">
+      <div class="big" style="font-family:var(--font-sans);font-weight:700;font-size:clamp(1.6rem,3.4vw,2.4rem);">Record it once. We deliver it right on time.</div>
+      <div class="lab">Inter · 400, 500, 600, 700 · navigation, body, forms, cards, buttons, labels · line-height 1.55–1.7</div>
     </div>
-    <div class="grid-2">
-      <div class="specimen" style="margin:0">
-        <div class="big" style="font-family:var(--font-wordmark);font-size:2rem;letter-spacing:0.16em">FOREVER HERE</div>
-        <div class="lab">Michroma · Wordmark &amp; labels only · wide geometric (stand-in for the block wordmark)</div>
-      </div>
-      <div class="specimen" style="margin:0">
-        <div class="big" style="font-family:var(--font-script);font-size:3rem;color:var(--ember-600)">Forever Here</div>
-        <div class="lab">Great Vibes · Emotional accent only · signature script (stand-in for the logo script)</div>
-      </div>
-    </div>
-    <p class="hint" style="margin-top:var(--s-4)">Fonts are best-guess stand-ins chosen to match the look and feel of Rob's materials. Swap for the licensed brand faces once confirmed; the scale and roles below stay the same.</p>
-  </div>
-</section>
 
-<!-- 6.1 SCALE -->
-<section id="scale" style="padding-top:0">
-  <div class="container">
-    <div class="section-head">
-      <span class="section-number">6.1</span>
-      <span class="eyebrow">Modular scale</span>
-      <h2 class="section-title">Type scale. The perfect fourth.</h2>
-      <hr class="section-rule">
+    <div style="margin-top:var(--space-12);">
+      <span class="eyebrow">Type scale</span>
+      <div class="trow"><span class="v">--text-hero</span><span style="font-family:var(--font-display);font-weight:700;font-size:3.2rem;">Aa</span><span style="color:var(--gray-500);">clamp(3.5rem, 7.5vw, 7.75rem)</span></div>
+      <div class="trow"><span class="v">--text-h1</span><span style="font-family:var(--font-display);font-weight:700;font-size:2.4rem;">Headline</span><span style="color:var(--gray-500);">clamp(2.75rem, 5.5vw, 5.5rem)</span></div>
+      <div class="trow"><span class="v">--text-h2</span><span style="font-family:var(--font-display);font-weight:700;font-size:1.9rem;">Section heading</span><span style="color:var(--gray-500);">clamp(2.1rem, 4vw, 4rem)</span></div>
+      <div class="trow"><span class="v">--text-h3</span><span style="font-family:var(--font-display);font-weight:600;font-size:1.4rem;">Card heading</span><span style="color:var(--gray-500);">clamp(1.45rem, 2.3vw, 2rem)</span></div>
+      <div class="trow"><span class="v">--text-lead</span><span style="font-size:1.15rem;">Lead paragraph</span><span style="color:var(--gray-500);">clamp(1.08rem, 1.4vw, 1.35rem)</span></div>
+      <div class="trow"><span class="v">--text-body</span><span>Body copy, the workhorse</span><span style="color:var(--gray-500);">1rem</span></div>
+      <div class="trow"><span class="v">--text-label</span><span style="font-size:.75rem;text-transform:uppercase;letter-spacing:.18em;font-weight:700;color:var(--gold-350);">Eyebrow / label</span><span style="color:var(--gray-500);">0.75rem · tracking .16–.22em</span></div>
     </div>
-    <div>
-      <div class="type-row"><span class="val">72px / 7xl</span><span style="font-family:var(--font-display);font-size:var(--fs-6xl)">Aa</span><span style="color:var(--slate-400)">Hero wordmark moments</span></div>
-      <div class="type-row"><span class="val">44px / 4xl</span><span style="font-family:var(--font-display);font-size:var(--fs-4xl)">Section titles</span></div>
-      <div class="type-row"><span class="val">28px / 2xl</span><span style="font-family:var(--font-display);font-size:var(--fs-2xl)">Card &amp; screen headings</span></div>
-      <div class="type-row"><span class="val">18px / lg</span><span style="font-family:var(--font-body);font-size:var(--fs-lg);font-weight:600">Lede &amp; emphasis</span></div>
-      <div class="type-row"><span class="val">16px / base</span><span style="font-family:var(--font-body);font-size:var(--fs-base)">Body copy and interface text, the workhorse size</span></div>
-      <div class="type-row"><span class="val">13px / caption</span><span style="font-family:var(--font-body);font-size:var(--fs-caption);color:var(--slate-500)">Captions, hints, metadata</span></div>
+
+    <div class="grid2" style="margin-top:var(--space-8);">
+      <div class="dd do"><b>Do</b>Keep paragraph width near 58–66ch. Button labels in Inter 700 with 0.06em tracking. Eyebrows and "COMING SOON" uppercase Inter 700 at 0.16–0.22em.</div>
+      <div class="dd no"><b>Do not</b>Set full paragraphs in all caps. Do not mix additional typefaces into the system without approval.</div>
     </div>
   </div>
 </section>
 
-<hr style="border:0;border-top:1px solid var(--slate-100)">
-
-<!-- 7.0 SPACING -->
-<section id="spacing">
-  <div class="container">
-    <div class="section-head">
-      <span class="section-number">7.0</span>
-      <span class="eyebrow">Rhythm</span>
-      <h2 class="section-title">Spacing &amp; layout.</h2>
-      <hr class="section-rule">
-      <p class="section-lede">A 4px base unit keeps app and web on the same grid. Generous whitespace is part of the reverence; do not crowd tender moments.</p>
+<!-- 5.0 IMAGERY -->
+<section id="imagery">
+  <div class="wrap">
+    <div class="shead">
+      <span class="snum">5.0</span><span class="eyebrow">Photography &amp; visual direction</span>
+      <h2 class="stitle">Imagery.<span class="status need">Licensing required</span></h2><hr class="rule">
+      <p class="slede">Cinematic waterfront at dusk. Warm orange sunset at the horizon, deep navy shadows, loved ones in silhouette. The focus is connection and presence, never grief imagery.</p>
     </div>
-    <div class="grid-2">
-      <div>
-        <div class="space-row"><span class="lab">--s-2 · 8px</span><div style="flex:1"><div class="space-bar" style="width:8px"></div></div></div>
-        <div class="space-row"><span class="lab">--s-4 · 16px</span><div style="flex:1"><div class="space-bar" style="width:16px"></div></div></div>
-        <div class="space-row"><span class="lab">--s-6 · 24px</span><div style="flex:1"><div class="space-bar" style="width:24px"></div></div></div>
-        <div class="space-row"><span class="lab">--s-8 · 32px</span><div style="flex:1"><div class="space-bar" style="width:32px"></div></div></div>
-        <div class="space-row"><span class="lab">--s-12 · 48px</span><div style="flex:1"><div class="space-bar" style="width:48px"></div></div></div>
-        <div class="space-row"><span class="lab">--s-16 · 64px</span><div style="flex:1"><div class="space-bar" style="width:64px"></div></div></div>
-        <div class="space-row"><span class="lab">--s-24 · 96px</span><div style="flex:1"><div class="space-bar" style="width:96px"></div></div></div>
+    <div class="grid2">
+      <div class="dd do"><b>Do</b>
+        Cinematic lake or waterfront at dusk. Warm sunset strip preserved to support the fire side of the brand. Dark navy overlay so text meets contrast. Soft grain, restrained bloom. Phone UI stays crisp while the background stays cinematic.
       </div>
-      <div>
-        <span class="eyebrow">Rules of thumb</span>
-        <p style="color:var(--slate-500);margin-bottom:var(--s-3)"><b>Touch targets</b> never below 44px tall on mobile. Buttons and inputs get real breathing room.</p>
-        <p style="color:var(--slate-500);margin-bottom:var(--s-3)"><b>Screens</b> use 20–24px side gutters on mobile, up to 32px on web.</p>
-        <p style="color:var(--slate-500);margin-bottom:var(--s-3)"><b>Content width</b> caps around 860px for reading so long, emotional copy stays comfortable.</p>
-        <p style="color:var(--slate-500)"><b>Radius</b> is soft but not bubbly: pill buttons, 16px cards, 24px sheets.</p>
+      <div class="dd no"><b>Do not</b>
+        No cemetery or hospital imagery, visible distress, or literal depictions of death. No heavy HDR. Keep faces non-specific unless model releases are obtained.
       </div>
+    </div>
+    <div class="card" style="margin-top:var(--space-8);">
+      <span class="eyebrow">Phone mockup rules</span>
+      <ul style="color:var(--gray-300);font-size:var(--text-small);margin:0;padding-left:20px;line-height:1.9;">
+        <li>Build the phone and call UI as separate responsive assets or HTML/CSS layers, never cropped from the mockup image.</li>
+        <li>The contact name and photo must remain editable.</li>
+        <li>The screen must not imply a live call when the experience is a scheduled recording.</li>
+        <li>Include a label such as <code>Scheduled message</code> if required by legal or product review.</li>
+        <li>Do not crop so tightly that the call state becomes unclear.</li>
+      </ul>
+    </div>
+    <p style="color:var(--gray-500);font-size:var(--text-small);margin-top:var(--space-6);">Hero alt text: <code>A parent and child silhouetted on a dock at sunset beside a phone displaying a scheduled call from a loved one.</code></p>
+  </div>
+</section>
+
+<!-- 6.0 ICONS -->
+<section id="icons">
+  <div class="wrap">
+    <div class="shead">
+      <span class="snum">6.0</span><span class="eyebrow">Iconography</span>
+      <h2 class="stitle">Icons.</h2><hr class="rule">
+      <p class="slede">Simple outline icons with rounded geometry. Stroke 1.75–2px on a 24px canvas. Never mix filled and outline families.</p>
+    </div>
+    <div class="icons">
+      <div class="ic"><svg width="28" height="28" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span>scheduled delivery</span></div>
+      <div class="ic"><svg width="28" height="28" viewBox="0 0 24 24"><path d="M12 15a3 3 0 0 0 3-3V6a3 3 0 0 0-6 0v6a3 3 0 0 0 3 3Z"/><path d="M19 11a7 7 0 0 1-14 0M12 18v3"/></svg><span>voice messages</span></div>
+      <div class="ic"><svg width="28" height="28" viewBox="0 0 24 24"><rect x="2" y="6" width="14" height="12" rx="2"/><path d="m16 11 6-3v8l-6-3z"/></svg><span>video messages</span></div>
+      <div class="ic"><svg width="28" height="28" viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3-8.6A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.3 1.8.6 2.6a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.5-1.1a2 2 0 0 1 2.1-.5c.8.3 1.7.5 2.6.6a2 2 0 0 1 1.7 2Z"/></svg><span>verified caller ID</span></div>
+      <div class="ic"><svg width="28" height="28" viewBox="0 0 24 24"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg><span>privacy &amp; security</span></div>
+      <div class="ic"><svg width="28" height="28" viewBox="0 0 24 24"><path d="M12 12c-2-3-5-3-6.5-1a3.5 3.5 0 0 0 0 5c1.5 2 4.5 2 6.5-1 2-3 5-3 6.5-1a3.5 3.5 0 0 1 0 5c-1.5 2-4.5 2-6.5-1Z"/></svg><span>enduring connection</span></div>
     </div>
   </div>
 </section>
 
-<hr style="border:0;border-top:1px solid var(--slate-100)">
-
-<!-- 8.0 COMPONENTS -->
+<!-- 7.0 COMPONENTS -->
 <section id="components">
-  <div class="container">
-    <div class="section-head">
-      <span class="section-number">8.0</span>
-      <span class="eyebrow">Building blocks</span>
-      <h2 class="section-title">Component library.</h2>
-      <hr class="section-rule">
-      <p class="section-lede">The same components across mobile and web. Below are the ones the prototype leans on most.</p>
+  <div class="wrap">
+    <div class="shead">
+      <span class="snum">7.0</span><span class="eyebrow">Building blocks</span>
+      <h2 class="stitle">Components.</h2><hr class="rule">
+      <p class="slede">Shared across the landing page and the application so both feel like one product.</p>
     </div>
 
-    <span class="eyebrow">Buttons</span>
-    <div class="comp-frame" style="margin:var(--s-3) 0 var(--s-12)">
-      <button class="btn btn-primary">Record a message</button>
-      <button class="btn btn-frost">Schedule delivery</button>
-      <button class="btn btn-ghost">Add a person</button>
-      <button class="btn btn-quiet">Cancel</button>
+    <span class="eyebrow">Buttons · 52–56px tall, pill radius, Inter 700</span>
+    <div class="card demo-row" style="margin:var(--space-3) 0 var(--space-12);">
+      <button class="btn btn-primary">JOIN THE WAITLIST</button>
+      <button class="btn btn-grad">RECORD A MESSAGE</button>
+      <button class="btn btn-fire">NOTIFY MY DEPARTMENT</button>
+      <button class="btn btn-secondary">BE THE FIRST TO KNOW</button>
     </div>
 
-    <div class="grid-2" style="margin-bottom:var(--s-12)">
+    <div class="grid2">
       <div>
-        <span class="eyebrow">Forms &amp; inputs</span>
-        <div class="comp-frame light" style="margin-top:var(--s-3);display:block">
-          <div class="input-demo">
-            <label for="d1">Who is this message for?</label>
-            <input id="d1" type="text" placeholder="e.g. Emma, my daughter">
-            <div class="hint">Labels are always visible, never placeholder-only.</div>
+        <span class="eyebrow">Form controls · 50px min, labels always visible</span>
+        <div class="card" style="margin-top:var(--space-3);">
+          <div class="fld" style="margin-bottom:var(--space-6);">
+            <label for="d1">Email address</label>
+            <input id="d1" type="email" placeholder="you@email.com">
           </div>
-          <div class="input-demo" style="margin-top:var(--s-5)">
-            <label for="d2">Deliver on</label>
-            <input id="d2" type="text" placeholder="June 14, 2041" value="June 14, 2041">
+          <div class="fld">
+            <label for="d2">Number of department members</label>
+            <select id="d2">
+              <option>Select a range</option><option>1–9</option><option>10–24</option><option>25–49</option>
+              <option>50–99</option><option>100–249</option><option>250–499</option><option>500+</option>
+            </select>
           </div>
         </div>
       </div>
       <div>
         <span class="eyebrow">Card</span>
-        <div class="card" style="margin-top:var(--s-3)">
-          <span class="kicker">Scheduled · Voice</span>
-          <h3>For Emma, on her wedding day</h3>
-          <p>Delivers June 14, 2041 · 9:00 AM. A one-minute message, recorded in your voice.</p>
-          <div style="display:flex;gap:8px;margin-top:var(--s-4)">
-            <button class="btn btn-quiet" style="padding:8px 16px;font-size:var(--fs-sm)">Play</button>
-            <button class="btn btn-quiet" style="padding:8px 16px;font-size:var(--fs-sm)">Re-record</button>
-          </div>
-        </div>
-      </div>
-    </div>
+        <div class="codeblock" style="margin-top:var(--space-3);">.card{
+  background: var(--gradient-card);
+  border: 1px solid rgba(91,214,255,.14);
+  border-radius: 24px;
+  box-shadow: 0 24px 70px rgba(0,0,0,.28);
+  backdrop-filter: blur(14px);
+}</div>
+        <span class="eyebrow" style="margin-top:var(--space-6);">Layout tokens</span>
+        <div class="codeblock">--radius-control: 14px;
+--radius-card: 24px;
+--radius-pill: 999px;
+--content-max: 1200px;
+--copy-max: 66ch;
 
-    <span class="eyebrow">Signature screens</span>
-    <p style="color:var(--slate-500);margin:0 0 var(--s-6);max-width:60ch">Two screens define the product: the recording moment and the incoming call. These set the emotional tone for the entire prototype.</p>
-    <div class="phones">
-      <div class="phone">
-        <div class="phone-screen scr-record">
-          <div class="notch"></div>
-          <div style="margin-top:20px">
-            <div class="lab">RECORDING FOR</div>
-            <div class="recipient">Emma · Wedding day</div>
-          </div>
-          <div class="rec-ring"><div class="rec-dot"></div></div>
-          <div class="rec-time">00:42</div>
-          <div class="wave">
-            <span style="height:12px"></span><span style="height:28px"></span><span style="height:20px"></span>
-            <span style="height:36px"></span><span style="height:16px"></span><span style="height:30px"></span>
-            <span style="height:22px"></span><span style="height:38px"></span><span style="height:14px"></span>
-            <span style="height:26px"></span><span style="height:18px"></span>
-          </div>
-          <div style="margin-top:auto;color:var(--slate-400);font-size:var(--fs-caption)">Tap to stop</div>
-        </div>
+Breakpoints:
+  mobile   < 768px
+  tablet   768–1023px
+  desktop  1024–1279px
+  wide     ≥ 1280px</div>
       </div>
-      <div class="phone">
-        <div class="phone-screen ios-call">
-          <div class="notch"></div>
-          <div class="ios-statusbar">
-            <span class="t">9:41</span>
-            <span class="icons">
-              <svg width="17" height="11" viewBox="0 0 17 11" fill="#fff"><rect x="0" y="7" width="3" height="4" rx="1"/><rect x="4.5" y="5" width="3" height="6" rx="1"/><rect x="9" y="2.5" width="3" height="8.5" rx="1"/><rect x="13.5" y="0" width="3" height="11" rx="1"/></svg>
-              <svg width="16" height="11" viewBox="0 0 16 12" fill="#fff"><path d="M8 2.4c2.3 0 4.4.9 6 2.4l1.2-1.3A11 11 0 0 0 8 .5 11 11 0 0 0 .8 3.5L2 4.8A8.6 8.6 0 0 1 8 2.4Zm0 3.6c1.3 0 2.6.5 3.5 1.4l1.2-1.3A7.3 7.3 0 0 0 8 3.9a7.3 7.3 0 0 0-4.7 2.2l1.2 1.3C5.4 6.5 6.7 6 8 6Zm0 3.5 2-2.1a3.4 3.4 0 0 0-4 0l2 2.1Z"/></svg>
-              <svg width="26" height="12" viewBox="0 0 26 12"><rect x="0.5" y="0.5" width="21" height="11" rx="3" fill="none" stroke="#fff" stroke-opacity="0.5"/><rect x="2" y="2" width="16" height="8" rx="1.5" fill="#fff"/><rect x="23" y="4" width="2" height="4" rx="1" fill="#fff" fill-opacity="0.6"/></svg>
-            </span>
-          </div>
-          <div class="ios-caller">
-            <div class="name">Dad</div>
-            <div class="sub">Forever Here Audio</div>
-          </div>
-          <div class="ios-actions">
-            <div class="ios-secondary">
-              <div class="ios-mini">
-                <div class="b"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.7"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 1.5M9 2h6M12 5V2"/></svg></div>
-                <label>Remind Me</label>
-              </div>
-              <div class="ios-mini">
-                <div class="b"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.7"><path d="M21 11.5a8.5 8.5 0 0 1-12.3 7.6L3 21l1.9-5.7A8.5 8.5 0 1 1 21 11.5Z"/></svg></div>
-                <label>Message</label>
-              </div>
-            </div>
-            <div class="ios-primary">
-              <div class="ios-pcol">
-                <div class="ios-round decline"><svg viewBox="0 0 24 24" fill="#fff" style="transform:rotate(135deg)"><path d="M20 15.5c-1.2 0-2.4-.2-3.5-.6-.35-.12-.75-.03-1.02.24l-2.2 2.2c-2.83-1.44-5.15-3.76-6.59-6.59l2.2-2.2c.27-.27.36-.67.24-1.02C8.7 6.4 8.5 5.2 8.5 4c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1 0 9.39 7.61 17 17 17 .55 0 1-.45 1-1v-3.5c0-.55-.45-1-1-1z"/></svg></div>
-                <label>Decline</label>
-              </div>
-              <div class="ios-pcol">
-                <div class="ios-round accept"><svg viewBox="0 0 24 24" fill="#fff"><path d="M20 15.5c-1.2 0-2.4-.2-3.5-.6-.35-.12-.75-.03-1.02.24l-2.2 2.2c-2.83-1.44-5.15-3.76-6.59-6.59l2.2-2.2c.27-.27.36-.67.24-1.02C8.7 6.4 8.5 5.2 8.5 4c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1 0 9.39 7.61 17 17 17 .55 0 1-.45 1-1v-3.5c0-.55-.45-1-1-1z"/></svg></div>
-                <label>Accept</label>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <p class="hint" style="margin-top:var(--s-6)">The call screen is a faithful recreation of the iOS incoming-call UI (system font, Remind Me / Message, Decline / Accept). The only brand cue is the "Forever Here Audio" line, exactly where iOS shows the calling app's name, so the moment feels like a real call, not an ad.</p>
-  </div>
-</section>
-
-<hr style="border:0;border-top:1px solid var(--slate-100)">
-
-<!-- 9.0 ICONS -->
-<section id="icons">
-  <div class="container">
-    <div class="section-head">
-      <span class="section-number">9.0</span>
-      <span class="eyebrow">Iconography</span>
-      <h2 class="section-title">Icons. Quiet and consistent.</h2>
-      <hr class="section-rule">
-      <p class="section-lede">A single line style: 1.75px stroke, round caps, no fills. Icons support the words, never shout over them.</p>
-    </div>
-    <div class="icon-grid">
-      <div class="icon-cell"><svg width="30" height="30" fill="none" stroke-width="1.75" viewBox="0 0 24 24"><path d="M12 15a3 3 0 0 0 3-3V6a3 3 0 0 0-6 0v6a3 3 0 0 0 3 3Z"/><path d="M19 11a7 7 0 0 1-14 0M12 18v3"/></svg><span>record</span></div>
-      <div class="icon-cell"><svg width="30" height="30" fill="none" stroke-width="1.75" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span>schedule</span></div>
-      <div class="icon-cell"><svg width="30" height="30" fill="none" stroke-width="1.75" viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3-8.6A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.3 1.8.6 2.6a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.5-1.1a2 2 0 0 1 2.1-.5c.8.3 1.7.5 2.6.6a2 2 0 0 1 1.7 2Z"/></svg><span>call</span></div>
-      <div class="icon-cell"><svg width="30" height="30" fill="none" stroke-width="1.75" viewBox="0 0 24 24"><path d="M20 7 9 18l-5-5"/></svg><span>delivered</span></div>
-      <div class="icon-cell"><svg width="30" height="30" fill="none" stroke-width="1.75" viewBox="0 0 24 24"><path d="M12 21s-7-4.5-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 11c0 5.5-7 10-7 10Z"/></svg><span>legacy</span></div>
-      <div class="icon-cell"><svg width="30" height="30" fill="none" stroke-width="1.75" viewBox="0 0 24 24"><path d="M12 3l8 4v5c0 4.5-3.2 7.8-8 9-4.8-1.2-8-4.5-8-9V7l8-4Z"/></svg><span>guardian</span></div>
     </div>
   </div>
 </section>
 
-<hr style="border:0;border-top:1px solid var(--slate-100)">
-
-<!-- 10.0 PHOTOGRAPHY -->
-<section id="imagery">
-  <div class="container">
-    <div class="section-head">
-      <span class="section-number">10.0</span>
-      <span class="eyebrow">Imagery</span>
-      <h2 class="section-title">Photography &amp; illustration. Real, tender, unstaged.</h2>
-      <hr class="section-rule">
-      <p class="section-lede">Faces and hands in genuine moments. Warm light. Fire and ice appear as light and atmosphere, not literal flames and ice cubes.</p>
+<!-- 8.0 VOICE -->
+<section id="voice">
+  <div class="wrap">
+    <div class="shead">
+      <span class="snum">8.0</span><span class="eyebrow">Voice &amp; approved copy</span>
+      <h2 class="stitle">How Forever Here sounds.</h2><hr class="rule">
+      <p class="slede">Warm, plainspoken, reverent. Read every line aloud as if speaking to someone who just lost a parent. If it sounds cold, cute, or salesy in that room, rewrite it.</p>
     </div>
-    <div class="grid-2">
-      <div class="photo-do"><span class="photo-tag do">Do</span>A parent and child, real light, a phone in hand at a real moment</div>
-      <div class="photo-avoid"><span class="photo-tag no">Avoid</span>Stocky, staged smiles, literal grim-reaper or graveyard clichés, cold tech imagery</div>
+    <div class="grid2">
+      <div class="card">
+        <span class="eyebrow">Approved brand lines</span>
+        <p style="font-family:var(--font-display);font-size:var(--text-h3);margin-bottom:14px;">They'll hear you. <span style="color:var(--electric-600);">Forever.</span></p>
+        <p style="color:var(--gray-300);font-size:var(--text-small);margin-bottom:20px;">Hero headline</p>
+        <p style="font-family:var(--font-sans);font-size:.72rem;letter-spacing:.34em;color:var(--ice-400);font-weight:700;">SAY HELLO FOREVER</p>
+        <p style="color:var(--gray-300);font-size:var(--text-small);margin:8px 0 20px;">Tagline, sits under the wordmark</p>
+        <p style="font-family:var(--font-display);font-size:1.3rem;">Stay connected forever.</p>
+        <p style="color:var(--gray-300);font-size:var(--text-small);margin:8px 0 20px;">Brand promise</p>
+        <p style="font-family:var(--font-display);font-size:1.3rem;">LOVE NEVER LEAVES. <span style="color:var(--electric-600);">NEITHER WILL YOU.</span></p>
+        <p style="color:var(--gray-300);font-size:var(--text-small);margin-top:8px;">Closing line, footer</p>
+      </div>
+      <div class="card">
+        <span class="eyebrow">Section headings in use</span>
+        <p style="font-family:var(--font-display);font-size:1.2rem;margin-bottom:6px;">FOR EVERYONE WHO WANTS TO LEAVE A MESSAGE THAT LASTS.</p>
+        <p style="color:var(--gray-300);font-size:var(--text-small);margin-bottom:20px;">Audience section</p>
+        <p style="font-family:var(--font-display);font-size:1.2rem;margin-bottom:6px;">BE THE FIRST TO KNOW WHEN WE LAUNCH.</p>
+        <p style="color:var(--gray-300);font-size:var(--text-small);margin-bottom:20px;">Signup section</p>
+        <span class="eyebrow" style="margin-top:var(--space-6);">Words we avoid</span>
+        <p style="color:var(--gray-300);font-size:var(--text-small);">death · deceased · from beyond · spooky · disruptive · AI-powered · users · ping. And never "end-to-end encrypted" unless it is technically accurate.</p>
+      </div>
     </div>
-    <div class="grid-3" style="margin-top:var(--s-6)">
-      <div class="card"><span class="kicker">Light</span><p>Golden-hour warmth against cool shadow. The fire/ice duality lives in the lighting, subtly.</p></div>
-      <div class="card"><span class="kicker">Subjects</span><p>First responders with family, weddings, graduations, grandparents on the phone. Dignity always.</p></div>
-      <div class="card"><span class="kicker">Restraint</span><p>Grief is implied, never exploited. No tears-on-cue, no fear imagery, no coffins.</p></div>
-    </div>
-    <p class="hint" style="margin-top:var(--s-4)">Rob's concept art (the fire/ice heart-cloud splash and the campaign imagery) sets the target mood. Final licensed or original photography drops into these slots.</p>
   </div>
 </section>
 
-<hr style="border:0;border-top:1px solid var(--slate-100)">
-
-<!-- 11.0 MOTION -->
+<!-- 9.0 MOTION -->
 <section id="motion">
-  <div class="container">
-    <div class="section-head">
-      <span class="section-number">11.0</span>
-      <span class="eyebrow">Motion</span>
-      <h2 class="section-title">Motion. Gentle and intentional.</h2>
-      <hr class="section-rule">
-      <p class="section-lede">Movement should feel like a breath, not a bounce. Ease out, never spring. The incoming call is the one moment allowed a little drama.</p>
+  <div class="wrap">
+    <div class="shead">
+      <span class="snum">9.0</span><span class="eyebrow">Motion</span>
+      <h2 class="stitle">Movement should feel like a breath.</h2><hr class="rule">
     </div>
-    <div class="grid-3">
-      <div class="card"><span class="kicker">Fast · 160ms</span><p>Taps, toggles, button presses.</p><div class="motion-demo"><div class="motion-fill run"></div></div></div>
-      <div class="card"><span class="kicker">Base · 260ms</span><p>Screen transitions, sheets, cards.</p><div class="motion-demo"><div class="motion-fill run"></div></div></div>
-      <div class="card"><span class="kicker">Slow · 460ms</span><p>The call arriving, the message revealing.</p><div class="motion-demo"><div class="motion-fill run"></div></div></div>
-    </div>
-    <p class="hint" style="margin-top:var(--s-4)">Respect <code>prefers-reduced-motion</code>. When set, transitions cap at 80ms or turn off. Nothing critical relies on motion.</p>
-  </div>
-</section>
-
-<hr style="border:0;border-top:1px solid var(--slate-100)">
-
-<!-- 12.0 VOICE IN PRACTICE -->
-<section id="practice">
-  <div class="container">
-    <div class="section-head">
-      <span class="section-number">12.0</span>
-      <span class="eyebrow">Worked examples</span>
-      <h2 class="section-title">Voice in practice.</h2>
-      <hr class="section-rule">
-      <p class="section-lede">The same warmth, across every place words appear.</p>
-    </div>
-    <div class="example">
-      <div class="ctx">Delivery notification · the recipient's phone</div>
-      <div class="quote">"You have a message from Dad. It was recorded for today."</div>
-    </div>
-    <div class="example">
-      <div class="ctx">Record screen · microcopy</div>
-      <div class="quote">"Take your time. You can listen back and re-record as many times as you need."</div>
-    </div>
-    <div class="example">
-      <div class="ctx">Empty state · no messages yet</div>
-      <div class="quote">"Nothing scheduled yet. When you're ready, record the first thing you'd want them to hear."</div>
-    </div>
-    <div class="example">
-      <div class="ctx">Marketing headline · first responders</div>
-      <div class="quote">"If the worst happens, your voice still shows up."</div>
+    <div class="grid3">
+      <div class="card"><h3 style="font-size:1.2rem;margin-bottom:8px;">Ambient only</h3><p style="color:var(--gray-300);font-size:var(--text-small);">Logo glow may gently breathe over 5–8 seconds. Hero background may use a very small scale or parallax shift.</p></div>
+      <div class="card"><h3 style="font-size:1.2rem;margin-bottom:8px;">Entrances</h3><p style="color:var(--gray-300);font-size:var(--text-small);">The phone enters with a short fade and slight vertical movement. Nothing bounces or springs.</p></div>
+      <div class="card"><h3 style="font-size:1.2rem;margin-bottom:8px;">Never urgent</h3><p style="color:var(--gray-300);font-size:var(--text-small);">Avoid ringing animations that feel alarming. Respect <code>prefers-reduced-motion</code>. Never hide essential content behind animation.</p></div>
     </div>
   </div>
 </section>
 
-<!-- 13.0 ACCESSIBILITY -->
-<section id="access" class="on-night">
-  <div class="container">
-    <div class="section-head">
-      <span class="section-number" style="color:var(--frost-400)">13.0</span>
-      <span class="eyebrow on-dark">A baseline, not a checkbox</span>
-      <h2 class="section-title">Accessibility.</h2>
-      <hr class="section-rule">
-      <p class="section-lede">Our audiences include the grieving, the elderly, and people in hard moments. Clarity is compassion. Target WCAG 2.2 AA at minimum.</p>
+<!-- 10.0 ACCESSIBILITY -->
+<section id="access">
+  <div class="wrap">
+    <div class="shead">
+      <span class="snum">10.0</span><span class="eyebrow">A baseline, not a checkbox</span>
+      <h2 class="stitle">Accessibility.</h2><hr class="rule">
+      <p class="slede">Our audiences include the grieving and the elderly. Clarity is compassion. Target WCAG 2.2 AA.</p>
     </div>
-    <div class="acc-item"><span class="acc-check">✓</span><div><h4>Color contrast</h4><p>4.5:1 for body, 3:1 for large text. Use only the verified pairings in Section 5.0. Never signal state with color alone.</p></div></div>
-    <div class="acc-item"><span class="acc-check">✓</span><div><h4>Touch targets</h4><p>44 × 44px minimum on mobile. The record and call buttons are large and forgiving by design.</p></div></div>
-    <div class="acc-item"><span class="acc-check">✓</span><div><h4>Reading level</h4><p>Plain language, short sentences. Someone reading through tears should understand it on the first pass.</p></div></div>
-    <div class="acc-item"><span class="acc-check">✓</span><div><h4>Forms</h4><p>Visible labels, marked required fields, inline errors announced via aria-live, never placeholder-only.</p></div></div>
-    <div class="acc-item"><span class="acc-check">✓</span><div><h4>Reduced motion</h4><p>Honor prefers-reduced-motion. No autoplay of the call animation when it is set.</p></div></div>
-    <div class="acc-item"><span class="acc-check">✓</span><div><h4>Captions</h4><p>Every delivered voice message offers a text transcript, for accessibility and for keepsake.</p></div></div>
+    <ul class="checklist" style="padding-left:20px;line-height:1.8;">
+      <li>4.5:1 contrast for body text, 3:1 for large text.</li>
+      <li>Never use color alone to distinguish fire vs. ice states or form errors.</li>
+      <li>Every field has a persistent visible label and an associated error message. Placeholders are not labels.</li>
+      <li>All CTAs and dropdowns operable by keyboard, with visible focus styles (2–3px outline, not glow alone).</li>
+      <li>Captions and transcripts for every voice and video example.</li>
+      <li>Tap targets at least 44 × 44px.</li>
+      <li>Semantic landmarks: <code>header</code>, <code>nav</code>, <code>main</code>, <code>section</code>, <code>footer</code>.</li>
+      <li>Errors use a dedicated accessible red, never Fire Orange alone.</li>
+    </ul>
   </div>
 </section>
 
-<!-- FOOTER -->
-<footer class="footer">
-  <div class="container">
-    <div class="footer-grid">
-      <div>
-        <div class="footer-brand">FOREVER<span>·</span>HERE</div>
-        <p style="max-width:36ch">Voice messages, recorded today and delivered as a phone call on the day they matter most. A mobile and web application.</p>
+<!-- 11.0 CLAIMS -->
+<section id="claims">
+  <div class="wrap">
+    <div class="shead">
+      <span class="snum">11.0</span><span class="eyebrow">Before launch</span>
+      <h2 class="stitle">Product claims requiring review.<span class="status need">Legal</span></h2><hr class="rule">
+      <p class="slede">These five claims appear in the marketing and must be confirmed by technical and legal review before they ship.</p>
+    </div>
+    <div class="grid2">
+      <div class="card"><h3 style="font-size:1.15rem;margin-bottom:8px;">"Delivered from your actual phone number"</h3><p style="color:var(--gray-300);font-size:var(--text-small);">Verify caller ID, carrier, verification, consent, and regional compliance. If the implementation uses a proxy or branded number, the copy must be revised.</p></div>
+      <div class="card"><h3 style="font-size:1.15rem;margin-bottom:8px;">"Private. Secure. Encrypted."</h3><p style="color:var(--gray-300);font-size:var(--text-small);">State whether data is encrypted in transit, at rest, or end to end. Do not claim end-to-end unless technically accurate.</p></div>
+      <div class="card"><h3 style="font-size:1.15rem;margin-bottom:8px;">Delivery after death</h3><p style="color:var(--gray-300);font-size:var(--text-small);">Define identity verification, account stewardship, cancellation rights, authorized contacts, delivery triggers, and data retention.</p></div>
+      <div class="card"><h3 style="font-size:1.15rem;margin-bottom:8px;">Emotional transparency</h3><p style="color:var(--gray-300);font-size:var(--text-small);">The interface must make clear the recipient is hearing a previously recorded message, not a live call.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 12.0 OPEN ITEMS -->
+<section id="open">
+  <div class="wrap">
+    <div class="shead">
+      <span class="snum">12.0</span><span class="eyebrow">Still open</span>
+      <h2 class="stitle">What this guide cannot answer yet.</h2><hr class="rule">
+      <p class="slede">Everything below needs a source file or a decision. Until then, the build uses documented recreations.</p>
+    </div>
+    <div class="grid2">
+      <div class="card">
+        <span class="eyebrow">Needs source files</span>
+        <ul style="color:var(--gray-300);font-size:var(--text-small);padding-left:20px;line-height:1.9;margin:0;">
+          <li>Fire-and-ice infinity logo as vector</li>
+          <li>Sunset/lake hero photograph, full resolution and licensed</li>
+          <li>Parent-and-child silhouette</li>
+          <li>The four audience photographs</li>
+          <li>Feature icons</li>
+        </ul>
+        <p style="color:var(--gray-500);font-size:var(--text-small);margin-top:var(--space-4);">None of these exist as separate files today; they are embedded in a flattened mockup. Do not crop them out of the full-page image for production.</p>
       </div>
-      <div>
-        <h5>Brand guide</h5>
-        <a href="#foundation">Foundation</a>
-        <a href="#palette">Color</a>
-        <a href="#type">Typography</a>
-        <a href="#components">Components</a>
-      </div>
-      <div>
-        <h5>Document</h5>
-        <a href="#top">Edition One · v1 working draft</a>
-        <a href="#top">Brand identity by Raborn Media</a>
-        <a href="#top">Logo &amp; imagery in development</a>
+      <div class="card">
+        <span class="eyebrow">Needs a decision</span>
+        <ul style="color:var(--gray-300);font-size:var(--text-small);padding-left:20px;line-height:1.9;margin:0;">
+          <li>Final hero headline and supporting paragraph</li>
+          <li>Department member-count ranges</li>
+          <li>Exact phone-call screen copy</li>
+          <li>Whether the domain returns to the visible footer</li>
+          <li>Verified social account URLs</li>
+          <li>Privacy, terms, consent, encryption, and caller-ID language</li>
+          <li>Whether AI-generated imagery is cleared for commercial use</li>
+        </ul>
       </div>
     </div>
-    <div class="footer-base">
-      <span>Forever Here · Brand Guide · v1 · 2026</span>
-      <span>Placeholders: logo, hero art, licensed fonts</span>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p class="fclose">LOVE NEVER LEAVES. <span class="b">NEITHER WILL YOU.</span></p>
+    <p style="text-align:center;color:var(--gray-300);margin-top:var(--space-4);">Forever Here ensures your voice and your presence live on, forever.</p>
+    <div style="text-align:center;margin-top:var(--space-12);">
+      <svg width="120" height="60" viewBox="0 0 200 100" class="logo-glow" style="margin:0 auto;" aria-hidden="true">
+        <g fill="none" stroke-linecap="round" stroke-width="13">
+          <path d="M100 50 C 84 18, 40 16, 24 50 C 40 84, 84 82, 100 50 Z" stroke="url(#fhFire)"/>
+          <path d="M100 50 C 116 18, 160 16, 176 50 C 160 84, 116 82, 100 50 Z" stroke="url(#fhIce)"/>
+        </g>
+      </svg>
+      <div style="font-family:var(--font-display);font-weight:600;letter-spacing:.26em;margin-top:10px;">FOREVER HERE</div>
+    </div>
+    <div class="fbase">
+      <span>Forever Here · Brand Guide · Version 2 · 2026</span>
+      <span>Built from Brand Development Handoff v1.0 · Brand identity by Raborn Media</span>
     </div>
   </div>
 </footer>

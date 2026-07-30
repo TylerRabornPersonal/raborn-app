@@ -4,208 +4,222 @@
 <meta charset="UTF-8" />
 <meta name="robots" content="noindex, nofollow, noarchive, nosnippet" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Forever Here: Be there for life's biggest moments. Forever.</title>
-<meta name="description" content="Record a message in your own voice today. Forever Here delivers it as a phone call on the day it matters most: a birthday, a wedding, or someday when you can't be there yourself." />
-
-<!-- Open Graph / social sharing -->
+<title>Forever Here — Messages That Arrive When They Matter Most</title>
+<meta name="description" content="Record private voice and video messages and schedule them for future delivery. Join the Forever Here launch list." />
 <meta property="og:type" content="website" />
-<meta property="og:title" content="Forever Here: Your voice, delivered when it matters most" />
-<meta property="og:description" content="Record a message today. We deliver it as a phone call on the exact day it means the most, even years from now." />
-<meta property="og:image" content="og-image.png" />
-<meta property="og:url" content="https://foreverhere.com" />
-<meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content="Forever Here: Be there for life's biggest moments. Forever." />
-<meta name="twitter:description" content="Record a message today. We deliver it as a phone call on the day it matters most." />
-<meta name="twitter:image" content="og-image.png" />
-
+<meta property="og:title" content="Forever Here — They'll hear you. Forever." />
+<meta property="og:description" content="Record private voice and video messages and schedule them for future delivery. Join the Forever Here launch list." />
+<meta property="og:url" content="https://ForeverHereCall.com" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..600&family=Mulish:ital,wght@0,300..800;1,300..600&family=Michroma&family=Great+Vibes&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,600;1,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 <!--
-  ════════════════════════════════════════════════════════════════════
-  SUPABASE SETUP  (do this once, then paste the two values below)
-  ────────────────────────────────────────────────────────────────────
-  1. Create a free project at supabase.com
-  2. In the SQL editor, run the SQL in  forever-here-supabase-setup.sql
-  3. Settings → API → copy the Project URL and the anon public key
-  4. Paste them into SUPABASE_URL and SUPABASE_ANON_KEY in the script below
-  Until you do, the page runs in DEMO MODE: forms "work" (success message +
-  saved to the browser) so you can preview and share the design safely.
-  ════════════════════════════════════════════════════════════════════
+  ══════════════════════════════════════════════════════════════
+  SUPABASE SETUP (optional) — paste values in the script at the bottom.
+  Run forever-here-supabase-setup.sql in your Supabase SQL editor first.
+  Until configured, forms run in PREVIEW MODE (success message, saved locally).
+  ══════════════════════════════════════════════════════════════
 -->
-
 <style>
-  :root {
-    --night-900:#0A0E16; --night-800:#10151F; --night-700:#171E2B; --night-600:#212A3A; --night-500:#2E3A4E;
-    --frost-700:#175A8F; --frost-600:#2277B4; --frost-500:#3D97D6; --frost-400:#6FB4E4; --frost-300:#A3D0EE; --frost-100:#E8F3FB;
-    --ember-700:#B83A12; --ember-600:#E14E1B; --ember-500:#FF6A2B; --ember-400:#FF8C55; --ember-200:#FFD2BB; --ember-100:#FFE9DE;
-    --plum-800:#3A1029;
-    --linen:#F6F2EC; --bone:#EDE7DD; --sand:#DED6C8;
-    --ink:#11131A; --slate-700:#353B47; --slate-500:#5C6470; --slate-400:#7C8492; --slate-300:#A6ADB8; --slate-200:#C9CED6; --slate-100:#E9ECF0; --white:#fff;
-    --answer:#34C759; --error:#D4483B;
-    --grad-fireice:linear-gradient(135deg,#3D97D6 0%,#6FB4E4 32%,#FF8C55 68%,#FF6A2B 100%);
-    --grad-ember:linear-gradient(160deg,#FF6A2B,#B83A12);
-    --font-display:'Fraunces',Georgia,serif; --font-body:'Mulish',system-ui,sans-serif;
-    --font-wordmark:'Michroma',sans-serif; --font-script:'Great Vibes',cursive;
-    --r-md:8px; --r-lg:14px; --r-xl:20px; --r-pill:999px;
-    --shadow-lg:0 20px 50px rgba(10,14,22,0.28);
-    --ease:cubic-bezier(0.22,1,0.36,1);
+  :root{
+    --ink-950:#02050B; --midnight-900:#071323; --deep-800:#0D1C33; --divider-650:#23334D;
+    --ice-400:#5BD6FF; --electric-600:#178BFF; --fire-500:#FF681F; --ember-400:#FFB45B;
+    --gold-350:#E6BA71; --cloud:#F7FAFF; --gray-300:#AEB9C9; --gray-500:#7E8A9E;
+    --gradient-fire-ice:linear-gradient(110deg,#FF681F 0%,#FFB45B 34%,#F7FAFF 50%,#5BD6FF 66%,#178BFF 100%);
+    --gradient-card:linear-gradient(145deg,rgba(13,28,51,.92),rgba(7,19,35,.78));
+    --font-display:"Cormorant Garamond",Georgia,"Times New Roman",serif;
+    --font-sans:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    --radius-control:14px; --radius-card:24px; --radius-pill:999px;
+    --content-max:1200px;
+    --ease:cubic-bezier(.22,1,.36,1);
   }
   *,*::before,*::after{box-sizing:border-box;}
   html{scroll-behavior:smooth;}
-  body{margin:0;font-family:var(--font-body);color:var(--ink);background:var(--linen);line-height:1.6;-webkit-font-smoothing:antialiased;}
-  h1,h2,h3{font-family:var(--font-display);font-weight:430;line-height:1.08;letter-spacing:-0.015em;margin:0;color:var(--night-800);}
+  body{margin:0;background:var(--ink-950);color:var(--cloud);font-family:var(--font-sans);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+  h1,h2,h3{font-family:var(--font-display);margin:0;line-height:1.02;font-weight:700;}
   p{margin:0;}
-  a{color:inherit;}
   img{max-width:100%;display:block;}
-  .wrap{max-width:1120px;margin:0 auto;padding:0 24px;}
-  .narrow{max-width:720px;margin:0 auto;padding:0 24px;}
+  .wrap{max-width:var(--content-max);margin:0 auto;padding:0 28px;}
+  .logo-glow{filter:drop-shadow(0 0 14px rgba(91,214,255,.28)) drop-shadow(0 0 18px rgba(255,104,31,.24));}
 
-  /* NAV */
-  .nav{position:absolute;top:0;left:0;right:0;z-index:20;}
-  .nav-in{display:flex;align-items:center;justify-content:space-between;height:72px;}
-  .brand{font-family:var(--font-wordmark);font-size:0.9rem;letter-spacing:0.22em;color:var(--linen);text-decoration:none;}
-  .brand span{color:var(--ember-500);}
-  .nav .cta{font-weight:700;font-size:0.9rem;color:var(--linen);text-decoration:none;border:1.5px solid rgba(255,255,255,0.4);padding:9px 18px;border-radius:var(--r-pill);transition:all .2s var(--ease);}
-  .nav .cta:hover{background:var(--ember-500);border-color:var(--ember-500);}
+  /* ── HERO ─────────────────────────────────────────── */
+  .hero{position:relative;overflow:hidden;padding:56px 0 68px;background:var(--ink-950);}
+  .hero-bg{position:absolute;inset:0;z-index:0;display:block;}
+  .hero-bg img{width:100%;height:100%;object-fit:cover;object-position:center 42%;}
+  .hero-overlay{position:absolute;inset:0;z-index:1;
+    background:linear-gradient(90deg,rgba(2,5,11,.96) 0%,rgba(7,19,35,.82) 46%,rgba(7,19,35,.38) 100%),
+               linear-gradient(0deg,rgba(2,5,11,.88) 0%,rgba(2,5,11,.12) 58%);}
+  .hero-grid{position:relative;z-index:2;display:grid;grid-template-columns:1.02fr .98fr;gap:40px;align-items:center;}
 
-  /* HERO */
-  .hero{position:relative;overflow:hidden;color:var(--linen);
-    background:radial-gradient(1000px 620px at 74% -8%,rgba(255,106,43,0.24),transparent 60%),
-               radial-gradient(1000px 720px at 6% 112%,rgba(61,151,214,0.22),transparent 60%),
-               var(--night-900);
-    padding:150px 0 110px;text-align:center;}
-  .hero-cloud{position:absolute;inset:0;opacity:.9;pointer-events:none;}
-  .eyebrow{font-family:var(--font-body);text-transform:uppercase;letter-spacing:0.2em;font-size:0.8rem;font-weight:700;color:var(--ember-400);}
-  .hero .wordmark{font-family:var(--font-wordmark);font-size:clamp(2rem,7vw,4.2rem);letter-spacing:0.14em;margin:18px 0 0;text-shadow:0 0 40px rgba(255,106,43,0.28);position:relative;z-index:2;}
-  .hero .script{font-family:var(--font-script);font-size:clamp(1.8rem,5vw,3rem);color:var(--ember-400);position:relative;z-index:2;margin-top:6px;}
-  .hero .tagline{font-family:var(--font-display);font-style:italic;font-weight:300;font-size:clamp(1.2rem,2.6vw,1.7rem);color:var(--slate-200);margin:22px 0 0;position:relative;z-index:2;}
-  .hero .sub{max-width:44ch;margin:22px auto 0;color:var(--slate-300);font-size:1.05rem;position:relative;z-index:2;}
-  .hero-actions{margin-top:34px;display:flex;gap:14px;justify-content:center;flex-wrap:wrap;position:relative;z-index:2;}
-  .btn{font-family:var(--font-body);font-weight:700;font-size:1rem;border:0;border-radius:var(--r-pill);padding:15px 30px;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:transform .16s var(--ease),box-shadow .24s;}
-  .btn:hover{transform:translateY(-2px);}
-  .btn-primary{background:var(--grad-ember);color:#fff;box-shadow:0 10px 26px rgba(225,78,27,0.4);}
-  .btn-ghost{background:transparent;color:var(--linen);border:1.5px solid rgba(255,255,255,0.45);}
-  .btn-ghost:hover{background:rgba(255,255,255,0.08);}
-  /* Hero two-column + phone mockup */
-  .hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:44px;align-items:center;text-align:left;}
-  .hero-copy .script{margin-top:16px;}
-  .hero-copy .sub{margin:22px 0 0;}
-  .hero-copy .hero-actions{justify-content:flex-start;}
-  .hero-phone{display:flex;justify-content:center;position:relative;z-index:2;}
-  .mini-phone{width:236px;height:470px;background:linear-gradient(180deg,#23232a,#101014 60%,#0b0b0e);border-radius:36px;border:1px solid rgba(255,255,255,.14);box-shadow:0 34px 64px rgba(0,0,0,.55);position:relative;padding:16px;display:flex;flex-direction:column;font-family:-apple-system,'SF Pro Display','Helvetica Neue',Arial,sans-serif;color:#fff;overflow:hidden;}
-  .mini-phone::before{content:"";position:absolute;inset:0;background:radial-gradient(200px 150px at 50% 12%,rgba(255,106,43,.18),transparent 60%),radial-gradient(220px 200px at 50% 108%,rgba(61,151,214,.18),transparent 60%);pointer-events:none;}
-  .mp-notch{position:absolute;top:13px;left:50%;transform:translateX(-50%);width:78px;height:22px;background:#000;border-radius:999px;z-index:3;}
-  .mp-status{display:flex;justify-content:space-between;align-items:center;font-size:12px;font-weight:600;padding:7px 8px 0;position:relative;z-index:2;}
-  .mp-caller{text-align:center;margin-top:56px;position:relative;z-index:2;}
-  .mp-name{font-size:28px;font-weight:500;line-height:1.1;}
-  .mp-sub{font-size:13px;color:rgba(255,255,255,.72);margin-top:6px;}
-  .mp-actions{margin-top:auto;display:flex;justify-content:space-around;position:relative;z-index:2;padding-bottom:8px;}
-  .mp-col{text-align:center;}
-  .mp-btn{width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 7px;}
-  .mp-btn.decline{background:#FF3B30;}
-  .mp-btn.accept{background:#34C759;animation:jig 1.5s ease-in-out infinite;}
-  .mp-col label{font-size:11px;color:rgba(255,255,255,.85);}
-  @keyframes jig{0%,100%{transform:translateY(0);}50%{transform:translateY(-5px);}}
-  @media(max-width:860px){
-    .hero-grid{grid-template-columns:1fr;text-align:center;}
-    .hero-copy .hero-actions{justify-content:center;}
-    .hero-copy .sub{margin-left:auto;margin-right:auto;}
-    .hero-phone{margin-top:28px;}
-  }
+  .brandblock{margin-bottom:26px;}
+  .wordmark{font-family:var(--font-display);font-weight:600;font-size:clamp(2.1rem,4.4vw,3.35rem);letter-spacing:.15em;line-height:1;margin-top:6px;}
+  .sayhello{font-family:var(--font-sans);font-size:.72rem;letter-spacing:.42em;color:var(--ice-400);font-weight:600;margin-top:9px;}
 
-  /* STORY */
-  .story{padding:110px 0;background:var(--linen);text-align:center;}
-  .story h2{font-size:clamp(1.9rem,4vw,3rem);max-width:18ch;margin:0 auto;}
-  .story .lead{font-size:1.25rem;color:var(--slate-500);max-width:52ch;margin:26px auto 0;font-weight:300;}
-  .story .accent{color:var(--ember-600);font-style:italic;font-family:var(--font-display);}
+  .headline{font-size:clamp(2.2rem,4.6vw,3.5rem);letter-spacing:-.005em;}
+  .headline .blue{color:var(--electric-600);display:block;}
+  .hero-copy{color:var(--cloud);font-size:.98rem;line-height:1.62;margin-top:22px;max-width:44ch;opacity:.94;}
+  .hero-copy + .hero-copy{margin-top:16px;}
 
-  /* HOW */
-  .how{padding:100px 0;background:var(--white);}
-  .section-head{text-align:center;margin-bottom:60px;}
-  .section-head h2{font-size:clamp(1.8rem,3.5vw,2.6rem);}
-  .section-head p{color:var(--slate-500);margin-top:12px;font-size:1.1rem;}
-  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;}
-  @media(max-width:820px){.steps{grid-template-columns:1fr;}}
-  .step{text-align:center;padding:14px;}
-  .step .num{width:64px;height:64px;border-radius:50%;margin:0 auto 20px;display:flex;align-items:center;justify-content:center;background:var(--night-900);color:var(--ember-400);font-family:var(--font-display);font-size:1.6rem;position:relative;}
-  .step .num::after{content:"";position:absolute;inset:-4px;border-radius:50%;border:1.5px solid var(--frost-300);opacity:.5;}
-  .step h3{font-size:1.4rem;margin-bottom:10px;}
-  .step p{color:var(--slate-500);font-size:0.98rem;}
+  .features{display:grid;grid-template-columns:repeat(4,1fr);margin:30px 0 28px;}
+  .feat{padding:0 12px;text-align:center;border-left:1px solid rgba(35,51,77,.85);}
+  .feat:first-child{border-left:0;padding-left:0;}
+  .feat svg{margin:0 auto 11px;display:block;}
+  .feat .lab{font-size:.63rem;font-weight:600;letter-spacing:.09em;line-height:1.45;text-transform:uppercase;color:var(--cloud);opacity:.92;}
 
-  /* AUDIENCE STRIP */
-  .aud{padding:70px 0;background:var(--bone);}
-  .aud-row{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;}
-  .aud-chip{background:var(--white);border:1px solid var(--sand);border-radius:var(--r-pill);padding:12px 22px;font-weight:600;color:var(--slate-700);font-size:0.98rem;}
+  .cta-row{display:flex;gap:14px;flex-wrap:wrap;}
+  .btn{font-family:var(--font-sans);font-weight:700;font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;border:0;border-radius:8px;height:52px;padding:0 30px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;text-decoration:none;transition:transform .16s var(--ease),box-shadow .24s;}
+  .btn:hover{transform:translateY(-1px);}
+  .btn-primary{background:linear-gradient(180deg,#2E9BFF,#1268D8);color:#fff;box-shadow:0 0 30px rgba(23,139,255,.34);}
+  .btn-secondary{background:rgba(7,19,35,.55);color:var(--ice-400);border:1px solid rgba(91,214,255,.45);}
+  .btn-fire{background:linear-gradient(180deg,#FF7A2E,#E4570F);color:#fff;box-shadow:0 0 26px rgba(255,104,31,.3);}
+
+  /* COMING SOON above the phone, larger */
+  .hero-right{position:relative;z-index:2;text-align:center;}
+  .coming{font-family:var(--font-sans);font-weight:700;font-size:clamp(1.3rem,2.5vw,2rem);letter-spacing:.42em;
+    color:#FF8A2E;text-indent:.42em;margin-bottom:10px;
+    text-shadow:0 0 18px rgba(255,104,31,.55), 0 0 44px rgba(255,138,46,.28);}
+  .coming-rule{position:relative;width:min(360px,76%);height:1px;margin:0 auto 26px;
+    background:linear-gradient(90deg,transparent 0%,rgba(255,104,31,.28) 18%,rgba(255,180,91,.85) 50%,rgba(255,104,31,.28) 82%,transparent 100%);}
+  /* lens flare bloom at the center of the rule */
+  .coming-rule::before{content:"";position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+    width:170px;height:14px;border-radius:50%;pointer-events:none;
+    background:radial-gradient(ellipse at center,rgba(255,214,150,.95) 0%,rgba(255,138,46,.55) 32%,rgba(255,104,31,.18) 58%,transparent 76%);
+    filter:blur(2px);}
+  .coming-rule::after{content:"";position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+    width:7px;height:7px;border-radius:50%;pointer-events:none;background:#FFE7C4;
+    box-shadow:0 0 10px 3px rgba(255,180,91,.85),0 0 22px 8px rgba(255,104,31,.45);}
+
+  /* PHONE */
+  .phone{width:270px;margin:0 auto;position:relative;border-radius:42px;padding:11px;
+    background:linear-gradient(160deg,#2b3038,#14171c 55%,#0b0d11);
+    box-shadow:0 34px 76px rgba(0,0,0,.66), 0 0 0 1px rgba(255,255,255,.10);}
+  .screen{position:relative;background:linear-gradient(180deg,#0a1119 0%,#050a12 60%,#02050B 100%);border-radius:33px;overflow:hidden;padding:14px 16px 22px;min-height:520px;display:flex;flex-direction:column;align-items:center;text-align:center;}
+  .notch{position:absolute;top:11px;left:50%;transform:translateX(-50%);width:86px;height:22px;background:#000;border-radius:var(--radius-pill);}
+  .sbar{width:100%;display:flex;justify-content:space-between;align-items:center;font-size:11px;font-weight:600;color:#fff;font-family:-apple-system,'SF Pro Text',sans-serif;padding:2px 4px 0;}
+  .caller{margin-top:34px;}
+  .caller .nm{font-family:var(--font-display);font-style:italic;font-weight:600;font-size:1.7rem;color:#fff;line-height:1.1;}
+  .caller .sub{font-size:.72rem;color:var(--gray-300);margin-top:2px;font-style:italic;font-family:var(--font-display);}
+  .phone-mark{margin:22px auto 0;}
+  .phone-quote{font-family:var(--font-display);font-style:italic;font-size:.95rem;color:var(--cloud);line-height:1.35;margin-top:16px;max-width:22ch;}
+  .quick{display:flex;justify-content:center;gap:64px;margin-top:auto;padding-top:24px;}
+  .quick .q{text-align:center;}
+  .quick .q svg{margin:0 auto 5px;display:block;}
+  .quick .q span{font-size:.6rem;color:var(--gray-300);}
+  .answer-row{display:flex;justify-content:center;gap:64px;margin-top:20px;}
+  .ar{text-align:center;}
+  .ar .circ{width:54px;height:54px;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 6px;}
+  .ar .circ.dec{background:#E8362A;}
+  .ar .circ.acc{background:#2ECC58;}
+  .ar span{font-size:.6rem;color:var(--gray-300);}
+
+  /* ── SECTION HEADINGS with rules ─────────────────── */
+  .sec{padding:66px 0;}
+  .sec-head{display:flex;align-items:center;gap:22px;margin-bottom:38px;}
+  .sec-head::before,.sec-head::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,transparent,rgba(91,214,255,.42),transparent);}
+  .sec-head h2{font-size:clamp(1.15rem,2.1vw,1.6rem);letter-spacing:.055em;text-align:center;white-space:nowrap;font-weight:600;}
+
+  /* AUDIENCE CARDS */
+  .aud-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;}
+  .aud{background:var(--gradient-card);border:1px solid rgba(91,214,255,.14);border-radius:16px;box-shadow:0 24px 70px rgba(0,0,0,.28);}
+  .aud .pic{height:196px;position:relative;}
+  /* clip the photo, not the badge */
+  .aud .pic picture{display:block;width:100%;height:100%;overflow:hidden;border-radius:16px 16px 0 0;}
+  .aud .pic img{display:block;width:100%;height:100%;object-fit:cover;}
+  .aud .pic::after{content:"";position:absolute;inset:0;border-radius:16px 16px 0 0;pointer-events:none;background:linear-gradient(0deg,rgba(2,5,11,.92) 0%,rgba(2,5,11,.15) 55%,rgba(2,5,11,.05) 100%);}
+  .aud .badge{z-index:3;position:absolute;left:50%;bottom:-23px;transform:translateX(-50%);width:46px;height:46px;border-radius:50%;background:var(--deep-800);border:1.5px solid rgba(91,214,255,.5);display:flex;align-items:center;justify-content:center;box-shadow:0 6px 18px rgba(2,5,11,.75);}
+  .aud .body{padding:42px 18px 24px;text-align:center;}
+  .aud h3{font-family:var(--font-sans);font-size:.82rem;font-weight:700;letter-spacing:.11em;text-transform:uppercase;margin-bottom:9px;}
+  .aud p{font-size:.8rem;color:var(--gray-300);line-height:1.6;}
 
   /* SIGNUP */
-  .signup{padding:110px 0;background:var(--night-900);color:var(--linen);position:relative;overflow:hidden;}
-  .signup::before{content:"";position:absolute;inset:0;background:radial-gradient(700px 400px at 50% -10%,rgba(255,106,43,0.16),transparent 60%);pointer-events:none;}
-  .signup .section-head h2{color:var(--linen);}
-  .signup .section-head p{color:var(--slate-300);}
-  .forms{display:grid;grid-template-columns:1fr 1fr;gap:24px;position:relative;z-index:2;}
-  @media(max-width:820px){.forms{grid-template-columns:1fr;}}
-  .fcard{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.12);border-radius:var(--r-xl);padding:34px;}
-  .fcard.dept{border-color:rgba(61,151,214,0.4);}
-  .fcard .tag{font-family:var(--font-body);font-size:0.75rem;text-transform:uppercase;letter-spacing:0.14em;font-weight:800;color:var(--ember-400);}
-  .fcard.dept .tag{color:var(--frost-400);}
-  .fcard h3{color:var(--linen);font-size:1.5rem;margin:10px 0 8px;}
-  .fcard .desc{color:var(--slate-300);font-size:0.95rem;margin-bottom:24px;}
-  .field{margin-bottom:16px;}
-  .field label{display:block;font-size:0.85rem;font-weight:700;color:var(--slate-200);margin-bottom:7px;}
-  .field input{width:100%;padding:13px 15px;border-radius:var(--r-md);border:1.5px solid rgba(255,255,255,0.18);background:rgba(255,255,255,0.06);color:var(--linen);font-family:var(--font-body);font-size:1rem;}
-  .field input::placeholder{color:var(--slate-400);}
-  .field input:focus{outline:2px solid var(--frost-500);outline-offset:1px;border-color:var(--frost-500);}
-  .fcard .btn{width:100%;justify-content:center;margin-top:8px;}
-  .fcard.dept .btn-primary{background:linear-gradient(160deg,#3D97D6,#175A8F);box-shadow:0 10px 26px rgba(34,119,180,0.35);}
-  .msg{margin-top:14px;font-size:0.9rem;padding:12px 14px;border-radius:var(--r-md);display:none;}
+  .signup-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px;}
+  .scard{background:var(--gradient-card);border-radius:var(--radius-card);padding:26px;box-shadow:0 24px 70px rgba(0,0,0,.28);}
+  .scard.ind{border:1px solid rgba(23,139,255,.42);}
+  .scard.dep{border:1px solid rgba(255,104,31,.42);}
+  .shead{display:flex;align-items:flex-start;gap:14px;margin-bottom:20px;}
+  .sico{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .ind .sico{background:rgba(23,139,255,.14);border:1px solid rgba(23,139,255,.5);}
+  .dep .sico{background:rgba(255,104,31,.14);border:1px solid rgba(255,104,31,.5);}
+  .shead h3{font-family:var(--font-sans);font-size:.92rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;}
+  .ind .shead h3{color:var(--electric-600);}
+  .dep .shead h3{color:var(--fire-500);}
+  .shead p{font-size:.8rem;color:var(--gray-300);margin-top:3px;}
+  .lbl{display:block;font-size:.68rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--gray-300);margin-bottom:6px;}
+  .inp{width:100%;min-height:50px;border-radius:var(--radius-control);background:rgba(2,5,11,.68);border:1px solid var(--divider-650);color:var(--cloud);padding:0 15px;font-family:var(--font-sans);font-size:.9rem;}
+  .inp::placeholder{color:var(--gray-500);}
+  .inp:focus{outline:none;border-color:var(--ice-400);box-shadow:0 0 0 3px rgba(91,214,255,.18);}
+  .fgroup{margin-bottom:13px;}
+  .frow{display:grid;grid-template-columns:1fr 1fr;gap:13px;}
+  .inline-form{display:flex;gap:0;}
+  .inline-form .inp{border-radius:var(--radius-control) 0 0 var(--radius-control);border-right:0;}
+  .inline-form .btn{border-radius:0 var(--radius-control) var(--radius-control) 0;height:50px;padding:0 22px;font-size:.72rem;}
+  .privacy{display:flex;align-items:center;gap:7px;margin-top:14px;font-size:.72rem;color:var(--gray-300);}
+  .privacy svg{flex-shrink:0;}
+  .msg{margin-top:12px;font-size:.8rem;padding:11px 13px;border-radius:10px;display:none;}
   .msg.show{display:block;}
-  .msg.ok{background:rgba(52,199,89,0.14);color:#8ef0ab;border:1px solid rgba(52,199,89,0.4);}
-  .msg.err{background:rgba(212,72,59,0.14);color:#ffb3ab;border:1px solid rgba(212,72,59,0.4);}
-  .demo-note{position:relative;z-index:2;text-align:center;margin-top:24px;font-size:0.82rem;color:var(--slate-400);}
-
-  /* SHARE */
-  .share{padding:70px 0;background:var(--linen);text-align:center;}
-  .share h3{font-size:1.5rem;margin-bottom:8px;}
-  .share p{color:var(--slate-500);margin-bottom:24px;}
-  .share-row{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;}
-  .share-btn{display:inline-flex;align-items:center;gap:8px;padding:11px 20px;border-radius:var(--r-pill);border:1.5px solid var(--sand);background:var(--white);font-weight:700;color:var(--slate-700);text-decoration:none;cursor:pointer;font-size:0.92rem;transition:all .2s var(--ease);}
-  .share-btn:hover{border-color:var(--ember-500);color:var(--ember-600);}
+  .msg.ok{background:rgba(46,204,88,.13);color:#8CE8A6;border:1px solid rgba(46,204,88,.4);}
+  .msg.err{background:rgba(232,54,42,.13);color:#FFB0A8;border:1px solid rgba(232,54,42,.4);}
+  .preview-note{text-align:center;font-size:.72rem;color:var(--gray-500);margin-top:20px;}
 
   /* FOOTER */
-  footer{background:var(--night-900);color:var(--slate-400);padding:56px 0 34px;text-align:center;}
-  .footer-brand{font-family:var(--font-wordmark);font-size:1rem;letter-spacing:0.2em;color:var(--linen);}
-  .footer-brand span{color:var(--ember-500);}
-  footer .tag{font-family:var(--font-script);font-size:1.6rem;color:var(--ember-400);margin:6px 0 18px;}
-  footer .fine{font-size:0.8rem;color:var(--slate-500);margin-top:20px;}
+  footer{padding:56px 0 34px;background:var(--midnight-900);border-top:1px solid rgba(35,51,77,.7);text-align:center;}
+  .fclose{font-family:var(--font-display);font-weight:700;font-size:clamp(1.25rem,2.4vw,1.85rem);letter-spacing:.03em;}
+  .fclose .b{color:var(--electric-600);}
+  .fsub{color:var(--gray-300);font-size:.86rem;margin-top:8px;}
+  .fdiv{height:1px;background:linear-gradient(90deg,transparent,rgba(91,214,255,.32),transparent);margin:30px auto;max-width:820px;}
+  .fwm{font-family:var(--font-display);font-weight:600;letter-spacing:.3em;font-size:.9rem;margin-top:8px;}
+  .fcopy{font-size:.72rem;color:var(--gray-500);margin-top:22px;}
+
+  /* RESPONSIVE */
+  @media(max-width:1000px){
+    .hero-grid{grid-template-columns:1fr;text-align:center;}
+    .hero-copy{margin-left:auto;margin-right:auto;}
+    .cta-row{justify-content:center;}
+    .brandblock svg{margin-left:auto;margin-right:auto;}
+    .aud-grid{grid-template-columns:repeat(2,1fr);}
+    .hero-overlay{background:linear-gradient(0deg,rgba(2,5,11,.94) 0%,rgba(2,5,11,.5) 70%),rgba(2,5,11,.72);}
+  }
+  @media(max-width:720px){
+    .aud-grid,.signup-grid,.frow{grid-template-columns:1fr;}
+    .features{grid-template-columns:repeat(2,1fr);gap:20px 0;}
+    .feat:nth-child(3){border-left:0;padding-left:0;}
+    .phone{width:min(78vw,270px);}
+    .sec-head::before,.sec-head::after{display:none;}
+    .sec-head h2{white-space:normal;}
+    .btn{width:100%;}
+    .inline-form .btn{width:auto;}
+  }
+  @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;}}
 </style>
 </head>
 <body>
 <style id="fh-gate-style">
   #fh-gate{position:fixed;inset:0;z-index:2147483647;display:flex;align-items:center;justify-content:center;
-    background:radial-gradient(700px 500px at 70% 8%,rgba(255,106,43,.18),transparent 60%),radial-gradient(700px 560px at 8% 112%,rgba(61,151,214,.18),transparent 60%),#0A0E16;
-    font-family:'Mulish',system-ui,-apple-system,sans-serif;color:#F6F2EC;}
+    background:radial-gradient(700px 500px at 70% 8%,rgba(255,104,31,.16),transparent 60%),radial-gradient(700px 560px at 8% 112%,rgba(23,139,255,.16),transparent 60%),#02050B;
+    font-family:'Inter',system-ui,-apple-system,sans-serif;color:#F7FAFF;}
   #fh-gate .box{width:min(360px,88vw);text-align:center;padding:0 20px;}
-  #fh-gate .wm{font-family:'Michroma',sans-serif;letter-spacing:.12em;font-size:1.05rem;color:#F6F2EC;}
-  #fh-gate h1{font-family:'Fraunces',Georgia,serif;font-weight:400;font-size:1.5rem;margin:18px 0 6px;color:#F6F2EC;letter-spacing:-.01em;}
-  #fh-gate p{color:#A6ADB8;font-size:.9rem;margin:0 0 22px;line-height:1.5;}
-  #fh-gate input{width:100%;padding:14px 16px;border-radius:999px;border:1.5px solid rgba(255,255,255,.2);background:rgba(255,255,255,.06);color:#fff;font-size:1rem;text-align:center;font-family:inherit;}
-  #fh-gate input:focus{outline:2px solid #3D97D6;border-color:#3D97D6;}
-  #fh-gate button{width:100%;margin-top:12px;padding:14px;border:0;border-radius:999px;font-weight:800;font-size:1rem;color:#fff;cursor:pointer;background:linear-gradient(160deg,#FF6A2B,#B83A12);}
-  #fh-gate .err{color:#ffb3ab;font-size:.85rem;margin-top:12px;min-height:1em;}
-  #fh-gate .nda{margin-top:22px;font-size:.72rem;color:#7C8492;letter-spacing:.02em;}
-  html.fh-locked,body.fh-locked{overflow:hidden !important;}
+  #fh-gate .wm{font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;letter-spacing:.22em;font-size:1.15rem;}
+  #fh-gate h1{font-family:'Cormorant Garamond',Georgia,serif;font-weight:700;font-size:1.6rem;margin:16px 0 6px;}
+  #fh-gate p{color:#AEB9C9;font-size:.88rem;margin:0 0 22px;line-height:1.55;}
+  #fh-gate input{width:100%;min-height:50px;border-radius:14px;border:1px solid #23334D;background:rgba(2,5,11,.68);color:#F7FAFF;font-size:1rem;text-align:center;font-family:inherit;padding:0 15px;}
+  #fh-gate input:focus{outline:none;border-color:#5BD6FF;box-shadow:0 0 0 3px rgba(91,214,255,.18);}
+  #fh-gate button{width:100%;margin-top:12px;height:52px;border:0;border-radius:14px;font-weight:700;font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;color:#fff;cursor:pointer;background:linear-gradient(180deg,#2E9BFF,#1268D8);}
+  #fh-gate .err{color:#FFB0A8;font-size:.84rem;margin-top:12px;min-height:1em;}
+  #fh-gate .nda{margin-top:22px;font-size:.72rem;color:#7E8A9E;}
+  html.fh-locked,body.fh-locked{overflow:hidden!important;}
 </style>
 <div id="fh-gate" role="dialog" aria-modal="true" aria-label="Password required">
   <div class="box">
-    <svg width="86" height="53" viewBox="0 0 150 92" aria-hidden="true" style="margin:0 auto 4px;display:block;">
+    <svg width="110" height="55" viewBox="0 0 200 100" aria-hidden="true" style="margin:0 auto 6px;display:block;filter:drop-shadow(0 0 14px rgba(91,214,255,.28)) drop-shadow(0 0 18px rgba(255,104,31,.24));">
       <defs>
-        <linearGradient id="fhgi" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#A3D0EE"/><stop offset="1" stop-color="#2277B4"/></linearGradient>
-        <linearGradient id="fhgf" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#B83A12"/><stop offset="1" stop-color="#FF8C55"/></linearGradient>
+        <linearGradient id="gFire" x1="0%" y1="50%" x2="100%" y2="50%"><stop offset="0%" stop-color="#FF681F"/><stop offset="55%" stop-color="#FFB45B"/><stop offset="100%" stop-color="#F7FAFF"/></linearGradient>
+        <linearGradient id="gIce" x1="0%" y1="50%" x2="100%" y2="50%"><stop offset="0%" stop-color="#F7FAFF"/><stop offset="45%" stop-color="#5BD6FF"/><stop offset="100%" stop-color="#178BFF"/></linearGradient>
       </defs>
-      <path d="M75 46 C 60 20, 22 22, 22 46 C 22 70, 60 72, 75 46 Z" stroke="url(#fhgi)" stroke-width="9" fill="none" stroke-linecap="round"/>
-      <path d="M75 46 C 90 72, 128 70, 128 46 C 128 22, 90 20, 75 46 Z" stroke="url(#fhgf)" stroke-width="9" fill="none" stroke-linecap="round"/>
+      <g fill="none" stroke-linecap="round" stroke-width="13">
+        <path d="M100 50 C 84 18, 40 16, 24 50 C 40 84, 84 82, 100 50 Z" stroke="url(#gFire)"/>
+        <path d="M100 50 C 116 18, 160 16, 176 50 C 160 84, 116 82, 100 50 Z" stroke="url(#gIce)"/>
+      </g>
     </svg>
     <div class="wm">FOREVER HERE</div>
     <h1>Private preview</h1>
@@ -225,8 +239,7 @@
   function unlock(){ if(gate&&gate.parentNode) gate.parentNode.removeChild(gate); document.documentElement.classList.remove('fh-locked'); document.body.classList.remove('fh-locked'); }
   try{ if(sessionStorage.getItem(KEY)==='1'){ unlock(); return; } }catch(e){}
   document.documentElement.classList.add('fh-locked'); document.body.classList.add('fh-locked');
-  var form=document.getElementById('fh-gate-form');
-  form.addEventListener('submit',function(e){
+  document.getElementById('fh-gate-form').addEventListener('submit',function(e){
     e.preventDefault();
     var v=(document.getElementById('fh-pw').value||'').trim().toLowerCase();
     if(v===PW){ try{ sessionStorage.setItem(KEY,'1'); }catch(e){} unlock(); }
@@ -236,49 +249,116 @@
 </script>
 
 
-<!-- NAV -->
-<nav class="nav">
-  <div class="wrap nav-in">
-    <a href="#top" class="brand">FOREVER<span>·</span>HERE</a>
-    <a href="#signup" class="cta">Get early access</a>
-  </div>
-</nav>
+<!-- ══════════ HERO ══════════ -->
+<header class="hero">
+  <picture class="hero-bg">
+    <source srcset="images/hero-lake.webp" type="image/webp">
+    <img src="images/hero-lake.jpg" alt="A parent and child silhouetted on a dock at sunset beside a phone displaying a scheduled call from a loved one.">
+  </picture>
+  <div class="hero-overlay"></div>
 
-<!-- HERO -->
-<header class="hero" id="top">
   <div class="wrap hero-grid">
-    <div class="hero-copy">
-      <span class="eyebrow">Coming soon</span>
-      <div class="script">Forever Here</div>
-      <p class="tagline">Be there for life's biggest moments. Forever.</p>
-      <p class="sub">Record a message in your own voice today. We deliver it as a phone call on the day it means the most: a birthday, a wedding, or someday when you can't be there yourself.</p>
-      <div class="hero-actions">
-        <a href="#signup" class="btn btn-primary">Get early access</a>
-        <a href="#how" class="btn btn-ghost">See how it works</a>
+    <!-- LEFT -->
+    <div>
+      <div class="brandblock">
+        <svg class="logo-glow" width="228" height="114" viewBox="0 0 200 100" aria-label="Forever Here fire-and-ice infinity symbol">
+          <defs>
+            <linearGradient id="fhFire" x1="0%" y1="50%" x2="100%" y2="50%">
+              <stop offset="0%" stop-color="#FF681F"/><stop offset="55%" stop-color="#FFB45B"/><stop offset="100%" stop-color="#F7FAFF"/>
+            </linearGradient>
+            <linearGradient id="fhIce" x1="0%" y1="50%" x2="100%" y2="50%">
+              <stop offset="0%" stop-color="#F7FAFF"/><stop offset="45%" stop-color="#5BD6FF"/><stop offset="100%" stop-color="#178BFF"/>
+            </linearGradient>
+          </defs>
+          <g fill="none" stroke-linecap="round" stroke-width="13">
+            <path d="M100 50 C 84 18, 40 16, 24 50 C 40 84, 84 82, 100 50 Z" stroke="url(#fhFire)"/>
+            <path d="M100 50 C 116 18, 160 16, 176 50 C 160 84, 116 82, 100 50 Z" stroke="url(#fhIce)"/>
+          </g>
+        </svg>
+        <div class="wordmark">FOREVER HERE</div>
+        <div class="sayhello">SAY HELLO FOREVER</div>
+      </div>
+
+      <h1 class="headline">THEY'LL HEAR YOU.<span class="blue">FOREVER.</span></h1>
+
+      <p class="hero-copy">Forever Here lets you leave personal voicemails and videos to be delivered at a date and time you choose, even after you're gone.</p>
+      <p class="hero-copy">The messages come from your actual phone number, so it feels like you're still with them.</p>
+
+      <div class="features">
+        <div class="feat">
+          <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#5BD6FF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3-8.6A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.3 1.8.6 2.6a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.5-1.1a2 2 0 0 1 2.1-.5c.8.3 1.7.5 2.6.6a2 2 0 0 1 1.7 2Z"/></svg>
+          <div class="lab">Delivered<br>from your<br>actual number</div>
+        </div>
+        <div class="feat">
+          <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#FF8B3D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>
+          <div class="lab">Choose date<br>&amp; time for<br>delivery</div>
+        </div>
+        <div class="feat">
+          <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#5BD6FF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15a3 3 0 0 0 3-3V6a3 3 0 0 0-6 0v6a3 3 0 0 0 3 3Z"/><path d="M19 11a7 7 0 0 1-14 0M12 18v3"/></svg>
+          <div class="lab">Voice &amp; video<br>messages</div>
+        </div>
+        <div class="feat">
+          <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#FF8B3D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 20 6v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6Z"/><circle cx="12" cy="11" r="1.6"/><path d="M12 12.6V15"/></svg>
+          <div class="lab">Private.<br>Secure.<br>Encrypted.</div>
+        </div>
+      </div>
+
+      <div class="cta-row">
+        <a href="#signup" class="btn btn-primary">Coming Soon</a>
+        <a href="#signup" class="btn btn-secondary">Be the first to know</a>
       </div>
     </div>
-    <div class="hero-phone">
-      <div class="mini-phone">
-        <div class="mp-notch"></div>
-        <div class="mp-status">
-          <span>9:41</span>
-          <span style="display:flex;gap:5px;align-items:center;">
-            <svg width="16" height="11" viewBox="0 0 17 11" fill="#fff"><rect x="0" y="7" width="3" height="4" rx="1"/><rect x="4.5" y="5" width="3" height="6" rx="1"/><rect x="9" y="2.5" width="3" height="8.5" rx="1"/><rect x="13.5" y="0" width="3" height="11" rx="1"/></svg>
-            <svg width="24" height="11" viewBox="0 0 26 12"><rect x="0.5" y="0.5" width="21" height="11" rx="3" fill="none" stroke="#fff" stroke-opacity="0.5"/><rect x="2" y="2" width="16" height="8" rx="1.5" fill="#fff"/><rect x="23" y="4" width="2" height="4" rx="1" fill="#fff" fill-opacity="0.6"/></svg>
-          </span>
-        </div>
-        <div class="mp-caller">
-          <div class="mp-name">Dad</div>
-          <div class="mp-sub">Forever Here Audio</div>
-        </div>
-        <div class="mp-actions">
-          <div class="mp-col">
-            <div class="mp-btn decline"><svg width="26" height="26" viewBox="0 0 24 24" fill="#fff" style="transform:rotate(135deg)"><path d="M20 15.5c-1.2 0-2.4-.2-3.5-.6-.35-.12-.75-.03-1.02.24l-2.2 2.2c-2.83-1.44-5.15-3.76-6.59-6.59l2.2-2.2c.27-.27.36-.67.24-1.02C8.7 6.4 8.5 5.2 8.5 4c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1 0 9.39 7.61 17 17 17 .55 0 1-.45 1-1v-3.5c0-.55-.45-1-1-1z"/></svg></div>
-            <label>Decline</label>
+
+    <!-- RIGHT: COMING SOON above the phone, larger -->
+    <div class="hero-right">
+      <div class="coming">COMING SOON</div>
+      <div class="coming-rule"></div>
+      <div class="phone">
+        <div class="screen">
+          <div class="notch"></div>
+          <div class="sbar">
+            <span>9:41</span>
+            <span style="display:flex;gap:5px;align-items:center;">
+              <svg width="15" height="10" viewBox="0 0 17 11" fill="#fff"><rect y="7" width="3" height="4" rx="1"/><rect x="4.5" y="5" width="3" height="6" rx="1"/><rect x="9" y="2.5" width="3" height="8.5" rx="1"/><rect x="13.5" width="3" height="11" rx="1"/></svg>
+              <svg width="14" height="10" viewBox="0 0 16 12" fill="#fff"><path d="M8 2.4c2.3 0 4.4.9 6 2.4l1.2-1.3A11 11 0 0 0 8 .5 11 11 0 0 0 .8 3.5L2 4.8A8.6 8.6 0 0 1 8 2.4Zm0 3.6c1.3 0 2.6.5 3.5 1.4l1.2-1.3A7.3 7.3 0 0 0 8 3.9a7.3 7.3 0 0 0-4.7 2.2l1.2 1.3C5.4 6.5 6.7 6 8 6Zm0 3.5 2-2.1a3.4 3.4 0 0 0-4 0l2 2.1Z"/></svg>
+              <svg width="22" height="10" viewBox="0 0 26 12"><rect x=".5" y=".5" width="21" height="11" rx="3" fill="none" stroke="#fff" stroke-opacity=".55"/><rect x="2" y="2" width="16" height="8" rx="1.5" fill="#fff"/><rect x="23" y="4" width="2" height="4" rx="1" fill="#fff" fill-opacity=".6"/></svg>
+            </span>
           </div>
-          <div class="mp-col">
-            <div class="mp-btn accept"><svg width="26" height="26" viewBox="0 0 24 24" fill="#fff"><path d="M20 15.5c-1.2 0-2.4-.2-3.5-.6-.35-.12-.75-.03-1.02.24l-2.2 2.2c-2.83-1.44-5.15-3.76-6.59-6.59l2.2-2.2c.27-.27.36-.67.24-1.02C8.7 6.4 8.5 5.2 8.5 4c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1 0 9.39 7.61 17 17 17 .55 0 1-.45 1-1v-3.5c0-.55-.45-1-1-1z"/></svg></div>
-            <label>Accept</label>
+
+          <div class="caller">
+            <div class="nm">Dad</div>
+            <div class="sub">mobile</div>
+          </div>
+
+          <svg class="phone-mark logo-glow" width="150" height="75" viewBox="0 0 200 100" aria-hidden="true">
+            <g fill="none" stroke-linecap="round" stroke-width="13">
+              <path d="M100 50 C 84 18, 40 16, 24 50 C 40 84, 84 82, 100 50 Z" stroke="url(#fhFire)"/>
+              <path d="M100 50 C 116 18, 160 16, 176 50 C 160 84, 116 82, 100 50 Z" stroke="url(#fhIce)"/>
+            </g>
+          </svg>
+
+          <p class="phone-quote">Forever doesn't have to be far away.</p>
+
+          <div class="quick">
+            <div class="q">
+              <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.6" stroke-linecap="round"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 1.5M9 2 5 5M15 2l4 3"/></svg>
+              <span>Remind Me</span>
+            </div>
+            <div class="q">
+              <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.5 8.5 0 0 1-12.3 7.6L3 21l1.9-5.7A8.5 8.5 0 1 1 21 11.5Z"/></svg>
+              <span>Message</span>
+            </div>
+          </div>
+
+          <div class="answer-row">
+            <div class="ar">
+              <div class="circ dec"><svg width="24" height="24" viewBox="0 0 24 24" fill="#fff" style="transform:rotate(135deg)"><path d="M20 15.5c-1.2 0-2.4-.2-3.5-.6-.35-.12-.75-.03-1.02.24l-2.2 2.2c-2.83-1.44-5.15-3.76-6.59-6.59l2.2-2.2c.27-.27.36-.67.24-1.02C8.7 6.4 8.5 5.2 8.5 4c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1 0 9.39 7.61 17 17 17 .55 0 1-.45 1-1v-3.5c0-.55-.45-1-1-1z"/></svg></div>
+              <span>Decline</span>
+            </div>
+            <div class="ar">
+              <div class="circ acc"><svg width="24" height="24" viewBox="0 0 24 24" fill="#fff"><path d="M20 15.5c-1.2 0-2.4-.2-3.5-.6-.35-.12-.75-.03-1.02.24l-2.2 2.2c-2.83-1.44-5.15-3.76-6.59-6.59l2.2-2.2c.27-.27.36-.67.24-1.02C8.7 6.4 8.5 5.2 8.5 4c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1 0 9.39 7.61 17 17 17 .55 0 1-.45 1-1v-3.5c0-.55-.45-1-1-1z"/></svg></div>
+              <span>Accept</span>
+            </div>
           </div>
         </div>
       </div>
@@ -286,184 +366,208 @@
   </div>
 </header>
 
-<!-- STORY -->
-<section class="story">
-  <div class="narrow">
-    <h2>Her phone lit up. It was <span class="accent">Dad's</span> name.</h2>
-    <p class="lead">He recorded it years ago, for the morning of her wedding. When the day came, her phone rang, and there he was, in his own voice, right on time. That is what Forever Here does. Not a file in a folder someone has to remember to open. A real call, on the day it matters.</p>
-  </div>
-</section>
-
-<!-- HOW -->
-<section class="how" id="how">
+<!-- ══════════ AUDIENCE ══════════ -->
+<section class="sec">
   <div class="wrap">
-    <div class="section-head">
-      <h2>How it works</h2>
-      <p>Three simple steps. The hard part, showing up, we handle.</p>
-    </div>
-    <div class="steps">
-      <div class="step">
-        <div class="num">1</div>
-        <h3>Record your voice</h3>
-        <p>Say what you'd want them to hear. Take your time, listen back, and re-record until it's right.</p>
-      </div>
-      <div class="step">
-        <div class="num">2</div>
-        <h3>Choose when it arrives</h3>
-        <p>Pick a date, a milestone like a wedding or 40th birthday, or set it to be delivered someday when you're gone.</p>
-      </div>
-      <div class="step">
-        <div class="num">3</div>
-        <h3>It arrives as a call</h3>
-        <p>On the day, their phone rings and your message plays. The moment feels like you reaching out, because it is.</p>
-      </div>
-    </div>
-  </div>
-</section>
+    <div class="sec-head"><h2>FOR EVERYONE WHO WANTS TO LEAVE A MESSAGE THAT LASTS.</h2></div>
+    <div class="aud-grid">
 
-<!-- AUDIENCE -->
-<section class="aud">
-  <div class="wrap">
-    <div class="aud-row">
-      <span class="aud-chip">First responders &amp; military</span>
-      <span class="aud-chip">Parents &amp; grandparents</span>
-      <span class="aud-chip">Hospice &amp; end-of-life</span>
-    </div>
-  </div>
-</section>
-
-<!-- SIGNUP -->
-<section class="signup" id="signup">
-  <div class="wrap">
-    <div class="section-head">
-      <h2>Be the first to know when we launch</h2>
-      <p>Two ways to get on board. Sign up for yourself, or bring Forever Here to your whole team.</p>
-    </div>
-    <div class="forms">
-
-      <!-- INDIVIDUAL -->
-      <form class="fcard indiv" id="form-individual" novalidate>
-        <span class="tag">For you</span>
-        <h3>Notify me when it's live</h3>
-        <p class="desc">Drop your email and we'll let you know the moment early access opens.</p>
-        <div class="field">
-          <label for="i-email">Email address</label>
-          <input id="i-email" name="email" type="email" placeholder="you@email.com" required autocomplete="email" />
+      <div class="aud">
+        <div class="pic">
+          <picture>
+            <source srcset="images/first-responders.webp" type="image/webp">
+            <img src="images/first-responders.jpg" alt="A firefighter walking toward a burning structure.">
+          </picture>
+          <div class="badge"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#FF8B3D" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 20 6v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6Z"/><path d="m9 12 2 2 4-4"/></svg></div>
         </div>
-        <button type="submit" class="btn btn-primary">Notify me</button>
+        <div class="body">
+          <h3>First Responders</h3>
+          <p>Stay connected with your family, no matter the risks you face.</p>
+        </div>
+      </div>
+
+      <div class="aud">
+        <div class="pic">
+          <picture>
+            <source srcset="images/military.webp" type="image/webp">
+            <img src="images/military.jpg" alt="A service member looking out over a mountain range.">
+          </picture>
+          <div class="badge"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#5BD6FF" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3 9 5-9 5-9-5 9-5Z"/><path d="m3 13 9 5 9-5"/></svg></div>
+        </div>
+        <div class="body">
+          <h3>Military</h3>
+          <p>Leave messages of love and guidance, wherever duty calls.</p>
+        </div>
+      </div>
+
+      <div class="aud">
+        <div class="pic">
+          <picture>
+            <source srcset="images/parents-loved-ones.webp" type="image/webp">
+            <img src="images/parents-loved-ones.jpg" alt="A father and daughter walking hand in hand along the beach at sunset.">
+          </picture>
+          <div class="badge"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#5BD6FF" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-4.5-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 11c0 5.5-7 10-7 10Z"/></svg></div>
+        </div>
+        <div class="body">
+          <h3>Parents &amp; Loved Ones</h3>
+          <p>Be there for birthdays, milestones, and life's most important moments.</p>
+        </div>
+      </div>
+
+      <div class="aud">
+        <div class="pic">
+          <picture>
+            <source srcset="images/legacy-messages.webp" type="image/webp">
+            <img src="images/legacy-messages.jpg" alt="A man sitting on a mountaintop at dusk looking out over the range.">
+          </picture>
+          <div class="badge"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#5BD6FF" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 12c-2-3-5-3-6.5-1a3.5 3.5 0 0 0 0 5c1.5 2 4.5 2 6.5-1 2-3 5-3 6.5-1a3.5 3.5 0 0 1 0 5c-1.5 2-4.5 2-6.5-1Z"/></svg></div>
+        </div>
+        <div class="body">
+          <h3>Legacy Messages</h3>
+          <p>Share your life story, wisdom, and love for generations to come.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ SIGNUP ══════════ -->
+<section class="sec" id="signup" style="padding-top:12px;">
+  <div class="wrap">
+    <div class="sec-head"><h2>BE THE FIRST TO KNOW WHEN WE LAUNCH.</h2></div>
+    <div class="signup-grid">
+
+      <!-- INDIVIDUALS -->
+      <form class="scard ind" id="form-individual" novalidate>
+        <div class="shead">
+          <div class="sico"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="#178BFF" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7"/></svg></div>
+          <div>
+            <h3>For Individuals</h3>
+            <p>Sign up to be notified when Forever Here is available.</p>
+          </div>
+        </div>
+        <label class="lbl" for="i-email">Email address</label>
+        <div class="inline-form">
+          <input class="inp" id="i-email" name="email" type="email" placeholder="Enter your email address" autocomplete="email" required>
+          <button type="submit" class="btn btn-primary">Notify Me</button>
+        </div>
+        <div class="privacy">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#5BD6FF" stroke-width="1.9" stroke-linecap="round"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>
+          <span>We respect your privacy. No spam, ever.</span>
+        </div>
         <div class="msg" id="i-msg" role="status" aria-live="polite"></div>
       </form>
 
-      <!-- DEPARTMENT -->
-      <form class="fcard dept" id="form-department" novalidate>
-        <span class="tag">For departments &amp; organizations</span>
-        <h3>Bring it to your team</h3>
-        <p class="desc">Tell us where to send launch details and how many people you'd cover.</p>
-        <div class="field">
-          <label for="d-org">Organization <span style="color:var(--slate-400);font-weight:500">(optional)</span></label>
-          <input id="d-org" name="organization" type="text" placeholder="e.g. Ascension Parish Sheriff's Office" autocomplete="organization" />
+      <!-- DEPARTMENTS -->
+      <form class="scard dep" id="form-department" novalidate>
+        <div class="shead">
+          <div class="sico"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="#FF681F" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V8l7-5 7 5v13"/><path d="M10 21v-6h4v6"/></svg></div>
+          <div>
+            <h3>For Departments</h3>
+            <p>Bring Forever Here to your team.</p>
+          </div>
         </div>
-        <div class="field">
-          <label for="d-email">Department email</label>
-          <input id="d-email" name="email" type="email" placeholder="contact@department.gov" required autocomplete="email" />
+        <div class="frow">
+          <div class="fgroup">
+            <label class="lbl" for="d-name">Your name</label>
+            <input class="inp" id="d-name" name="contactName" type="text" placeholder="Your Name" autocomplete="name" required>
+          </div>
+          <div class="fgroup">
+            <label class="lbl" for="d-email">Your email</label>
+            <input class="inp" id="d-email" name="email" type="email" placeholder="Your Email" autocomplete="email" required>
+          </div>
         </div>
-        <div class="field">
-          <label for="d-count">Number of employees</label>
-          <input id="d-count" name="employee_count" type="number" min="1" placeholder="e.g. 120" required />
+        <div class="fgroup">
+          <label class="lbl" for="d-dept">Department name</label>
+          <input class="inp" id="d-dept" name="departmentName" type="text" placeholder="Department Name" autocomplete="organization" required>
         </div>
-        <button type="submit" class="btn btn-primary">Request info</button>
+        <div class="fgroup">
+          <label class="lbl" for="d-size">Number of department members</label>
+          <select class="inp" id="d-size" name="departmentSize" required>
+            <option value="">How many members are in your department?</option>
+            <option value="1-9">1–9</option><option value="10-24">10–24</option><option value="25-49">25–49</option>
+            <option value="50-99">50–99</option><option value="100-249">100–249</option>
+            <option value="250-499">250–499</option><option value="500-plus">500+</option>
+          </select>
+        </div>
+        <button type="submit" class="btn btn-fire" style="width:100%;">Notify My Department</button>
+        <div class="privacy">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#FF8B3D" stroke-width="1.9" stroke-linecap="round"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>
+          <span>We respect your privacy. No spam, ever.</span>
+        </div>
         <div class="msg" id="d-msg" role="status" aria-live="polite"></div>
       </form>
 
     </div>
-    <p class="demo-note" id="demo-note"></p>
+    <p class="preview-note" id="preview-note"></p>
   </div>
 </section>
 
-<!-- FOOTER -->
+<!-- ══════════ FOOTER ══════════ -->
 <footer>
   <div class="wrap">
-    <div class="footer-brand">FOREVER<span>·</span>HERE</div>
-    <div class="tag">Be there. Forever.</div>
-    <div>Record today. Delivered when it matters most.</div>
-    <div class="fine">© 2026 Forever Here. All rights reserved. · Early-access preview.</div>
+    <p class="fclose">LOVE NEVER LEAVES. <span class="b">NEITHER WILL YOU.</span></p>
+    <p class="fsub">Forever Here ensures your voice and your presence live on, forever.</p>
+    <div class="fdiv"></div>
+    <svg width="118" height="59" viewBox="0 0 200 100" class="logo-glow" style="margin:0 auto;" aria-hidden="true">
+      <g fill="none" stroke-linecap="round" stroke-width="13">
+        <path d="M100 50 C 84 18, 40 16, 24 50 C 40 84, 84 82, 100 50 Z" stroke="url(#fhFire)"/>
+        <path d="M100 50 C 116 18, 160 16, 176 50 C 160 84, 116 82, 100 50 Z" stroke="url(#fhIce)"/>
+      </g>
+    </svg>
+    <div class="fwm">FOREVER HERE</div>
+    <p class="fcopy">© 2026 Forever Here. All rights reserved.</p>
   </div>
 </footer>
 
-<!-- Supabase client -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
 (function(){
-  // ─── PASTE YOUR SUPABASE VALUES HERE ────────────────────────────
-  const SUPABASE_URL = "";        // e.g. https://abcd1234.supabase.co
-  const SUPABASE_ANON_KEY = "";   // your anon public key
-  // ────────────────────────────────────────────────────────────────
+  // ─── PASTE SUPABASE VALUES HERE ──────────────────────────────
+  var SUPABASE_URL = "";
+  var SUPABASE_ANON_KEY = "";
+  // ─────────────────────────────────────────────────────────────
+  var configured = SUPABASE_URL && SUPABASE_ANON_KEY && window.supabase;
+  var db = configured ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY) : null;
 
-  const configured = SUPABASE_URL && SUPABASE_ANON_KEY && window.supabase;
-  let db = null;
-  if (configured) { db = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY); }
+  var note = document.getElementById('preview-note');
+  note.textContent = configured ? "" : "Preview mode: signups are saved to this browser only. Connect Supabase to collect them for real.";
 
-  const demoNote = document.getElementById('demo-note');
-  if (!configured) {
-    demoNote.textContent = "Preview mode: signups are saved to this browser only. Connect Supabase to collect them for real.";
-  } else {
-    demoNote.textContent = "";
+  function show(el, ok, text){ el.className = 'msg show ' + (ok?'ok':'err'); el.textContent = text; }
+  function saveLocal(k,p){ try{ var a=JSON.parse(localStorage.getItem(k)||'[]'); a.push(Object.assign({at:new Date().toISOString()},p)); localStorage.setItem(k,JSON.stringify(a)); }catch(e){} }
+  async function submit(table,payload){
+    if(configured){ var r = await db.from(table).insert(payload); if(r.error) throw r.error; }
+    else { saveLocal('fh_'+table,payload); await new Promise(function(r){setTimeout(r,400);}); }
   }
+  function validEmail(v){ return /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(v); }
 
-  function showMsg(el, ok, text){
-    el.className = 'msg show ' + (ok ? 'ok' : 'err');
-    el.textContent = text;
-  }
-  function saveLocal(key, payload){
-    try {
-      const arr = JSON.parse(localStorage.getItem(key) || '[]');
-      arr.push(Object.assign({at:new Date().toISOString()}, payload));
-      localStorage.setItem(key, JSON.stringify(arr));
-    } catch(e){}
-  }
-  async function submit(table, payload){
-    if (configured){
-      const { error } = await db.from(table).insert(payload);
-      if (error) throw error;
-    } else {
-      saveLocal('fh_'+table, payload);
-      await new Promise(r=>setTimeout(r,400)); // feel real
-    }
-  }
-
-  // Individual
   document.getElementById('form-individual').addEventListener('submit', async function(e){
     e.preventDefault();
-    const email = document.getElementById('i-email').value.trim();
-    const msg = document.getElementById('i-msg');
-    const btn = this.querySelector('button');
-    if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)){ showMsg(msg,false,"Please enter a valid email address."); return; }
-    btn.disabled = true; btn.textContent = "Saving…";
-    try {
-      await submit('individual_signups', { email: email });
-      showMsg(msg, true, "You're on the list. We'll be in touch the moment we launch.");
-      this.reset();
-    } catch(err){ showMsg(msg,false,"Something went wrong. Please try again."); }
-    btn.disabled = false; btn.textContent = "Notify me";
+    var email=document.getElementById('i-email').value.trim(), msg=document.getElementById('i-msg'), btn=this.querySelector('button');
+    if(!validEmail(email)){ show(msg,false,'Please enter a valid email address.'); return; }
+    btn.disabled=true; var t=btn.textContent; btn.textContent='Saving…';
+    try{ await submit('individual_signups',{email:email}); show(msg,true,"You're on the list. We'll let you know the moment we launch."); this.reset(); }
+    catch(err){ show(msg,false,'Something went wrong. Please try again.'); }
+    btn.disabled=false; btn.textContent=t;
   });
 
-  // Department
   document.getElementById('form-department').addEventListener('submit', async function(e){
     e.preventDefault();
-    const org = document.getElementById('d-org').value.trim();
-    const email = document.getElementById('d-email').value.trim();
-    const count = parseInt(document.getElementById('d-count').value, 10);
-    const msg = document.getElementById('d-msg');
-    const btn = this.querySelector('button');
-    if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)){ showMsg(msg,false,"Please enter a valid department email."); return; }
-    if (!count || count < 1){ showMsg(msg,false,"Please enter the number of employees."); return; }
-    btn.disabled = true; btn.textContent = "Saving…";
-    try {
-      await submit('department_signups', { organization: org || null, email: email, employee_count: count });
-      showMsg(msg, true, "Thank you. We'll send your department the launch details as soon as we're live.");
-      this.reset();
-    } catch(err){ showMsg(msg,false,"Something went wrong. Please try again."); }
-    btn.disabled = false; btn.textContent = "Request info";
+    var name=document.getElementById('d-name').value.trim(),
+        email=document.getElementById('d-email').value.trim(),
+        dept=document.getElementById('d-dept').value.trim(),
+        size=document.getElementById('d-size').value,
+        msg=document.getElementById('d-msg'), btn=this.querySelector('button[type="submit"]');
+    if(!name){ show(msg,false,'Please enter your name.'); return; }
+    if(!validEmail(email)){ show(msg,false,'Please enter a valid email address.'); return; }
+    if(!dept){ show(msg,false,'Please enter your department name.'); return; }
+    if(!size){ show(msg,false,'Please choose how many members are in your department.'); return; }
+    btn.disabled=true; var t=btn.textContent; btn.textContent='Saving…';
+    try{ await submit('department_signups',{contact_name:name,email:email,department_name:dept,department_size:size});
+         show(msg,true,"Thank you. We'll send your department the launch details as soon as we're live."); this.reset(); }
+    catch(err){ show(msg,false,'Something went wrong. Please try again.'); }
+    btn.disabled=false; btn.textContent=t;
   });
 })();
 </script>
