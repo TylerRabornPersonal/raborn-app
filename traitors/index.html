@@ -18,11 +18,15 @@
   --card-blue:#d7e0e4;
   --ink:#241e17;
   --ink-soft:#5a4c3c;
-  --string:#b01b2e;
-  --gold:#c9a227;
   --marker:#1d3557;
-  --stamp:#a8232f;
-  --dead:#8d8577;
+  --gold:#c9a227;
+
+  --alive:#2e6b34;
+  --banished:#b5601c;
+  --murdered:#b01b2e;
+
+  --yellow-lo:rgba(212,160,23,.38);
+  --yellow-hi:#d4a017;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{-webkit-text-size-adjust:100%}
@@ -30,7 +34,7 @@ body{
   background:var(--cork-d);
   font-family:'Special Elite',Courier,monospace;
   color:var(--ink);
-  padding:18px 12px 90px;
+  padding:18px 12px 92px;
   display:flex;flex-direction:column;align-items:center;
 }
 #board{
@@ -44,281 +48,219 @@ body{
     radial-gradient(circle at 22% 46%, rgba(0,0,0,.08) 0 2px, transparent 3px),
     linear-gradient(148deg,var(--cork-l) 0%,var(--cork) 42%,var(--cork-d) 100%);
   background-size:70px 70px,90px 90px,110px 110px,80px 80px,120px 120px,60px 60px,100% 100%;
-  border:14px solid #43301c;
-  border-radius:4px;
+  border:14px solid #43301c;border-radius:4px;
   box-shadow:inset 0 0 90px rgba(0,0,0,.5),0 22px 50px rgba(0,0,0,.55);
   padding:34px 26px 44px;
 }
 
-/* ---------- shared pieces ---------- */
 .pin{
   position:absolute;top:-9px;left:50%;margin-left:-9px;
   width:18px;height:18px;border-radius:50%;
-  background:radial-gradient(circle at 34% 30%,#ff8d8d 0 18%,var(--stamp) 45%,#5e1119 100%);
+  background:radial-gradient(circle at 34% 30%,#ff8d8d 0 18%,var(--murdered) 45%,#5e1119 100%);
   box-shadow:0 3px 5px rgba(0,0,0,.5);z-index:5;
 }
 .pin.gold{background:radial-gradient(circle at 34% 30%,#ffe9a8 0 18%,var(--gold) 45%,#6b5310 100%)}
+.pin.green{background:radial-gradient(circle at 34% 30%,#a8e6a0 0 18%,var(--alive) 45%,#173d1a 100%)}
 .tape{
   position:absolute;top:-13px;left:50%;margin-left:-46px;
   width:92px;height:26px;background:rgba(238,228,196,.55);
   border-left:1px dashed rgba(0,0,0,.18);border-right:1px dashed rgba(0,0,0,.18);
   box-shadow:0 2px 4px rgba(0,0,0,.28);z-index:5;
 }
-.card{
-  position:relative;background:var(--paper);
-  box-shadow:0 8px 18px rgba(0,0,0,.42);
-  border-radius:2px;padding:18px 20px 20px;
-}
-.card::after{
-  content:"";position:absolute;inset:0;border-radius:2px;pointer-events:none;
-  background:linear-gradient(115deg,rgba(255,255,255,.4),rgba(0,0,0,.06) 60%,rgba(0,0,0,.12));
-}
-.eyebrow{
-  font-family:'Permanent Marker',cursive;font-size:11px;letter-spacing:.22em;
-  color:var(--stamp);text-transform:uppercase;margin-bottom:6px;
-}
-.scrawl{font-family:'Permanent Marker',cursive;color:var(--paper);text-shadow:2px 3px 0 rgba(0,0,0,.45)}
+.card{position:relative;background:var(--paper);box-shadow:0 8px 18px rgba(0,0,0,.42);
+  border-radius:2px;padding:18px 20px 20px}
+.card::after{content:"";position:absolute;inset:0;border-radius:2px;pointer-events:none;
+  background:linear-gradient(115deg,rgba(255,255,255,.4),rgba(0,0,0,.06) 60%,rgba(0,0,0,.12))}
+.eyebrow{font-family:'Permanent Marker',cursive;font-size:11px;letter-spacing:.22em;
+  color:var(--murdered);text-transform:uppercase;margin-bottom:6px}
 .hand{font-family:'Caveat',cursive;font-weight:700;color:var(--marker)}
 
-/* ---------- header ---------- */
+/* header */
 header{position:relative;text-align:center;margin-bottom:34px;padding-top:6px}
-header h1{
-  font-family:'Permanent Marker',cursive;color:var(--paper);
-  font-size:clamp(28px,5.6vw,58px);line-height:1.02;letter-spacing:.01em;
-  text-shadow:3px 4px 0 rgba(0,0,0,.5);
-}
-header h1 span{color:var(--stamp);text-shadow:3px 4px 0 rgba(0,0,0,.4)}
-.subhead{
-  font-size:12px;letter-spacing:.3em;text-transform:uppercase;
-  color:#f0e4c8;opacity:.72;margin-top:10px;
-}
-.stampbox{
-  display:inline-block;margin-top:16px;padding:7px 18px;
-  border:3px double var(--stamp);color:var(--stamp);
+header h1{font-family:'Permanent Marker',cursive;color:var(--paper);
+  font-size:clamp(28px,5.6vw,58px);line-height:1.02;text-shadow:3px 4px 0 rgba(0,0,0,.5)}
+header h1 span{color:var(--murdered)}
+.subhead{font-size:12px;letter-spacing:.3em;text-transform:uppercase;color:#f0e4c8;opacity:.72;margin-top:10px}
+.stampbox{display:inline-block;margin-top:16px;padding:7px 18px;
+  border:3px double var(--banished);color:var(--banished);
   font-family:'Permanent Marker',cursive;font-size:13px;letter-spacing:.16em;
-  transform:rotate(-2.4deg);background:rgba(239,228,200,.9);
-  box-shadow:0 4px 10px rgba(0,0,0,.35);
-}
+  transform:rotate(-2.4deg);background:rgba(239,228,200,.92);box-shadow:0 4px 10px rgba(0,0,0,.35)}
 
-/* ---------- tally strip ---------- */
-.tally{
-  display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
-  gap:14px;margin-bottom:38px;
-}
+/* tally */
+.tally{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;margin-bottom:38px}
 .tally .card{padding:14px 12px;text-align:center}
-.tally .num{
-  font-family:'Permanent Marker',cursive;font-size:34px;line-height:1;
-  color:var(--marker);
-}
-.tally .num.red{color:var(--stamp)}
-.tally .lbl{
-  font-size:10px;letter-spacing:.16em;text-transform:uppercase;
-  margin-top:7px;color:var(--ink-soft);line-height:1.5;
-}
+.tally .num{font-family:'Permanent Marker',cursive;font-size:34px;line-height:1;color:var(--ink-soft)}
+.tally .num.green{color:var(--alive)}
+.tally .num.orange{color:var(--banished)}
+.tally .num.red{color:var(--murdered)}
+.tally .lbl{font-size:10px;letter-spacing:.16em;text-transform:uppercase;margin-top:7px;color:var(--ink-soft);line-height:1.5}
 
-/* ---------- section heads ---------- */
-.sec{margin-bottom:42px}
+/* sections */
+.sec{margin-bottom:44px}
 .sechead{margin-bottom:18px}
-.sechead h2{
-  font-family:'Permanent Marker',cursive;color:var(--paper);
-  font-size:clamp(20px,3.4vw,32px);text-shadow:2px 3px 0 rgba(0,0,0,.45);
-  line-height:1.15;
-}
-.sechead .kicker{
-  font-size:11px;letter-spacing:.24em;text-transform:uppercase;
-  color:var(--gold);margin-bottom:5px;
-}
+.sechead h2{font-family:'Permanent Marker',cursive;color:var(--paper);
+  font-size:clamp(20px,3.4vw,32px);text-shadow:2px 3px 0 rgba(0,0,0,.45);line-height:1.15}
+.sechead .kicker{font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);margin-bottom:5px}
 
-/* ---------- the chain ---------- */
-.chainwrap{position:relative;padding:26px 0 6px}
-.chainline{
-  position:absolute;left:2%;right:2%;top:76px;height:3px;
-  background:linear-gradient(90deg,transparent,var(--string) 5%,var(--string) 95%,transparent);
-  box-shadow:0 2px 3px rgba(0,0,0,.45);z-index:1;
-}
-.chain{
-  position:relative;z-index:2;display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(174px,1fr));gap:16px;
-}
-.chip{position:relative;background:var(--paper);padding:16px 12px 14px;text-align:center;
-  box-shadow:0 8px 16px rgba(0,0,0,.45);border-radius:2px}
-.chip:nth-child(odd){transform:rotate(-1.4deg)}
-.chip:nth-child(even){transform:rotate(1.6deg)}
-.chip .who{font-family:'Permanent Marker',cursive;font-size:17px;line-height:1.2}
-.chip .role{font-size:10px;letter-spacing:.1em;color:var(--ink-soft);margin-top:5px;text-transform:uppercase}
-.chip .fate{
-  margin-top:11px;font-family:'Permanent Marker',cursive;font-size:12px;
-  letter-spacing:.08em;padding:5px 6px;border:2px solid var(--stamp);color:var(--stamp);
-}
-.chip.gone .who{color:var(--stamp)}
-.chip.gone::before{
-  content:"";position:absolute;inset:8px;z-index:4;
-  background:
-    linear-gradient(to bottom right,transparent calc(50% - 2px),rgba(176,27,46,.85) calc(50% - 2px),rgba(176,27,46,.85) calc(50% + 2px),transparent calc(50% + 2px)),
-    linear-gradient(to bottom left,transparent calc(50% - 2px),rgba(176,27,46,.85) calc(50% - 2px),rgba(176,27,46,.85) calc(50% + 2px),transparent calc(50% + 2px));
-}
-.chip.alive .fate{border-color:var(--marker);color:var(--marker)}
-.chainnote{
-  margin-top:24px;background:var(--card-blue);position:relative;
-  padding:20px 22px;box-shadow:0 8px 18px rgba(0,0,0,.4);transform:rotate(-.5deg);
-}
-.chainnote p{font-size:14px;line-height:1.72}
-.chainnote .odds{
-  font-family:'Permanent Marker',cursive;color:var(--stamp);font-size:19px;
-  display:block;margin-top:12px;letter-spacing:.02em;
-}
-
-/* ---------- questions ---------- */
-.qgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px}
-.q{position:relative;background:var(--paper-2);padding:22px 22px 24px;
-  box-shadow:0 10px 20px rgba(0,0,0,.45);border-radius:2px}
-.q:nth-child(1){transform:rotate(-1deg)}
-.q:nth-child(2){transform:rotate(.8deg)}
-.q:nth-child(3){transform:rotate(-.6deg)}
-.qnum{
-  font-family:'Permanent Marker',cursive;font-size:44px;color:var(--stamp);
-  line-height:.85;opacity:.75;
-}
-.q h3{
-  font-family:'Permanent Marker',cursive;font-size:20px;line-height:1.22;
-  margin:8px 0 12px;color:var(--marker);
-}
+/* questions */
+.qgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(360px,1fr));gap:22px}
+.q{position:relative;background:var(--paper-2);padding:26px 26px 28px;box-shadow:0 10px 20px rgba(0,0,0,.45)}
+.q:nth-child(1){transform:rotate(-.9deg)}.q:nth-child(2){transform:rotate(.7deg)}
+.qnum{font-family:'Permanent Marker',cursive;font-size:48px;color:var(--murdered);line-height:.85;opacity:.75}
+.q h3{font-family:'Permanent Marker',cursive;font-size:30px;line-height:1.18;margin:12px 0 16px;color:var(--marker)}
 .q p{font-size:13.5px;line-height:1.75;margin-bottom:10px}
-.q .quote{
-  border-left:3px solid var(--stamp);padding:7px 0 7px 12px;
-  font-style:italic;color:var(--ink-soft);font-size:13px;line-height:1.65;margin:12px 0;
-}
-.q .ask{
-  margin-top:14px;padding:12px 14px;background:rgba(29,53,87,.09);
-  border:2px dashed var(--marker);
-}
-.q .ask span{
-  display:block;font-size:10px;letter-spacing:.2em;text-transform:uppercase;
-  color:var(--marker);margin-bottom:6px;
-}
-.q .ask p{font-family:'Caveat',cursive;font-weight:700;font-size:19px;line-height:1.4;
-  color:var(--marker);margin:0}
+.q .quote{border-left:3px solid var(--murdered);padding:7px 0 7px 12px;font-style:italic;
+  color:var(--ink-soft);font-size:13px;line-height:1.65;margin:12px 0}
+.q .ask{margin-top:18px;padding:18px 18px 20px;background:rgba(29,53,87,.1);border:3px dashed var(--marker)}
+.q .ask span{display:block;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--marker);margin-bottom:10px}
+.q .ask p{font-family:'Caveat',cursive;font-weight:700;font-size:30px;line-height:1.28;color:var(--marker);margin:0}
+.q .askfoot{margin-top:12px;font-size:12.5px;line-height:1.7;color:var(--ink-soft)}
 
-/* ---------- wordle ---------- */
-.wordle{display:grid;grid-template-columns:1fr;gap:18px}
-@media(min-width:820px){.wordle{grid-template-columns:1.05fr .95fr}}
-.tiles{display:flex;gap:7px;margin:14px 0 16px;flex-wrap:wrap}
-.tile{
-  width:38px;height:38px;display:flex;align-items:center;justify-content:center;
-  font-family:'Permanent Marker',cursive;font-size:18px;color:#fff;border-radius:2px;
-}
-.tile.g{background:#5a7d4a}.tile.y{background:#b8952f}.tile.k{background:#5c5346}
-.teamrow{
-  display:flex;justify-content:space-between;gap:10px;align-items:baseline;
-  padding:9px 0;border-bottom:1px dotted rgba(0,0,0,.22);font-size:13px;
-}
-.teamrow:last-child{border-bottom:none}
-.teamrow b{font-family:'Permanent Marker',cursive;font-size:14px;letter-spacing:.04em}
-.teamrow .pts{color:var(--ink-soft);white-space:nowrap;font-size:12px}
-.bodycount{background:var(--card-blue)}
-.bc-row{
-  display:flex;justify-content:space-between;gap:12px;padding:8px 0;
-  border-bottom:1px dotted rgba(0,0,0,.2);font-size:13px;
-}
-.bc-row:last-child{border-bottom:none}
-.bc-row .v{font-family:'Permanent Marker',cursive;font-size:12px;letter-spacing:.05em}
-.v.faith{color:var(--marker)}
-.v.dead{color:var(--stamp)}
-.v.alive{color:#3f6b34}
-.verdict{
-  margin-top:16px;padding:14px 16px;background:rgba(168,35,47,.1);
-  border:3px double var(--stamp);
-}
-.verdict p{font-family:'Caveat',cursive;font-weight:700;font-size:20px;line-height:1.42;color:var(--stamp)}
-
-/* ---------- suspects ---------- */
-.suspects{display:grid;grid-template-columns:repeat(auto-fit,minmax(232px,1fr));gap:18px}
-.sus{position:relative;background:var(--paper);padding:18px 16px 16px;
-  box-shadow:0 9px 18px rgba(0,0,0,.44);border-radius:2px}
-.sus:nth-child(3n+1){transform:rotate(-1.1deg)}
-.sus:nth-child(3n+2){transform:rotate(.9deg)}
-.sus:nth-child(3n){transform:rotate(-.4deg)}
-.sus .name{font-family:'Permanent Marker',cursive;font-size:19px;line-height:1.2}
-.sus .job{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-soft);margin-top:4px}
-.pct{display:flex;align-items:baseline;gap:8px;margin:13px 0 9px}
-.pct .n{font-family:'Permanent Marker',cursive;font-size:38px;line-height:.9}
-.pct .d{font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-soft)}
-.meter{height:11px;background:rgba(0,0,0,.16);border-radius:1px;overflow:hidden}
-.meter i{display:block;height:100%}
-.sus .why{font-size:12.5px;line-height:1.66;margin-top:12px}
-.sus .delta{
-  position:absolute;top:12px;right:14px;font-family:'Caveat',cursive;font-weight:700;
-  font-size:17px;
-}
-.up{color:var(--stamp)}.down{color:#3f6b34}.flat{color:var(--ink-soft)}
-.t-hot .n,.t-hot .delta{color:var(--stamp)} .t-hot .meter i{background:var(--stamp)}
-.t-warm .n{color:#b5651d} .t-warm .meter i{background:#b5651d}
-.t-cool .n{color:var(--marker)} .t-cool .meter i{background:var(--marker)}
-.t-cold .n{color:#3f6b34} .t-cold .meter i{background:#3f6b34}
-
-/* ---------- perfect scores ---------- */
+/* perfect scores */
 .perfgrid{display:grid;grid-template-columns:1fr;gap:18px}
 @media(min-width:820px){.perfgrid{grid-template-columns:1fr 1fr}}
-.perf{position:relative;background:var(--paper);padding:22px 22px 24px;
-  box-shadow:0 10px 20px rgba(0,0,0,.45)}
-.perf:nth-child(1){transform:rotate(-.9deg)}
-.perf:nth-child(2){transform:rotate(.7deg)}
-.perf h3{font-family:'Permanent Marker',cursive;font-size:19px;line-height:1.24;
-  color:var(--marker);margin:8px 0 12px}
+.perf{position:relative;background:var(--paper);padding:22px 22px 24px;box-shadow:0 10px 20px rgba(0,0,0,.45)}
+.perf:nth-child(1){transform:rotate(-.9deg)}.perf:nth-child(2){transform:rotate(.7deg)}
+.perf h3{font-family:'Permanent Marker',cursive;font-size:19px;line-height:1.24;color:var(--marker);margin:8px 0 12px}
 .perf p{font-size:13.5px;line-height:1.75;margin-bottom:10px}
 .mathbox{margin:14px 0;padding:14px 16px;background:rgba(29,53,87,.08);border:2px solid var(--marker)}
 .mathbox .line{display:flex;justify-content:space-between;gap:10px;font-size:12.5px;padding:4px 0}
 .mathbox .res{margin-top:9px;padding-top:9px;border-top:2px solid var(--marker);
-  font-family:'Permanent Marker',cursive;font-size:21px;color:var(--stamp);text-align:center}
-.roster{display:flex;flex-wrap:wrap;gap:6px;margin:12px 0 4px}
-.chipname{font-size:11px;letter-spacing:.05em;padding:5px 9px;background:rgba(0,0,0,.08);
-  border:1px solid rgba(0,0,0,.2);white-space:nowrap}
-.chipname.x{background:rgba(176,27,46,.14);border-color:var(--stamp);color:var(--stamp);
-  text-decoration:line-through}
-.chipname.both{background:var(--gold);border-color:#6b5310;color:#2b2205;font-weight:700}
-.crossbox{background:var(--card-blue);position:relative;padding:24px 22px;margin-top:20px;
-  box-shadow:0 10px 22px rgba(0,0,0,.45);transform:rotate(-.4deg)}
-.crossnames{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;margin:18px 0 6px}
-.crossname{background:var(--paper);padding:15px 10px;text-align:center;
-  box-shadow:0 6px 13px rgba(0,0,0,.35);border:3px solid var(--gold)}
-.crossname .cn{font-family:'Permanent Marker',cursive;font-size:19px;line-height:1.15}
-.crossname .cs{font-size:10px;letter-spacing:.1em;text-transform:uppercase;
-  color:var(--ink-soft);margin-top:6px}
-.crossname.out{border-color:var(--dead);opacity:.62}
-.flag{display:inline-block;margin-top:10px;padding:4px 8px;background:var(--gold);
-  color:#2b2205;font-size:10px;letter-spacing:.12em;text-transform:uppercase;font-weight:700}
+  font-family:'Permanent Marker',cursive;font-size:21px;color:var(--murdered);text-align:center}
 
-/* ---------- ledger ---------- */
+/* crossover table */
+.crosswrap{background:var(--paper);padding:22px 16px 24px;position:relative;
+  box-shadow:0 10px 22px rgba(0,0,0,.45);overflow-x:auto}
+table{width:100%;border-collapse:collapse}
+.xtable{min-width:600px}
+.xtable th{font-family:'Permanent Marker',cursive;font-size:11px;letter-spacing:.06em;
+  color:var(--marker);border-bottom:2px solid var(--marker);text-transform:uppercase;padding:10px 8px;text-align:center}
+.xtable th:first-child{text-align:left}
+.xtable td{padding:11px 8px;text-align:center;font-size:12.5px;border-bottom:1px dotted rgba(0,0,0,.22)}
+.xtable td.nm{text-align:left;font-family:'Permanent Marker',cursive;font-size:15px;white-space:nowrap}
+.nm.a{color:var(--alive)}
+.nm.m{color:var(--murdered);text-decoration:line-through;text-decoration-thickness:2px}
+.nm.b{color:var(--banished);text-decoration:line-through;text-decoration-thickness:2px}
+td.on{background:var(--yellow-lo)}
+td.both{background:var(--yellow-hi)}
+.bang{color:var(--murdered);font-family:'Permanent Marker',cursive;font-size:17px;margin-left:5px;letter-spacing:.04em}
+.st{font-family:'Permanent Marker',cursive;font-size:11px;letter-spacing:.05em}
+.st.a{color:var(--alive)}.st.m{color:var(--murdered)}.st.b{color:var(--banished)}
+.xlegend{margin-top:16px;font-size:11.5px;line-height:1.9;color:var(--ink-soft)}
+.key{display:inline-block;width:15px;height:12px;vertical-align:-1px;margin-right:5px;border:1px solid rgba(0,0,0,.3)}
+.key.lo{background:var(--yellow-lo)}.key.hi{background:var(--yellow-hi)}
+.verdictbox{margin-top:20px;background:var(--card-blue);padding:22px;position:relative;
+  box-shadow:0 10px 20px rgba(0,0,0,.42);transform:rotate(-.4deg)}
+.verdictbox h3{font-family:'Permanent Marker',cursive;font-size:21px;line-height:1.25;color:var(--marker);margin-bottom:10px}
+.verdictbox p{font-size:13.5px;line-height:1.76;margin-bottom:10px}
+
+/* chain */
+.chainwrap{position:relative;padding:26px 0 6px}
+.chainline{position:absolute;left:2%;right:2%;top:76px;height:3px;
+  background:linear-gradient(90deg,transparent,var(--murdered) 5%,var(--murdered) 95%,transparent);
+  box-shadow:0 2px 3px rgba(0,0,0,.45);z-index:1}
+.chain{position:relative;z-index:2;display:grid;grid-template-columns:repeat(auto-fit,minmax(174px,1fr));gap:16px}
+.chip{position:relative;background:var(--paper);padding:16px 12px 14px;text-align:center;
+  box-shadow:0 8px 16px rgba(0,0,0,.45)}
+.chip:nth-child(odd){transform:rotate(-1.4deg)}.chip:nth-child(even){transform:rotate(1.6deg)}
+.chip .who{font-family:'Permanent Marker',cursive;font-size:17px;line-height:1.2}
+.chip .role{font-size:10px;letter-spacing:.1em;color:var(--ink-soft);margin-top:5px;text-transform:uppercase}
+.chip .fate{margin-top:11px;font-family:'Permanent Marker',cursive;font-size:12px;letter-spacing:.08em;padding:5px 6px;border:2px solid}
+.chip.x::before{
+  content:"";position:absolute;inset:8px;z-index:4;
+  background:
+    linear-gradient(to bottom right,transparent calc(50% - 2px),var(--xc) calc(50% - 2px),var(--xc) calc(50% + 2px),transparent calc(50% + 2px)),
+    linear-gradient(to bottom left,transparent calc(50% - 2px),var(--xc) calc(50% - 2px),var(--xc) calc(50% + 2px),transparent calc(50% + 2px));
+}
+.chip.mur{--xc:rgba(176,27,46,.85)}
+.chip.mur .who,.chip.mur .fate{color:var(--murdered)}.chip.mur .fate{border-color:var(--murdered)}
+.chip.ban{--xc:rgba(181,96,28,.85)}
+.chip.ban .who,.chip.ban .fate{color:var(--banished)}.chip.ban .fate{border-color:var(--banished)}
+.chip.alv .who,.chip.alv .fate{color:var(--alive)}.chip.alv .fate{border-color:var(--alive)}
+.chainnote{margin-top:24px;background:var(--card-blue);position:relative;padding:20px 22px;
+  box-shadow:0 8px 18px rgba(0,0,0,.4);transform:rotate(-.5deg)}
+.chainnote p{font-size:13.5px;line-height:1.74}
+.chainnote .odds{font-family:'Permanent Marker',cursive;color:var(--murdered);font-size:19px;display:block;margin-top:12px}
+
+/* wordle */
+.wordle{display:grid;grid-template-columns:1fr;gap:18px}
+@media(min-width:820px){.wordle{grid-template-columns:1.05fr .95fr}}
+.tiles{display:flex;gap:7px;margin:14px 0 16px;flex-wrap:wrap}
+.tile{width:38px;height:38px;display:flex;align-items:center;justify-content:center;
+  font-family:'Permanent Marker',cursive;font-size:18px;color:#fff}
+.tile.g{background:#5a7d4a}
+.teamrow{display:flex;justify-content:space-between;gap:10px;align-items:baseline;padding:9px 0;
+  border-bottom:1px dotted rgba(0,0,0,.22);font-size:13px}
+.teamrow:last-child{border-bottom:none}
+.teamrow b{font-family:'Permanent Marker',cursive;font-size:14px}
+.teamrow .pts{color:var(--ink-soft);white-space:nowrap;font-size:12px}
+.bc-row{display:flex;justify-content:space-between;gap:12px;padding:8px 0;
+  border-bottom:1px dotted rgba(0,0,0,.2);font-size:13px}
+.bc-row:last-child{border-bottom:none}
+.bc-row .v{font-family:'Permanent Marker',cursive;font-size:12px;letter-spacing:.05em}
+.v.ban{color:var(--banished)}.v.mur{color:var(--murdered)}.v.alv{color:var(--alive)}
+.verdict{margin-top:16px;padding:14px 16px;background:rgba(181,96,28,.12);border:3px double var(--banished)}
+.verdict p{font-family:'Caveat',cursive;font-weight:700;font-size:20px;line-height:1.42;color:var(--banished)}
+
+/* suspects */
+.suspects{display:grid;grid-template-columns:repeat(auto-fit,minmax(232px,1fr));gap:18px}
+.sus{position:relative;background:var(--paper);padding:18px 16px 16px;box-shadow:0 9px 18px rgba(0,0,0,.44)}
+.sus:nth-child(3n+1){transform:rotate(-1.1deg)}.sus:nth-child(3n+2){transform:rotate(.9deg)}.sus:nth-child(3n){transform:rotate(-.4deg)}
+.sus .name{font-family:'Permanent Marker',cursive;font-size:20px;line-height:1.2}
+.pct{display:flex;align-items:baseline;gap:8px;margin:12px 0 9px}
+.pct .n{font-family:'Permanent Marker',cursive;font-size:38px;line-height:.9}
+.pct .d{font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-soft)}
+.meter{height:11px;background:rgba(0,0,0,.16);overflow:hidden}
+.meter i{display:block;height:100%}
+.sus .why{font-size:12.5px;line-height:1.66;margin-top:12px}
+.sus .delta{position:absolute;top:12px;right:14px;font-family:'Caveat',cursive;font-weight:700;font-size:17px}
+.up{color:var(--murdered)}.down{color:var(--alive)}.flat{color:var(--ink-soft)}
+.t-hot .n{color:var(--murdered)}.t-hot .meter i{background:var(--murdered)}
+.t-warm .n{color:#b5651d}.t-warm .meter i{background:#b5651d}
+.t-cool .n{color:var(--marker)}.t-cool .meter i{background:var(--marker)}
+.t-cold .n{color:var(--alive)}.t-cold .meter i{background:var(--alive)}
+.flags{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
+.flag{font-size:9.5px;letter-spacing:.11em;text-transform:uppercase;font-weight:700;
+  padding:5px 8px;border:1px solid rgba(0,0,0,.3);color:#2b2205}
+.flag.both{background:var(--yellow-hi)}
+.flag.one{background:var(--yellow-lo)}
+.flag.shield{background:rgba(181,96,28,.2);border-color:var(--banished);color:var(--banished)}
+
+/* alliance callout */
+.alliance{margin-top:22px;background:var(--card-blue);position:relative;padding:24px 24px 26px;
+  box-shadow:0 10px 22px rgba(0,0,0,.45);transform:rotate(-.4deg)}
+.alliance h3{font-family:'Permanent Marker',cursive;font-size:22px;line-height:1.25;color:var(--marker);margin:6px 0 12px}
+.alliance p{font-size:13.5px;line-height:1.76;margin-bottom:11px}
+.qt{display:grid;grid-template-columns:1fr;gap:12px;margin:16px 0 6px}
+@media(min-width:760px){.qt{grid-template-columns:1fr 1fr}}
+.qt div{background:var(--paper);padding:15px 16px;border-left:4px solid var(--yellow-hi);
+  box-shadow:0 5px 11px rgba(0,0,0,.25)}
+.qt .said{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:7px}
+.qt .line{font-size:13.5px;line-height:1.62;font-style:italic}
+
+/* ledger */
 .ledger{background:var(--paper);padding:20px 14px 22px;position:relative;
   box-shadow:0 10px 22px rgba(0,0,0,.45);overflow-x:auto}
-table{width:100%;border-collapse:collapse;min-width:660px}
-th,td{padding:9px 7px;text-align:center;font-size:12px;border-bottom:1px dotted rgba(0,0,0,.22)}
-th{
-  font-family:'Permanent Marker',cursive;font-size:11px;letter-spacing:.06em;
-  color:var(--marker);border-bottom:2px solid var(--marker);text-transform:uppercase;
-}
-td.who{text-align:left;font-family:'Permanent Marker',cursive;font-size:13.5px;white-space:nowrap}
-td.hit{color:var(--stamp);font-weight:700}
-td.skip{color:#9a9080}
-td.tot{font-family:'Permanent Marker',cursive;font-size:16px;color:var(--marker)}
-tr.spot td{background:rgba(176,27,46,.09)}
-.legend{margin-top:14px;font-size:11.5px;line-height:1.8;color:var(--ink-soft)}
-.legend b{color:var(--stamp)}
+.ltable{min-width:660px}
+.ltable th,.ltable td{padding:9px 7px;text-align:center;font-size:12px;border-bottom:1px dotted rgba(0,0,0,.22)}
+.ltable th{font-family:'Permanent Marker',cursive;font-size:11px;letter-spacing:.06em;color:var(--marker);
+  border-bottom:2px solid var(--marker);text-transform:uppercase}
+.ltable th:first-child{text-align:left}
+.ltable td.who{text-align:left;font-family:'Permanent Marker',cursive;font-size:13.5px;white-space:nowrap}
+.ltable td.hit{color:var(--banished);font-weight:700}
+.ltable td.skip{color:#9a9080}
+.ltable td.tot{font-family:'Permanent Marker',cursive;font-size:16px;color:var(--banished)}
+.ltable tr.spot td{background:rgba(181,96,28,.1)}
+.legend{margin-top:14px;font-size:11.5px;line-height:1.85;color:var(--ink-soft)}
+.legend b{color:var(--banished)}
 
-/* ---------- footer ---------- */
-.foot{
-  margin-top:12px;text-align:center;font-size:11px;letter-spacing:.2em;
-  text-transform:uppercase;color:#f0e4c8;opacity:.6;
-}
+.foot{margin-top:12px;text-align:center;font-size:11px;letter-spacing:.2em;
+  text-transform:uppercase;color:#f0e4c8;opacity:.6}
 
-/* ---------- export button ---------- */
-#save{
-  position:fixed;right:18px;bottom:18px;z-index:99;
+#save{position:fixed;right:18px;bottom:18px;z-index:99;
   font-family:'Permanent Marker',cursive;font-size:14px;letter-spacing:.06em;
-  background:var(--stamp);color:var(--paper);border:3px solid #6d1620;
-  padding:13px 22px;border-radius:3px;cursor:pointer;
-  box-shadow:0 8px 20px rgba(0,0,0,.5);
-}
+  background:var(--murdered);color:var(--paper);border:3px solid #6d1620;
+  padding:13px 22px;cursor:pointer;box-shadow:0 8px 20px rgba(0,0,0,.5)}
 #save:hover{background:#8d1c27}
 #save:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
 #save[disabled]{opacity:.6;cursor:wait}
@@ -326,7 +268,7 @@ tr.spot td{background:rgba(176,27,46,.09)}
 @media (max-width:640px){
   #board{padding:22px 14px 30px;border-width:9px}
   .chainline{display:none}
-  .card,.q,.sus,.chip{transform:none!important}
+  .card,.q,.sus,.chip,.perf,.verdictbox{transform:none!important}
 }
 </style>
 </head>
@@ -341,59 +283,19 @@ tr.spot td{background:rgba(176,27,46,.09)}
   </header>
 
   <div class="tally">
-    <div class="card"><span class="pin"></span><div class="num">29</div><div class="lbl">Players<br>at start</div></div>
-    <div class="card"><span class="pin gold"></span><div class="num">11</div><div class="lbl">Still<br>standing</div></div>
+    <div class="card"><span class="pin gold"></span><div class="num">29</div><div class="lbl">Players<br>at start</div></div>
+    <div class="card"><span class="pin green"></span><div class="num green">11</div><div class="lbl">Still<br>standing</div></div>
     <div class="card"><span class="pin"></span><div class="num red">13</div><div class="lbl">Murdered<br>in 7 nights</div></div>
-    <div class="card"><span class="pin"></span><div class="num red">5</div><div class="lbl">Banished<br>all faithful</div></div>
+    <div class="card"><span class="pin"></span><div class="num orange">5</div><div class="lbl">Banished<br>all faithful</div></div>
     <div class="card"><span class="pin gold"></span><div class="num">0</div><div class="lbl">Traitors<br>identified</div></div>
   </div>
 
-  <!-- ============ HERO: THE CHAIN ============ -->
-  <section class="sec">
-    <div class="sechead">
-      <div class="kicker">The one pattern that isn't noise</div>
-      <h2>Everybody who voted for Ella is dead.</h2>
-    </div>
-
-    <div class="chainwrap">
-      <div class="chainline"></div>
-      <div class="chain">
-        <div class="chip gone"><span class="pin"></span>
-          <div class="who">Ryan Deshler</div><div class="role">Voted Ella</div>
-          <div class="fate">MURDERED Aug 7</div></div>
-        <div class="chip gone"><span class="pin"></span>
-          <div class="who">Kaylee Mitchell</div><div class="role">Voted Ella</div>
-          <div class="fate">MURDERED Aug 7</div></div>
-        <div class="chip gone"><span class="pin"></span>
-          <div class="who">Matt Stratton</div><div class="role">Voted Ella</div>
-          <div class="fate">MURDERED Aug 7</div></div>
-        <div class="chip gone"><span class="pin"></span>
-          <div class="who">Derrick Robertson</div><div class="role">Voted Ella</div>
-          <div class="fate">BANISHED Aug 6</div></div>
-        <div class="chip alive"><span class="pin gold"></span>
-          <div class="who">Parker Webb</div><div class="role">Voted Ella</div>
-          <div class="fate">STILL HERE</div></div>
-      </div>
-    </div>
-
-    <div class="chainnote">
-      <span class="tape"></span>
-      <p><b>Five people wrote Ella's name on the Aug 6 poll. Four were gone inside 24 hours.</b>
-      Derrick lost the banishment by one vote. That same night the Traitors had thirteen people to
-      choose from and picked exactly three &mdash; and all three were the surviving Ella voters.</p>
-      <p style="margin-top:11px">Ryan's last real message named her: <i>&ldquo;Ella is the Traitor.&rdquo;</i>
-      He was murdered that night alongside the only two other people who agreed with him.</p>
-      <span class="odds">Odds of that happening by chance: 1 in 286. About 0.35%.</span>
-    </div>
-  </section>
-
-  <!-- ============ THREE QUESTIONS ============ -->
+  <!-- 1. THREE QUESTIONS -->
   <section class="sec">
     <div class="sechead">
       <div class="kicker">Take these to the round table</div>
-      <h2>Three questions nobody has actually answered.</h2>
+      <h2>Two questions nobody has actually answered.</h2>
     </div>
-
     <div class="qgrid">
 
       <div class="q"><span class="pin"></span>
@@ -407,7 +309,8 @@ tr.spot td{background:rgba(176,27,46,.09)}
         <p>Ella also raised recruitment: when a Traitor is banished, a new one can be turned in secret.
         Five banishments later, nobody has asked whether that happened here.</p>
         <div class="ask"><span>Ask the host</span>
-          <p>MK &mdash; how many Traitors did this game start with, and has anyone been recruited since?</p></div>
+          <p>How many Traitors did this game start with &mdash; and has anyone been recruited since?</p></div>
+        <div class="askfoot">Every count-based theory in this channel is built on a number we made up.</div>
       </div>
 
       <div class="q"><span class="pin"></span>
@@ -416,47 +319,259 @@ tr.spot td{background:rgba(176,27,46,.09)}
         <p>She stated it in the rules for Wordle Wars on Jul 27: <b>you have been randomly assigned to
         one of three teams.</b> Take her at her word &mdash; she has been straight with us all game.</p>
         <p>Now sit with what that means. <b>If the teams are random, team membership carries no
-        information whatsoever about who is a Traitor.</b> None. It is a coin toss wearing a name tag.
-        And yet almost every accusation for two weeks has started with which team somebody was on.</p>
+        information about who is a Traitor.</b> None. It is a coin toss wearing a name tag. And yet
+        almost every accusation for two weeks has opened with which team somebody was on.</p>
         <div class="quote">Team&nbsp;3 lost the Wordle, so Team&nbsp;3 must have a Traitor. Team&nbsp;1
-        won it, so Team&nbsp;1 is clean. Team&nbsp;2 kept the shield, so Team&nbsp;2 is guilty. All
-        three of those arguments are reading meaning into a randomizer.</div>
+        won it, so Team&nbsp;1 is clean. Team&nbsp;2 kept the shield, so Team&nbsp;2 is guilty. All three
+        of those arguments are reading meaning into a randomiser.</div>
+        <p>Even the most careful version collapses. Ryan's one-Traitor-per-group theory is what narrowed
+        Team&nbsp;1 down to Ella or me &mdash; but random assignment does not hand you an even spread.
+        Three Traitors dropped at random into teams of 5, 6 and 6 land one apiece in only
+        <b>180 of 680 arrangements. Roughly 26%.</b></p>
         <div class="ask"><span>Ask the host</span>
-          <p>MK &mdash; were these teams randomly selected, as it was stated in the rules they would be?</p></div>
-      </div>
-
-      <div class="q"><span class="pin"></span>
-        <div class="qnum">03</div>
-        <h3>&ldquo;One Traitor per team&rdquo; is a guess stacked on a guess.</h3>
-        <p>Ryan's final theory was one Traitor per group, which narrowed Team&nbsp;1 down to Ella or me.
-        Random assignment does not hand you an even spread &mdash; that is the opposite of what random
-        means. Three Traitors dropped at random into teams of 5, 6 and 6 land one apiece in only
-        <b>180 of 680 possible arrangements.</b></p>
-        <p>And that is the best case, granting a Traitor count nobody has ever confirmed.</p>
-        <div class="quote">That is roughly 26%. Which means there is about a <b>74% chance the premise
-        everyone is voting on is simply wrong.</b></div>
-        <div class="ask"><span>Say it out loud</span>
-          <p>We keep narrowing the field with maths we invented. That is how we got five Faithfuls in a row.</p></div>
+          <p>Were these teams randomly selected, as it was stated in the rules they would be?</p></div>
+        <div class="askfoot">If yes, then who was on which team proves nothing &mdash; and there is a
+        74% chance the premise we have been voting on is wrong. What a random team cannot explain is
+        <b>how that team performed.</b> That is the next page.</div>
       </div>
 
     </div>
   </section>
 
-  <!-- ============ WORDLE ============ -->
+  <!-- 2. PERFECT SCORES -->
+  <section class="sec">
+    <div class="sechead">
+      <div class="kicker">The thing nobody will say out loud</div>
+      <h2>Two teams turned in perfect scores. Nobody asked how.</h2>
+    </div>
+    <div class="perfgrid">
+
+      <div class="perf"><span class="pin gold"></span>
+        <div class="eyebrow">Question A &middot; Wordle Wars, Jul 27</div>
+        <h3>How does a team guess a Wordle correctly on the very first try?</h3>
+        <p>Team&nbsp;1 opened with TRUST and it was the answer. First guess. Full 100 points and the
+        Shield. Team&nbsp;2 needed two guesses, Team&nbsp;3 needed four.</p>
+        <div class="tiles">
+          <span class="tile g">T</span><span class="tile g">R</span><span class="tile g">U</span>
+          <span class="tile g">S</span><span class="tile g">T</span>
+        </div>
+        <div class="mathbox">
+          <div class="line"><span>Blind guess from the Wordle answer list</span><b>1 in 2,309</b></div>
+          <div class="line"><span>Guessing thematically &mdash; say 20 plausible words</span><b>1 in 20</b></div>
+          <div class="res">Best case still only 5%</div>
+        </div>
+        <p>Every team had the same thematic hint. Two of them used it and still needed multiple guesses.
+        One team walked straight to it.</p>
+        <p><b>This was raised once.</b> Brad Arrowood said on Jul 28 that everyone he suspected was on
+        Team&nbsp;1, and that they suspiciously got the word on the first try to lock the Shield away
+        from everyone else. He was banished that same afternoon. He was a Faithful.</p>
+      </div>
+
+      <div class="perf"><span class="pin gold"></span>
+        <div class="eyebrow">Question B &middot; The Five Locks, Aug 5</div>
+        <h3>How does a team answer 25 trivia questions without missing one?</h3>
+        <p>Five vaults, five questions each. Team&nbsp;3 turned in 500 &mdash; a clean sweep. Team&nbsp;2
+        came in at 480, Team&nbsp;1 at 460. MK said outright she expected at least one team to stumble
+        and none did.</p>
+        <p>Several of those questions were pure guesswork: the basketball rim, the card without a
+        moustache, the first NFL team, the Olympic team.</p>
+        <div class="mathbox">
+          <div class="line"><span>Assume only four needed a genuine guess</span><b>&nbsp;</b></div>
+          <div class="line"><span>Four options each</span><b>1 in 4</b></div>
+          <div class="line"><span>All four right &mdash; &frac14; &times; &frac14; &times; &frac14; &times; &frac14;</span><b>1 in 256</b></div>
+          <div class="res">0.4% &mdash; four in a thousand</div>
+        </div>
+        <p>And that is the charitable version. Assume five coin-flip questions instead of four and it
+        drops to roughly one in a thousand.</p>
+        <p>Rule&nbsp;7 was explicit: no cheating on missions, no looking up answers. A Faithful gains
+        almost nothing by breaking it. A Traitor gains a Shield, a murder-pool exemption, and a
+        reputation as the team that works well together.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 3. OVERLAY -->
+  <section class="sec">
+    <div class="sechead">
+      <div class="kicker">Now overlay the two rosters</div>
+      <h2>Four people sat at both perfect scores.</h2>
+    </div>
+
+    <div class="crosswrap"><span class="pin"></span>
+      <table class="xtable">
+        <thead>
+          <tr>
+            <th>Player</th>
+            <th>Perfect Wordle<br>Jul 27</th>
+            <th>Perfect Trivia<br>Aug 5</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="nm a">Owen Song</td>
+            <td class="both">YES <span class="bang">!!</span></td>
+            <td class="both">YES <span class="bang">!!</span></td>
+            <td class="st a">STILL STANDING</td>
+          </tr>
+          <tr>
+            <td class="nm a">Bailey Wood</td>
+            <td class="both">YES <span class="bang">!!</span></td>
+            <td class="both">YES <span class="bang">!!</span></td>
+            <td class="st a">STILL STANDING</td>
+          </tr>
+          <tr>
+            <td class="nm a">Yennhi Nguyen</td>
+            <td class="both">YES <span class="bang">!!</span></td>
+            <td class="both">YES <span class="bang">!!</span></td>
+            <td class="st a">STILL STANDING</td>
+          </tr>
+          <tr>
+            <td class="nm m">Matt Stratton</td>
+            <td class="both">YES <span class="bang">!!</span></td>
+            <td class="both">YES <span class="bang">!!</span></td>
+            <td class="st m">MURDERED AUG 7</td>
+          </tr>
+          <tr>
+            <td class="nm a">Parker Webb</td>
+            <td class="on">YES</td>
+            <td>&mdash;</td>
+            <td class="st a">STILL STANDING</td>
+          </tr>
+          <tr>
+            <td class="nm a">Kaelyn Martin</td>
+            <td>&mdash;</td>
+            <td class="on">YES</td>
+            <td class="st a">STILL STANDING</td>
+          </tr>
+          <tr>
+            <td class="nm a">Kobi Worthington</td>
+            <td>&mdash;</td>
+            <td class="on">YES</td>
+            <td class="st a">STILL STANDING</td>
+          </tr>
+          <tr>
+            <td class="nm m">Katie Masai</td>
+            <td class="on">YES</td>
+            <td>&mdash;</td>
+            <td class="st m">MURDERED AUG 6</td>
+          </tr>
+          <tr>
+            <td class="nm m">Kaylee Mitchell</td>
+            <td class="on">YES</td>
+            <td>&mdash;</td>
+            <td class="st m">MURDERED AUG 7</td>
+          </tr>
+          <tr>
+            <td class="nm m">Julian Macalalag</td>
+            <td class="on">YES</td>
+            <td>&mdash;</td>
+            <td class="st m">MURDERED AUG 4</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="xlegend">
+        <span class="key hi"></span><b>Dark yellow + <span class="bang" style="font-size:14px;margin:0">!!</span></b>
+        &nbsp;on both perfect teams &nbsp;&middot;&nbsp;
+        <span class="key lo"></span>on one perfect team<br>
+        <span style="color:var(--alive)">Green</span> = still standing &nbsp;&middot;&nbsp;
+        <span style="color:var(--murdered)">Red strikethrough</span> = murdered &nbsp;&middot;&nbsp;
+        <span style="color:var(--banished)">Orange strikethrough</span> = banished
+      </div>
+    </div>
+
+    <div class="verdictbox"><span class="tape"></span>
+      <h3>Three of the four are still in the game. And not one banished player appears on this list.</h3>
+      <p>Matt clears &mdash; the Traitors murdered him, so he was a Faithful. That leaves
+      <b>Owen, Bailey and Yennhi</b> as the only people who were at the table for both impossible scores.</p>
+      <p>Look at the fourth column too. Every single person we have banished &mdash; Alex, Brad&nbsp;A.,
+      Kelsey, Gary, Derrick &mdash; was on <b>neither</b> perfect team. We have spent five round tables
+      convicting people who were nowhere near the two results that don't add up.</p>
+      <p class="hand" style="font-size:21px;margin-top:16px;line-height:1.45">
+        If someone in this game is comfortable cheating, they left fingerprints on both scoreboards.
+        Three names carry both sets.</p>
+    </div>
+  </section>
+
+  <!-- 4. SHIELD -->
+  <section class="sec">
+    <div class="sechead">
+      <div class="kicker">Follow the chaos, not the volume</div>
+      <h2>The shield nobody used.</h2>
+    </div>
+    <div class="card" style="transform:rotate(-.4deg)"><span class="tape"></span>
+      <p style="font-size:13.5px;line-height:1.78">
+        Team&nbsp;2 won the Five Locks and could hand the Shield to <b>anyone in the game.</b> They
+        already knew Team&nbsp;1 was the only pool eligible for murder that night. They kept it inside
+        Team&nbsp;2, where it could not possibly be used. Katie and Rachel died. Yennhi asked why. Ryan
+        said he couldn't say. Kaylee said to trust that their hearts were pure.</p>
+      <p style="font-size:13.5px;line-height:1.78;margin-top:12px">
+        <b>Then the picture changed.</b> Ryan and Kaylee &mdash; the two loudest defenders of that
+        decision &mdash; were both murdered the following night, which makes both of them Faithfuls. So
+        the hoard was not a Traitor play end to end. But somebody in that room argued for wasting it,
+        and four of the six are still here.</p>
+      <div class="flags" style="margin-top:14px">
+        <span class="flag shield">Kendall</span><span class="flag shield">Laney</span>
+        <span class="flag shield">Parker</span><span class="flag shield">Armando</span>
+      </div>
+      <p class="hand" style="font-size:20px;margin-top:16px;line-height:1.45">
+        Chaos is the tell, not noise. Ask who argued to keep it &mdash; and who stayed quiet while they did.</p>
+    </div>
+  </section>
+
+  <!-- 5. ELLA -->
+  <section class="sec">
+    <div class="sechead">
+      <div class="kicker">A separate thread &middot; still unexplained</div>
+      <h2>Everybody who voted for Ella is gone.</h2>
+    </div>
+
+    <div class="chainwrap">
+      <div class="chainline"></div>
+      <div class="chain">
+        <div class="chip x mur"><span class="pin"></span>
+          <div class="who">Ryan Deshler</div><div class="role">Voted Ella</div>
+          <div class="fate">MURDERED AUG 7</div></div>
+        <div class="chip x mur"><span class="pin"></span>
+          <div class="who">Kaylee Mitchell</div><div class="role">Voted Ella</div>
+          <div class="fate">MURDERED AUG 7</div></div>
+        <div class="chip x mur"><span class="pin"></span>
+          <div class="who">Matt Stratton</div><div class="role">Voted Ella</div>
+          <div class="fate">MURDERED AUG 7</div></div>
+        <div class="chip x ban"><span class="pin"></span>
+          <div class="who">Derrick Robertson</div><div class="role">Voted Ella</div>
+          <div class="fate">BANISHED AUG 6</div></div>
+        <div class="chip alv"><span class="pin green"></span>
+          <div class="who">Parker Webb</div><div class="role">Voted Ella</div>
+          <div class="fate">STILL STANDING</div></div>
+      </div>
+    </div>
+
+    <div class="chainnote"><span class="tape"></span>
+      <p><b>Five people wrote Ella's name on the Aug 6 poll. Four were gone inside 24 hours.</b>
+      Derrick lost the banishment by one vote. That same night the Traitors had thirteen people to
+      choose from and picked exactly three &mdash; and all three were the surviving Ella voters.
+      Ryan's last real message named her outright.</p>
+      <p style="margin-top:11px"><b>The honest counter:</b> those three were also among the sharpest
+      analysts left, so the Traitors may have been clearing thinkers rather than protecting Ella. Parker
+      voted Ella too and is still here. It is a real pattern, but it is not proof &mdash; and it points
+      away from the cheating cluster, not at it.</p>
+      <span class="odds">Odds of that trio by pure chance: 1 in 286. About 0.35%.</span>
+    </div>
+  </section>
+
+  <!-- 6. WORDLE TEAM 3 -->
   <section class="sec">
     <div class="sechead">
       <div class="kicker">Setting the record straight</div>
-      <h2>The Wordle never proved anything. It just killed four Faithfuls.</h2>
+      <h2>The losing Wordle team never proved anything. It just cost us four Faithfuls.</h2>
     </div>
-
     <div class="wordle">
 
       <div class="card"><span class="tape"></span>
-        <div class="eyebrow">Wordle Wars &middot; Jul 27</div>
-        <div class="tiles">
-          <span class="tile g">G</span><span class="tile g">U</span><span class="tile g">I</span>
-          <span class="tile g">L</span><span class="tile g">T</span>
-        </div>
+        <div class="eyebrow">Wordle Wars &middot; Jul 27 &middot; Team 3</div>
         <div class="teamrow"><b>Team 1</b><span class="pts">TRUST &middot; 1st guess &middot; 100 pts</span></div>
         <div class="teamrow"><b>Team 2</b><span class="pts">ALIBI &middot; 2nd guess &middot; 80 pts</span></div>
         <div class="teamrow"><b>Team 3</b><span class="pts">GUILT &middot; 4th guess &middot; 20 pts</span></div>
@@ -469,243 +584,183 @@ tr.spot td{background:rgba(176,27,46,.09)}
           that thread ever named me. Derrick's own words afterwards: we were just really bad at Team Wordle.</p>
       </div>
 
-      <div class="card bodycount"><span class="pin"></span>
+      <div class="card" style="background:var(--card-blue)"><span class="pin"></span>
         <div class="eyebrow">What happened to Wordle Team 3</div>
-        <div class="bc-row"><span>Brad Arrowood</span><span class="v faith">BANISHED &middot; FAITHFUL</span></div>
-        <div class="bc-row"><span>Kelsey McAuley</span><span class="v faith">BANISHED &middot; FAITHFUL</span></div>
-        <div class="bc-row"><span>Gary</span><span class="v faith">BANISHED &middot; FAITHFUL</span></div>
-        <div class="bc-row"><span>Derrick Robertson</span><span class="v faith">BANISHED &middot; FAITHFUL</span></div>
-        <div class="bc-row"><span>Sarah Kate Hammond</span><span class="v dead">MURDERED</span></div>
-        <div class="bc-row"><span>Miguel</span><span class="v dead">MURDERED</span></div>
-        <div class="bc-row"><span>Tyler Raborn</span><span class="v alive">LAST ONE LEFT</span></div>
+        <div class="bc-row"><span>Brad Arrowood</span><span class="v ban">BANISHED &middot; FAITHFUL</span></div>
+        <div class="bc-row"><span>Kelsey McAuley</span><span class="v ban">BANISHED &middot; FAITHFUL</span></div>
+        <div class="bc-row"><span>Gary</span><span class="v ban">BANISHED &middot; FAITHFUL</span></div>
+        <div class="bc-row"><span>Derrick Robertson</span><span class="v ban">BANISHED &middot; FAITHFUL</span></div>
+        <div class="bc-row"><span>Sarah Kate Hammond</span><span class="v mur">MURDERED</span></div>
+        <div class="bc-row"><span>Miguel</span><span class="v mur">MURDERED</span></div>
+        <div class="bc-row"><span>Tyler Raborn</span><span class="v alv">STILL STANDING</span></div>
         <div class="verdict">
-          <p>Six of seven gone. Four banished on the sabotage theory. Four Faithfuls.
-          The Wordle theory is 0 for 4 &mdash; and it is the reason I am still being looked at.</p>
+          <p>Six of seven gone. Four banished on the sabotage theory. Four Faithfuls. The losing-team
+          theory is 0 for 4 &mdash; and it is the reason I am still being looked at.</p>
         </div>
       </div>
 
     </div>
   </section>
 
-  <!-- ============ PERFECT SCORES ============ -->
+  <!-- 7. SUSPECTS -->
   <section class="sec">
     <div class="sechead">
-      <div class="kicker">The thing nobody will say out loud</div>
-      <h2>Two teams turned in perfect scores. Nobody has asked how.</h2>
-    </div>
-
-    <div class="perfgrid">
-
-      <div class="perf"><span class="pin gold"></span>
-        <div class="eyebrow">Question A &middot; Wordle Wars, Jul 27</div>
-        <h3>How does a team guess a Wordle correctly on the very first try?</h3>
-        <p>Team&nbsp;1 opened with TRUST and it was the answer. First guess. Full 100 points and the
-        Shield. Team&nbsp;2 needed two guesses, Team&nbsp;3 needed four.</p>
-        <div class="mathbox">
-          <div class="line"><span>Blind guess from the Wordle answer list</span><b>1 in 2,309</b></div>
-          <div class="line"><span>Guessing thematically &mdash; say 20 plausible words</span><b>1 in 20</b></div>
-          <div class="res">Best case still only 5%</div>
-        </div>
-        <p>Every team had the same thematic hint. Two of them used it and still needed multiple guesses.
-        One team walked straight to it.</p>
-        <p><b>This was raised once.</b> Brad Arrowood said on Jul 28 that everyone he suspected was on
-        Team&nbsp;1, and that they suspiciously got the word on the first try to lock the Shield away
-        from everyone else. He was banished that same afternoon. He was a Faithful.</p>
-        <div class="roster">
-          <span class="chipname x">Katie</span><span class="chipname x">Julian</span>
-          <span class="chipname both">Matt</span><span class="chipname">Parker</span>
-          <span class="chipname x">Kaylee</span><span class="chipname both">Bailey</span>
-          <span class="chipname both">Yennhi</span><span class="chipname both">Owen</span>
-        </div>
-      </div>
-
-      <div class="perf"><span class="pin gold"></span>
-        <div class="eyebrow">Question B &middot; The Five Locks, Aug 5</div>
-        <h3>How does a team answer 25 trivia questions without missing one?</h3>
-        <p>Five vaults, five questions each. Team&nbsp;3 turned in 500 &mdash; a clean sweep. Team&nbsp;2
-        came in at 480, Team&nbsp;1 at 460. MK herself said she expected at least one team to stumble
-        and none did.</p>
-        <p>Several of those questions were pure guesswork: the basketball rim, the card without a
-        moustache, the first NFL team, the Olympic team.</p>
-        <div class="mathbox">
-          <div class="line"><span>Assume only 4 needed a genuine guess</span><b>&nbsp;</b></div>
-          <div class="line"><span>Four options each</span><b>1 in 4</b></div>
-          <div class="line"><span>All four correct &mdash; &frac14; &times; &frac14; &times; &frac14; &times; &frac14;</span><b>1 in 256</b></div>
-          <div class="res">0.4% &mdash; four in a thousand</div>
-        </div>
-        <p>And that is the charitable version. Assume five coin-flip questions instead of four and it
-        drops to one in a thousand.</p>
-        <div class="roster">
-          <span class="chipname both">Matt</span><span class="chipname">Kaelyn</span>
-          <span class="chipname both">Yennhi</span><span class="chipname both">Owen</span>
-          <span class="chipname">Kobi</span><span class="chipname both">Bailey</span>
-        </div>
-      </div>
-
-    </div>
-
-    <div class="crossbox"><span class="tape"></span>
-      <div class="eyebrow">Now overlay the two rosters</div>
-      <h3 style="font-family:'Permanent Marker',cursive;font-size:22px;line-height:1.25;color:var(--marker);margin:6px 0 4px">
-        Four people were on both perfect teams. Three of them are still in the game.</h3>
-      <p style="font-size:13.5px;line-height:1.75;margin-top:10px">
-        Rule 7 said it plainly: no cheating on missions, no looking up answers. A Faithful gains almost
-        nothing by breaking it. A Traitor gains a Shield, a murder-pool exemption, and a reputation as
-        the team that <i>works well together.</i> If someone in this game is comfortable cheating, they
-        left fingerprints on both scoreboards.</p>
-      <div class="crossnames">
-        <div class="crossname"><div class="cn">Owen Song</div><div class="cs">Both perfect teams</div></div>
-        <div class="crossname"><div class="cn">Bailey Wood</div><div class="cs">Both perfect teams</div></div>
-        <div class="crossname"><div class="cn">Yennhi Nguyen</div><div class="cs">Both perfect teams</div></div>
-        <div class="crossname out"><div class="cn">Matt Stratton</div><div class="cs">Murdered Aug 7 &middot; Faithful</div></div>
-      </div>
-      <p class="hand" style="font-size:21px;margin-top:18px;line-height:1.45">
-        Matt clears &mdash; the Traitors killed him. That leaves Owen, Bailey and Yennhi as the only
-        people who were sitting at the table for both impossible scores.</p>
-      <p style="font-size:12.5px;line-height:1.7;margin-top:12px;color:var(--ink-soft)">
-        Worth noting on the other side: Parker was on the perfect Wordle team only, Kaelyn and Kobi on
-        the perfect trivia team only. And Ella was on neither &mdash; she guessed ALIBI on the second try
-        and finished last in the Five Locks. Whatever the cheating is, it is a separate thread from the
-        Ella chain, which means it may point at a different Traitor entirely.</p>
-    </div>
-  </section>
-
-  <!-- ============ THE SHIELD ============ -->
-  <section class="sec">
-    <div class="sechead">
-      <div class="kicker">Follow the chaos, not the volume</div>
-      <h2>The shield nobody used.</h2>
-    </div>
-    <div class="card" style="transform:rotate(-.4deg)"><span class="tape"></span>
-      <p style="font-size:13.5px;line-height:1.78">
-        Team&nbsp;2 won the Five Locks and could hand the Shield to <b>anyone in the game.</b> They already
-        knew Team&nbsp;1 was the only pool eligible for murder that night. They kept it inside Team&nbsp;2,
-        where it could not possibly be used. Katie and Rachel died. Yennhi asked why. Ryan said he
-        couldn't say. Kaylee said to trust that their hearts were pure.</p>
-      <p style="font-size:13.5px;line-height:1.78;margin-top:12px">
-        <b>Then the picture changed.</b> Ryan and Kaylee &mdash; the two loudest defenders of that decision
-        &mdash; were both murdered the following night, which makes both of them Faithfuls. So the hoard
-        was not a Traitor play end to end. But somebody in that room argued for wasting it, and four of the
-        six are still here: <b>Kendall, Laney, Parker, Armando.</b></p>
-      <p class="hand" style="font-size:20px;margin-top:16px;line-height:1.45">
-        Chaos is the tell, not noise. Ask who argued to keep it &mdash; and who stayed quiet while they did.</p>
-    </div>
-  </section>
-
-  <!-- ============ SUSPECTS ============ -->
-  <section class="sec">
-    <div class="sechead">
-      <div class="kicker">Fourth revision &middot; 11 remaining &middot; two threads, maybe two Traitors</div>
+      <div class="kicker">Fifth revision &middot; weighted toward mission anomalies, not voting records</div>
       <h2>The board, as it stands tonight.</h2>
     </div>
-
     <div class="suspects">
 
-      <div class="sus t-hot"><span class="pin"></span><span class="delta up">&uarr; 33</span>
-        <div class="name">Ella Hunt</div><div class="job">Marketing Coordinator</div>
-        <div class="pct"><span class="n">78%</span><span class="d">Traitor</span></div>
-        <div class="meter"><i style="width:78%"></i></div>
-        <div class="why">Every Ella voter but one was eliminated within a day. Survived a forced
-          five-person murder pool while two Faithfuls in it died. Has never once voted for anyone who
-          wasn't a confirmed Faithful &mdash; Gary three times, then Derrick.</div>
+      <div class="sus t-hot"><span class="pin"></span>
+        <div class="name">Ella Hunt</div>
+        <div class="pct"><span class="n">55%</span><span class="d">Traitor</span></div>
+        <div class="meter"><i style="width:55%"></i></div>
+        <div class="why">Four of the five people who voted for her were gone within a day, and she
+          survived a forced five-person murder pool while two Faithfuls in it died. Held back by the
+          fact that she is clean on every mission anomaly &mdash; neither perfect team, no hand in the
+          shield.</div>
       </div>
 
-      <div class="sus t-hot"><span class="pin"></span><span class="delta down">&darr; 7</span>
-        <div class="name">Kendall</div><div class="job">Senior Marketing Coordinator</div>
-        <div class="pct"><span class="n">45%</span><span class="d">Traitor</span></div>
-        <div class="meter"><i style="width:45%"></i></div>
-        <div class="why">Derrick's dying declaration, and he was a Faithful. Four of her five votes
-          landed on a banished Faithful &mdash; best elimination rate in the game. Never voted Derrick
-          until it was safe consensus. Two votes received in five round tables.</div>
+      <div class="sus t-hot"><span class="pin gold"></span>
+        <div class="name">Owen Song</div>
+        <div class="pct"><span class="n">50%</span><span class="d">Traitor</span></div>
+        <div class="meter"><i style="width:50%"></i></div>
+        <div class="why">Sat at the table for both impossible scores. Has not voted in three straight
+          round tables and has not posted since Aug 4 &mdash; the least engaged player alive, untouched
+          across seven murder nights. Nothing on his record depends on how he voted, because he barely has.</div>
+        <div class="flags"><span class="flag both">Both perfect teams</span></div>
       </div>
 
-      <div class="sus t-hot"><span class="pin gold"></span><span class="delta up">&uarr; 7</span>
-        <div class="name">Owen Song</div><div class="job">Design &amp; Web Development</div>
-        <div class="pct"><span class="n">42%</span><span class="d">Traitor</span></div>
-        <div class="meter"><i style="width:42%"></i></div>
-        <div class="why">Has not voted in three straight round tables and has not posted since Aug 4.
-          The least engaged player alive, untouched across seven murder nights &mdash; and he was sitting
-          at the table for both perfect scores.</div>
-        <span class="flag">On both perfect teams</span>
+      <div class="sus t-warm"><span class="pin"></span>
+        <div class="name">Bailey Wood</div>
+        <div class="pct"><span class="n">36%</span><span class="d">Traitor</span></div>
+        <div class="meter"><i style="width:36%"></i></div>
+        <div class="why">On both perfect teams. Zero votes received across six round tables, and quiet
+          enough to have been an obvious murder target six times over without ever being touched. The
+          only crossover name nobody has ever said out loud.</div>
+        <div class="flags"><span class="flag both">Both perfect teams</span></div>
       </div>
 
-      <div class="sus t-warm"><span class="pin"></span><span class="delta up">&uarr; 6</span>
-        <div class="name">Bailey Wood</div><div class="job">Graphic Designer</div>
-        <div class="pct"><span class="n">28%</span><span class="d">Traitor</span></div>
-        <div class="meter"><i style="width:28%"></i></div>
-        <div class="why">Three of her four votes landed on banished Faithfuls. Zero votes received in
-          five round tables. Quiet enough to have been a murder target six times over and never was.</div>
-        <span class="flag">On both perfect teams</span>
+      <div class="sus t-warm"><span class="pin"></span>
+        <div class="name">Kendall</div>
+        <div class="pct"><span class="n">36%</span><span class="d">Traitor</span></div>
+        <div class="meter"><i style="width:36%"></i></div>
+        <div class="why">In the room that withheld the shield and let two Team&nbsp;1 Faithfuls die.
+          Derrick named her in his dying declaration and he was a Faithful. Neither perfect team, which
+          is the only thing keeping her out of the top two.</div>
+        <div class="flags"><span class="flag shield">Withheld the shield</span></div>
       </div>
 
-      <div class="sus t-warm"><span class="pin"></span><span class="delta flat">&mdash;</span>
-        <div class="name">Kaelyn Martin</div><div class="job">Marketing Coordinator</div>
-        <div class="pct"><span class="n">28%</span><span class="d">Traitor</span></div>
-        <div class="meter"><i style="width:28%"></i></div>
-        <div class="why">Four votes cast, four confirmed Faithfuls, three of them banished. Zero votes
-          received in the entire game. Kobi vouched for her on day three and nobody has looked since.
-          Redirected the disengagement argument onto Laney the moment it got warm.</div>
+      <div class="sus t-warm"><span class="pin"></span>
+        <div class="name">Yennhi Nguyen</div>
+        <div class="pct"><span class="n">32%</span><span class="d">Traitor</span></div>
+        <div class="meter"><i style="width:32%"></i></div>
+        <div class="why">On both perfect teams, and the one who publicly argued there were no Traitors
+          on the first-guess Wordle team &mdash; while sitting on it. Zero votes received in six round
+          tables. See the mutual alibi below.</div>
+        <div class="flags"><span class="flag both">Both perfect teams</span></div>
       </div>
 
-      <div class="sus t-cool"><span class="pin"></span><span class="delta up">&uarr; 2</span>
-        <div class="name">Laney</div><div class="job">Director of UX &amp; Tech Strategy</div>
-        <div class="pct"><span class="n">22%</span><span class="d">Traitor</span></div>
-        <div class="meter"><i style="width:22%"></i></div>
-        <div class="why">Zero votes received all game. Voted Derrick three times running. Publicly
-          supplied Ella's alibi when Ella came under fire. In the room for the shield decision.</div>
+      <div class="sus t-warm"><span class="pin"></span>
+        <div class="name">Parker Webb</div>
+        <div class="pct"><span class="n">32%</span><span class="d">Traitor</span></div>
+        <div class="meter"><i style="width:32%"></i></div>
+        <div class="why">The only player carrying two mission flags: on the perfect Wordle team and in
+          the room that withheld the shield. Loudest voice in the game and has still never received a
+          single vote. See the mutual alibi below.</div>
+        <div class="flags">
+          <span class="flag one">Perfect Wordle team</span>
+          <span class="flag shield">Withheld the shield</span>
+        </div>
       </div>
 
-      <div class="sus t-cool"><span class="pin"></span><span class="delta up">&uarr; 4</span>
-        <div class="name">Parker Webb</div><div class="job">Senior Graphic Designer</div>
+      <div class="sus t-cool"><span class="pin"></span>
+        <div class="name">Kobi Worthington</div>
         <div class="pct"><span class="n">20%</span><span class="d">Traitor</span></div>
         <div class="meter"><i style="width:20%"></i></div>
-        <div class="why">The only Ella voter left breathing, which cuts both ways &mdash; either she was
-          spared as a low-credibility loose end, or she was never in danger. Fingerprints on three
-          Faithful banishments, and zero votes received despite being the loudest voice in the game.</div>
-        <span class="flag">Perfect Wordle team</span>
+        <div class="why">On the perfect trivia team. Ran the investigation for two weeks, then went
+          silent the moment he nearly got banished and skipped the Aug 6 vote entirely. His early
+          vouches are still shielding two people on this board.</div>
+        <div class="flags"><span class="flag one">Perfect trivia team</span></div>
       </div>
 
-      <div class="sus t-cool"><span class="pin"></span><span class="delta up">&uarr; 10</span>
-        <div class="name">Yennhi Nguyen</div><div class="job">Graphic Designer</div>
-        <div class="pct"><span class="n">20%</span><span class="d">Traitor</span></div>
-        <div class="meter"><i style="width:20%"></i></div>
-        <div class="why">Pushed hardest on the wasted shield, which is Faithful-coded, and defended her
-          own team's first-guess Wordle by arguing there were no Traitors on it. She was on both perfect
-          teams. Zero votes received.</div>
-        <span class="flag">On both perfect teams</span>
-      </div>
-
-      <div class="sus t-cool"><span class="pin"></span><span class="delta up">&uarr; 4</span>
-        <div class="name">Kobi Worthington</div><div class="job">Marketing Coordinator</div>
+      <div class="sus t-cool"><span class="pin"></span>
+        <div class="name">Kaelyn Martin</div>
         <div class="pct"><span class="n">18%</span><span class="d">Traitor</span></div>
         <div class="meter"><i style="width:18%"></i></div>
-        <div class="why">Ran the investigation for two weeks, then went silent the moment he nearly got
-          banished. Skipped the Aug 6 vote entirely. His early vouches are still shielding two people
-          on this board.</div>
-        <span class="flag">Perfect trivia team</span>
+        <div class="why">Her case was almost entirely a clean Faithful-elimination record, and that
+          signal has proved close to worthless here. One perfect team, no hand in the shield. Still has
+          never named a suspect with reasoning.</div>
+        <div class="flags"><span class="flag one">Perfect trivia team</span></div>
       </div>
 
-      <div class="sus t-cold"><span class="pin"></span><span class="delta flat">&mdash;</span>
-        <div class="name">Armando Saucedo</div><div class="job">Video Editor</div>
+      <div class="sus t-cool"><span class="pin"></span>
+        <div class="name">Laney</div>
+        <div class="pct"><span class="n">15%</span><span class="d">Traitor</span></div>
+        <div class="meter"><i style="width:15%"></i></div>
+        <div class="why">In the shield room, and that is the whole file. Neither perfect team. Quiet
+          votes and a Derrick habit, plus supplying Ella's alibi when Ella came under fire.</div>
+        <div class="flags"><span class="flag shield">Withheld the shield</span></div>
+      </div>
+
+      <div class="sus t-cold"><span class="pin green"></span>
+        <div class="name">Tyler Raborn</div>
         <div class="pct"><span class="n">12%</span><span class="d">Traitor</span></div>
         <div class="meter"><i style="width:12%"></i></div>
-        <div class="why">Built the whiteboard, made the case, and got the answer wrong on camera.
-          Nearly banished in the Aug 4 runoff. Traitors rarely let themselves get that close.</div>
+        <div class="why">Taking my own medicine: if mission performance is the signal, then being on
+          the team that finished last is worth something too, and I was on it. Neither perfect team, no
+          hand in the shield, two votes received in six round tables.</div>
+        <div class="flags"><span class="flag one" style="opacity:.75">Losing Wordle team</span></div>
       </div>
 
-      <div class="sus t-cold"><span class="pin gold"></span><span class="delta down">&darr; 0</span>
-        <div class="name">Tyler Raborn</div><div class="job">CEO &middot; Wordle Team 3 survivor</div>
-        <div class="pct"><span class="n">2%</span><span class="d">Traitor</span></div>
-        <div class="meter"><i style="width:2%"></i></div>
-        <div class="why">Cleared by Katie's logic on Jul 30 and never seriously re-examined since.
-          Two votes received in five round tables. Currently the last standing member of a team that
-          lost four Faithfuls to a theory about a five-letter word.</div>
+      <div class="sus t-cold"><span class="pin"></span>
+        <div class="name">Armando Saucedo</div>
+        <div class="pct"><span class="n">11%</span><span class="d">Traitor</span></div>
+        <div class="meter"><i style="width:11%"></i></div>
+        <div class="why">In the shield room, which is the only thing holding him up here. Built the
+          whiteboard, made the case, and got it wrong on camera. Nearly banished in the Aug 4 runoff,
+          and Traitors rarely let themselves get that close.</div>
+        <div class="flags"><span class="flag shield">Withheld the shield</span></div>
       </div>
 
     </div>
+
+    <div class="alliance"><span class="tape"></span>
+      <div class="eyebrow">The mutual alibi &middot; Parker &amp; Yennhi</div>
+      <h3>They have been clearing each other in public since the first week.</h3>
+      <p>Both are on the perfect Wordle team. Both have gone six round tables without receiving a single
+      vote. And every time one of them comes under pressure, the other appears within the minute to
+      vouch &mdash; never with evidence, always with friendship.</p>
+      <div class="qt">
+        <div>
+          <div class="said">Parker &middot; Jul 28, defending Yennhi on the Wordle</div>
+          <div class="line">&ldquo;im here to defend yennhi because at first we thought we all had to do
+          it and then go off who got the best score&rdquo;</div>
+        </div>
+        <div>
+          <div class="said">Yennhi &middot; Jul 28, replying</div>
+          <div class="line">&ldquo;Thanks bestie&rdquo; &mdash; answered by Parker with
+          &ldquo;i got ur back&rdquo;</div>
+        </div>
+        <div>
+          <div class="said">Yennhi &middot; Jul 30, the moment Kobi named Parker</div>
+          <div class="line">&ldquo;I do not think it&rsquo;s Parker.&rdquo;</div>
+        </div>
+        <div>
+          <div class="said">Yennhi &middot; Jul 30, on her own perfect team</div>
+          <div class="line">&ldquo;I don&rsquo;t think any of us in team one had traitors though&rdquo;</div>
+        </div>
+      </div>
+      <p style="margin-top:16px"><b>Kobi saw it and then talked himself out of it.</b> He named Kaylee,
+      Parker and Yennhi as his top three, said the camaraderie between them was making him uncertain,
+      and retracted all three within nine minutes. Kaylee has since been murdered, which clears her.
+      The other two are still standing, still unvoted, still on the perfect Wordle team.</p>
+      <p class="hand" style="font-size:21px;margin-top:14px;line-height:1.45">
+        A defence is not evidence. Ask each of them to name the other&rsquo;s tell &mdash; or admit they
+        have never looked.</p>
+    </div>
   </section>
 
-  <!-- ============ LEDGER ============ -->
+  <!-- 8. LEDGER -->
   <section class="sec">
     <div class="sechead">
       <div class="kicker">Every vote cast by everyone still alive</div>
@@ -713,10 +768,10 @@ tr.spot td{background:rgba(176,27,46,.09)}
     </div>
 
     <div class="ledger"><span class="pin"></span>
-      <table>
+      <table class="ltable">
         <thead>
           <tr>
-            <th style="text-align:left">Player</th>
+            <th>Player</th>
             <th>Jul 22<br>Alex</th><th>Jul 28<br>Brad A.</th><th>Jul 30<br>Kelsey</th>
             <th>Aug 4<br>Gary</th><th>Aug 6<br>Derrick</th><th>Faithfuls<br>banished</th>
           </tr>
@@ -734,10 +789,10 @@ tr.spot td{background:rgba(176,27,46,.09)}
           <tr><td class="who">Parker</td>
             <td class="hit">Alex</td><td class="hit">Brad A.</td><td class="hit">Kelsey</td>
             <td>Ryan</td><td>Ella</td><td class="tot">3</td></tr>
-          <tr><td class="who">Bailey</td>
+          <tr class="spot"><td class="who">Bailey</td>
             <td class="hit">Alex</td><td class="hit">Brad A.</td><td class="skip">no vote</td>
             <td>Kobi</td><td class="hit">Derrick</td><td class="tot">3</td></tr>
-          <tr class="spot"><td class="who">Ella</td>
+          <tr><td class="who">Ella</td>
             <td class="skip">no vote</td><td>Gary</td><td>Gary</td>
             <td class="hit">Gary</td><td class="hit">Derrick</td><td class="tot">2</td></tr>
           <tr><td class="who">Kobi</td>
@@ -746,7 +801,7 @@ tr.spot td{background:rgba(176,27,46,.09)}
           <tr><td class="who">Laney</td>
             <td class="skip">no vote</td><td class="hit">Brad A.</td><td>Derrick</td>
             <td>Derrick</td><td class="hit">Derrick</td><td class="tot">2</td></tr>
-          <tr><td class="who">Yennhi</td>
+          <tr class="spot"><td class="who">Yennhi</td>
             <td>Derrick</td><td class="hit">Brad A.</td><td class="hit">Kelsey</td>
             <td>Armando</td><td>Tyler</td><td class="tot">2</td></tr>
           <tr><td class="who">Tyler</td>
@@ -758,8 +813,8 @@ tr.spot td{background:rgba(176,27,46,.09)}
         </tbody>
       </table>
       <div class="legend">
-        <b>Red</b> = the vote landed on the person actually banished. All five were Faithfuls, so a high
-        score means a high hit rate on eliminating your own side.<br>
+        <b>Orange</b> = the vote landed on the person actually banished. All five were Faithfuls, so a
+        high score means a high hit rate on eliminating your own side.<br>
         Votes received by anyone still alive, across all five round tables: Ella 5, Armando 5 (+2 in the
         runoff), Kobi 4 (+5), Owen 3, Kendall 2, Tyler 2. Bailey, Kaelyn, Laney, Parker and Yennhi have
         never received a single vote.
@@ -779,12 +834,8 @@ document.getElementById('save').addEventListener('click', function(){
   var original = btn.textContent;
   btn.disabled = true; btn.textContent = 'Rendering…';
   html2canvas(board, {
-    scale: 2,
-    backgroundColor: '#5b4227',
-    useCORS: true,
-    logging: false,
-    windowWidth: board.scrollWidth,
-    windowHeight: board.scrollHeight
+    scale: 2, backgroundColor: '#5b4227', useCORS: true, logging: false,
+    windowWidth: board.scrollWidth, windowHeight: board.scrollHeight
   }).then(function(canvas){
     var link = document.createElement('a');
     link.download = 'traitors-evidence-board.png';
