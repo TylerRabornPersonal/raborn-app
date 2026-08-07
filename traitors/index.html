@@ -226,6 +226,26 @@ td.both{background:var(--yellow-hi)}
 .flag.one{background:var(--yellow-lo)}
 .flag.shield{background:rgba(181,96,28,.2);border-color:var(--banished);color:var(--banished)}
 
+/* red herring thesis */
+.thesis{position:relative;background:var(--paper);padding:34px 30px 32px;text-align:center;
+  box-shadow:0 12px 26px rgba(0,0,0,.5);border:5px double var(--murdered);transform:rotate(-.5deg)}
+.thesis .big{font-family:'Permanent Marker',cursive;font-size:clamp(24px,4.4vw,42px);
+  line-height:1.16;color:var(--murdered)}
+.thesis .sub{font-family:'Caveat',cursive;font-weight:700;font-size:clamp(19px,2.6vw,27px);
+  line-height:1.38;color:var(--marker);margin-top:16px;max-width:840px;margin-left:auto;margin-right:auto}
+.rods{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:18px;margin-top:22px}
+.rod{position:relative;background:var(--paper-2);padding:20px 18px 20px;box-shadow:0 9px 18px rgba(0,0,0,.44)}
+.rod:nth-child(1){transform:rotate(-1deg)}.rod:nth-child(2){transform:rotate(.8deg)}.rod:nth-child(3){transform:rotate(-.5deg)}
+.rod .rn{font-family:'Permanent Marker',cursive;font-size:20px;line-height:1.2;color:var(--banished)}
+.rod .heat{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-soft);margin:7px 0 12px}
+.rod p{font-size:12.5px;line-height:1.68;margin-bottom:9px}
+.rod .rev{margin-top:12px;padding:9px 10px;border:2px solid var(--banished);color:var(--banished);
+  font-family:'Permanent Marker',cursive;font-size:12px;letter-spacing:.06em;text-align:center}
+.signal{margin-top:20px;background:var(--card-blue);position:relative;padding:24px;
+  box-shadow:0 10px 22px rgba(0,0,0,.45);transform:rotate(.4deg)}
+.signal h3{font-family:'Permanent Marker',cursive;font-size:22px;line-height:1.25;color:var(--marker);margin-bottom:12px}
+.signal p{font-size:13.5px;line-height:1.76;margin-bottom:11px}
+
 /* alliance callout */
 .alliance{margin-top:22px;background:var(--card-blue);position:relative;padding:24px 24px 26px;
   box-shadow:0 10px 22px rgba(0,0,0,.45);transform:rotate(-.4deg)}
@@ -252,6 +272,13 @@ td.both{background:var(--yellow-hi)}
 .ltable td.tot{font-family:'Permanent Marker',cursive;font-size:16px;color:var(--banished)}
 .ltable tr.spot td{background:rgba(181,96,28,.1)}
 .legend{margin-top:14px;font-size:11.5px;line-height:1.85;color:var(--ink-soft)}
+.ltable td.z{color:#a89e8c}
+.ltable td.big{font-family:'Permanent Marker',cursive;font-size:15px;color:var(--murdered)}
+.ltable td.rn{font-size:10.5px;color:var(--ink-soft);display:block;margin-top:2px}
+.ltable tr.never td{background:rgba(212,160,23,.24)}
+.ltable tr.never td.who{color:var(--alive)}
+.ltable tfoot td{border-bottom:none;border-top:2px solid var(--marker);padding-top:11px;
+  font-family:'Permanent Marker',cursive;font-size:12px;color:var(--marker)}
 .legend b{color:var(--banished)}
 
 .foot{margin-top:12px;text-align:center;font-size:11px;letter-spacing:.2em;
@@ -310,14 +337,14 @@ td.both{background:var(--yellow-hi)}
         Five banishments later, nobody has asked whether that happened here.</p>
         <div class="ask"><span>Ask the host</span>
           <p>How many Traitors did this game start with &mdash; and has anyone been recruited since?</p></div>
-        <div class="askfoot">Every count-based theory in this channel is built on a number we made up.</div>
+        <div class="askfoot">Every count-based theory in this channel rests on a number the players invented.</div>
       </div>
 
       <div class="q"><span class="pin"></span>
         <div class="qnum">02</div>
         <h3>The teams are random. MK said so. So why is anyone using them as evidence?</h3>
         <p>She stated it in the rules for Wordle Wars on Jul 27: <b>you have been randomly assigned to
-        one of three teams.</b> Take her at her word &mdash; she has been straight with us all game.</p>
+        one of three teams.</b> Take her at her word &mdash; she has been straight with the room all game.</p>
         <p>Now sit with what that means. <b>If the teams are random, team membership carries no
         information about who is a Traitor.</b> None. It is a coin toss wearing a name tag. And yet
         almost every accusation for two weeks has opened with which team somebody was on.</p>
@@ -325,20 +352,92 @@ td.both{background:var(--yellow-hi)}
         won it, so Team&nbsp;1 is clean. Team&nbsp;2 kept the shield, so Team&nbsp;2 is guilty. All three
         of those arguments are reading meaning into a randomiser.</div>
         <p>Even the most careful version collapses. Ryan's one-Traitor-per-group theory is what narrowed
-        Team&nbsp;1 down to Ella or me &mdash; but random assignment does not hand you an even spread.
+        Team&nbsp;1 down to Ella or Tyler &mdash; but random assignment does not hand you an even spread.
         Three Traitors dropped at random into teams of 5, 6 and 6 land one apiece in only
         <b>180 of 680 arrangements. Roughly 26%.</b></p>
         <div class="ask"><span>Ask the host</span>
           <p>Were these teams randomly selected, as it was stated in the rules they would be?</p></div>
         <div class="askfoot">If yes, then who was on which team proves nothing &mdash; and there is a
-        74% chance the premise we have been voting on is wrong. What a random team cannot explain is
+        74% chance the premise these banishments rest on is wrong. What a random team cannot explain is
         <b>how that team performed.</b> That is the next page.</div>
       </div>
 
     </div>
   </section>
 
-  <!-- 2. PERFECT SCORES -->
+
+  <!-- 3. ENGAGEMENT RED HERRING -->
+  <section class="sec">
+    <div class="sechead">
+      <div class="kicker">The mistake underneath every wrong banishment</div>
+      <h2>Talking is not guilt.</h2>
+    </div>
+
+    <div class="thesis"><span class="pin"></span>
+      <div class="big">Engaging in the discussion has been a red herring, not a flag of guilt.</div>
+      <div class="sub">Every player banished for being loud, theorising, or pushing hard turned out to be
+      a Faithful. Five for five. The signal was never in who talks the most &mdash; it is in the people
+      sitting slightly off to one side, never confrontational, never fully committed, quietly nudging
+      the room toward chaos.</div>
+    </div>
+
+    <div class="rods">
+
+      <div class="rod"><span class="pin"></span>
+        <div class="rn">Brad Arrowood</div>
+        <div class="heat">11 of 19 votes &middot; banished round two</div>
+        <p>Posted constantly, argued back, built theories out loud. The ominous gifs and the sword in the
+        photo lineup were treated as evidence because he was the one everyone could see.</p>
+        <p>He also called this exact trap before it closed on him &mdash; warning that with several
+        people not responding in chat at all, the Traitor was more likely hiding among the quiet than
+        among the ones causing noise. Four days later he was gone.</p>
+        <div class="rev">REVEALED FAITHFUL</div>
+      </div>
+
+      <div class="rod"><span class="pin"></span>
+        <div class="rn">Gary</div>
+        <div class="heat">Named in every round table he lived through</div>
+        <p>The single loudest presence in the game. Opened on day one with a joke about being a Traitor,
+        then accused Derrick, Tyler, Ella, Kelsey, Kobi and Brad&nbsp;A. in turn. Drew more suspicion
+        than anyone across four round tables and took seven cloaks in the Aug 4 runoff.</p>
+        <p>All of it read as a Traitor generating cover. None of it was.</p>
+        <div class="rev">REVEALED FAITHFUL</div>
+      </div>
+
+      <div class="rod"><span class="pin"></span>
+        <div class="rn">Derrick Robertson</div>
+        <div class="heat">12 votes through four rounds, 6 more in the fifth</div>
+        <p>Did more investigative work than any player: voting records, voice notes, a Loom. The effort
+        itself became the accusation &mdash; the killer inserting himself into the investigation.</p>
+        <p>His last message named the mechanism plainly: he and Gary had been good lightning rods
+        protecting the Traitors, and a vote for him was a vote for a red herring. He was right, and the
+        room banished him anyway.</p>
+        <div class="rev">REVEALED FAITHFUL</div>
+      </div>
+
+    </div>
+
+    <div class="signal"><span class="tape"></span>
+      <h3>Engagement has been punished twice over &mdash; at the round table and in the night.</h3>
+      <p>Alex was banished after being the first to publicly read the room. Kelsey was banished for
+      seeming too busy. And the Traitors have spent their murders on the sharpest people left standing:
+      Sarah Kate died days after calling out Brad&nbsp;A.'s gifs and Ryan's silence. Katie died after
+      producing the cleanest piece of deduction anyone has managed. Ryan, Kaylee and Matt died the night
+      after Ryan named a suspect out loud.</p>
+      <p><b>Put those two lists together and the pattern is unmistakable.</b> Loud players get banished
+      by the Faithfuls. Sharp players get murdered by the Traitors. Nobody in either group has ever
+      turned out to be a Traitor.</p>
+      <p>What survives is the middle: players who post enough not to look absent, who drop one short
+      accusation and let the room carry it, who defend a friend without evidence, who agree to waste a
+      shield and then decline to explain why. No campaigns. No whiteboards. Just a nudge, and then
+      silence while everyone else fights.</p>
+      <p class="hand" style="font-size:21px;margin-top:14px;line-height:1.45">
+        Stop asking who is making the most noise. Ask who has never had to defend themselves &mdash;
+        and who was standing next to the last five bodies without ever raising their voice.</p>
+    </div>
+  </section>
+
+  <!-- 4. PERFECT SCORES -->
   <section class="sec">
     <div class="sechead">
       <div class="kicker">The thing nobody will say out loud</div>
@@ -391,7 +490,7 @@ td.both{background:var(--yellow-hi)}
     </div>
   </section>
 
-  <!-- 3. OVERLAY -->
+  <!-- 5. OVERLAY -->
   <section class="sec">
     <div class="sechead">
       <div class="kicker">Now overlay the two rosters</div>
@@ -486,8 +585,8 @@ td.both{background:var(--yellow-hi)}
       <h3>Three of the four are still in the game. And not one banished player appears on this list.</h3>
       <p>Matt clears &mdash; the Traitors murdered him, so he was a Faithful. That leaves
       <b>Owen, Bailey and Yennhi</b> as the only people who were at the table for both impossible scores.</p>
-      <p>Look at the fourth column too. Every single person we have banished &mdash; Alex, Brad&nbsp;A.,
-      Kelsey, Gary, Derrick &mdash; was on <b>neither</b> perfect team. We have spent five round tables
+      <p>Look at the fourth column too. Every single person banished so far &mdash; Alex, Brad&nbsp;A.,
+      Kelsey, Gary, Derrick &mdash; was on <b>neither</b> perfect team. Five round tables have been spent
       convicting people who were nowhere near the two results that don't add up.</p>
       <p class="hand" style="font-size:21px;margin-top:16px;line-height:1.45">
         If someone in this game is comfortable cheating, they left fingerprints on both scoreboards.
@@ -495,7 +594,7 @@ td.both{background:var(--yellow-hi)}
     </div>
   </section>
 
-  <!-- 4. SHIELD -->
+  <!-- 6. SHIELD -->
   <section class="sec">
     <div class="sechead">
       <div class="kicker">Follow the chaos, not the volume</div>
@@ -521,7 +620,7 @@ td.both{background:var(--yellow-hi)}
     </div>
   </section>
 
-  <!-- 5. ELLA -->
+  <!-- 7. ELLA -->
   <section class="sec">
     <div class="sechead">
       <div class="kicker">A separate thread &middot; still unexplained</div>
@@ -562,11 +661,11 @@ td.both{background:var(--yellow-hi)}
     </div>
   </section>
 
-  <!-- 6. WORDLE TEAM 3 -->
+  <!-- 8. WORDLE TEAM 3 -->
   <section class="sec">
     <div class="sechead">
       <div class="kicker">Setting the record straight</div>
-      <h2>The losing Wordle team never proved anything. It just cost us four Faithfuls.</h2>
+      <h2>The losing Wordle team never proved anything. It just removed four Faithfuls.</h2>
     </div>
     <div class="wordle">
 
@@ -581,7 +680,7 @@ td.both{background:var(--yellow-hi)}
         <p style="font-size:13px;line-height:1.7;margin-top:10px">
           <b>Worth remembering:</b> MK took <i>one</i> submission per team. There is no per-person
           scorecard. Nobody can be blamed individually for a shared guess &mdash; and no accusation in
-          that thread ever named me. Derrick's own words afterwards: we were just really bad at Team Wordle.</p>
+          that thread ever named Tyler. Derrick's own verdict afterwards was that Team&nbsp;3 were simply bad at it.</p>
       </div>
 
       <div class="card" style="background:var(--card-blue)"><span class="pin"></span>
@@ -595,14 +694,14 @@ td.both{background:var(--yellow-hi)}
         <div class="bc-row"><span>Tyler Raborn</span><span class="v alv">STILL STANDING</span></div>
         <div class="verdict">
           <p>Six of seven gone. Four banished on the sabotage theory. Four Faithfuls. The losing-team
-          theory is 0 for 4 &mdash; and it is the reason I am still being looked at.</p>
+          theory is 0 for 4 &mdash; and it is the only reason Tyler is still on anyone's list.</p>
         </div>
       </div>
 
     </div>
   </section>
 
-  <!-- 7. SUSPECTS -->
+  <!-- 9. SUSPECTS -->
   <section class="sec">
     <div class="sechead">
       <div class="kicker">Fifth revision &middot; weighted toward mission anomalies, not voting records</div>
@@ -706,9 +805,10 @@ td.both{background:var(--yellow-hi)}
         <div class="name">Tyler Raborn</div>
         <div class="pct"><span class="n">12%</span><span class="d">Traitor</span></div>
         <div class="meter"><i style="width:12%"></i></div>
-        <div class="why">Taking my own medicine: if mission performance is the signal, then being on
-          the team that finished last is worth something too, and I was on it. Neither perfect team, no
-          hand in the shield, two votes received in six round tables.</div>
+        <div class="why">Cleared by Katie's reasoning on Jul 30 and never seriously re-examined since.
+          Neither perfect team, no hand in the shield, two votes received in six round tables. Carries a
+          small mark only because the same standard applies to him: he was on the Wordle team that
+          finished last.</div>
         <div class="flags"><span class="flag one" style="opacity:.75">Losing Wordle team</span></div>
       </div>
 
@@ -760,7 +860,7 @@ td.both{background:var(--yellow-hi)}
     </div>
   </section>
 
-  <!-- 8. LEDGER -->
+  <!-- 10. LEDGER -->
   <section class="sec">
     <div class="sechead">
       <div class="kicker">Every vote cast by everyone still alive</div>
@@ -818,6 +918,70 @@ td.both{background:var(--yellow-hi)}
         Votes received by anyone still alive, across all five round tables: Ella 5, Armando 5 (+2 in the
         runoff), Kobi 4 (+5), Owen 3, Kendall 2, Tyler 2. Bailey, Kaelyn, Laney, Parker and Yennhi have
         never received a single vote.
+      </div>
+    </div>
+  </section>
+
+
+  <!-- 11. VOTES RECEIVED -->
+  <section class="sec">
+    <div class="sechead">
+      <div class="kicker">The other side of the ledger</div>
+      <h2>Votes received, every round.</h2>
+    </div>
+
+    <div class="ledger"><span class="pin"></span>
+      <table class="ltable">
+        <thead>
+          <tr>
+            <th>Player</th>
+            <th>Jul 22<br>Round 1</th><th>Jul 28<br>Round 2</th><th>Jul 30<br>Round 3</th>
+            <th>Aug 4<br>Round 4</th><th>Aug 6<br>Round 5</th><th>Total<br>received</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td class="who">Ella</td>
+            <td class="z">0</td><td class="z">0</td><td class="z">0</td><td class="z">0</td>
+            <td>5</td><td class="big">5</td></tr>
+          <tr><td class="who">Armando</td>
+            <td>1</td><td class="z">0</td><td class="z">0</td>
+            <td>4 <span class="rn">+2 in runoff</span></td><td class="z">0</td><td class="big">5</td></tr>
+          <tr><td class="who">Kobi</td>
+            <td class="z">0</td><td class="z">0</td><td class="z">0</td>
+            <td>4 <span class="rn">+5 in runoff</span></td><td class="z">0</td><td class="big">4</td></tr>
+          <tr><td class="who">Owen</td>
+            <td>1</td><td>2</td><td class="z">0</td><td class="z">0</td><td class="z">0</td>
+            <td class="big">3</td></tr>
+          <tr><td class="who">Kendall</td>
+            <td class="z">0</td><td class="z">0</td><td>1</td><td>1</td><td class="z">0</td>
+            <td class="big">2</td></tr>
+          <tr><td class="who">Tyler</td>
+            <td class="z">0</td><td>1</td><td class="z">0</td><td class="z">0</td><td>1</td>
+            <td class="big">2</td></tr>
+          <tr class="never"><td class="who">Bailey</td>
+            <td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td class="tot">0</td></tr>
+          <tr class="never"><td class="who">Kaelyn</td>
+            <td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td class="tot">0</td></tr>
+          <tr class="never"><td class="who">Laney</td>
+            <td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td class="tot">0</td></tr>
+          <tr class="never"><td class="who">Parker</td>
+            <td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td class="tot">0</td></tr>
+          <tr class="never"><td class="who">Yennhi</td>
+            <td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td class="tot">0</td></tr>
+        </tbody>
+        <tfoot>
+          <tr><td>Banished that round</td>
+            <td>Alex</td><td>Brad A.</td><td>Kelsey</td><td>Gary</td><td>Derrick</td>
+            <td>All Faithful</td></tr>
+        </tfoot>
+      </table>
+      <div class="legend">
+        Twenty-one votes have been aimed at the eleven players still standing, across five round tables
+        &mdash; and every one of them landed on just six names.
+        <b>Five players have never been named once.</b> Bailey, Kaelyn, Laney, Parker and Yennhi have sat
+        through five banishments without a single person writing them down.<br>
+        Gary drew 15 votes over three rounds and was a Faithful. Derrick drew 12 and was a Faithful. The
+        heaviest suspicion in this game has been the least accurate signal in it.
       </div>
     </div>
   </section>
