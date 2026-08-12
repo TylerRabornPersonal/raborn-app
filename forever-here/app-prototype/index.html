@@ -78,7 +78,7 @@
   /* SPLASH */
   #splash{background:radial-gradient(600px 400px at 72% 6%,rgba(255,104,31,.26),transparent 60%),radial-gradient(600px 460px at 10% 108%,rgba(91,214,255,.24),transparent 60%),var(--night-900);color:var(--linen);align-items:center;justify-content:center;text-align:center;}
   #splash .wm{font-family:var(--font-wm);font-weight:600;font-size:1.95rem;letter-spacing:.18em;line-height:1.18;color:#fff;}
-  #splash .sayhello{font-family:var(--font-body);font-size:.68rem;letter-spacing:.42em;color:var(--frost-400);font-weight:600;margin-top:10px;}
+  #splash .sayhello{font-family:var(--font-body);font-size:.62rem;letter-spacing:.14em;color:var(--frost-400);font-weight:600;margin-top:12px;line-height:1.6;max-width:22ch;margin-left:auto;margin-right:auto;}
   #splash .tag{font-family:var(--font-soft);font-style:italic;font-weight:300;color:var(--slate-300);margin:20px auto 0;font-size:1.05rem;max-width:24ch;}
   #splash .closing{font-family:var(--font-display);font-weight:600;font-size:.82rem;letter-spacing:.06em;color:var(--slate-400);margin-top:26px;}
   #splash .closing span{color:var(--frost-600);}
@@ -110,6 +110,15 @@
   .type-card h3{font-size:1.2rem;margin-bottom:4px;}
   .type-card h3{color:var(--linen);}
   .type-card p{font-size:.86rem;color:var(--slate-400);}
+
+  /* DELIVERY OPTIONS (always visible) */
+  .optgroup{display:flex;flex-direction:column;gap:10px;}
+  .optcard{display:flex;gap:11px;align-items:flex-start;padding:13px 14px;border:1.5px solid rgba(255,255,255,.16);
+    border-radius:var(--r-md);background:rgba(255,255,255,.04);cursor:pointer;transition:border-color .15s,background .15s;}
+  .optcard:has(input:checked){border-color:var(--frost-500);background:rgba(91,214,255,.10);}
+  .optcard input{margin-top:3px;accent-color:var(--frost-500);flex-shrink:0;}
+  .optcard b{display:block;color:var(--linen);font-size:.9rem;font-weight:700;}
+  .optcard small{display:block;color:var(--slate-400);font-size:.78rem;margin-top:2px;}
 
   /* CHIPS */
   .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px;}
@@ -301,8 +310,8 @@
           </g>
         </svg>
         <div class="wm">FOREVER HERE</div>
-        <div class="sayhello">SAY HELLO FOREVER</div>
-        <div class="tag">They'll hear you. Forever.</div>
+        <div class="sayhello">NEVER MISS ANOTHER MOMENT OR MILESTONE</div>
+        <div class="tag">Your voice lives on.</div>
         <div class="closing">LOVE NEVER LEAVES. <span>NEITHER WILL YOU.</span></div>
       </div>
       <div class="sp-actions stack">
@@ -348,11 +357,11 @@
     <section class="screen" id="home">
       <div class="topbar" style="justify-content:space-between;"><h2 style="font-family:var(--font-wm);font-size:.95rem;letter-spacing:.18em;">FOREVER&nbsp;HERE</h2><button class="back" onclick="go('settings')" aria-label="Account settings"><svg width="20" height="20" viewBox="0 0 24 24" class="svg-ico" style="stroke:#fff"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.6 1.6 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.6 1.6 0 0 0-1.8-.3 1.6 1.6 0 0 0-1 1.5V21a2 2 0 0 1-4 0v-.1a1.6 1.6 0 0 0-1-1.5 1.6 1.6 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.6 1.6 0 0 0 .3-1.8 1.6 1.6 0 0 0-1.5-1H3a2 2 0 0 1 0-4h.1a1.6 1.6 0 0 0 1.5-1 1.6 1.6 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.6 1.6 0 0 0 1.8.3H9a1.6 1.6 0 0 0 1-1.5V3a2 2 0 0 1 4 0v.1a1.6 1.6 0 0 0 1 1.5 1.6 1.6 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.6 1.6 0 0 0-.3 1.8V9a1.6 1.6 0 0 0 1.5 1H21a2 2 0 0 1 0 4h-.1a1.6 1.6 0 0 0-1.5 1Z"/></svg></button></div>
       <div class="body pad">
-        <div class="greet">Hello, <span id="home-name">Robert</span><div class="sub">What call would you like to schedule today?</div></div>
+        <div class="greet">Hello, <span id="home-name">Robert</span></div>
         <div style="height:20px;"></div>
         <button class="home-card make" onclick="startNew()">
           <svg class="ico svg-ico" width="26" height="26" viewBox="0 0 24 24"><path d="M12 15a3 3 0 0 0 3-3V6a3 3 0 0 0-6 0v6a3 3 0 0 0 3 3Z"/><path d="M19 11a7 7 0 0 1-14 0M12 18v3"/></svg>
-          <h3>Make a Call</h3><p>Record a message to be delivered on the day it matters.</p>
+          <h3>Schedule a Call</h3><p>Record a message to be delivered on the day it matters.</p>
         </button>
         <button class="home-card calls" onclick="go('mycalls')">
           <svg class="ico svg-ico" width="26" height="26" viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3-8.6A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.3 1.8.6 2.6a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.5-1.1a2 2 0 0 1 2.1-.5c.8.3 1.7.5 2.6.6a2 2 0 0 1 1.7 2Z"/></svg>
@@ -392,11 +401,13 @@
         <div class="field"><label for="s-rel">Relationship</label><input id="s-rel" type="text" placeholder="Daughter"></div>
         <div class="field"><label for="s-cell">Their cell number</label><input id="s-cell" type="tel" placeholder="(601) 555-0188"></div>
         <div class="field"><label for="s-email">Their email (optional)</label><input id="s-email" type="email" placeholder="emma@email.com"><p class="hint">If the call can't get through, say they changed their number, we'll email them the message as a link they can play.</p></div>
-        <div class="field"><label for="s-mode">When should it be delivered?</label>
-          <select id="s-mode" onchange="toggleMode()">
-            <option value="guardian">Delivery date to be scheduled by a guardian</option>
-            <option value="date">On a specific date I choose</option>
-          </select>
+        <div class="field"><label>When should it be delivered?</label>
+          <div class="optgroup">
+            <label class="optcard"><input type="radio" name="s-mode" value="guardian" checked onchange="toggleMode()">
+              <span><b>Delivery date scheduled by a guardian</b><small>For moments you can't put a date on yet</small></span></label>
+            <label class="optcard"><input type="radio" name="s-mode" value="date" onchange="toggleMode()">
+              <span><b>On a specific date I choose</b><small>Pick the exact day and time</small></span></label>
+          </div>
         </div>
         <div id="date-fields" style="display:none;">
           <div class="row2">
@@ -550,6 +561,16 @@
     instructions:'Please release this on the morning of her wedding day.',
     audioUrl:null, seeded:true,
     voiceText:"Emma, if you're hearing this, it's your wedding day, and I want you to know I'm so proud of the woman you've become. I love you more than words. Go be happy."
+  },{
+    id:'seed-mil', type:'scheduled', mode:'date', senderName:'Dad', recipient:'Sarah', relation:'Wife',
+    when:'Every Sunday while deployed', label:'Military deployment', people:[], email:'',
+    instructions:'', audioUrl:null, seeded:true,
+    voiceText:"Hey. Just wanted to let you know I'm out working hard saving America and I appreciate you holding the fort down. Sorry I could not actually call today but wanted you to know how much I love you. Talk soon."
+  },{
+    id:'seed-par', type:'scheduled', mode:'date', senderName:'Mom', recipient:'Noah', relation:'Son',
+    when:'Tonight · 7:30 PM', label:'Bedtime story', people:[], email:'',
+    instructions:'', audioUrl:null, seeded:true,
+    voiceText:"Goodnight, sweet boy. Once upon a time there was a little bear who could not fall asleep, because he was waiting on his mama to come home. So his mama sent him the moon, and she told him: every night you look up, that is me saying goodnight. Close your eyes now. I love you. I will see you in the morning."
   }];
 
   // ── NAV ────────────────────────────────────────────────
@@ -577,7 +598,7 @@
   // ── CREATE FLOW ────────────────────────────────────────
   window.startNew = function(){ captureName(); draft={ type:'scheduled', mode:'guardian', recipient:'', relation:'', email:'', instructions:'', people:[], audioUrl:null, seconds:0 }; go('sched'); };
   window.toggleMode = function(){
-    var mode = document.getElementById('s-mode').value;
+    var mode = (document.querySelector('input[name="s-mode"]:checked')||{}).value || 'guardian';
     document.getElementById('date-fields').style.display = mode==='date' ? 'block' : 'none';
     document.getElementById('guardian-note').style.display = mode==='date' ? 'none' : 'block';
     document.getElementById('guardian-instructions-field').style.display = mode==='date' ? 'none' : 'block';
@@ -677,7 +698,7 @@
     draft.recipient = document.getElementById('s-name').value.trim() || 'your recipient';
     draft.relation = document.getElementById('s-rel').value.trim();
     draft.email = document.getElementById('s-email').value.trim();
-    draft.mode = document.getElementById('s-mode').value;
+    draft.mode = (document.querySelector('input[name="s-mode"]:checked')||{}).value || 'guardian';
     draft.instructions = document.getElementById('s-instructions').value.trim();
     draft.label = document.getElementById('s-label').value.trim();
     if(draft.mode==='date'){
