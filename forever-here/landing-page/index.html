@@ -46,14 +46,14 @@
   /* ── HERO ─────────────────────────────────────────── */
   .hero{position:relative;overflow:hidden;padding:56px 0 68px;background:var(--ink-950);}
   .hero-bg{position:absolute;inset:0;z-index:0;display:block;}
-  .hero-bg img{width:100%;height:100%;object-fit:cover;object-position:2% 45%;}
+  .hero-bg img{width:100%;height:100%;object-fit:cover;object-position:100% 55%;}
   .hero-overlay{position:absolute;inset:0;z-index:1;
-    background:linear-gradient(90deg,rgba(2,5,11,.96) 0%,rgba(7,19,35,.82) 46%,rgba(7,19,35,.38) 100%),
+    background:linear-gradient(90deg,rgba(2,5,11,.97) 0%,rgba(7,19,35,.85) 44%,rgba(7,19,35,.18) 74%,rgba(2,5,11,.05) 100%),
                linear-gradient(0deg,rgba(2,5,11,.88) 0%,rgba(2,5,11,.12) 58%);}
   .hero-grid{position:relative;z-index:2;display:grid;grid-template-columns:1.02fr .98fr;gap:40px;align-items:center;}
 
   .brandblock{margin-bottom:26px;}
-  .wordmark{font-family:var(--font-display);font-weight:600;font-size:clamp(2.1rem,4.4vw,3.35rem);letter-spacing:.15em;line-height:1;margin-top:6px;}
+  .wordmark{font-family:var(--font-display);font-weight:600;font-size:clamp(2.3rem,4.8vw,3.7rem);letter-spacing:.15em;line-height:1;text-shadow:0 2px 26px rgba(2,5,11,.6);}
   .sayhello{font-family:var(--font-sans);font-size:.7rem;letter-spacing:.2em;color:var(--ice-400);font-weight:600;margin-top:11px;line-height:1.5;}
 
   .headline{font-size:clamp(2.2rem,4.6vw,3.5rem);letter-spacing:-.005em;}
@@ -90,28 +90,10 @@
     width:7px;height:7px;border-radius:50%;pointer-events:none;background:#FFE7C4;
     box-shadow:0 0 10px 3px rgba(255,180,91,.85),0 0 22px 8px rgba(255,104,31,.45);}
 
-  /* PHONE */
-  .phone{width:270px;margin:0 auto;position:relative;border-radius:42px;padding:11px;
-    background:linear-gradient(160deg,#2b3038,#14171c 55%,#0b0d11);
-    box-shadow:0 34px 76px rgba(0,0,0,.66), 0 0 0 1px rgba(255,255,255,.10);}
-  .screen{position:relative;background:linear-gradient(180deg,#0a1119 0%,#050a12 60%,#02050B 100%);border-radius:33px;overflow:hidden;padding:14px 16px 22px;min-height:520px;display:flex;flex-direction:column;align-items:center;text-align:center;}
-  .notch{position:absolute;top:11px;left:50%;transform:translateX(-50%);width:86px;height:22px;background:#000;border-radius:var(--radius-pill);}
-  .sbar{width:100%;display:flex;justify-content:space-between;align-items:center;font-size:11px;font-weight:600;color:#fff;font-family:-apple-system,'SF Pro Text',sans-serif;padding:2px 4px 0;}
-  .caller{margin-top:34px;}
-  .caller .nm{font-family:var(--font-display);font-style:italic;font-weight:600;font-size:1.7rem;color:#fff;line-height:1.1;}
-  .caller .sub{font-size:.72rem;color:var(--gray-300);margin-top:2px;font-style:italic;font-family:var(--font-display);}
-  .phone-mark{margin:22px auto 0;}
-  .phone-quote{font-family:var(--font-display);font-style:italic;font-size:.95rem;color:var(--cloud);line-height:1.35;margin-top:16px;max-width:22ch;}
-  .quick{display:flex;justify-content:center;gap:64px;margin-top:auto;padding-top:24px;}
-  .quick .q{text-align:center;}
-  .quick .q svg{margin:0 auto 5px;display:block;}
-  .quick .q span{font-size:.6rem;color:var(--gray-300);}
-  .answer-row{display:flex;justify-content:center;gap:64px;margin-top:20px;}
-  .ar{text-align:center;}
-  .ar .circ{width:54px;height:54px;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 6px;}
-  .ar .circ.dec{background:#E8362A;}
-  .ar .circ.acc{background:#2ECC58;}
-  .ar span{font-size:.6rem;color:var(--gray-300);}
+  /* PHONE GRAPHIC */
+  .phone-img{display:block;}
+  .phone-img img{width:min(330px,74vw);margin:0 auto;display:block;
+    filter:drop-shadow(0 36px 64px rgba(0,0,0,.62)) drop-shadow(0 8px 22px rgba(0,0,0,.45));}
 
   /* ── SECTION HEADINGS with rules ─────────────────── */
   .sec{padding:66px 0;}
@@ -168,7 +150,7 @@
   .fclose .b{color:var(--electric-600);}
   .fsub{color:var(--gray-300);font-size:.86rem;margin-top:8px;}
   .fdiv{height:1px;background:linear-gradient(90deg,transparent,rgba(91,214,255,.32),transparent);margin:30px auto;max-width:820px;}
-  .fwm{font-family:var(--font-display);font-weight:600;letter-spacing:.3em;font-size:.9rem;margin-top:8px;}
+  .fwm{font-family:var(--font-display);font-weight:600;letter-spacing:.3em;font-size:1.15rem;margin-top:0;}
   .fcopy{font-size:.72rem;color:var(--gray-500);margin-top:22px;}
 
   /* RESPONSIVE */
@@ -179,13 +161,13 @@
     .brandblock svg{margin-left:auto;margin-right:auto;}
     .aud-grid{grid-template-columns:repeat(2,1fr);}
     .hero-overlay{background:linear-gradient(0deg,rgba(2,5,11,.94) 0%,rgba(2,5,11,.5) 70%),rgba(2,5,11,.72);}
-    .hero-bg img{object-position:center 45%;}
+    .hero-bg img{object-position:78% 55%;}
   }
   @media(max-width:720px){
     .aud-grid,.signup-grid,.frow{grid-template-columns:1fr;}
     .features{grid-template-columns:repeat(2,1fr);gap:20px 0;}
     .feat:nth-child(3){border-left:0;padding-left:0;}
-    .phone{width:min(78vw,270px);}
+    .phone-img img{width:min(70vw,300px);}
     .sec-head::before,.sec-head::after{display:none;}
     .sec-head h2{white-space:normal;}
     .btn{width:100%;}
@@ -212,16 +194,6 @@
 </style>
 <div id="fh-gate" role="dialog" aria-modal="true" aria-label="Password required">
   <div class="box">
-    <svg width="110" height="55" viewBox="0 0 200 100" aria-hidden="true" style="margin:0 auto 6px;display:block;filter:drop-shadow(0 0 14px rgba(91,214,255,.28)) drop-shadow(0 0 18px rgba(255,104,31,.24));">
-      <defs>
-        <linearGradient id="gFire" x1="0%" y1="50%" x2="100%" y2="50%"><stop offset="0%" stop-color="#FF681F"/><stop offset="55%" stop-color="#FFB45B"/><stop offset="100%" stop-color="#F7FAFF"/></linearGradient>
-        <linearGradient id="gIce" x1="0%" y1="50%" x2="100%" y2="50%"><stop offset="0%" stop-color="#F7FAFF"/><stop offset="45%" stop-color="#5BD6FF"/><stop offset="100%" stop-color="#178BFF"/></linearGradient>
-      </defs>
-      <g fill="none" stroke-linecap="round" stroke-width="13">
-        <path d="M100 50 C 84 18, 40 16, 24 50 C 40 84, 84 82, 100 50 Z" stroke="url(#gFire)"/>
-        <path d="M100 50 C 116 18, 160 16, 176 50 C 160 84, 116 82, 100 50 Z" stroke="url(#gIce)"/>
-      </g>
-    </svg>
     <div class="wm">FOREVER HERE</div>
     <h1>Private preview</h1>
     <p>This material is confidential and shared under NDA. Enter the password to continue.</p>
@@ -253,8 +225,8 @@
 <!-- ══════════ HERO ══════════ -->
 <header class="hero">
   <picture class="hero-bg">
-    <source srcset="images/hero-lake.webp" type="image/webp">
-    <img src="images/hero-lake.jpg" alt="A parent and child silhouetted on a dock at sunset beside a phone displaying a scheduled call from a loved one.">
+    <source srcset="images/hero-dusk.webp" type="image/webp">
+    <img src="images/hero-dusk.jpg" alt="A parent and child silhouetted on a dock at sunset beside a phone displaying a scheduled call from a loved one.">
   </picture>
   <div class="hero-overlay"></div>
 
@@ -262,20 +234,6 @@
     <!-- LEFT -->
     <div>
       <div class="brandblock">
-        <svg class="logo-glow" width="228" height="114" viewBox="0 0 200 100" aria-label="Forever Here fire-and-ice infinity symbol">
-          <defs>
-            <linearGradient id="fhFire" x1="0%" y1="50%" x2="100%" y2="50%">
-              <stop offset="0%" stop-color="#FF681F"/><stop offset="55%" stop-color="#FFB45B"/><stop offset="100%" stop-color="#F7FAFF"/>
-            </linearGradient>
-            <linearGradient id="fhIce" x1="0%" y1="50%" x2="100%" y2="50%">
-              <stop offset="0%" stop-color="#F7FAFF"/><stop offset="45%" stop-color="#5BD6FF"/><stop offset="100%" stop-color="#178BFF"/>
-            </linearGradient>
-          </defs>
-          <g fill="none" stroke-linecap="round" stroke-width="13">
-            <path d="M100 50 C 84 18, 40 16, 24 50 C 40 84, 84 82, 100 50 Z" stroke="url(#fhFire)"/>
-            <path d="M100 50 C 116 18, 160 16, 176 50 C 160 84, 116 82, 100 50 Z" stroke="url(#fhIce)"/>
-          </g>
-        </svg>
         <div class="wordmark">FOREVER HERE</div>
         <div class="sayhello">NEVER MISS ANOTHER MOMENT OR MILESTONE</div>
       </div>
@@ -314,55 +272,10 @@
     <div class="hero-right">
       <div class="coming">COMING SOON</div>
       <div class="coming-rule"></div>
-      <div class="phone">
-        <div class="screen">
-          <div class="notch"></div>
-          <div class="sbar">
-            <span>9:41</span>
-            <span style="display:flex;gap:5px;align-items:center;">
-              <svg width="15" height="10" viewBox="0 0 17 11" fill="#fff"><rect y="7" width="3" height="4" rx="1"/><rect x="4.5" y="5" width="3" height="6" rx="1"/><rect x="9" y="2.5" width="3" height="8.5" rx="1"/><rect x="13.5" width="3" height="11" rx="1"/></svg>
-              <svg width="14" height="10" viewBox="0 0 16 12" fill="#fff"><path d="M8 2.4c2.3 0 4.4.9 6 2.4l1.2-1.3A11 11 0 0 0 8 .5 11 11 0 0 0 .8 3.5L2 4.8A8.6 8.6 0 0 1 8 2.4Zm0 3.6c1.3 0 2.6.5 3.5 1.4l1.2-1.3A7.3 7.3 0 0 0 8 3.9a7.3 7.3 0 0 0-4.7 2.2l1.2 1.3C5.4 6.5 6.7 6 8 6Zm0 3.5 2-2.1a3.4 3.4 0 0 0-4 0l2 2.1Z"/></svg>
-              <svg width="22" height="10" viewBox="0 0 26 12"><rect x=".5" y=".5" width="21" height="11" rx="3" fill="none" stroke="#fff" stroke-opacity=".55"/><rect x="2" y="2" width="16" height="8" rx="1.5" fill="#fff"/><rect x="23" y="4" width="2" height="4" rx="1" fill="#fff" fill-opacity=".6"/></svg>
-            </span>
-          </div>
-
-          <div class="caller">
-            <div class="nm">Dad</div>
-            <div class="sub">mobile</div>
-          </div>
-
-          <svg class="phone-mark logo-glow" width="150" height="75" viewBox="0 0 200 100" aria-hidden="true">
-            <g fill="none" stroke-linecap="round" stroke-width="13">
-              <path d="M100 50 C 84 18, 40 16, 24 50 C 40 84, 84 82, 100 50 Z" stroke="url(#fhFire)"/>
-              <path d="M100 50 C 116 18, 160 16, 176 50 C 160 84, 116 82, 100 50 Z" stroke="url(#fhIce)"/>
-            </g>
-          </svg>
-
-          <p class="phone-quote">Forever doesn't have to be far away.</p>
-
-          <div class="quick">
-            <div class="q">
-              <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.6" stroke-linecap="round"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 1.5M9 2 5 5M15 2l4 3"/></svg>
-              <span>Remind Me</span>
-            </div>
-            <div class="q">
-              <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.5 8.5 0 0 1-12.3 7.6L3 21l1.9-5.7A8.5 8.5 0 1 1 21 11.5Z"/></svg>
-              <span>Message</span>
-            </div>
-          </div>
-
-          <div class="answer-row">
-            <div class="ar">
-              <div class="circ dec"><svg width="24" height="24" viewBox="0 0 24 24" fill="#fff" style="transform:rotate(135deg)"><path d="M20 15.5c-1.2 0-2.4-.2-3.5-.6-.35-.12-.75-.03-1.02.24l-2.2 2.2c-2.83-1.44-5.15-3.76-6.59-6.59l2.2-2.2c.27-.27.36-.67.24-1.02C8.7 6.4 8.5 5.2 8.5 4c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1 0 9.39 7.61 17 17 17 .55 0 1-.45 1-1v-3.5c0-.55-.45-1-1-1z"/></svg></div>
-              <span>Decline</span>
-            </div>
-            <div class="ar">
-              <div class="circ acc"><svg width="24" height="24" viewBox="0 0 24 24" fill="#fff"><path d="M20 15.5c-1.2 0-2.4-.2-3.5-.6-.35-.12-.75-.03-1.02.24l-2.2 2.2c-2.83-1.44-5.15-3.76-6.59-6.59l2.2-2.2c.27-.27.36-.67.24-1.02C8.7 6.4 8.5 5.2 8.5 4c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1 0 9.39 7.61 17 17 17 .55 0 1-.45 1-1v-3.5c0-.55-.45-1-1-1z"/></svg></div>
-              <span>Accept</span>
-            </div>
-          </div>
-        </div>
-      </div>
+      <picture class="phone-img">
+        <source srcset="images/phone-dad.webp" type="image/webp">
+        <img src="images/phone-dad.png" alt="A Forever Here call from Dad ringing on an iPhone.">
+      </picture>
     </div>
   </div>
 </header>
@@ -511,12 +424,6 @@
     <p class="fclose">LOVE NEVER LEAVES. <span class="b">NEITHER WILL YOU.</span></p>
     <p class="fsub">Forever Here ensures your voice and your presence live on, forever.</p>
     <div class="fdiv"></div>
-    <svg width="118" height="59" viewBox="0 0 200 100" class="logo-glow" style="margin:0 auto;" aria-hidden="true">
-      <g fill="none" stroke-linecap="round" stroke-width="13">
-        <path d="M100 50 C 84 18, 40 16, 24 50 C 40 84, 84 82, 100 50 Z" stroke="url(#fhFire)"/>
-        <path d="M100 50 C 116 18, 160 16, 176 50 C 160 84, 116 82, 100 50 Z" stroke="url(#fhIce)"/>
-      </g>
-    </svg>
     <div class="fwm">FOREVER HERE</div>
     <p class="fcopy">© 2026 Forever Here. All rights reserved.</p>
   </div>
