@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CCS Theatre — Christ Covenant School</title>
+<meta name="description" content="Christ Covenant School Theatre — home of International Thespian Troupe 11767. Productions, competition team, and theatre arts in Ridgeland, MS.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700;9..144,900&family=Libre+Franklin:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --stage:#04101f;          /* darkest — the house before curtain */
+  --navy-deep:#062036;      /* deep section bg */
+  --navy:#073e6b;           /* CCS brand navy */
+  --navy-card:#0a2c4d;      /* card surface */
+  --gold:#fdd209;           /* CCS brand gold */
+  --gold-dim:#c9a507;
+  --ivory:#f6f1e4;          /* warm house-light white */
+  --ivory-dim:rgba(246,241,228,.68);
+  --line:rgba(253,210,9,.22);
+  --maxw:1180px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Libre Franklin',system-ui,sans-serif;
+  background:var(--stage);
+  color:var(--ivory);
+  line-height:1.65;
+  font-weight:300;
+  -webkit-font-smoothing:antialiased;
+}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+h1,h2,h3,h4{font-family:'Fraunces',serif;font-weight:600;line-height:1.12}
+
+/* ---------- marquee dots (signature motif) ---------- */
+.marquee-dots{display:flex;gap:9px;margin:18px 0 0}
+.marquee-dots span{width:5px;height:5px;border-radius:50%;background:var(--gold);opacity:.35;animation:twinkle 2.4s infinite}
+.marquee-dots span:nth-child(2n){animation-delay:.6s}
+.marquee-dots span:nth-child(3n){animation-delay:1.2s}
+.marquee-dots span:nth-child(5n){animation-delay:1.8s}
+@keyframes twinkle{0%,100%{opacity:.25}50%{opacity:1}}
+@media (prefers-reduced-motion:reduce){
+  .marquee-dots span{animation:none;opacity:.7}
+  *{transition:none!important;animation:none!important}
+  html{scroll-behavior:auto}
+}
+
+/* ---------- nav ---------- */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  background:rgba(4,16,31,.9);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid rgba(253,210,9,.14);
+}
+.nav-inner{max-width:var(--maxw);margin:0 auto;padding:0 24px;height:72px;display:flex;align-items:center;justify-content:space-between}
+.nav-brand{display:flex;align-items:center;gap:12px}
+.nav-brand img{height:44px;width:auto}
+.nav-brand .wordmark{font-family:'Fraunces',serif;font-weight:700;font-size:1.05rem;letter-spacing:.02em}
+.nav-brand .wordmark em{font-style:normal;color:var(--gold)}
+.nav-links{display:flex;align-items:center;gap:28px;font-size:.82rem;font-weight:500;letter-spacing:.06em;text-transform:uppercase}
+.nav-links a{color:var(--ivory-dim);transition:color .2s}
+.nav-links a:hover,.nav-links a:focus-visible{color:var(--gold)}
+.nav-cta{
+  background:var(--gold);color:var(--stage)!important;
+  padding:10px 20px;border-radius:3px;font-weight:700;
+  transition:transform .15s, box-shadow .2s;
+}
+.nav-cta:hover{transform:translateY(-1px);box-shadow:0 6px 18px rgba(253,210,9,.35)}
+.menu-btn{display:none;background:none;border:1px solid var(--line);color:var(--gold);padding:8px 14px;border-radius:3px;font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;cursor:pointer}
+@media(max-width:900px){
+  .nav-links{
+    display:none;position:absolute;top:72px;left:0;right:0;
+    background:rgba(4,16,31,.98);flex-direction:column;padding:24px;gap:20px;
+    border-bottom:1px solid var(--line);
+  }
+  .nav-links.open{display:flex}
+  .menu-btn{display:block}
+}
+
+/* ---------- hero ---------- */
+.hero{
+  position:relative;min-height:100svh;display:flex;align-items:center;
+  overflow:hidden;
+}
+.hero-bg{position:absolute;inset:0;z-index:0}
+.hero-bg img{width:100%;height:100%;object-fit:cover;object-position:center 30%;filter:saturate(.85) brightness(.5)}
+.hero-bg::after{
+  content:"";position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse 70% 55% at 50% 8%, rgba(253,210,9,.16), transparent 60%),
+    linear-gradient(180deg, rgba(4,16,31,.55) 0%, rgba(4,16,31,.35) 45%, var(--stage) 100%);
+}
+.hero-inner{position:relative;z-index:1;max-width:var(--maxw);margin:0 auto;padding:140px 24px 90px;width:100%}
+.eyebrow{
+  display:inline-block;font-size:.78rem;font-weight:600;letter-spacing:.28em;
+  text-transform:uppercase;color:var(--gold);margin-bottom:20px;
+}
+.hero h1{
+  font-size:clamp(2.9rem,7.2vw,5.6rem);font-weight:900;
+  letter-spacing:-.015em;max-width:14ch;
+}
+.hero h1 .gold{color:var(--gold);font-style:italic;font-weight:700}
+.hero p{max-width:54ch;margin-top:24px;font-size:1.08rem;color:var(--ivory-dim)}
+.hero-actions{display:flex;gap:16px;margin-top:36px;flex-wrap:wrap}
+.btn{
+  display:inline-block;padding:15px 30px;border-radius:3px;
+  font-weight:700;font-size:.88rem;letter-spacing:.06em;text-transform:uppercase;
+  transition:transform .15s, box-shadow .2s, background .2s;
+}
+.btn-gold{background:var(--gold);color:var(--stage)}
+.btn-gold:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(253,210,9,.35)}
+.btn-ghost{border:1px solid rgba(246,241,228,.35);color:var(--ivory)}
+.btn-ghost:hover{border-color:var(--gold);color:var(--gold)}
+.hero-troupe{
+  margin-top:64px;display:inline-flex;align-items:center;gap:14px;
+  font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ivory-dim);
+}
+.hero-troupe::before{content:"";width:44px;height:1px;background:var(--gold)}
+
+/* ---------- shared section ---------- */
+section{padding:110px 24px}
+.wrap{max-width:var(--maxw);margin:0 auto}
+.sec-head{max-width:640px;margin-bottom:56px}
+.sec-head h2{font-size:clamp(2rem,4.4vw,3.2rem);font-weight:700;letter-spacing:-.01em}
+.sec-head p{margin-top:18px;color:var(--ivory-dim);font-size:1.02rem}
+
+/* reveal on scroll */
+.reveal{opacity:0;transform:translateY(26px);transition:opacity .7s ease, transform .7s ease}
+.reveal.in{opacity:1;transform:none}
+
+/* ---------- about ---------- */
+#about{background:var(--stage)}
+.about-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:64px;align-items:center}
+.about-photos{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.about-photos img{border-radius:4px;aspect-ratio:3/4;object-fit:cover;width:100%}
+.about-photos img:nth-child(2){margin-top:36px}
+@media(max-width:900px){.about-grid{grid-template-columns:1fr}}
+
+/* ---------- troupe ---------- */
+#troupe{background:var(--navy-deep)}
+.troupe-award{
+  display:inline-flex;align-items:center;gap:12px;margin:26px 0 0;
+  border:1px solid var(--line);border-radius:3px;padding:14px 22px;
+  font-size:.86rem;letter-spacing:.04em;color:var(--gold);
+  background:rgba(253,210,9,.05);
+}
+.troupe-award svg{flex-shrink:0}
+.troupe-cols{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-top:56px}
+.troupe-card{
+  background:var(--navy-card);border:1px solid rgba(253,210,9,.12);
+  border-radius:6px;overflow:hidden;
+  display:flex;flex-direction:column;
+}
+.troupe-card img{aspect-ratio:16/10;object-fit:cover;width:100%}
+.troupe-card .body{padding:32px 34px 38px}
+.troupe-card h3{font-size:1.55rem;color:var(--gold)}
+.troupe-card .sub{font-size:.78rem;letter-spacing:.2em;text-transform:uppercase;color:var(--ivory-dim);margin-top:6px}
+.troupe-card p{margin-top:16px;font-size:.96rem;color:var(--ivory-dim)}
+.officers{margin-top:22px;display:flex;flex-wrap:wrap;gap:8px}
+.officers span{
+  font-size:.78rem;font-weight:500;letter-spacing:.03em;
+  border:1px solid rgba(246,241,228,.22);border-radius:99px;padding:6px 14px;
+  color:var(--ivory);
+}
+.officers span em{font-style:normal;color:var(--gold-dim)}
+@media(max-width:900px){.troupe-cols{grid-template-columns:1fr}}
+
+/* ---------- competition ---------- */
+#competition{background:var(--stage)}
+.comp-grid{display:grid;grid-template-columns:.95fr 1.05fr;gap:64px;align-items:center}
+.comp-photo{position:relative}
+.comp-photo img{border-radius:6px;width:100%}
+.comp-photo .tag{
+  position:absolute;bottom:-18px;left:24px;background:var(--gold);color:var(--stage);
+  font-family:'Fraunces',serif;font-weight:700;font-size:.92rem;
+  padding:10px 20px;border-radius:3px;box-shadow:0 10px 30px rgba(0,0,0,.45);
+}
+.comp-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:40px;border:1px solid var(--line);border-radius:6px;overflow:hidden}
+.comp-stats div{background:var(--navy-deep);padding:22px 18px;text-align:center}
+.comp-stats b{display:block;font-family:'Fraunces',serif;font-size:1.7rem;font-weight:700;color:var(--gold)}
+.comp-stats small{font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ivory-dim)}
+.roster{margin-top:34px}
+.roster h4{font-size:.8rem;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);font-family:'Libre Franklin',sans-serif;font-weight:600}
+.roster p{margin-top:10px;font-family:'Fraunces',serif;font-size:1.18rem;line-height:1.8;color:var(--ivory)}
+@media(max-width:900px){.comp-grid{grid-template-columns:1fr}}
+
+/* ---------- playbill / past shows ---------- */
+#shows{background:var(--navy-deep);position:relative}
+.playbill{position:relative;margin-top:20px}
+.playbill::before{
+  content:"";position:absolute;left:11px;top:8px;bottom:8px;width:1px;
+  background:linear-gradient(180deg,var(--gold),rgba(253,210,9,.08));
+}
+.show{
+  position:relative;padding:0 0 64px 56px;
+  display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:36px;align-items:start;
+}
+.show:last-child{padding-bottom:0}
+.show::before{
+  content:"";position:absolute;left:5px;top:10px;width:13px;height:13px;border-radius:50%;
+  background:var(--stage);border:2px solid var(--gold);
+}
+.show .when{font-size:.76rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);font-weight:600}
+.show h3{font-size:clamp(1.5rem,3vw,2.1rem);margin-top:8px}
+.show .note{margin-top:12px;color:var(--ivory-dim);font-size:.94rem;max-width:44ch}
+.show-pics{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.show-pics img{border-radius:4px;aspect-ratio:4/3;object-fit:cover;width:100%;filter:saturate(.92)}
+.show-pics img:only-child{grid-column:1/-1;aspect-ratio:16/9}
+@media(max-width:820px){.show{grid-template-columns:1fr}}
+
+/* ---------- support ---------- */
+#support{background:var(--stage)}
+.support-cards{display:grid;grid-template-columns:1fr 1fr;gap:28px}
+.support-card{
+  border:1px solid var(--line);border-radius:6px;padding:44px 40px;
+  background:linear-gradient(160deg, rgba(253,210,9,.06), rgba(253,210,9,0) 55%), var(--navy-card);
+  display:flex;flex-direction:column;
+}
+.support-card h3{font-size:1.7rem;color:var(--gold)}
+.support-card p{margin:16px 0 28px;color:var(--ivory-dim);flex:1}
+.support-card .btn{align-self:flex-start}
+@media(max-width:820px){.support-cards{grid-template-columns:1fr}}
+
+/* ---------- footer ---------- */
+footer{background:var(--navy-deep);border-top:1px solid var(--line);padding:70px 24px 40px}
+.foot-grid{max-width:var(--maxw);margin:0 auto;display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:40px}
+.foot-grid img{height:56px;width:auto;margin-bottom:18px}
+footer h4{font-family:'Libre Franklin',sans-serif;font-weight:600;font-size:.78rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:16px}
+footer p, footer a{font-size:.92rem;color:var(--ivory-dim);line-height:1.9}
+footer a:hover{color:var(--gold)}
+.foot-bottom{max-width:var(--maxw);margin:56px auto 0;padding-top:24px;border-top:1px solid rgba(246,241,228,.1);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:.8rem;color:rgba(246,241,228,.45)}
+@media(max-width:900px){.foot-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.foot-grid{grid-template-columns:1fr}}
+
+:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a class="nav-brand" href="#top" aria-label="CCS Theatre home">
+      <img src="https://images.squarespace-cdn.com/content/v1/654003072edf841ff28674c9/e1ecbb06-bc39-40c4-b3c5-26823294b539/ccs-theatre-2023+%282%29.png" alt="CCS Theatre logo">
+      <span class="wordmark">CCS <em>Theatre</em></span>
+    </a>
+    <button class="menu-btn" aria-expanded="false" aria-controls="navlinks" onclick="toggleMenu(this)">Menu</button>
+    <div class="nav-links" id="navlinks">
+      <a href="#about">About</a>
+      <a href="#troupe">Troupe 11767</a>
+      <a href="#competition">Competition</a>
+      <a href="#shows">Past Shows</a>
+      <a href="#support">Support</a>
+      <a class="nav-cta" href="https://www.theatre.ccs.ms/tickets">Tickets</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero" id="top">
+  <div class="hero-bg">
+    <img src="https://images.squarespace-cdn.com/content/v1/654003072edf841ff28674c9/8cc53102-6029-4ee5-b5d1-1902b5d476c2/CS5A3739+%281%29.JPG" alt="CCS Theatre students performing on stage">
+  </div>
+  <div class="hero-inner">
+    <span class="eyebrow">Christ Covenant School · Ridgeland, MS</span>
+    <h1>Where creativity <span class="gold">comes alive</span> on stage</h1>
+    <p>From full-scale musicals to national festival stages, CCS Theatre is a vibrant community of young performers bringing captivating stories to life — and making unforgettable memories along the way.</p>
+    <div class="hero-actions">
+      <a class="btn btn-gold" href="https://www.theatre.ccs.ms/tickets">Get Tickets</a>
+      <a class="btn btn-ghost" href="#about">Explore the Program</a>
+    </div>
+    <div class="hero-troupe">International Thespian Troupe 11767</div>
+    <div class="marquee-dots" aria-hidden="true">
+      <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+    </div>
+  </div>
+</header>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="wrap about-grid">
+    <div class="reveal">
+      <span class="eyebrow">Welcome</span>
+      <div class="sec-head" style="margin-bottom:0">
+        <h2>A stage for every student</h2>
+        <p>Let us take you on a magical journey where creativity comes alive. Immerse yourself in the captivating tales we bring to life on stage, and join our vibrant community of theatre lovers.</p>
+        <p>We are here to entertain, inspire, and leave you with unforgettable memories — and your support means the world to us. Start your theatre adventure with CCS Theatre today.</p>
+        <div style="margin-top:30px">
+          <a class="btn btn-ghost" href="https://www.instagram.com/ccstheatredepartment/">Follow on Instagram</a>
+        </div>
+      </div>
+    </div>
+    <div class="about-photos reveal">
+      <img src="https://images.squarespace-cdn.com/content/v1/654003072edf841ff28674c9/a4e28f0c-b28b-4152-9087-b9fb98494ad4/IMG_8348.jpeg" alt="CCS Theatre performance">
+      <img src="https://images.squarespace-cdn.com/content/v1/654003072edf841ff28674c9/eac9603f-21b3-48fd-a76a-8c860806b5ea/IMG_8356.jpeg" alt="Students on stage">
+    </div>
+  </div>
+</section>
+
+<!-- TROUPE 11767 -->
+<section id="troupe">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Theatre Honor Society</span>
+      <h2>Troupe 11767</h2>
+      <p>At Christ Covenant School, we believe in recognizing and celebrating excellence in the performing arts. Our Theatre Honor Society honors the talents and achievements of students who excel in theatre arts and enrich the cultural life of our school community.</p>
+      <div class="troupe-award">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M8 21h8M12 17v4M7 4h10v4a5 5 0 0 1-10 0V4zM7 5H4v2a3 3 0 0 0 3 3M17 5h3v2a3 3 0 0 1-3 3"/></svg>
+        Rising Star Troupe Award — Mississippi Thescon
+      </div>
+    </div>
+    <div class="troupe-cols">
+      <article class="troupe-card reveal">
+        <img src="https://images.squarespace-cdn.com/content/v1/654003072edf841ff28674c9/58a54065-b694-44e9-a6cd-246511ce5771/IMG_7753.jpg" alt="High school troupe members">
+        <div class="body">
+          <h3>High School Troupe</h3>
+          <div class="sub">International Thespian Society</div>
+          <p>Our upper school thespians lead the way — on stage, backstage, and at festival — carrying the troupe's standard of excellence in every production.</p>
+          <div class="officers">
+            <span>Barham <em>· President</em></span>
+            <span>Virginia <em>· Vice President</em></span>
+            <span>Caroline <em>· Chaplain</em></span>
+            <span>Banks <em>· Secretary</em></span>
+            <span>Lucy <em>· Historian</em></span>
+          </div>
+        </div>
+      </article>
+      <article class="troupe-card reveal">
+        <img src="https://images.squarespace-cdn.com/content/v1/654003072edf841ff28674c9/d8afdbda-8c6b-4f39-bd67-54f9fbf176c0/IMG_5636+2.JPG" alt="Middle school troupe officers">
+        <div class="body">
+          <h3>Middle School Troupe</h3>
+          <div class="sub">Junior Theatre Honor Society</div>
+          <p>Get ready to shine in the spotlight! Our junior society celebrates the passion and talent of young performers and theatre enthusiasts across the junior high community.</p>
+          <div class="officers">
+            <span>Gracyn <em>· President</em></span>
+            <span>Julia <em>· Vice President</em></span>
+            <span>Kate <em>· Chaplain</em></span>
+            <span>Emily <em>· Secretary</em></span>
+            <span>Mary Alice <em>· Historian</em></span>
+            <span>Addy <em>· 7th Grade Rep</em></span>
+            <span>JD <em>· 7th Grade Rep</em></span>
+            <span>Mary Genevive <em>· 6th Grade Rep</em></span>
+            <span>Yochanan <em>· 6th Grade Rep</em></span>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- COMPETITION -->
+<section id="competition">
+  <div class="wrap comp-grid">
+    <div class="comp-photo reveal">
+      <img src="https://images.squarespace-cdn.com/content/v1/654003072edf841ff28674c9/380f1023-5506-49c4-91c4-fb35cc3db2a2/JTF+Comp+team+2025.png" alt="Competition team at the Junior Theatre Festival">
+      <div class="tag">Junior Theatre Festival · Atlanta, GA</div>
+    </div>
+    <div class="reveal">
+      <span class="eyebrow">Competition Troupe</span>
+      <div class="sec-head" style="margin-bottom:0">
+        <h2>Tested on the national stage</h2>
+        <p>Fifteen CCS students traveled to Atlanta for the Junior Theatre Festival, performing a 15-minute adjudication of <em>Newsies Jr.</em> for theatre professionals — including Broadway's Katy Geraghty — and training in acting and dance workshops led by industry pros.</p>
+      </div>
+      <div class="comp-stats">
+        <div><b>15</b><small>Students</small></div>
+        <div><b>1</b><small>Excellence in Music Award</small></div>
+        <div><b>2</b><small>Student All-Stars</small></div>
+      </div>
+      <div class="roster">
+        <h4>Meet the Team</h4>
+        <p>Lily · JD · Kate · Gracyn · Mary Brett · Seth · Emma · Sophia · Lydian · Caroline · Jack · Emily · Lucy · Virginia · Barham</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PAST SHOWS -->
+<section id="shows">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">The Playbill Archive</span>
+      <h2>Seasons past</h2>
+      <p>Seven years of curtain calls — every production a new adventure for our students and audiences alike.</p>
+    </div>
+    <div class="playbill">
+
+      <article class="show reveal">
+        <div>
+          <div class="when">November 15–16, 2024</div>
+          <h3>The Lion, the Witch, and the Wardrobe</h3>
+          <p class="note">Narnia came to life on the CCS stage — from the lamppost to the stone table.</p>
+        </div>
+        <div class="show-pics">
+          <img src="https://images.squarespace-cdn.com/content/v1/654003072edf841ff28674c9/32f59698-a4ef-4753-aff9-a5c72713d120/0C5A7741.jpeg" alt="Scene from The Lion, the Witch, and the Wardrobe">
+          <img src="https://images.squarespace-cdn.com/content/v1/654003072edf841ff28674c9/75f7175b-ce71-4256-8be8-c36b740fb1c5/0C5A8199.jpeg" alt="Cast of The Lion, the Witch, and the Wardrobe">
+        </div>
+      </article>
+
+      <article class="show reveal">
+        <div>
+          <div class="when">April 25–26, 2024</div>
+          <h3>Newsies Jr.</h3>
+          <p class="note">Seize the day! The show that carried our competition troupe all the way to Atlanta.</p>
+        </div>
+        <div class="show-pics">
+          <img src="https://images.squarespace-cdn.com/content/v1/654003072edf841ff28674c9/0f45590d-51ab-4ec8-8d4e-096a663a508d/CS5A3598+2.JPG" alt="Scene from Newsies Jr.">
+          <img src="https://images.squarespace-cdn.com/content/v1/654003072edf841ff28674c9/c0609e5d-12e0-43d6-b969-5e62afd9ca64/0C5A1652_Original+%281%29.JPG" alt="Newsies Jr. cast on stage">
+        </div>
+      </article>
+
+      <article class="show reveal">
+        <div>
+          <div class="when">December 1–2, 2023</div>
+          <h3>The Best Christmas Pageant Ever!</h3>
+          <p class="note">A holiday classic, retold with plenty of CCS heart.</p>
+        </div>
+        <div class="show-pics">
+          <img src="https://images.squarespace-cdn.com/content/v1/654003072edf841ff28674c9/c1897c1c-5c5e-4625-8766-d2282a720818/0X7A4138.JPG" alt="Scene from The Best Christmas Pageant Ever">
+          <img src="https://images.squarespace-cdn.com/content/v1/654003072edf841ff28674c9/18a2911e-ade1-45e7-9bf7-565a1ae131d8/IMG_9693.JPG" alt="Best Christmas Pageant Ever cast">
+        </div>
+      </article>
+
+      <article class="show reveal">
+        <div>
+          <div class="when">March 2023</div>
+          <h3>Beauty and the Beast Jr.</h3>
+          <p class="note">A tale as old as time, with a full house every night.</p>
+        </div>
+        <div class="show-pics">
+          <img src="https://images.squarespace-cdn.com/content/v1/654003072edf841ff28674c9/f56b2230-e397-4c20-b4a6-c1a0c06471b8/DSC_4578.JPG" alt="Scene from Beauty and the Beast Jr.">
+          <img src="https://images.squarespace-cdn.com/content/v1/654003072edf841ff28674c9/0130a868-5a25-429e-a512-9df382d84b52/DSC_4794.JPG" alt="Beauty and the Beast Jr. cast">
+        </div>
+      </article>
+
+      <article class="show reveal">
+        <div>
+          <div class="when">March 2022</div>
+          <h3>The Little Mermaid Jr.</h3>
+          <p class="note">Under the sea and onto the stage.</p>
+        </div>
+        <div class="show-pics">
+          <img src="https://images.squarespace-cdn.com/content/v1/654003072edf841ff28674c9/1ae1fd7e-85f6-4cdb-8762-f5fbb21f4fb5/DSC_2518+%281%29.JPG" alt="Scene from The Little Mermaid Jr.">
+          <img src="https://images.squarespace-cdn.com/content/v1/654003072edf841ff28674c9/89a9e66a-64d0-49f7-ae5b-abaed72ace61/DSC_2633.JPG" alt="Little Mermaid Jr. performers">
+        </div>
+      </article>
+
+      <article class="show reveal">
+        <div>
+          <div class="when">May 2021</div>
+          <h3>Seussical Jr.</h3>
+          <p class="note">Oh, the thinks our students thought.</p>
+        </div>
+        <div class="show-pics">
+          <img src="https://images.squarespace-cdn.com/content/v1/654003072edf841ff28674c9/8471a635-f9fb-41c7-86dd-be81f1555d76/IMG_0712.jpg" alt="Scene from Seussical Jr.">
+          <img src="https://images.squarespace-cdn.com/content/v1/654003072edf841ff28674c9/ba63e11d-cee5-4000-80f5-852913b647e4/IMG_9129.jpg" alt="Seussical Jr. cast">
+        </div>
+      </article>
+
+      <article class="show reveal">
+        <div>
+          <div class="when">Summer 2020</div>
+          <h3>Mary Poppins Jr.</h3>
+          <p class="note">Practically perfect — and where this stage tradition took flight.</p>
+        </div>
+        <div class="show-pics">
+          <img src="https://images.squarespace-cdn.com/content/v1/654003072edf841ff28674c9/bac7d96d-724c-43fb-acf9-e5e56a6d8a94/6X4A0270.JPEG" alt="Scene from Mary Poppins Jr.">
+          <img src="https://images.squarespace-cdn.com/content/v1/654003072edf841ff28674c9/a5e7b469-c995-4d3c-80d0-55823af38425/6X4A0211.JPEG" alt="Mary Poppins Jr. cast">
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- SUPPORT -->
+<section id="support">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Support the Program</span>
+      <h2>Help the curtain rise</h2>
+      <p>Every set piece, costume, and festival trip is made possible by families and friends of CCS Theatre.</p>
+    </div>
+    <div class="support-cards">
+      <div class="support-card reveal">
+        <h3>Become a Season Sponsor</h3>
+        <p>Put your family or business behind a full season of CCS Theatre and be recognized alongside our productions all year long.</p>
+        <a class="btn btn-gold" href="https://www.theatre.ccs.ms/seasonsponsor">Sponsor a Season</a>
+      </div>
+      <div class="support-card reveal">
+        <h3>Make a Donation</h3>
+        <p>CCS Theatre is a school-based program, so your gift is entirely tax deductible under the U.S. tax code — and goes straight to our students.</p>
+        <a class="btn btn-gold" href="https://pushpay.com/g/christcovenantschool">Donate Now</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="foot-grid">
+    <div>
+      <img src="https://images.squarespace-cdn.com/content/v1/654003072edf841ff28674c9/e521ef0e-8823-4d22-88c8-4bd5d4d1f9aa/New+CCS+Logo+Without+Tagline.png" alt="Christ Covenant School logo">
+      <p>Christ Covenant School Theatre<br>Home of International Thespian Troupe 11767</p>
+    </div>
+    <div>
+      <h4>Location</h4>
+      <p>752 S Pear Orchard Rd<br>Ridgeland, MS 39157</p>
+    </div>
+    <div>
+      <h4>Hours</h4>
+      <p>Monday — Friday<br>8:00 – 3:00</p>
+    </div>
+    <div>
+      <h4>Connect</h4>
+      <p>
+        <a href="tel:6019782272">(601) 978-2272</a><br>
+        <a href="https://www.instagram.com/ccstheatredepartment/">Instagram</a><br>
+        <a href="https://ccs.ms/">ccs.ms</a>
+      </p>
+    </div>
+  </div>
+  <div class="foot-bottom">
+    <span>© 2026 Christ Covenant School Theatre. All rights reserved.</span>
+    <span>Soli Deo Gloria</span>
+  </div>
+</footer>
+
+<script>
+function toggleMenu(btn){
+  const links = document.getElementById('navlinks');
+  const open = links.classList.toggle('open');
+  btn.setAttribute('aria-expanded', open);
+}
+document.querySelectorAll('#navlinks a').forEach(a=>a.addEventListener('click',()=>{
+  document.getElementById('navlinks').classList.remove('open');
+}));
+const io = new IntersectionObserver(es=>es.forEach(e=>{
+  if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}
+}),{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>
