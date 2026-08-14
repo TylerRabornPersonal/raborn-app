@@ -1,0 +1,1834 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Verdacta · Magnolia Environmental Group</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,200;0,300;0,400;0,500;0,600;1,300;1,400&family=Public+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Spline+Sans+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ═══ @verdacta/ui tokens ═══ */
+:root{
+--pine-100:#E6EEE9;--pine-200:#C5D8CD;--pine-300:#9BBBA8;--pine-400:#6E9A82;--pine-500:#4A7D64;
+--pine-600:#2F5F4A;--pine-700:#24493A;--pine-800:#1B382D;--pine-900:#12261F;
+--verdigris-100:#E3F0ED;--verdigris-200:#C0DED8;--verdigris-300:#92C4BB;--verdigris-400:#64A89B;
+--verdigris-500:#418D80;--verdigris-600:#327264;--verdigris-700:#285A50;--verdigris-800:#1F463E;--verdigris-900:#15302B;
+--copper-200:#E9CDB7;--copper-300:#D7AB88;--copper-400:#C1885C;--copper-500:#A9683C;--copper-600:#8A5430;--copper-700:#6D4226;
+--bone:#FBFBF7;--limestone:#F2F3EC;--ash:#E4E7DB;--sagegray:#D3D7C8;--lichen:#A9AFA0;
+--fieldgray:#737B6E;--slategreen:#4E564E;--ink:#161F1A;--white:#FFF;
+--st-compliant:#3A7D34;--st-compliant-bg:#E3EFDA;--st-compliant-tx:#2C5E27;
+--st-due:#B87A1C;--st-due-bg:#F7ECD2;--st-due-tx:#7A5210;
+--st-overdue:#B03A26;--st-overdue-bg:#F9E5DF;--st-overdue-tx:#8C2F1E;
+--st-review:#3D74B8;--st-review-bg:#E1EBF6;--st-review-tx:#2C567F;
+--st-superseded:#6E7468;--st-superseded-bg:#E9EBE2;--st-superseded-tx:#565C52;
+--chart-1:#1D7043;--chart-2:#C07A33;--chart-3:#3D74B8;--chart-4:#9E4E86;
+--font-display:'Spectral','Georgia',serif;--font-body:'Public Sans',system-ui,sans-serif;--font-mono:'Spline Sans Mono','Menlo',monospace;
+--fs-micro:.6875rem;--fs-caption:.8125rem;--fs-sm:.875rem;--fs-base:1rem;--fs-lg:1.125rem;--fs-xl:1.375rem;--fs-2xl:1.75rem;--fs-3xl:2.25rem;--fs-4xl:2.75rem;
+--s-1:4px;--s-2:8px;--s-3:12px;--s-4:16px;--s-5:20px;--s-6:24px;--s-8:32px;--s-10:40px;--s-12:48px;--s-16:64px;
+--r-sm:2px;--r-md:4px;--r-lg:8px;--r-xl:12px;
+--shadow-sm:0 1px 2px rgba(18,38,31,.06);--shadow-md:0 4px 12px rgba(18,38,31,.08),0 1px 3px rgba(18,38,31,.05);
+--ease:cubic-bezier(.22,1,.36,1);--dur:160ms;
+}
+*,*::before,*::after{box-sizing:border-box}
+html,body{margin:0;height:100%}
+body{font-family:var(--font-body);font-size:var(--fs-sm);line-height:1.55;color:var(--ink);background:var(--limestone);-webkit-font-smoothing:antialiased}
+a{color:var(--verdigris-700);text-decoration:none}
+a:hover{text-decoration:underline;text-underline-offset:3px}
+h1,h2,h3,h4{font-family:var(--font-display);font-weight:300;color:var(--pine-800);margin:0;line-height:1.15}
+button{font-family:var(--font-body)}
+::selection{background:var(--verdigris-200);color:var(--pine-900)}
+
+/* ═══ Shell ═══ */
+.shell{display:grid;grid-template-columns:236px 1fr;min-height:100vh}
+.rail{background:var(--pine-800);color:var(--sagegray);padding:var(--s-5) 0;display:flex;flex-direction:column;position:sticky;top:0;height:100vh;overflow-y:auto}
+.rail::-webkit-scrollbar{width:0}
+.wm{font-family:var(--font-display);line-height:1;white-space:nowrap}
+.wm .verd{color:var(--bone);font-weight:500}
+.wm .acta{color:var(--verdigris-300);font-style:italic;font-weight:300}
+.rail-logo{padding:0 var(--s-5) var(--s-4);font-size:var(--fs-xl);border-bottom:1px solid rgba(251,251,247,.1);margin-bottom:var(--s-4)}
+.rail-firm{padding:0 var(--s-5);font-size:var(--fs-micro);text-transform:uppercase;letter-spacing:.13em;color:var(--pine-300);margin:var(--s-2) 0 var(--s-2)}
+.rail a.nav{display:flex;align-items:center;gap:10px;padding:8px var(--s-5);color:var(--sagegray);font-size:var(--fs-sm);border-left:3px solid transparent;transition:all var(--dur) var(--ease)}
+.rail a.nav:hover{background:rgba(251,251,247,.06);text-decoration:none;color:var(--bone)}
+.rail a.nav.active{background:rgba(65,141,128,.24);color:var(--bone);border-left-color:var(--verdigris-400);font-weight:600}
+.rail a.nav .ic{width:16px;height:16px;flex:none;opacity:.75}
+.rail a.nav .badge{margin-left:auto;background:var(--st-overdue);color:#fff;font-size:10px;font-weight:700;border-radius:99px;padding:1px 7px}
+.rail a.nav .badge.amber{background:var(--st-due)}
+.rail-bottom{margin-top:auto;padding:var(--s-4) var(--s-5) 0;border-top:1px solid rgba(251,251,247,.1)}
+.rail-user{display:flex;gap:10px;align-items:center;font-size:var(--fs-caption);color:var(--pine-200)}
+.avatar{width:30px;height:30px;border-radius:50%;background:var(--verdigris-600);color:var(--bone);display:inline-flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex:none}
+.avatar.sm{width:24px;height:24px;font-size:9px}
+.avatar.copper{background:var(--copper-500)}.avatar.plum{background:#9E4E86}.avatar.river{background:#3D74B8}.avatar.pine{background:var(--pine-500)}
+
+.main{display:flex;flex-direction:column;min-width:0}
+.topbar{background:var(--bone);border-bottom:1px solid var(--sagegray);padding:var(--s-3) var(--s-8);display:flex;align-items:center;gap:var(--s-5);position:sticky;top:0;z-index:40}
+.crumb{font-size:var(--fs-caption);color:var(--fieldgray);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.crumb b{color:var(--pine-800);font-weight:600}
+.search{margin-left:auto;position:relative}
+.search input{width:290px;font-family:var(--font-body);font-size:var(--fs-caption);padding:7px 12px 7px 30px;border:1.5px solid var(--sagegray);border-radius:var(--r-md);background:var(--white);color:var(--ink)}
+.search input:focus{outline:none;border-color:var(--verdigris-600);box-shadow:0 0 0 3px rgba(65,141,128,.22)}
+.search .mag{position:absolute;left:9px;top:7px;color:var(--lichen)}
+.search-results{position:absolute;top:36px;right:0;width:360px;background:var(--bone);border:1px solid var(--sagegray);border-radius:var(--r-lg);box-shadow:var(--shadow-md);z-index:60;max-height:340px;overflow-y:auto;display:none}
+.search-results a{display:block;padding:9px 14px;border-bottom:1px solid var(--ash);font-size:var(--fs-caption);color:var(--ink)}
+.search-results a:hover{background:var(--limestone);text-decoration:none}
+.search-results .k{font-size:var(--fs-micro);text-transform:uppercase;letter-spacing:.08em;color:var(--fieldgray)}
+.today-chip{font-family:var(--font-mono);font-size:var(--fs-micro);color:var(--fieldgray);background:var(--ash);padding:4px 10px;border-radius:var(--r-md);white-space:nowrap}
+.view{padding:var(--s-8);max-width:1360px;width:100%;margin:0 auto}
+
+/* ═══ Primitives ═══ */
+.card{background:var(--bone);border:1px solid var(--sagegray);border-radius:var(--r-lg);box-shadow:var(--shadow-sm)}
+.card-pad{padding:var(--s-5)}
+.section-label{font-size:var(--fs-micro);text-transform:uppercase;letter-spacing:.14em;color:var(--verdigris-700);font-weight:700;margin-bottom:var(--s-3);display:flex;align-items:center;gap:8px}
+.section-label::after{content:"";flex:1;height:1px;background:var(--ash)}
+.grid{display:grid;gap:var(--s-4)}
+.kpis{display:grid;grid-template-columns:repeat(6,1fr);gap:var(--s-3);margin-bottom:var(--s-6)}
+.kpi{background:var(--bone);border:1px solid var(--sagegray);border-radius:var(--r-lg);padding:var(--s-4)}
+.kpi .lbl{font-size:var(--fs-micro);text-transform:uppercase;letter-spacing:.12em;color:var(--fieldgray);margin-bottom:2px;white-space:nowrap}
+.kpi .num{font-family:var(--font-display);font-size:var(--fs-3xl);font-weight:300;color:var(--pine-700);line-height:1.05}
+.kpi .num.red{color:var(--st-overdue)}.kpi .num.amber{color:var(--st-due-tx)}
+.kpi .sub{font-size:var(--fs-micro);color:var(--fieldgray)}
+.kpi.alert{border-color:var(--st-overdue);background:var(--st-overdue-bg)}
+.chip{display:inline-flex;align-items:center;gap:6px;font-size:var(--fs-micro);font-weight:700;padding:2px 9px;border-radius:99px;white-space:nowrap}
+.chip .ic{width:6px;height:6px;border-radius:50%;flex:none}
+.chip.compliant{background:var(--st-compliant-bg);color:var(--st-compliant-tx)}.chip.compliant .ic{background:var(--st-compliant)}
+.chip.due{background:var(--st-due-bg);color:var(--st-due-tx)}.chip.due .ic{background:var(--st-due);border-radius:1px}
+.chip.overdue{background:var(--st-overdue-bg);color:var(--st-overdue-tx)}.chip.overdue .ic{background:var(--st-overdue);border-radius:1px;transform:rotate(45deg)}
+.chip.review{background:var(--st-review-bg);color:var(--st-review-tx)}.chip.review .ic{background:var(--st-review)}
+.chip.superseded{background:var(--st-superseded-bg);color:var(--st-superseded-tx)}.chip.superseded .ic{background:var(--st-superseded)}
+.ptag{display:inline-flex;font-size:var(--fs-micro);text-transform:uppercase;letter-spacing:.1em;font-weight:700;padding:2px 9px;border-radius:99px;white-space:nowrap}
+.ptag.air{background:var(--pine-100);color:var(--pine-700)}
+.ptag.water{background:var(--st-review-bg);color:var(--st-review-tx)}
+.ptag.stormwater{background:var(--verdigris-100);color:var(--verdigris-800)}
+.ptag.pretreatment{background:#F3E7EF;color:#7A3D68}
+.cite{display:inline-flex;align-items:center;gap:5px;font-family:var(--font-mono);font-size:10.5px;font-weight:500;color:var(--verdigris-800);background:var(--verdigris-100);border:1px solid var(--verdigris-200);border-radius:var(--r-sm);padding:1px 7px;white-space:nowrap;max-width:100%;overflow:hidden;text-overflow:ellipsis}
+.cite.wrap{white-space:normal;max-width:100%;line-height:1.5}
+.cite::before{content:"§";color:var(--copper-600);font-family:var(--font-display)}
+.mono{font-family:var(--font-mono);font-size:var(--fs-caption)}
+.btn{font-size:var(--fs-caption);font-weight:600;padding:8px 16px;border-radius:var(--r-md);border:1.5px solid transparent;cursor:pointer;transition:all var(--dur) var(--ease)}
+.btn-primary{background:var(--pine-600);color:var(--bone)}.btn-primary:hover{background:var(--pine-800)}
+.btn-ghost{background:transparent;border-color:var(--pine-400);color:var(--pine-700)}.btn-ghost:hover{background:var(--ash)}
+.btn:focus-visible{outline:3px solid var(--verdigris-400);outline-offset:2px}
+table.tbl{width:100%;border-collapse:collapse;font-size:var(--fs-caption)}
+.tbl th{text-align:left;padding:8px 12px;font-size:var(--fs-micro);text-transform:uppercase;letter-spacing:.09em;color:var(--slategreen);background:var(--ash);white-space:nowrap;position:sticky;top:0}
+.tbl td{padding:10px 12px;border-top:1px solid var(--ash);vertical-align:middle}
+.tbl tr.row-link{cursor:pointer}
+.tbl tr.row-link:hover{background:var(--limestone)}
+.tbl tr.ovd{background:var(--st-overdue-bg)}
+.duecell{font-family:var(--font-mono);font-size:var(--fs-micro);white-space:nowrap}
+.duecell .rel{display:block;font-family:var(--font-body);font-weight:600;font-size:var(--fs-micro);color:var(--fieldgray)}
+.duecell .rel.red{color:var(--st-overdue)}.duecell .rel.amber{color:var(--st-due-tx)}
+.empty{border:1px dashed var(--sagegray);border-radius:var(--r-lg);padding:var(--s-8);text-align:center;color:var(--fieldgray);font-size:var(--fs-caption)}
+.empty .glyph{font-family:var(--font-display);font-size:var(--fs-2xl);color:var(--lichen)}
+.progress{height:7px;background:var(--ash);border-radius:99px;overflow:hidden}
+.progress > div{height:100%;background:linear-gradient(90deg,var(--verdigris-500),var(--verdigris-600));border-radius:99px}
+.runway{height:10px;background:var(--ash);border-radius:99px;overflow:hidden;position:relative}
+.runway > div{height:100%;border-radius:99px}
+.tabs{display:flex;gap:2px;border-bottom:2px solid var(--ash);margin:var(--s-5) 0 var(--s-5)}
+.tabs button{background:none;border:none;padding:9px 16px;font-size:var(--fs-sm);font-weight:600;color:var(--fieldgray);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-2px}
+.tabs button.active{color:var(--pine-800);border-bottom-color:var(--verdigris-500)}
+.tabs button:hover{color:var(--pine-700)}
+.tabs button .ct{font-size:10px;background:var(--ash);border-radius:99px;padding:1px 6px;margin-left:5px;color:var(--slategreen)}
+
+/* timeline */
+.timeline{list-style:none;margin:0;padding:0;position:relative}
+.timeline::before{content:"";position:absolute;left:11px;top:6px;bottom:6px;width:2px;background:var(--ash)}
+.timeline li{position:relative;padding:0 0 var(--s-5) var(--s-8)}
+.timeline .dot{position:absolute;left:4px;top:3px;width:16px;height:16px;border-radius:50%;background:var(--bone);border:2px solid var(--verdigris-500);display:flex;align-items:center;justify-content:center}
+.timeline li.k-rejection .dot,.timeline li.k-agency-action.neg .dot{border-color:var(--st-overdue)}
+.timeline li.k-submission .dot{border-color:var(--pine-500);background:var(--pine-500)}
+.timeline li.k-agency-action .dot{border-color:var(--st-review)}
+.timeline li.k-reminder .dot{border-color:var(--st-due)}
+.timeline .t-date{font-family:var(--font-mono);font-size:var(--fs-micro);color:var(--fieldgray)}
+.timeline .t-text{font-size:var(--fs-caption);color:var(--ink);margin:1px 0 2px}
+.timeline .t-by{font-size:var(--fs-micro);color:var(--fieldgray)}
+.kind-tag{display:inline-block;font-size:9.5px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;padding:1px 7px;border-radius:99px;margin-right:6px;background:var(--ash);color:var(--slategreen)}
+.kind-tag.submission{background:var(--pine-100);color:var(--pine-700)}
+.kind-tag.rejection{background:var(--st-overdue-bg);color:var(--st-overdue-tx)}
+.kind-tag.agency-action{background:var(--st-review-bg);color:var(--st-review-tx)}
+.kind-tag.reminder{background:var(--st-due-bg);color:var(--st-due-tx)}
+.kind-tag.call{background:#F3E7EF;color:#7A3D68}
+
+/* documents */
+.doc-row{display:flex;align-items:center;gap:var(--s-4);padding:11px 14px;border-top:1px solid var(--ash)}
+.doc-row:first-child{border-top:0}
+.doc-row:hover{background:var(--limestone)}
+.doc-ic{width:34px;height:40px;border:1.5px solid var(--sagegray);border-radius:3px;background:var(--white);position:relative;flex:none;display:flex;align-items:flex-end;justify-content:center;font-size:8px;font-weight:700;color:var(--fieldgray);padding-bottom:3px}
+.doc-ic::before{content:"";position:absolute;top:0;right:0;border-style:solid;border-width:0 10px 10px 0;border-color:var(--limestone) var(--limestone) var(--sagegray) var(--sagegray)}
+.doc-name{font-weight:600;font-size:var(--fs-caption);color:var(--ink)}
+.doc-meta{font-size:var(--fs-micro);color:var(--fieldgray)}
+.doc-status{margin-left:auto;flex:none}
+.dstat{display:inline-flex;font-size:var(--fs-micro);font-weight:700;padding:2px 9px;border-radius:var(--r-sm);white-space:nowrap}
+.dstat.accepted{background:var(--st-compliant-bg);color:var(--st-compliant-tx)}
+.dstat.submitted,.dstat.resubmitted{background:var(--st-review-bg);color:var(--st-review-tx)}
+.dstat.rejected,.dstat.revision-requested{background:var(--st-overdue-bg);color:var(--st-overdue-tx)}
+.dstat.draft{background:var(--ash);color:var(--slategreen)}
+.dstat.received{background:var(--verdigris-100);color:var(--verdigris-800)}
+
+/* calendar */
+.cal-head{display:flex;align-items:center;gap:var(--s-4);margin-bottom:var(--s-4)}
+.cal-title{font-family:var(--font-display);font-size:var(--fs-2xl);font-weight:300}
+.cal-nav{display:flex;gap:6px;margin-left:auto}
+.cal-grid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:6px}
+.cal-dow{font-size:var(--fs-micro);text-transform:uppercase;letter-spacing:.1em;color:var(--fieldgray);text-align:center;padding:4px 0;font-weight:700}
+.cal-cell{min-width:0;background:var(--bone);border:1px solid var(--sagegray);border-radius:var(--r-md);min-height:96px;padding:6px;font-size:var(--fs-micro)}
+.cal-cell.dim{background:var(--limestone);opacity:.55}
+.cal-cell.today{border:1.5px solid var(--verdigris-500);box-shadow:0 0 0 3px rgba(65,141,128,.15)}
+.cal-date{font-family:var(--font-mono);color:var(--fieldgray);margin-bottom:3px}
+.cal-cell.today .cal-date{color:var(--verdigris-700);font-weight:700}
+.pill{display:block;border-radius:var(--r-sm);font-size:10px;font-weight:600;padding:2px 6px;margin-bottom:3px;cursor:pointer;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;border-left:3px solid}
+.pill.due{background:var(--st-due-bg);color:var(--st-due-tx);border-color:var(--st-due)}
+.pill.overdue{background:var(--st-overdue-bg);color:var(--st-overdue-tx);border-color:var(--st-overdue)}
+.pill.compliant{background:var(--verdigris-100);color:var(--verdigris-800);border-color:var(--verdigris-500)}
+.pill.review{background:var(--st-review-bg);color:var(--st-review-tx);border-color:var(--st-review)}
+.pill.project{background:var(--pine-100);color:var(--pine-700);border-color:var(--pine-500)}
+
+/* notifications */
+.notif-row{display:flex;gap:var(--s-4);padding:12px 14px;border-top:1px solid var(--ash);align-items:flex-start}
+.notif-row:first-child{border-top:0}
+.lvl{flex:none;font-family:var(--font-mono);font-size:var(--fs-micro);font-weight:700;padding:3px 8px;border-radius:var(--r-sm);margin-top:1px}
+.lvl.warn{background:var(--st-due-bg);color:var(--st-due-tx)}
+.lvl.crit{background:var(--st-overdue-bg);color:var(--st-overdue-tx)}
+.lvl.info{background:var(--st-review-bg);color:var(--st-review-tx)}
+.chan{display:inline-flex;font-size:9.5px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;border:1px solid var(--sagegray);border-radius:99px;padding:1px 7px;color:var(--slategreen);margin-left:4px}
+.ladder{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+.rung{font-family:var(--font-mono);font-size:var(--fs-micro);font-weight:600;background:var(--verdigris-100);color:var(--verdigris-800);border:1px solid var(--verdigris-200);border-radius:99px;padding:2px 9px}
+.rung.sms{background:var(--st-due-bg);color:var(--st-due-tx);border-color:var(--st-due)}
+.toggle{display:inline-block;width:32px;height:18px;background:var(--verdigris-500);border-radius:99px;position:relative;vertical-align:middle}
+.toggle::after{content:"";position:absolute;right:2px;top:2px;width:14px;height:14px;background:#fff;border-radius:50%}
+.toggle.off{background:var(--sagegray)}
+.toggle.off::after{right:auto;left:2px}
+
+/* misc */
+.two-col{display:grid;grid-template-columns:2fr 1fr;gap:var(--s-5);align-items:start}
+.three-col{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--s-4)}
+.hero-strip{background:var(--pine-800);border-radius:var(--r-lg);color:var(--sagegray);padding:var(--s-5) var(--s-6);display:flex;align-items:center;gap:var(--s-6);margin-bottom:var(--s-6);flex-wrap:wrap}
+.hero-strip h2{color:var(--bone);font-size:var(--fs-2xl)}
+.filterbar{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:var(--s-4);align-items:center}
+.filterbar select,.filterbar input{font-family:var(--font-body);font-size:var(--fs-caption);padding:7px 10px;border:1.5px solid var(--sagegray);border-radius:var(--r-md);background:var(--white);color:var(--ink)}
+.filterbar select:focus,.filterbar input:focus{outline:none;border-color:var(--verdigris-600)}
+.bar-row{display:grid;grid-template-columns:110px 1fr 30px;align-items:center;gap:10px;margin-bottom:9px}
+.bar-row .blbl{font-size:var(--fs-caption);color:var(--slategreen)}
+.bar-row .btrack{height:13px;background:var(--ash);border-radius:0 4px 4px 0}
+.bar-row .bfill{height:100%;background:var(--chart-1);border-radius:0 4px 4px 0}
+.bar-row .bval{font-family:var(--font-mono);font-size:var(--fs-caption);text-align:right;color:var(--ink)}
+.breadcrumbs{font-size:var(--fs-caption);color:var(--fieldgray);margin-bottom:var(--s-4)}
+.breadcrumbs a{color:var(--verdigris-700)}
+.pagehead{display:flex;align-items:flex-start;gap:var(--s-5);margin-bottom:var(--s-6);flex-wrap:wrap}
+.pagehead h1{font-size:var(--fs-3xl)}
+.pagehead .sub{color:var(--fieldgray);font-size:var(--fs-sm);margin-top:4px}
+.meta-grid{display:grid;grid-template-columns:repeat(5,auto);gap:var(--s-6);margin-top:var(--s-4)}
+.meta-grid .m .k{font-size:var(--fs-micro);text-transform:uppercase;letter-spacing:.12em;color:var(--fieldgray)}
+.meta-grid .m .v{font-family:var(--font-mono);font-size:var(--fs-sm);color:var(--ink);margin-top:2px}
+@media(max-width:1100px){.kpis{grid-template-columns:repeat(3,1fr)}.two-col,.three-col{grid-template-columns:1fr}.meta-grid{grid-template-columns:repeat(2,1fr)}}
+</style>
+</head>
+<body>
+<div class="shell">
+  <nav class="rail" id="rail"></nav>
+  <div class="main">
+    <div class="topbar">
+      <div class="crumb" id="crumb"></div>
+      <div class="search">
+        <span class="mag">⌕</span>
+        <input id="searchbox" type="text" placeholder="Search permits, clients, obligations…" autocomplete="off" aria-label="Search"/>
+        <div class="search-results" id="searchresults"></div>
+      </div>
+      <span class="today-chip" id="todaychip"></span>
+      <span class="avatar copper" title="Katherine Laurent, PE">KL</span>
+    </div>
+    <div class="view" id="view"></div>
+  </div>
+</div>
+<script>
+/* Verdacta prototype seed data — Magnolia Environmental Group demo portfolio.
+   All permit numbers, dates, citations, and limits are drawn from real MDEQ permit documents
+   (see /home/claude/verdacta/permits/extracted.json). Demo "today" = 2026-08-14. */
+"use strict";
+
+window.VERDACTA_DATA = {
+  today: "2026-08-14",
+
+  firm: {
+    name: "Magnolia Environmental Group",
+    tagline: "Environmental engineering & compliance consulting · Ridgeland, MS",
+    staff: [
+      { id: "s-kl", name: "Katherine Laurent, PE", initials: "KL", role: "Principal / Professional Engineer" },
+      { id: "s-dm", name: "Darnell McRae", initials: "DM", role: "Air Practice Lead" },
+      { id: "s-jb", name: "Jolene Breaux", initials: "JB", role: "Water Practice Lead" },
+      { id: "s-tp", name: "Tyler Prescott", initials: "TP", role: "Project Engineer" },
+      { id: "s-mh", name: "Marcus Hollis", initials: "MH", role: "Field Technician" }
+    ]
+  },
+
+  clients: [
+    {
+      id: "c-ergon", name: "Ergon Refining, Inc.", industry: "Petroleum refining & terminals",
+      contacts: [
+        { name: "Ray Thibodeaux", title: "EHS Manager, Vicksburg Refinery", email: "rthibodeaux@ergon-demo.com", phone: "601-555-0142", notify: { email: true, sms: true } },
+        { name: "Celia Ford", title: "Terminal Operations Superintendent", email: "cford@ergon-demo.com", phone: "601-555-0177", notify: { email: true, sms: false } }
+      ]
+    },
+    {
+      id: "c-ambit", name: "Ambit Chemical Technologies", industry: "Specialty chemicals (toll manufacturing)",
+      contacts: [
+        { name: "Denise Okafor", title: "Plant Manager", email: "dokafor@ambitchem-demo.com", phone: "228-555-0119", notify: { email: true, sms: true } }
+      ]
+    },
+    {
+      id: "c-amite", name: "Amite BioEnergy, LLC", industry: "Wood pellet manufacturing",
+      contacts: [
+        { name: "Hank Delcambre", title: "Environmental Coordinator", email: "hdelcambre@amitebio-demo.com", phone: "601-555-0163", notify: { email: true, sms: true } }
+      ]
+    },
+    {
+      id: "c-nissan", name: "Nissan North America — Canton", industry: "Automotive manufacturing",
+      contacts: [
+        { name: "Priya Natarajan", title: "Sr. Environmental Engineer", email: "pnatarajan@nna-demo.com", phone: "601-555-0186", notify: { email: true, sms: false } }
+      ]
+    },
+    {
+      id: "c-abb", name: "ABB Motors and Mechanical", industry: "Electric motor manufacturing",
+      contacts: [
+        { name: "Gwen Tarver", title: "Facilities & EHS Supervisor", email: "gtarver@abbmotors-demo.com", phone: "662-555-0131", notify: { email: true, sms: true } }
+      ]
+    }
+  ],
+
+  sites: [
+    { id: "st-erg-ref", clientId: "c-ergon", name: "Vicksburg Refinery", city: "Vicksburg", county: "Warren", state: "MS",
+      description: "Petroleum refinery — crude/vacuum units, hydrogen plant, asphalt operations, ~100-tank farm, truck/barge/rail loading, cogeneration turbine.", receivingStream: null },
+    { id: "st-erg-term", clientId: "c-ergon", name: "Fuels Terminal — Vicksburg", city: "Vicksburg", county: "Warren", state: "MS",
+      description: "Bulk fuel terminal — gasoline/distillate/ethanol storage tanks, 3-bay truck loading rack with vapor combustion unit, barge loadout.", receivingStream: null },
+    { id: "st-ambit", clientId: "c-ambit", name: "Gulfport Plant (Seaway Road)", city: "Gulfport", county: "Harrison", state: "MS",
+      description: "Toll chemical manufacturer — reactors, cooling pond, production and containment areas; process wastewater to POTW, stormwater to surface water.", receivingStream: "Unnamed tributary of Bernard Bayou" },
+    { id: "st-amite", clientId: "c-amite", name: "Gloster Wood Pellet Facility", city: "Gloster", county: "Amite", state: "MS",
+      description: "Wood pellet plant — wood yard, 165 MMBTU/hr wood-fired furnace, rotary dryer with WESP-RTO, hammermills and pellet mills with baghouses routed to RCO.", receivingStream: null },
+    { id: "st-nissan", clientId: "c-nissan", name: "Canton Manufacturing Facility", city: "Canton", county: "Madison", state: "MS",
+      description: "Automotive assembly plant — industrial stormwater discharges under MDEQ Industrial Stormwater General Permit coverage.", receivingStream: "Unnamed tributary of Bear Creek" },
+    { id: "st-abb", clientId: "c-abb", name: "Columbus Plant", city: "Columbus", county: "Lowndes", state: "MS",
+      description: "Electric motor manufacturing — surface coating booths, aluminum die-casting, machining/welding, two diesel emergency generators.", receivingStream: null }
+  ],
+
+  permits: [
+    {
+      id: "p-ergon-tv", siteId: "st-erg-ref", number: "2780-00003", program: "air",
+      type: "Title V Operating Permit", agency: "MDEQ — Office of Pollution Control",
+      status: "expiring", issued: "2022-03-01", effective: "2022-03-01", expires: "2027-02-28",
+      renewalRule: "Timely renewal application must be submitted at least six (6) months prior to expiration of the Title V permit (Condition 1.17; 11 Miss. Admin. Code Pt. 2, R. 6.4.C(2)).",
+      renewalDue: "2026-08-31",
+      description: "Refinery-wide Title V permit: process heaters/boilers, NSPS Ja crude heater with NOx/O2 CEMS, emergency flare, cogen turbine (NSPS GG), wastewater system (NSPS QQQ / Benzene NESHAP FF), ~100 storage tanks (NSPS Ka/Kb/UU), loading racks, 9 emergency engines, facility-wide LDAR (NSPS GGG/VV).",
+      emissionPoints: [
+        "AA-000: facility-wide equipment leaks (LDAR, NSPS GGG/VV)",
+        "AA-014–AA-022, AA-049, AA-208/209, AB-001/002, AH-016–AH-018: NG/refinery-fuel-gas heaters & boilers (8–95.8 MMBTU/hr)",
+        "AA-018R: 51.89 MMBTU/hr crude heater (NSPS Ja, NOx/O2 CEMS option)",
+        "AA-024: emergency flare FL-2; AA-043: 95.8 MMBTU/hr cogen turbine (NSPS GG)",
+        "AA-026: wastewater treatment system w/ oil-water separator (NSPS QQQ, NESHAP FF)",
+        "AT-101–AV-351: fixed roof asphalt/crude/distillate tanks plus IFR/EFR naphtha & crude tanks",
+        "AD-002–AD-007: truck/barge/rail loading; AG-001–AG-009: emergency engines; BB-001: sour water stripper ammonia vent; BB-002: cooling towers"
+      ],
+      keyLimits: [
+        "Fuel gas H2S 230 mg/dscm (0.10 gr/dscf), 3-hr rolling avg (NSPS J) — AA-019/AA-022/AH-018 (3.B.13)",
+        "NOx 0.06 lb/MMBTU (0.065 w/ air preheat) on AA-019; 0.025 lb/MMBTU on AA-022, 3-hr avg (3.B.15/16)",
+        "Ammonia (BB-001): 903.0 tpy and 4.0 tons/day (3.B.29)",
+        "No liquid fossil fuel > 0.05% S facility-wide except curtailment (3.B.43); turbine fuel S ≤ 0.8 wt% (3.B.20)",
+        "Opacity 40% (60% soot blowing); PM 0.6 lb/MMBTU; SO2 4.8 lb/MMBTU (3.A.1, 3.B.10/11)",
+        "Oil-water separator vapor recovery ≥ 95% control efficiency (3.B.28)",
+        "Fire pump engines: NMHC+NOx 7.8 / CO 2.6 / PM 0.40 g/HP-hr; diesel ≤ 15 ppm S (3.B.46/48)"
+      ],
+      specialConditions: [
+        "RENEWAL CRITICAL: application due 2026-08-31 (6 months before 2027-02-28 expiration)",
+        "Full LDAR program (NSPS GGG/VV): monthly Method 21 valve/pump monitoring, 5-day first attempt / 15-day repair, semiannual reports",
+        "NSPS J fuel-gas H2S CMS with quarterly reports; NSPS Ja NOx/O2 CEMS QA (daily drift, quarterly NOx / annual O2 accuracy)",
+        "Consent Decree (lodged 2003-09-30) fuel restrictions on boilers AA-016/017, AB-001/002",
+        "Benzene Waste NESHAP FF relies on TAB < 10 Mg/yr — re-determination required on process changes",
+        "Flare: daily smoke checks, monthly Method 22, quarterly auto-igniter inspections, semiannual reports"
+      ]
+    },
+    {
+      id: "p-ergon-smop", siteId: "st-erg-term", number: "2780-00063", program: "air",
+      type: "Synthetic Minor Operating Permit (federally enforceable)", agency: "MDEQ — Office of Pollution Control",
+      status: "active", issued: "2025-05-14", effective: "2025-05-14", expires: "2030-04-30",
+      renewalRule: "Renewal application not less than 180 days prior to expiration, substantiated with current emissions data (Section 1.C.1; 11 Miss. Admin. Code Pt. 2, R. 2.8).",
+      renewalDue: "2029-11-01",
+      description: "Bulk gasoline terminal SMOP: IFR gasoline/distillate tanks (NSPS Kb; new 2025 Tank 6 under NSPS Kc), truck loading rack with vapor combustion unit (NSPS XX / NESHAP BBBBBB), ethanol tanks, barge loadout (diesel only), gasoline-service equipment leaks.",
+      emissionPoints: [
+        "AA-002–AA-009, AA-026: internal floating roof gasoline/distillate tanks, 630k–1,266k gal (Kb; AA-026 = Kc, built 2025)",
+        "AA-012–AA-021: fixed-roof additive/red dye tanks (1,000–10,000 gal)",
+        "AA-018: 3-bay truck loading rack w/ vapor combustion unit",
+        "AA-022–AA-024: 30,000-gal denatured ethanol tanks",
+        "AA-027: barge loadout (diesel only); FUG-001: equipment in gasoline service"
+      ],
+      keyLimits: [
+        "Throughput caps (Title V avoidance): ≤ 200,000,000 gal gasoline / ≤ 90,000,000 gal distillate / ≤ 30,000,000 gal ethanol, rolling 12-month (3.1)",
+        "Loading rack: 35 mg TOC per liter of gasoline loaded (NSPS XX) (3.12)",
+        "Cargo tank gauge pressure < 4,500 Pa during loading; PV vents open ≥ 4,500 Pa (3.14/3.15)",
+        "Tank vapor space ≤ 25% LEL, 5-min rolling avg — compliance by 2027-05-08 (3.7(j), 3.20(o))",
+        "Opacity ≤ 40% (3.2/3.3); barge loadout diesel-only (3.21)"
+      ],
+      specialConditions: [
+        "NESHAP BBBBBB compliance date 2027-05-08: annual tank LEL monitoring, enhanced loading procedures, expanded semiannual CEDRI reporting",
+        "Tank 6 (AA-026) under NSPS Kc: roof-landing alarm, LEL at annual inspection, its own semiannual CEDRI reports",
+        "Vapor combustion unit stack test every 5 years (≤ 61 months) with 300,000-liter loading requirement",
+        "Dual monthly leak inspections (loading rack NSPS XX + gasoline-service equipment BBBBBB), 5-day/15-day repair clocks",
+        "Annual Method 27 cargo tank vapor-tightness file with biweekly cross-checks"
+      ]
+    },
+    {
+      id: "p-ambit-npdes", siteId: "st-ambit", number: "MS0034878", program: "water",
+      type: "NPDES Individual Wastewater Permit (with SWPPP conditions)", agency: "MDEQ — Office of Pollution Control",
+      status: "active", issued: "2026-03-25", effective: "2026-03-25", expires: "2031-02-28",
+      renewalRule: "Application for reissuance at least 180 days prior to expiration; Permit Board may allow later, but never after expiration (Condition S-8; 11 Miss. Admin. Code Pt. 6, R. 1.1.5.B(1)).",
+      renewalDue: "2030-09-01",
+      description: "Individual NPDES permit for steam condensate, cooling pond overflow, and stormwater runoff to an unnamed tributary of Bernard Bayou, with a full industrial-SWPPP program embedded.",
+      emissionPoints: [
+        "Outfall 001: steam condensate + stormwater from eastern production areas",
+        "Outfall 002: cooling pond overflow during large rain events",
+        "Outfall 003: stormwater from northern production areas and parking"
+      ],
+      keyLimits: [
+        "Oil & grease 10 mg/L monthly avg / 15 mg/L daily max (001, 002)",
+        "TSS 100 mg/L monthly avg (001, 002); report-only at 003",
+        "pH 6.0–9.0 SU all outfalls; temperature 90 °F daily max (001, 002)",
+        "Ammonia-N and BOD5 report-only, monthly (001, 003)",
+        "No floating solids / visible foam beyond trace; no visible sheen (L-1, L-2)"
+      ],
+      specialConditions: [
+        "SWPPP program: monthly inspections + jar tests, annual evaluation by Dec 31, annual training, spill/leak logs, 5-yr illicit-connection certification",
+        "SARA 313 water priority chemical containment / manual drain valve provisions (T-9 to T-11)",
+        "Secondary containment for bulk storage > 1,320 gal aggregate or single containers > 660 gal (T-57)",
+        "Cooling/boiler water additives need 60-day advance MDEQ approval (S-9)",
+        "TMDL reopener (T-58); e-reporting mandate after 2025-12-20"
+      ]
+    },
+    {
+      id: "p-ambit-pret", siteId: "st-ambit", number: "MSP092477", program: "pretreatment",
+      type: "Pretreatment Permit (indirect discharge to POTW)", agency: "MDEQ — Office of Pollution Control",
+      status: "active", issued: "2025-05-13", effective: "2025-05-13", expires: "2030-04-30",
+      renewalRule: "Application for reissuance at least 180 days prior to expiration (Condition S-7; 11 Miss. Admin. Code Pt. 6, R. 1.1.5.B(1)).",
+      renewalDue: "2029-11-01",
+      description: "Pretreatment permit for batch equipment-cleaning and containment-washdown wastewater discharged to the Bernard Bayou Industrial District POTW (MS0027537).",
+      emissionPoints: [
+        "Outfall 001A: reactor/hose/equipment cleaning wastewater + containment washdown from spill cleanups (batch discharge to POTW)"
+      ],
+      keyLimits: [
+        "pH 6.0–9.0 SU per discharge event; flow report-only (batch, MGD)",
+        "General pretreatment prohibitions: no wastes with flashpoint < 140 °F, no pH < 5.0, no heat causing POTW influent > 104 °F (L-2; 40 CFR 403.5(b))",
+        "Only the described cleaning/washdown wastewater authorized (001A L-1)",
+        "No discharge of wastewater to surface waters of the State (T-15)"
+      ],
+      specialConditions: [
+        "6-month weekly BOD5/COD/TSS/NH3-N characterization study completed; permit may be reopened to add numeric limits (M-1)",
+        "Dual immediate oral notification to MDEQ and the POTW for spills/bypass/upset (S-1)",
+        "RCRA hazardous-waste discharge notification + waste-minimization certification (T-51 to T-53)",
+        "POTW authority may impose additional requirements independently (T-12)"
+      ]
+    },
+    {
+      id: "p-amite-tv", siteId: "st-amite", number: "0800-00031", program: "air",
+      type: "Title V Operating Permit", agency: "MDEQ — Office of Pollution Control",
+      status: "active", issued: "2026-06-23", effective: "2026-06-23", expires: "2031-05-31",
+      renewalRule: "Timely renewal application is one submitted at least six (6) months prior to expiration (Condition 1.17; 11 Miss. Admin. Code Pt. 2, R. 6.2.A(1)(c), 6.4.B, 6.4.C(2)).",
+      renewalDue: "2030-11-30",
+      description: "Title V permit for wood pellet manufacturing with case-by-case MACT (112(g)): rotary dryer w/ WESP-RTO, hammermills/pellet mills w/ baghouses routed to RCO, wood-fired furnace with bypass-stack hour caps, CAM plans, two emergency engines.",
+      emissionPoints: [
+        "AA-100 series: wood yard fugitives (debarker, chipper, storage piles)",
+        "AA-200/AA-204a: wood chip rotary dryer → WESP-RTO (AA-201)",
+        "AA-203a: 165 MMBTU/hr wood-fired furnace (bypass stacks AA-203d/AA-204b)",
+        "AA-300 series: hammermills + pellet mills/coolers with baghouses → RCO (AA-301)",
+        "AA-401: pellet silos / truck load-out baghouse",
+        "AA-501/502: diesel emergency pump & generator engines (NSPS IIII)"
+      ],
+      keyLimits: [
+        "PSD avoidance: PM/PM10/PM2.5/NOx/VOC each 245.0 tpy; CO 249.0 tpy, rolling 12-month (3.B.3/4)",
+        "96.0% total HAP destruction efficiency — RTO and RCO (3.B.5/3.B.13)",
+        "Dryer ≤ 467,316 ODT/yr; pellet production ≤ 624,700 ODT/yr, rolling 12-month (3.B.10/12)",
+        "Furnace bypass: ≤ 100 hr startup/shutdown + ≤ 500 hr idle venting per rolling 12 months (3.B.7)",
+        "Engines: diesel ≤ 15 ppm S; 100 hr/yr maintenance & testing incl. ≤ 50 hr non-emergency (3.B.17/18)"
+      ],
+      specialConditions: [
+        "Case-by-case MACT (CAA 112(g), 40 CFR 63 Subpart B) — RTO/RCO destruction efficiency is the MACT limit",
+        "CAM plans: RTO/RCO firebox temperature 3-hr averages, WESP power, baghouse ΔP 0.25–8 in. H2O; QIP trigger at 6 excursions/6 months",
+        "Initial RTO/RCO HAP destruction test due 2027-04-10; PM tests by 2028-12-03; RCO catalyst test by 2027-03-17",
+        "Dust Management Plan (Mar 2025) and SSMP (2024-09-27) must be maintained; annual dust-control training",
+        "Performance test results to EPA via CEDRI/ERT (5.C.5)"
+      ]
+    },
+    {
+      id: "p-nissan-sw", siteId: "st-nissan", number: "MSR001603", program: "stormwater",
+      type: "Industrial Stormwater General Permit — Certificate of Coverage", agency: "MDEQ — Office of Pollution Control",
+      status: "admin-continued", issued: "2021-08-17", effective: "2021-08-17", expires: "2025-11-30",
+      renewalRule: "No individual renewal filing. The general permit expired 2025-11-30 and is administratively continued (ACT16 T-22). When MDEQ reissues the ISGP, active coverage recipients get a Letter of Instruction; coverage under the old permit ends 6 months after reissuance unless a complete Recoverage Form is received (ACT3 S-3, ACT16 T-22).",
+      renewalDue: null,
+      description: "Coverage MSR001603 under Mississippi's Industrial Stormwater General Permit (issued 2020-12-10) for stormwater associated with automotive manufacturing; obligations continue during administrative continuance.",
+      emissionPoints: [
+        "Facility stormwater outfalls per SWPPP site map (numbered drainage areas) to unnamed tributary of Bear Creek",
+        "Allowable non-stormwater discharges per ACT2 T-3 (hydrant flushing, uncontaminated condensate, etc.)"
+      ],
+      keyLimits: [
+        "Non-numeric limits: discharges free of floating debris/oil/scum beyond trace, settleable eroded soils, excess TSS/turbidity/color, WQ-criteria-violating chemicals (ACT12 L-1)",
+        "Secondary containment for single containers > 660 gal or aggregate > 1,320 gal (ACT5 T-7(5)(F); ACT16 T-24)",
+        "Sampled storms (when sampling triggered) must be > 0.1 in. and ≥ 72 hr after previous measurable storm (ACT11 T-1)"
+      ],
+      specialConditions: [
+        "WATCH: general permit expired 2025-11-30, administratively continued — monitor MDEQ reissuance; recoverage window closes 6 months after reissuance (ACT16 T-22)",
+        "MS ISGP uses monthly visual inspections/jar tests rather than federal MSGP benchmark monitoring; analytical sampling only for coal piles, TMDL triggers, or SARA 313 releases",
+        "No Exposure Certification alternative available; 5-yr recertification, non-transferable (ACT2 T-6)",
+        "Deficiencies from inspections corrected within 7 days (immediately if environmental harm) (ACT10 R-1)"
+      ]
+    },
+    {
+      id: "p-abb-smop", siteId: "st-abb", number: "1680-00065", program: "air",
+      type: "Synthetic Minor Operating Permit (federally enforceable)", agency: "MDEQ — Office of Pollution Control",
+      status: "active", issued: "2026-06-05", effective: "2026-06-05", expires: "2031-05-31",
+      renewalRule: "Renewal application not less than 180 days prior to expiration, substantiated with current emissions data (Section 1.C.1; 11 Miss. Admin. Code Pt. 2, R. 2.8).",
+      renewalDue: "2030-12-02",
+      description: "SMOP for motor manufacturing: surface coating (5 booths), aluminum die-casting, machining/welding under NESHAP 6X with tiered Method 22/9 testing, two diesel emergency engines under NESHAP ZZZZ; synthetic-minor VOC/HAP caps.",
+      emissionPoints: [
+        "AA-100: surface coating operations (booths, varnish, paint mix room)",
+        "AB-100: aluminum die-casting (two 1.6 MMBTU/hr NG furnaces)",
+        "AB-001–AB-008: NG-fired ovens, 44 space heaters, brazing torches, WW evaporators",
+        "AC-100: machining & welding (NESHAP Subpart XXXXXX)",
+        "AD-001/AD-002: 168 & 308 HP diesel emergency generators (NESHAP ZZZZ)",
+        "AE-001/AE-002: paint thinner & varnish storage tanks"
+      ],
+      keyLimits: [
+        "VOC < 99.0 tpy facility-wide, rolling 12-month (3.1)",
+        "Single HAP < 9.00 tpy; total HAPs < 24.00 tpy, rolling 12-month (3.2)",
+        "Opacity < 40% (3.3/3.4); PM 0.6 lb/MMBTU fuel-burning units (3.6)",
+        "SO2 500 ppmv process equipment (3.7); 4.8 lb/MMBTU engines (3.9)",
+        "Engines: 100 hr/yr maintenance & testing, ≤ 50 hr non-emergency (3.11)"
+      ],
+      specialConditions: [
+        "Synthetic-minor caps enforce Title V avoidance — monthly rolling-12-month VOC/HAP tracking is the core driver",
+        "NESHAP 6X tiered Method 22 → Method 9 welding-fugitive regime with SSWEMP escalation on > 20% opacity",
+        "NESHAP ZZZZ engine work practices: 500-hr oil changes, non-resettable hour meters, ≤ 30-min startup idle",
+        "Single annual report (Jan 31) bundles six sub-reports — one hard reporting date per year"
+      ]
+    }
+  ],
+
+  projects: [
+    { id: "pr-01", siteId: "st-erg-ref", permitId: "p-ergon-tv", name: "Title V Renewal Application", type: "renewal",
+      status: "active", lead: "s-dm", due: "2026-08-31", pctComplete: 65,
+      notes: "Flagship filing. Emissions inventory and applicable-requirements modules drafted; compliance history & certification forms in progress. Must be filed by 2026-08-31 (6 months before 2027-02-28 expiration) to preserve the application shield." },
+    { id: "pr-02", siteId: "st-amite", permitId: "p-amite-tv", name: "RTO/RCO HAP Destruction Performance Test", type: "stack-test",
+      status: "planned", lead: "s-dm", due: "2027-04-10", pctComplete: 10,
+      notes: "Initial 96% HAP DE demonstration (Method 25A inlet/outlet) per Condition 5.B.6. Protocol targeted for MDEQ 2026-12-15; establishes minimum firebox temperature operating limits and site-specific emission factors." },
+    { id: "pr-03", siteId: "st-ambit", permitId: "p-ambit-npdes", name: "SWPPP Update for Reissued NPDES Permit", type: "plan-update",
+      status: "active", lead: "s-jb", due: "2026-09-21", pctComplete: 70,
+      notes: "Revise existing SWPPP within 180 days of 2026-03-25 reissuance (Condition T-1). Site map and SARA 313 sections done; BMP schedule under revision." },
+    { id: "pr-04", siteId: "st-ambit", permitId: "p-ambit-pret", name: "Pretreatment Baseline Monitoring Program & BMR", type: "compliance",
+      status: "complete", lead: "s-jb", due: "2026-08-04", pctComplete: 100,
+      notes: "6-month weekly BOD5/COD/TSS/NH3-N study (Condition M-1). BMR submitted 2026-05-12, revision requested by MDEQ (flow data gap), R1 resubmitted 2026-07-13, accepted 2026-08-04." },
+    { id: "pr-05", siteId: "st-erg-term", permitId: "p-ergon-smop", name: "NESHAP BBBBBB LEL Monitoring Readiness", type: "compliance",
+      status: "active", lead: "s-dm", due: "2027-05-08", pctComplete: 25,
+      notes: "Prepare for 2027-05-08 compliance date: LEL meter procurement/calibration procedures, tank-by-tank monitoring plan, CEDRI reporting template mapping (Conditions 3.7(j), 5.11, 6.20)." },
+    { id: "pr-06", siteId: "st-abb", permitId: "p-abb-smop", name: "SMOP Compliance Calendar & Recordkeeping Audit", type: "audit",
+      status: "active", lead: "s-tp", due: "2026-09-30", pctComplete: 40,
+      notes: "New permit (issued 2026-06-05): build compliance calendar, verify coating/metal-working/engine recordkeeping systems, stand up the tiered Method 22 welding observation program." },
+    { id: "pr-07", siteId: "st-nissan", permitId: "p-nissan-sw", name: "ISGP Recoverage Preparation", type: "application",
+      status: "planned", lead: "s-jb", due: "2026-12-31", pctComplete: 5,
+      notes: "Contingent on MDEQ reissuing the general permit (no public-notice date yet per 2026-08-06 call). Pre-stage Recoverage Form data and confirm SWPPP is current so the 6-month window is easy to hit. Placeholder due date — will reset when the reissuance drops." }
+  ],
+
+  obligations: [
+    /* ---------- Ergon Vicksburg Refinery — Title V 2780-00003 ---------- */
+    { id: "ob-001", permitId: "p-ergon-tv", title: "Annual Title V compliance certification", category: "certification",
+      frequency: "annual",
+      deadlineRule: "Certification of compliance with all permit terms to Permit Board and EPA Region IV by January 31 for the preceding calendar year",
+      citation: "Condition 4.2, p.56", nextDue: "2027-01-31", lastCompleted: "2026-01-28", assignee: "s-dm", status: "compliant",
+      notes: "2025 certification accepted; identifies each term, status, and continuous vs intermittent compliance." },
+    { id: "ob-002", permitId: "p-ergon-tv", title: "Semiannual monitoring report", category: "report",
+      frequency: "semiannual",
+      deadlineRule: "Reports of all required monitoring due July 31 and January 31 for the preceding six-month period",
+      citation: "Condition 5.A.4, p.57", nextDue: "2027-01-31", lastCompleted: "2026-07-30", assignee: "s-dm", status: "compliant",
+      notes: "Jan–Jun 2026 SMR submitted 7/30; carries tank VE logs, QQQ certifications, engine hours, flare data, LDAR reports." },
+    { id: "ob-003", permitId: "p-ergon-tv", title: "Permit deviation reporting", category: "notification",
+      frequency: "per-event",
+      deadlineRule: "Report deviations, probable cause, and corrective actions within 5 working days of when the deviation began; 24-hr notice for upsets with off-site impact",
+      citation: "Condition 5.A.5, p.58", nextDue: null, lastCompleted: null, assignee: "s-dm", status: "compliant",
+      notes: "No open deviations." },
+    { id: "ob-004", permitId: "p-ergon-tv", title: "Annual Title V fee & emissions inventory", category: "fee",
+      frequency: "annual",
+      deadlineRule: "Emissions inventory for previous year due July 1; fee payment due September 1 (quarterly election available)",
+      citation: "Condition 1.8(d), p.5", nextDue: "2026-09-01", lastCompleted: "2026-06-29", assignee: "s-tp", status: "due",
+      notes: "2025 inventory filed 6/29; client fee payment due 9/1." },
+    { id: "ob-005", permitId: "p-ergon-tv", title: "LDAR monitoring (monthly Method 21) & semiannual reports", category: "monitoring",
+      frequency: "monthly monitoring; semiannual reporting",
+      deadlineRule: "Monitor pumps in light liquid service and valves monthly; first repair attempt ≤ 5 calendar days, repair ≤ 15 calendar days; weekly visual pump checks; semiannual leak/repair reports",
+      citation: "Conditions 3.B.33–3.B.42 (p.23), 5.C.14 (p.86-87); 40 CFR 60 Subparts GGG/VV", nextDue: "2026-08-31", lastCompleted: "2026-07-31", assignee: "s-mh", status: "due",
+      notes: "August monitoring round in progress; valves eligible for quarterly skip after 2 leak-free months." },
+    { id: "ob-006", permitId: "p-ergon-tv", title: "Fuel gas H2S CMS & quarterly reports", category: "monitoring",
+      frequency: "continuous; quarterly reporting",
+      deadlineRule: "Continuous H2S monitoring of fuel gas before combustion; quarterly concentration reports; report all rolling 3-hr averages > 230 mg/dscm as excess emissions",
+      citation: "Conditions 5.B.7 (p.62), 5.C.5/5.C.6 (p.85); 40 CFR 60.105(a)(4), (e)(3) Subpart J", nextDue: "2026-10-30", lastCompleted: "2026-07-28", assignee: "s-dm", status: "compliant",
+      notes: "Q2 2026 report submitted 7/28; no exceedances." },
+    { id: "ob-007", permitId: "p-ergon-tv", title: "Biennial NOx stack tests — heaters AA-019 & AA-022", category: "stack-test",
+      frequency: "every 2 years (within 24 months of previous test)",
+      deadlineRule: "Method 7E testing within 24 months of previous test; protocol ≥ 30 days prior, 10-day observer notice, results within 60 days",
+      citation: "Conditions 5.B.8 (p.63), 5.C.7 (p.85)", nextDue: "2027-04-22", lastCompleted: "2025-04-22", assignee: "s-dm", status: "compliant",
+      notes: "Demonstrates 0.06/0.065 and 0.025 lb/MMBTU NOx limits." },
+    { id: "ob-008", permitId: "p-ergon-tv", title: "Weekly asphalt tank visible emission observations", category: "inspection",
+      frequency: "weekly",
+      deadlineRule: "Weekly observations of ~25 asphalt tanks; EPA Method 9 if any visible emissions; logs submitted with each semiannual report",
+      citation: "Conditions 5.B.1 (p.61), 5.C.1 (p.83); 40 CFR 60.474(c)(5) Subpart UU", nextDue: "2026-08-19", lastCompleted: "2026-08-12", assignee: "s-mh", status: "due",
+      notes: "AT-111 through AV-351 asphalt tanks." },
+    { id: "ob-009", permitId: "p-ergon-tv", title: "Floating roof tank inspections & seal gap measurements", category: "inspection",
+      frequency: "pre-fill / each degassing; seal gaps annual (secondary) and 5-year (primary)",
+      deadlineRule: "Inspect IFR/seals before fill and each emptying/degassing (Kb); Ka EFR crude tanks: primary seal gaps every 5 yrs, secondary annually; defect reports within 30 days, gap reports within 60 days",
+      citation: "Conditions 5.B.3/5.B.5 (p.62), 5.C.2/5.C.3 (p.84); 40 CFR 60.113a/113b", nextDue: "2026-11-05", lastCompleted: "2025-11-03", assignee: "s-mh", status: "compliant",
+      notes: "Annual secondary seal gap round on Ka tanks scheduled early November." },
+    { id: "ob-010", permitId: "p-ergon-tv", title: "Flare monitoring (daily smoke checks / monthly Method 22 / quarterly auto-igniter)", category: "inspection",
+      frequency: "daily / monthly / quarterly; semiannual reporting",
+      deadlineRule: "Daily smoke inspections on manned days (15-min Method 22 if smoke, corrective action if visible > 1 min); monthly Method 22 > 15 min with ≥ 15 days between tests; quarterly auto-igniter physical inspections",
+      citation: "Conditions 5.B.40/5.B.41 (p.80-81), 5.C.18 (p.88-89)", nextDue: "2026-08-27", lastCompleted: "2026-07-29", assignee: "s-mh", status: "due",
+      notes: "August monthly Method 22 scheduled 8/27; Q3 auto-igniter inspection due 9/30." },
+    { id: "ob-011", permitId: "p-ergon-tv", title: "NOx/O2 CEMS QA on crude heater AA-018R", category: "monitoring",
+      frequency: "continuous; daily/quarterly/annual QA",
+      deadlineRule: "Daily calibration drift tests; quarterly accuracy determinations for NOx monitor; annual accuracy determination for O2 monitor (40 CFR 60 App. F Proc. 1); excess emission reports per 60.108a(d)",
+      citation: "Conditions 5.B.32 (p.76-77), 5.C.16 (p.88); 40 CFR 60.107a Subpart Ja", nextDue: "2026-09-30", lastCompleted: "2026-06-26", assignee: "s-tp", status: "compliant",
+      notes: "Q3 quarterly accuracy determination scheduled with CEMS vendor for late September." },
+    { id: "ob-012", permitId: "p-ergon-tv", title: "NSPS QQQ wastewater system inspections & semiannual certifications", category: "inspection",
+      frequency: "monthly/weekly inspections; semiannual certification",
+      deadlineRule: "Water seals checked monthly (weekly visual/physical for certain drains); junction boxes and sewer lines semiannually; semiannual certification that all required inspections were performed, plus summary of breached seals/defects and repairs",
+      citation: "Conditions 3.B.24–3.B.28 (p.22), 5.C.10/5.C.11 (p.85-86); 40 CFR 60.698(b)-(c) Subpart QQQ", nextDue: "2026-08-31", lastCompleted: "2026-07-31", assignee: "s-mh", status: "review",
+      notes: "July drain/water-seal inspection logs uploaded; pending engineer QA review before filing." },
+    { id: "ob-013", permitId: "p-ergon-tv", title: "Benzene Waste NESHAP (FF) TAB tracking", category: "recordkeeping",
+      frequency: "continuous; per process change",
+      deadlineRule: "Maintain 40 CFR 61.356 records; repeat Total Annual Benzene determination whenever a process change could increase TAB by ≥ 1 Mg/yr; comply with 61.357 reporting",
+      citation: "Conditions 3.B.22 (p.21), 5.B.11 (p.63), 5.C.9 (p.85)", nextDue: null, lastCompleted: "2026-02-12", assignee: "s-tp", status: "compliant",
+      notes: "Facility relies on TAB < 10 Mg/yr — keep it that way; last determination Feb 2026." },
+    { id: "ob-014", permitId: "p-ergon-tv", title: "Emergency engine hour tracking & semiannual reports", category: "report",
+      frequency: "semiannual",
+      deadlineRule: "Report non-resettable hour-meter readings semiannually, detailing emergency vs non-emergency hours and justification",
+      citation: "Condition 5.C.17, p.88", nextDue: "2027-01-31", lastCompleted: "2026-07-30", assignee: "s-tp", status: "compliant",
+      notes: "Nine engines AG-001–AG-009; 100/50-hr limits." },
+    { id: "ob-015", permitId: "p-ergon-tv", title: "Daily fuel records & 5-year records retention", category: "recordkeeping",
+      frequency: "daily; continuous",
+      deadlineRule: "Record type and quantity of fuels used daily at all heaters/boilers (turbine: daily fuel S and N content); retain all monitoring records ≥ 5 years",
+      citation: "Conditions 5.B.6, 5.B.9 (p.62-63), 5.A.3 (p.57)", nextDue: null, lastCompleted: null, assignee: "s-mh", status: "compliant",
+      notes: "Automated fuel logging verified during July walk-through." },
+    { id: "ob-016", permitId: "p-ergon-tv", title: "Title V renewal application", category: "renewal",
+      frequency: "5-year permit cycle",
+      deadlineRule: "Submit renewal application at least 6 months before the 2027-02-28 expiration — i.e., by 2026-08-31",
+      citation: "Condition 1.17, p.7", nextDue: "2026-08-31", lastCompleted: null, assignee: "s-dm", status: "due",
+      notes: "Flagship project pr-01 at 65%. Application shield only with timely, complete filing." },
+
+    /* ---------- Ergon Fuels Terminal — SMOP 2780-00063 ---------- */
+    { id: "ob-017", permitId: "p-ergon-smop", title: "Semiannual synthetic minor monitoring report", category: "report",
+      frequency: "semiannual",
+      deadlineRule: "Certified semiannual report postmarked no later than January 31 and July 31 for the preceding six-month period, with throughput records and tank inspection summaries",
+      citation: "Condition 6.2, p.40", nextDue: "2027-01-31", lastCompleted: "2026-07-29", assignee: "s-dm", status: "compliant",
+      notes: "Jan–Jun 2026 report filed 7/29 with BBBBBB compliance/excess-emission attachments (6.5/6.6/6.19)." },
+    { id: "ob-018", permitId: "p-ergon-smop", title: "Permit deviation reporting", category: "notification",
+      frequency: "per-event",
+      deadlineRule: "Report all deviations with probable cause and corrective/preventive actions within 5 working days of when the deviation began",
+      citation: "Condition 6.1, p.40", nextDue: null, lastCompleted: null, assignee: "s-dm", status: "compliant",
+      notes: "No open deviations." },
+    { id: "ob-019", permitId: "p-ergon-smop", title: "Annual roof landing report", category: "report",
+      frequency: "annual",
+      deadlineRule: "Report all floating-roof landings for the previous 12 months (duration in hours and reason for each) by January 31",
+      citation: "Condition 6.4, p.40", nextDue: "2027-01-31", lastCompleted: "2026-01-27", assignee: "s-tp", status: "compliant",
+      notes: "Roof landing records maintained per Condition 5.13." },
+    { id: "ob-020", permitId: "p-ergon-smop", title: "Monthly product throughput records", category: "recordkeeping",
+      frequency: "monthly",
+      deadlineRule: "Maintain monthly throughputs of gasoline, additive, distillate, and off-spec product against rolling 12-month Title V avoidance caps (200M/90M/30M gal)",
+      citation: "Conditions 5.2 (p.24), 3.1 (p.10)", nextDue: "2026-08-31", lastCompleted: "2026-07-31", assignee: "s-tp", status: "due",
+      notes: "Barge loadout diesel throughput tracked monthly under 5.37." },
+    { id: "ob-021", permitId: "p-ergon-smop", title: "Monthly loading rack leak inspection", category: "inspection",
+      frequency: "monthly",
+      deadlineRule: "Inspect vapor collection system, vapor processing system, and each gasoline loading rack each calendar month during loading (sight/sound/smell); repair leaks within 15 calendar days",
+      citation: "Condition 5.16, p.29; 40 CFR 60.502(j) Subpart XX", nextDue: "2026-08-29", lastCompleted: "2026-07-30", assignee: "s-mh", status: "due",
+      notes: "Records retained 2 years with findings, method, corrective action, inspector signature (5.17)." },
+    { id: "ob-022", permitId: "p-ergon-smop", title: "Monthly LDAR of equipment in gasoline service", category: "inspection",
+      frequency: "monthly",
+      deadlineRule: "Monthly sight/sound/smell leak inspection of all gasoline-service equipment; first repair attempt ≤ 5 calendar days, repair/replacement ≤ 15 calendar days; delayed repairs explained in semiannual report",
+      citation: "Condition 5.24, p.32; 40 CFR 63.11089(a)-(d) Subpart BBBBBB", nextDue: "2026-08-29", lastCompleted: "2026-07-30", assignee: "s-mh", status: "due",
+      notes: "Signed logbook with equipment list/diagram (5.25/5.26)." },
+    { id: "ob-023", permitId: "p-ergon-smop", title: "Annual internal floating roof / seal visual inspections", category: "inspection",
+      frequency: "annual; plus pre-fill and each emptying/degassing",
+      deadlineRule: "Visually inspect IFR and seals through fixed-roof hatches at least every 12 months; repair or empty within 45 days of failure (30-day extension possible); full inspection each emptying/degassing (≤ 10-yr interval)",
+      citation: "Conditions 5.4–5.7, p.24-25; 40 CFR 60.113b(a) Subpart Kb (AA-026: 5.27–5.29, Subpart Kc)", nextDue: "2026-10-15", lastCompleted: "2025-10-10", assignee: "s-mh", status: "compliant",
+      notes: "MDEQ must be notified 30 days before refill inspections (6.8); 2026 round scheduled mid-October." },
+    { id: "ob-024", permitId: "p-ergon-smop", title: "Annual tank LEL monitoring (begins by May 2027)", category: "monitoring",
+      frequency: "annual (first round by 2027-05-08)",
+      deadlineRule: "No later than 2027-05-08, begin LEL monitoring of each IFR gasoline tank at least every 12 months; vapor space ≤ 25% LEL on 5-min rolling average; exceedance = inspection failure requiring repair and re-monitoring",
+      citation: "Conditions 3.7(j)/3.8 (p.13), 5.11 (p.26-27); 40 CFR 63.11087(f)-(g) Subpart BBBBBB", nextDue: "2027-05-08", lastCompleted: null, assignee: "s-dm", status: "compliant",
+      notes: "Readiness project pr-05 covers meter procurement, procedures, and CEDRI mapping." },
+    { id: "ob-025", permitId: "p-ergon-smop", title: "Vapor combustion unit stack test", category: "stack-test",
+      frequency: "every 5 years (≤ 61 months)",
+      deadlineRule: "Method 25A/25B stack test once every five years, not to exceed 61 months from previous test; 6-hr test with ≥ 300,000 L gasoline loaded; protocol ≥ 30 days prior; results within 60 days",
+      citation: "Conditions 5.19 (p.30), 6.7 (p.41-42)", nextDue: "2029-07-15", lastCompleted: "2024-07-15", assignee: "s-dm", status: "compliant",
+      notes: "Demonstrates 35 mg TOC/L limit; pilot-flame operating parameter re-established with each test." },
+    { id: "ob-026", permitId: "p-ergon-smop", title: "Thermal oxidizer daily checks & semiannual preventive maintenance", category: "monitoring",
+      frequency: "daily; semiannual PM inspection",
+      deadlineRule: "Verify assist-air blower and vapor line valve each day of loading rack operation; semiannual preventive maintenance inspection of the thermal oxidation system per manufacturer recommendations; auto-prevent loading when pilot flame absent",
+      citation: "Condition 5.22, p.31-32; 40 CFR 63.11092(b) Subpart BBBBBB", nextDue: "2026-11-15", lastCompleted: "2026-05-12", assignee: "s-mh", status: "compliant",
+      notes: "Next semiannual PM inspection scheduled November." },
+    { id: "ob-027", permitId: "p-ergon-smop", title: "Cargo tank vapor-tightness documentation cross-check", category: "recordkeeping",
+      frequency: "biweekly cross-check (reducible to quarterly/semiannual); annual Method 27 certifications",
+      deadlineRule: "Cross-check each loaded truck's tank ID against annual Method 27 certification within 2 weeks of loading; notify owner of non-vapor-tight trucks within 1 week; block reloading until documented",
+      citation: "Condition 4.2, p.19-20; 40 CFR 60.502(e) Subpart XX; records per 5.20", nextDue: "2026-08-21", lastCompleted: "2026-08-07", assignee: "s-tp", status: "review",
+      notes: "Q2 cross-check logs uploaded 8/7; engineer review in progress to confirm eligibility for quarterly cross-check frequency." },
+    { id: "ob-028", permitId: "p-ergon-smop", title: "Records retention & malfunction records", category: "recordkeeping",
+      frequency: "continuous",
+      deadlineRule: "Retain required records/reports ≥ 5 years (2 years for certain Kb/XX records); record occurrence/duration of each malfunction and mitigation actions; tank dimension records for vessel life",
+      citation: "Conditions 5.1, 5.3, 5.9, 5.10, p.24-25", nextDue: null, lastCompleted: null, assignee: "s-tp", status: "compliant",
+      notes: null },
+    { id: "ob-029", permitId: "p-ergon-smop", title: "SMOP renewal application", category: "renewal",
+      frequency: "5-year permit cycle",
+      deadlineRule: "Apply not less than 180 days before the 2030-04-30 expiration — i.e., by 2029-11-01",
+      citation: "Section 1.C.1, p.6", nextDue: "2029-11-01", lastCompleted: null, assignee: "s-dm", status: "compliant",
+      notes: null },
+    { id: "ob-030", permitId: "p-ergon-smop", title: "Tank 6 (AA-026) NSPS Kc semiannual CEDRI report", category: "report",
+      frequency: "semiannual",
+      deadlineRule: "Semiannual reports covering Jan 1–Jun 30 and Jul 1–Dec 31 due the last day of the month two months after period end (Aug 31 / Feb 28-29); submit via CEDRI once template available",
+      citation: "Conditions 6.14/6.15, p.43-46; 40 CFR 60.116c(c)-(d) Subpart Kc", nextDue: "2026-08-31", lastCompleted: "2026-02-25", assignee: "s-tp", status: "due",
+      notes: "Jan–Jun 2026 report due 8/31; includes inspection dates/types and any roof-landing alarm events." },
+
+    /* ---------- Ambit — NPDES MS0034878 ---------- */
+    { id: "ob-031", permitId: "p-ambit-npdes", title: "Monthly Discharge Monitoring Report (DMR)", category: "report",
+      frequency: "monthly",
+      deadlineRule: "DMR data submitted electronically via MDEQ NetDMR no later than the 28th day of the month following the completed reporting period",
+      citation: "Condition S-1 (p.2) and per-outfall S-1 conditions (p.36-38)", nextDue: "2026-08-28", lastCompleted: "2026-07-27", assignee: "s-jb", status: "due",
+      notes: "July-period DMR for Outfalls 001–003 due 8/28 (part of the Aug 28 DMR cluster)." },
+    { id: "ob-032", permitId: "p-ambit-npdes", title: "Monthly effluent sampling — all outfalls", category: "sampling",
+      frequency: "monthly",
+      deadlineRule: "Monthly grab samples (O&G, TSS, BOD5, ammonia, pH) and instantaneous flow/temperature at each outfall, Jan–Dec, at nearest accessible point after final treatment",
+      citation: "Effluent Limitations & Monitoring tables, Limits and Monitoring pp.1-3; L-3", nextDue: "2026-08-27", lastCompleted: "2026-07-22", assignee: "s-mh", status: "due",
+      notes: "August round targeted for a rain-influenced week to catch Outfall 002 overflow if it occurs." },
+    { id: "ob-033", permitId: "p-ambit-npdes", title: "24-hour noncompliance notification", category: "notification",
+      frequency: "per-event",
+      deadlineRule: "Oral report within 24 hours of noncompliance that may endanger health/environment (incl. bypass/upset exceeding limits, daily-max violations); written submission within 5 days",
+      citation: "Condition S-4, p.3", nextDue: null, lastCompleted: null, assignee: "s-jb", status: "compliant",
+      notes: "Other noncompliance reported with DMRs or within 30 days of end of month (S-5)." },
+    { id: "ob-034", permitId: "p-ambit-npdes", title: "Annual comprehensive site inspection & SWPPP evaluation", category: "inspection",
+      frequency: "annual",
+      deadlineRule: "Comprehensive SWPPP evaluation by December 31 in the year following issuance and annually thereafter, documented on the Annual SWPPP Evaluation Form kept on site",
+      citation: "Condition M-1 (SWPPP group), p.21", nextDue: "2026-12-31", lastCompleted: "2025-12-30", assignee: "s-jb", status: "compliant",
+      notes: "Amended SWPPP submitted to MDEQ within 30 days if evaluation finds changes needed." },
+    { id: "ob-035", permitId: "p-ambit-npdes", title: "Monthly SWPPP site inspection & jar tests", category: "inspection",
+      frequency: "monthly",
+      deadlineRule: "Routine visual site inspections at least once per month (during/after storm events if feasible), documented on the Monthly Inspection/Visual Evaluation Report Form; jar tests at each outfall during storm-event inspections",
+      citation: "Condition M-2 (SWPPP group), p.22", nextDue: "2026-08-09", lastCompleted: "2026-07-09", assignee: "s-mh", status: "overdue",
+      notes: "OVERDUE — August inspection missed its scheduled 8/9 window (technician on the Vicksburg tank rounds). Reschedule immediately; escalated to J. Breaux and K. Laurent 8/13." },
+    { id: "ob-036", permitId: "p-ambit-npdes", title: "SWPPP update for reissued permit", category: "plan-update",
+      frequency: "one-time (180 days), then as needed",
+      deadlineRule: "Develop/revise SWPPP within 180 days of permit issuance (2026-03-25 → due 2026-09-21); amend within 30 days of changes or ineffectiveness and submit amendment to MDEQ within 30 days",
+      citation: "Conditions T-1 (p.26), S-1 (p.25)", nextDue: "2026-09-21", lastCompleted: null, assignee: "s-jb", status: "due",
+      notes: "Project pr-03 at 70%; SARA 313 sections complete." },
+    { id: "ob-037", permitId: "p-ambit-npdes", title: "Annual stormwater employee training (documentation)", category: "recordkeeping",
+      frequency: "annual refresher; initial within 12 months",
+      deadlineRule: "Refresher training for all responsible employees by December 31 of each calendar year; new hires trained before assuming duties; records retained ≥ 3 years",
+      citation: "Conditions R-2 (p.24), R-1 (p.23)", nextDue: "2026-12-31", lastCompleted: "2025-12-16", assignee: "s-mh", status: "compliant",
+      notes: "Training log form on file; 2026 refresher planned with the December inspection visit." },
+    { id: "ob-038", permitId: "p-ambit-npdes", title: "Illicit connection dry-weather certification", category: "certification",
+      frequency: "5-year",
+      deadlineRule: "Certify at least every 5 years that storm water discharges have been evaluated for non-allowable non-storm-water discharges (method, dates, observation points, results)",
+      citation: "Condition T-6(8), p.31", nextDue: "2030-12-31", lastCompleted: "2025-11-14", assignee: "s-jb", status: "compliant",
+      notes: "Last certification via visual inspection + plant schematic review, filed with SWPPP." },
+    { id: "ob-039", permitId: "p-ambit-npdes", title: "Cooling/boiler water additive pre-approval", category: "notification",
+      frequency: "per-event",
+      deadlineRule: "Written notification to MDEQ ≥ 60 days before adding any new chemical product to cooling/boiler water subject to discharge; written approval required before use",
+      citation: "Condition S-9, p.5", nextDue: null, lastCompleted: null, assignee: "s-jb", status: "compliant",
+      notes: "No new additives planned." },
+    { id: "ob-040", permitId: "p-ambit-npdes", title: "Anticipated bypass notice", category: "notification",
+      frequency: "per-event",
+      deadlineRule: "Prior notice, if possible at least 10 days before, for any anticipated bypass; unanticipated bypass under the 24-hour rule",
+      citation: "Condition S-7, p.4", nextDue: null, lastCompleted: null, assignee: "s-jb", status: "compliant",
+      notes: null },
+    { id: "ob-041", permitId: "p-ambit-npdes", title: "New stormwater sampling data submittal", category: "report",
+      frequency: "per-event",
+      deadlineRule: "Submit any new storm water sampling data within 90 days of sampling; maintain monthly Spill & Leak Log with the SWPPP",
+      citation: "Conditions S-1(6) (p.25), T-2(4)", nextDue: null, lastCompleted: null, assignee: "s-jb", status: "compliant",
+      notes: null },
+    { id: "ob-042", permitId: "p-ambit-npdes", title: "Records retention (3 years)", category: "recordkeeping",
+      frequency: "continuous",
+      deadlineRule: "Retain all monitoring records, including calibration/maintenance records, minimum 3 years; furnish to MDEQ on request",
+      citation: "Condition T-22, p.10", nextDue: null, lastCompleted: null, assignee: "s-jb", status: "compliant",
+      notes: null },
+    { id: "ob-043", permitId: "p-ambit-npdes", title: "Permit reissuance application", category: "renewal",
+      frequency: "5-year permit cycle",
+      deadlineRule: "Application for reissuance at least 180 days before the 2031-02-28 expiration — i.e., by 2030-09-01; SWPPP certification form attached to renewal Form 2F if plan current",
+      citation: "Conditions S-8 (p.4), S-2 (p.26)", nextDue: "2030-09-01", lastCompleted: null, assignee: "s-jb", status: "compliant",
+      notes: null },
+    { id: "ob-044", permitId: "p-ambit-npdes", title: "Closure plan (if closing)", category: "notification",
+      frequency: "per-event",
+      deadlineRule: "Closure Plan to Permit Board no later than 90 days prior to permanent closure/abandonment",
+      citation: "Condition T-59, p.20", nextDue: null, lastCompleted: null, assignee: "s-jb", status: "compliant",
+      notes: null },
+
+    /* ---------- Ambit — Pretreatment MSP092477 ---------- */
+    { id: "ob-045", permitId: "p-ambit-pret", title: "Monthly Discharge Monitoring Report (DMR)", category: "report",
+      frequency: "monthly",
+      deadlineRule: "DMR submitted electronically via MDEQ NetDMR no later than the 28th day of the month following the completed reporting period",
+      citation: "Conditions S-2 (p.3), Outfall 001A S-1 (p.20)", nextDue: "2026-08-28", lastCompleted: "2026-07-24", assignee: "s-jb", status: "due",
+      notes: "Part of the Aug 28 DMR cluster; reports batch flow and pH." },
+    { id: "ob-046", permitId: "p-ambit-pret", title: "Per-discharge-event monitoring (flow & pH)", category: "sampling",
+      frequency: "per-event (each batch discharge)",
+      deadlineRule: "Monitor flow (batch estimate, MGD) and pH (grab) once per discharge event, after final treatment before discharge to the POTW",
+      citation: "Effluent Limitations & Monitoring table (Limits and Monitoring p.1); L-1", nextDue: null, lastCompleted: "2026-08-06", assignee: "s-mh", status: "compliant",
+      notes: "Last batch discharge monitored 8/6; pH 7.4 SU." },
+    { id: "ob-047", permitId: "p-ambit-pret", title: "Six-month baseline characterization (BOD5/COD/TSS/NH3-N)", category: "sampling",
+      frequency: "weekly for 6 months (complete)",
+      deadlineRule: "Weekly grab samples for six months beginning the month after the effective date; results submitted no later than the 28th of the month following complete collection",
+      citation: "Outfall 001A Condition M-1, p.20", nextDue: null, lastCompleted: "2025-11-28", assignee: "s-jb", status: "compliant",
+      notes: "Study complete; BMR accepted by MDEQ 2026-08-04 after one revision cycle. Permit may be reopened to add numeric limits." },
+    { id: "ob-048", permitId: "p-ambit-pret", title: "Form 2P Items 17A–17C supplemental data", category: "report",
+      frequency: "one-time",
+      deadlineRule: "Complete and submit Items 17A, 17B, and 17C of pretreatment application Form 2P within 180 days of commencing discharge to the POTW",
+      citation: "Outfall 001A Condition S-2, p.20", nextDue: null, lastCompleted: "2025-11-10", assignee: "s-jb", status: "compliant",
+      notes: "Filed November 2025." },
+    { id: "ob-049", permitId: "p-ambit-pret", title: "Immediate oral notification of spills/bypass/upset (MDEQ + POTW)", category: "notification",
+      frequency: "per-event",
+      deadlineRule: "Notify the Permit Board and the POTW orally immediately upon becoming aware of a spill reaching the POTW or State waters, unanticipated bypass/upset exceeding limits, or daily-max violation",
+      citation: "Condition S-1, p.2", nextDue: null, lastCompleted: null, assignee: "s-jb", status: "compliant",
+      notes: "Dual-notification call tree posted in control room." },
+    { id: "ob-050", permitId: "p-ambit-pret", title: "24-hour / 5-day noncompliance reporting", category: "notification",
+      frequency: "per-event",
+      deadlineRule: "Oral report within 24 hours of awareness of noncompliance that may endanger health/environment; written submission within 5 days; other noncompliance within 30 days of end of month",
+      citation: "Conditions S-3/S-4, p.3-4", nextDue: null, lastCompleted: null, assignee: "s-jb", status: "compliant",
+      notes: null },
+    { id: "ob-051", permitId: "p-ambit-pret", title: "Hazardous waste discharge notification (RCRA)", category: "notification",
+      frequency: "per-event (one-time per waste)",
+      deadlineRule: "Written notice to MDEQ, EPA Regional Waste Management Division, State HW authorities, and POTW for any discharge that would be hazardous waste if otherwise disposed; new listed wastes within 90 days of new RCRA rules",
+      citation: "Conditions T-51–T-53, p.16-17; 40 CFR 403.12(p)", nextDue: null, lastCompleted: null, assignee: "s-jb", status: "compliant",
+      notes: "Exempt ≤ 15 kg/month non-acute; waste-minimization certification required with any notice." },
+    { id: "ob-052", permitId: "p-ambit-pret", title: "Records retention (3 years)", category: "recordkeeping",
+      frequency: "continuous",
+      deadlineRule: "Retain all monitoring records and results, including calibration and maintenance records, minimum 3 years",
+      citation: "Condition T-22, p.8", nextDue: null, lastCompleted: null, assignee: "s-jb", status: "compliant",
+      notes: null },
+    { id: "ob-053", permitId: "p-ambit-pret", title: "Permit reissuance application", category: "renewal",
+      frequency: "5-year permit cycle",
+      deadlineRule: "Application at least 180 days before the 2030-04-30 expiration — i.e., by 2029-11-01",
+      citation: "Condition S-7, p.4", nextDue: "2029-11-01", lastCompleted: null, assignee: "s-jb", status: "compliant",
+      notes: null },
+    { id: "ob-054", permitId: "p-ambit-pret", title: "Anticipated bypass notice", category: "notification",
+      frequency: "per-event",
+      deadlineRule: "Prior notice, if possible at least 10 days before the date of an anticipated bypass",
+      citation: "Condition S-6, p.4", nextDue: null, lastCompleted: null, assignee: "s-jb", status: "compliant",
+      notes: null },
+    { id: "ob-055", permitId: "p-ambit-pret", title: "Closure plan (if closing)", category: "notification",
+      frequency: "per-event",
+      deadlineRule: "Closure Plan to Permit Board no later than 90 days prior to permanent closure and abandonment",
+      citation: "Condition T-60, p.18", nextDue: null, lastCompleted: null, assignee: "s-jb", status: "compliant",
+      notes: null },
+    { id: "ob-056", permitId: "p-ambit-pret", title: "Facility expansion/modification reporting", category: "notification",
+      frequency: "per-event",
+      deadlineRule: "Report any expansion, production increase, or process modification that may result in new or increased discharge via new application or notice before the change",
+      citation: "Condition T-25, p.9", nextDue: null, lastCompleted: null, assignee: "s-jb", status: "compliant",
+      notes: null },
+
+    /* ---------- Amite BioEnergy — Title V 0800-00031 ---------- */
+    { id: "ob-057", permitId: "p-amite-tv", title: "Annual Title V compliance certification", category: "certification",
+      frequency: "annual",
+      deadlineRule: "Certification of compliance to Permit Board and EPA Region IV (via CEDRI) by January 31 of each year for the preceding calendar year",
+      citation: "Condition 4.2, p.30", nextDue: "2027-01-31", lastCompleted: "2026-01-29", assignee: "s-dm", status: "compliant",
+      notes: "First certification under the reissued permit will address both permit versions (reissued 2026-06-23)." },
+    { id: "ob-058", permitId: "p-amite-tv", title: "Semiannual monitoring report (SMR)", category: "report",
+      frequency: "semiannual",
+      deadlineRule: "Reports of all required monitoring by July 31 and January 31 for the preceding six-month period, certified by responsible official",
+      citation: "Conditions 5.A.4 (p.31), 5.C.1 (p.49-51)", nextDue: "2027-01-31", lastCompleted: "2026-07-31", assignee: "s-dm", status: "compliant",
+      notes: "Jan–Jun 2026 SMR filed 7/31; includes CAM summary (5.C.6), bypass hours, throughput, engine hours." },
+    { id: "ob-059", permitId: "p-amite-tv", title: "Permit deviation reporting", category: "notification",
+      frequency: "per-event",
+      deadlineRule: "Report all deviations (incl. upsets/malfunctions), probable cause, and corrective actions within 5 working days of when the deviation began; 24-hr notice for off-site impacts",
+      citation: "Condition 5.A.5, p.32", nextDue: null, lastCompleted: null, assignee: "s-dm", status: "compliant",
+      notes: null },
+    { id: "ob-060", permitId: "p-amite-tv", title: "Annual Title V emissions fee", category: "fee",
+      frequency: "annual",
+      deadlineRule: "Annual fee reporting form (emissions inventory) due July 1; fee payment due September 1; 10% penalty accrues if unpaid 30 days after due date",
+      citation: "Condition 1.8(c), (e), (g), p.4-6", nextDue: "2026-09-01", lastCompleted: "2026-07-01", assignee: "s-tp", status: "due",
+      notes: "Fee form filed 7/1; client payment due 9/1." },
+    { id: "ob-061", permitId: "p-amite-tv", title: "RTO/RCO HAP destruction efficiency performance test", category: "stack-test",
+      frequency: "initial, then every 3 years (≤ 37 months)",
+      deadlineRule: "Initial performance test no later than 2027-04-10; subsequent tests every 3 years, not to exceed 37 months after the previous test",
+      citation: "Condition 5.B.6, p.38", nextDue: "2027-04-10", lastCompleted: null, assignee: "s-dm", status: "compliant",
+      notes: "Project pr-02 (planned). Demonstrates 96.0% HAP DE; also evaluates methanol, formaldehyde, acetaldehyde, CO, NOx and sets firebox temperature limits." },
+    { id: "ob-062", permitId: "p-amite-tv", title: "PM/PM10/PM2.5 performance testing", category: "stack-test",
+      frequency: "5-year (≤ 61-month interval)",
+      deadlineRule: "Conduct filterable and condensable PM testing no later than 2028-12-03, then no later than 61 months after the previous test",
+      citation: "Condition 5.B.6, p.38", nextDue: "2028-12-03", lastCompleted: null, assignee: "s-dm", status: "compliant",
+      notes: "WESP voltage/current operating limits established during PM10 tests." },
+    { id: "ob-063", permitId: "p-amite-tv", title: "Stack test protocol / results / emission factor submittals", category: "report",
+      frequency: "per test event",
+      deadlineRule: "Test protocol ≥ 30 days before test (10-day observer notice); results to MDEQ within 60 days; results to EPA via CEDRI within 60 days; site-specific emission factors within 90 days after testing",
+      citation: "Conditions 5.C.2–5.C.5, p.51-53", nextDue: "2026-12-15", lastCompleted: null, assignee: "s-dm", status: "compliant",
+      notes: "Protocol for the April 2027 RTO/RCO test targeted to MDEQ by 2026-12-15 to leave margin for a pre-test conference." },
+    { id: "ob-064", permitId: "p-amite-tv", title: "Monthly emission calculations & throughput tracking", category: "recordkeeping",
+      frequency: "monthly",
+      deadlineRule: "Calculate PM/PM10/PM2.5/NOx/CO/VOC emissions monthly and rolling 12-month; record dryer throughput and pellet production (ODT) monthly and rolling 12-month",
+      citation: "Conditions 5.B.3 (p.36), 5.B.19/5.B.21 (p.45)", nextDue: "2026-08-31", lastCompleted: "2026-07-31", assignee: "s-tp", status: "due",
+      notes: "Tracks 245/249-tpy PSD-avoidance caps and 467,316 / 624,700 ODT throughput caps." },
+    { id: "ob-065", permitId: "p-amite-tv", title: "Weekly Method 22 observations — RTO/RCO exhausts", category: "inspection",
+      frequency: "weekly",
+      deadlineRule: "≥ 6-minute Method 22 observation weekly during daylight/representative conditions; immediate Method 9 VEE if visible emissions detected (written explanation if not possible immediately)",
+      citation: "Condition 5.B.9, p.41-42", nextDue: "2026-08-18", lastCompleted: "2026-08-11", assignee: "s-mh", status: "due",
+      notes: "No visible emissions in 2026 to date." },
+    { id: "ob-066", permitId: "p-amite-tv", title: "Baghouse pressure-drop monitoring & monthly inspections", category: "monitoring",
+      frequency: "daily (ΔP); monthly (inspections)",
+      deadlineRule: "Record differential pressure across each baghouse filter daily during operation (CAM range 0.25–8 in. H2O); perform and record a performance inspection of each baghouse/bin vent filter monthly",
+      citation: "Conditions 5.B.23/5.B.24 (p.45-46), 5.B.20 (p.45)", nextDue: "2026-08-31", lastCompleted: "2026-07-30", assignee: "s-mh", status: "review",
+      notes: "July inspection logs uploaded; pending engineer review after two ΔP readings flirted with the low end of the CAM range on Hammermill System C." },
+    { id: "ob-067", permitId: "p-amite-tv", title: "CAM continuous parametric monitoring (RTO/RCO/WESP)", category: "monitoring",
+      frequency: "continuous; quarterly electrical inspections; annual sensor validation",
+      deadlineRule: "Continuously monitor firebox temperature and WESP secondary voltage/current on 3-hr block averages with ≥ 75% valid data; validate temperature sensors annually; inspect electrical connections at least quarterly",
+      citation: "Conditions 5.B.5, 5.B.8, 5.B.10, 5.B.18, p.37-44", nextDue: "2026-09-30", lastCompleted: "2026-06-30", assignee: "s-tp", status: "compliant",
+      notes: "QIP triggered at 6 excursions per 6-month period; none logged this period." },
+    { id: "ob-068", permitId: "p-amite-tv", title: "RCO catalyst life testing", category: "monitoring",
+      frequency: "every 16 months",
+      deadlineRule: "Evaluate catalyst reactivity and structural integrity no later than 2027-03-17, then ≤ 16 months after previous test; submit results within 60 days of each test",
+      citation: "Conditions 5.B.22 (p.45), 5.C.8 (p.53)", nextDue: "2027-03-17", lastCompleted: null, assignee: "s-dm", status: "compliant",
+      notes: "Coordinate with April 2027 stack test outage window if possible." },
+    { id: "ob-069", permitId: "p-amite-tv", title: "Furnace bypass stack hour tracking", category: "recordkeeping",
+      frequency: "monthly / rolling 12-month",
+      deadlineRule: "Record date, time, duration of each startup/shutdown bypass and idle-mode event; maintain rolling 12-month totals against the 100-hr (SU/SD) and 500-hr (idle) caps",
+      citation: "Conditions 5.B.12/5.B.13 (p.42), 3.B.7 (p.20-21)", nextDue: "2026-08-31", lastCompleted: "2026-07-31", assignee: "s-tp", status: "due",
+      notes: "Rolling totals at 41 hr SU/SD and 176 hr idle — comfortable margin." },
+    { id: "ob-070", permitId: "p-amite-tv", title: "Title V renewal application", category: "renewal",
+      frequency: "5-year permit cycle",
+      deadlineRule: "Submit renewal application at least 6 months before the 2031-05-31 expiration — i.e., by 2030-11-30",
+      citation: "Condition 1.17, p.8", nextDue: "2030-11-30", lastCompleted: null, assignee: "s-dm", status: "compliant",
+      notes: null },
+
+    /* ---------- Nissan Canton — ISGP coverage MSR001603 ---------- */
+    { id: "ob-071", permitId: "p-nissan-sw", title: "Monthly site inspection & jar tests", category: "inspection",
+      frequency: "monthly",
+      deadlineRule: "Routine visual site inspections at least once per month by trained personnel (during/after storm events if feasible); deficiencies corrected within 7 days (immediately if environmental harm)",
+      citation: "ISGP ACT10 R-1, p.25-26", nextDue: "2026-08-26", lastCompleted: "2026-07-28", assignee: "s-mh", status: "due",
+      notes: "Documented on Monthly Inspection Report + Visual Jar Test forms; obligations continue during administrative continuance." },
+    { id: "ob-072", permitId: "p-nissan-sw", title: "Quarterly storm-event visual monitoring (outfall jar tests)", category: "monitoring",
+      frequency: "quarterly (facility practice under ACT10 R-1)",
+      deadlineRule: "At least once per quarter, conduct the monthly inspection during/after a qualifying storm event and collect a jar-test sample at each outfall; investigate upstream and correct on any objectionable characteristics",
+      citation: "ISGP ACT10 R-1 (jar test provisions), p.25-26", nextDue: "2026-09-30", lastCompleted: "2026-06-18", assignee: "s-mh", status: "compliant",
+      notes: "Facility SWPPP schedules one storm-event round per quarter; MS ISGP folds visual monitoring into the monthly inspection regime (no federal-MSGP-style benchmark sampling)." },
+    { id: "ob-073", permitId: "p-nissan-sw", title: "Annual comprehensive SWPPP evaluation", category: "inspection",
+      frequency: "annual",
+      deadlineRule: "Comprehensive evaluation of the facility SWPPP by December 31 of each calendar year, documented on the Annual Comprehensive SWPPP Evaluation Form, signed and kept on site",
+      citation: "ISGP ACT10 R-2, p.25-26", nextDue: "2026-12-31", lastCompleted: "2025-12-18", assignee: "s-jb", status: "compliant",
+      notes: "Amended SWPPP to MDEQ within 30 days if evaluation requires changes (ACT9 S-1(4))." },
+    { id: "ob-074", permitId: "p-nissan-sw", title: "SWPPP implementation & amendments", category: "plan-update",
+      frequency: "continuous; per-event",
+      deadlineRule: "Implement and retain SWPPP on site; amend within 30 days when MDEQ requests changes or when design/operation changes or the plan proves ineffective; submit amendments to MDEQ within 30 days",
+      citation: "ISGP ACT9 S-1, p.24", nextDue: null, lastCompleted: null, assignee: "s-jb", status: "compliant",
+      notes: "Failure to implement the SWPPP is itself a permit violation." },
+    { id: "ob-075", permitId: "p-nissan-sw", title: "Monthly spill & leak log", category: "recordkeeping",
+      frequency: "monthly",
+      deadlineRule: "Complete a Monthly Spill and Leak Log Sheet for each month of coverage (negative entry if none), filed on site with the SWPPP",
+      citation: "ISGP ACT5 T-3, p.11", nextDue: "2026-08-31", lastCompleted: "2026-07-31", assignee: "s-mh", status: "due",
+      notes: null },
+    { id: "ob-076", permitId: "p-nissan-sw", title: "Annual employee stormwater training (documentation)", category: "recordkeeping",
+      frequency: "annual refresher; initial within 12 months",
+      deadlineRule: "Refresher training for all responsible employees by December 31 of each calendar year; new hires before assuming duties; documented on Employee Training Log Form",
+      citation: "ISGP ACT14 S-1/S-2, p.32-33", nextDue: "2026-12-31", lastCompleted: "2025-12-10", assignee: "s-mh", status: "compliant",
+      notes: null },
+    { id: "ob-077", permitId: "p-nissan-sw", title: "Illicit connection evaluation & certification", category: "certification",
+      frequency: "5-year",
+      deadlineRule: "Certify at least every five years that stormwater discharges have been evaluated (dry-weather screening) for non-allowable non-stormwater discharges; kept on site with SWPPP",
+      citation: "ISGP ACT5 T-7(8), p.13", nextDue: "2027-03-15", lastCompleted: "2022-03-15", assignee: "s-jb", status: "compliant",
+      notes: "Next certification due March 2027 — plan dye-test round for Q1 2027." },
+    { id: "ob-078", permitId: "p-nissan-sw", title: "Noncompliance reporting", category: "notification",
+      frequency: "per-event",
+      deadlineRule: "Oral notice to MDEQ within 24 hours of unanticipated noncompliance that may endanger health/environment, written report within 5 working days; other noncompliance within 30 days of end of month; anticipated noncompliance ≥ 10 days advance",
+      citation: "ISGP ACT16 T-18, p.40", nextDue: null, lastCompleted: null, assignee: "s-jb", status: "compliant",
+      notes: "Sheen/film releases also to MEMA (800-222-6362) or NRC (800-424-8802) (T-15)." },
+    { id: "ob-079", permitId: "p-nissan-sw", title: "Facility change / transfer notifications", category: "notification",
+      frequency: "per-event",
+      deadlineRule: "Notify Permit Board via appropriate form at least 30 days before planned process changes affecting stormwater quality, footprint changes, ownership changes, or changes to ISNOI information",
+      citation: "ISGP ACT4 S-3, p.8", nextDue: null, lastCompleted: null, assignee: "s-jb", status: "compliant",
+      notes: null },
+    { id: "ob-080", permitId: "p-nissan-sw", title: "Records retention (3 years)", category: "recordkeeping",
+      frequency: "continuous",
+      deadlineRule: "Retain all records, reports, and information required by the permit on site with the SWPPP for at least 3 years from date of generation",
+      citation: "ISGP ACT13 T-1 (p.31), ACT16 T-23 (p.42)", nextDue: null, lastCompleted: null, assignee: "s-mh", status: "compliant",
+      notes: null },
+    { id: "ob-081", permitId: "p-nissan-sw", title: "ISGP recoverage NOI (watch — reissuance pending)", category: "renewal",
+      frequency: "per general-permit reissuance",
+      deadlineRule: "After MDEQ reissues the ISGP, follow the Letter of Instruction; coverage under the expired permit terminates 6 months after reissuance unless a complete Recoverage Form and required submittals are received by MDEQ",
+      citation: "ISGP ACT3 S-3 (p.7), ACT16 T-22 (p.41-42)", nextDue: null, lastCompleted: null, assignee: "s-jb", status: "compliant",
+      notes: "WATCH ITEM — no due date until MDEQ reissues the general permit (expired 2025-11-30, administratively continued). Per 8/6/2026 call with MDEQ, draft still in internal review, no public-notice date. SWPPP resubmittal not required at recoverage if current and effective." },
+
+    /* ---------- ABB Motors — SMOP 1680-00065 ---------- */
+    { id: "ob-082", permitId: "p-abb-smop", title: "Annual synthetic minor monitoring report", category: "report",
+      frequency: "annual",
+      deadlineRule: "Certified annual monitoring report postmarked no later than January 31 for the preceding calendar year; identifies all deviations or contains a negative declaration",
+      citation: "Condition 6.2, p.24", nextDue: "2027-01-31", lastCompleted: null, assignee: "s-tp", status: "compliant",
+      notes: "First annual report under this permit (issued 2026-06-05); bundles VOC/HAP, coatings, welding VE, SSWEMP, metal working, and engine-hours sub-reports (6.4–6.9)." },
+    { id: "ob-083", permitId: "p-abb-smop", title: "Permit deviation reporting", category: "notification",
+      frequency: "per-event",
+      deadlineRule: "Report all deviations (incl. upsets) with probable cause and corrective actions within 5 working days of when the deviation began; 24-hr notice for upsets with off-site impact",
+      citation: "Condition 6.1, p.24; Section 1.B.4", nextDue: null, lastCompleted: null, assignee: "s-tp", status: "compliant",
+      notes: null },
+    { id: "ob-084", permitId: "p-abb-smop", title: "Monthly facility-wide VOC/HAP emission calculations", category: "recordkeeping",
+      frequency: "monthly",
+      deadlineRule: "Calculate and record total VOC, individual HAP, and total HAP emissions monthly and on a rolling 12-month basis",
+      citation: "Condition 5.2, p.18", nextDue: "2026-08-31", lastCompleted: "2026-07-31", assignee: "s-tp", status: "due",
+      notes: "Tracks synthetic-minor caps (VOC < 99 tpy; HAP < 9/24 tpy)." },
+    { id: "ob-085", permitId: "p-abb-smop", title: "Monthly surface coating usage records", category: "recordkeeping",
+      frequency: "monthly",
+      deadlineRule: "Record monthly gallons of each coating material used plus density, VOC wt%, HAP wt%, and rolling 12-month emission rates",
+      citation: "Condition 5.3, p.18", nextDue: "2026-08-31", lastCompleted: "2026-07-31", assignee: "s-tp", status: "due",
+      notes: "AA-100 coatings, thinner, varnish." },
+    { id: "ob-086", permitId: "p-abb-smop", title: "Weekly Method 22 welding visible-emission observation", category: "inspection",
+      frequency: "weekly (tiered: daily → weekly → monthly → 60-day)",
+      deadlineRule: "≥ 15-minute Method 22 test per tier schedule (currently weekly after 10 clean daily tests); visible emissions present if detected > 6 min of any 15-min period; revert to daily on any detection",
+      citation: "Condition 5.4, p.18-19; 40 CFR 63.11516(f)(3) Subpart XXXXXX", nextDue: "2026-08-11", lastCompleted: "2026-08-04", assignee: "s-mh", status: "overdue",
+      notes: "OVERDUE — weekly observation missed 8/11 (plant welding line ran a weekend shift outside the tech's visit). Perform ASAP and document the gap; escalated 8/14." },
+    { id: "ob-087", permitId: "p-abb-smop", title: "Method 9 opacity determination on repeat fugitive detections", category: "monitoring",
+      frequency: "per-event, then tiered schedule",
+      deadlineRule: "If fugitives detected in more than one visual determination in any 12 months, perform a 30-minute Method 9 within 24 hours, then follow daily/weekly/monthly Method 9 schedule",
+      citation: "Condition 5.6, p.20-21; 40 CFR 63.11516(f)(5)", nextDue: null, lastCompleted: null, assignee: "s-mh", status: "compliant",
+      notes: "Not triggered — no fugitive detections to date." },
+    { id: "ob-088", permitId: "p-abb-smop", title: "SSWEMP maintenance & annual submittal", category: "plan-update",
+      frequency: "annual (with annual report); per-event on >20% opacity",
+      deadlineRule: "Revise SSWEMP within 30 days of any Method 9 result exceeding 20% opacity; update annually if necessary, keep on site, and submit revision (or negative declaration) with the January 31 annual report",
+      citation: "Conditions 5.8 (p.22), 6.7 (p.26)", nextDue: "2027-01-31", lastCompleted: "2026-07-02", assignee: "s-tp", status: "compliant",
+      notes: "Baseline SSWEMP established July 2026 during compliance-calendar audit." },
+    { id: "ob-089", permitId: "p-abb-smop", title: "Monthly metal working material & operational records", category: "recordkeeping",
+      frequency: "monthly",
+      deadlineRule: "Record monthly pounds of metal processed and welding wire/electrode consumed, plus MFHAP content and rolling 12-month MFHAP emission rates",
+      citation: "Condition 5.11, p.23", nextDue: "2026-08-31", lastCompleted: "2026-07-31", assignee: "s-tp", status: "due",
+      notes: "MFHAP = Cd/Cr/Pb/Ni ≥ 0.1 wt% or Mn ≥ 1.0 wt%." },
+    { id: "ob-090", permitId: "p-abb-smop", title: "Emergency engine hour-meter monitoring", category: "monitoring",
+      frequency: "monthly",
+      deadlineRule: "Record hours of operation monthly for each engine via non-resettable hour meter, classifying each run as emergency or non-emergency",
+      citation: "Condition 5.12, p.23; 40 CFR 63.6655(f)(2) Subpart ZZZZ", nextDue: "2026-08-31", lastCompleted: "2026-07-31", assignee: "s-mh", status: "due",
+      notes: "100 hr/yr maintenance & testing, ≤ 50 hr non-emergency per engine (3.11)." },
+    { id: "ob-091", permitId: "p-abb-smop", title: "Emergency engine preventive maintenance", category: "inspection",
+      frequency: "every 500 operating hours or 1 year + 30 days",
+      deadlineRule: "Change oil/filter every 500 hrs or within 1 yr 30 days of previous change (whichever first); inspect air cleaner every 1,000 hrs; inspect hoses/belts every 500 hrs; oil-analysis option with 2-business-day change on condemning result",
+      citation: "Condition 4.4, p.14-15; 40 CFR 63.6603(a) Table 2d Subpart ZZZZ", nextDue: "2027-06-15", lastCompleted: "2026-06-10", assignee: "s-mh", status: "compliant",
+      notes: "Both engines serviced June 2026; startup idle limited to ≤ 30 min (4.3)." },
+    { id: "ob-092", permitId: "p-abb-smop", title: "Records retention (5 years)", category: "recordkeeping",
+      frequency: "continuous",
+      deadlineRule: "Retain all records, monitoring data, supporting information, and reports for at least 5 years from date of sample/measurement/report",
+      citation: "Condition 5.1, p.17; 11 Miss. Admin. Code Pt. 2, R. 2.9", nextDue: null, lastCompleted: null, assignee: "s-tp", status: "compliant",
+      notes: null },
+    { id: "ob-093", permitId: "p-abb-smop", title: "SMOP renewal application", category: "renewal",
+      frequency: "5-year permit cycle",
+      deadlineRule: "Apply not less than 180 days before the 2031-05-31 expiration — i.e., by 2030-12-02",
+      citation: "Section 1.C.1, p.6", nextDue: "2030-12-02", lastCompleted: null, assignee: "s-dm", status: "compliant",
+      notes: null }
+  ],
+
+  documents: [
+    /* Ergon Title V */
+    { id: "d-etv-01", permitId: "p-ergon-tv", name: "Title V Renewal Application — Emissions Inventory Module", docType: "application",
+      status: "draft", date: "2026-07-18", by: "s-tp", rev: "R0", note: "2021–2025 actuals compiled; awaiting Q2 2026 fuel data reconciliation." },
+    { id: "d-etv-02", permitId: "p-ergon-tv", name: "Title V Renewal Application — Compliance History & Certification Forms", docType: "application",
+      status: "draft", date: "2026-08-08", by: "s-dm", rev: "R0", note: "Applicable-requirements crosswalk complete; RO certification package pending client signature routing." },
+    { id: "d-etv-03", permitId: "p-ergon-tv", name: "Semiannual Monitoring Report (Jan–Jun 2026)", docType: "report",
+      status: "submitted", date: "2026-07-30", by: "s-dm", rev: "R0", note: "Includes tank VE logs, QQQ certifications, engine hours, LDAR summary, flare data." },
+    { id: "d-etv-04", permitId: "p-ergon-tv", name: "Q2 2026 Fuel Gas H2S CMS Report", docType: "report",
+      status: "submitted", date: "2026-07-28", by: "s-dm", rev: "R0", note: "No 3-hr averages above 230 mg/dscm." },
+    { id: "d-etv-05", permitId: "p-ergon-tv", name: "2025 Annual Compliance Certification", docType: "certification",
+      status: "accepted", date: "2026-01-28", by: "s-dm", rev: "R0", note: "Filed to Permit Board and EPA Region IV; intermittent-compliance note on one flare pilot outage (reported timely)." },
+    { id: "d-etv-06", permitId: "p-ergon-tv", name: "2025 Biennial NOx Stack Test Report (AA-019/AA-022)", docType: "test-result",
+      status: "accepted", date: "2025-06-18", by: "s-dm", rev: "R0", note: "Method 7E; both heaters passed with margin (0.048 and 0.019 lb/MMBTU)." },
+    { id: "d-etv-07", permitId: "p-ergon-tv", name: "MDEQ acknowledgment — SMR received", docType: "correspondence",
+      status: "received", date: "2026-08-05", by: "MDEQ", rev: "R0", note: "Routine acknowledgment of the Jan–Jun 2026 semiannual report." },
+
+    /* Ergon SMOP terminal */
+    { id: "d-est-01", permitId: "p-ergon-smop", name: "Semiannual SMOP Monitoring Report (Jan–Jun 2026)", docType: "report",
+      status: "submitted", date: "2026-07-29", by: "s-dm", rev: "R0", note: "Throughput vs caps, tank inspection summary, BBBBBB compliance attachments." },
+    { id: "d-est-02", permitId: "p-ergon-smop", name: "2025 Annual Roof Landing Report", docType: "report",
+      status: "accepted", date: "2026-01-27", by: "s-tp", rev: "R0", note: "Three landings in 2025 (Tank 5 product changeout; Tank 8 cleaning; Tank 6 initial fill)." },
+    { id: "d-est-03", permitId: "p-ergon-smop", name: "Tank 6 (AA-026) NSPS Subpart Kc Initial Notification", docType: "other",
+      status: "submitted", date: "2025-09-12", by: "s-dm", rev: "R0", note: "Filed within 60 days of becoming an affected vessel (40 CFR 60.116c(a))." },
+    { id: "d-est-04", permitId: "p-ergon-smop", name: "BBBBBB LEL Monitoring Readiness Gap Assessment", docType: "plan",
+      status: "draft", date: "2026-08-06", by: "s-tp", rev: "R0", note: "Meter specs, calibration gas sourcing, tank-by-tank plan for the 2027-05-08 compliance date." },
+    { id: "d-est-05", permitId: "p-ergon-smop", name: "July 2026 Loading Rack & Gasoline-Service LDAR Inspection Logs", docType: "other",
+      status: "draft", date: "2026-07-30", by: "s-mh", rev: "R0", note: "Field logs uploaded; one flange leak repaired same day (day 1 of 15-day clock)." },
+
+    /* Ambit NPDES */
+    { id: "d-anp-01", permitId: "p-ambit-npdes", name: "July 2026 DMR — Outfalls 001/002/003", docType: "dmr",
+      status: "submitted", date: "2026-07-27", by: "s-jb", rev: "R0", note: "NetDMR; all parameters within limits, Outfall 002 no discharge (no qualifying rain event)." },
+    { id: "d-anp-02", permitId: "p-ambit-npdes", name: "June 2026 DMR — Outfalls 001/002/003", docType: "dmr",
+      status: "accepted", date: "2026-06-25", by: "s-jb", rev: "R0", note: "O&G 6.2 mg/L monthly avg at 001." },
+    { id: "d-anp-03", permitId: "p-ambit-npdes", name: "SWPPP 2026 Update (for reissued permit)", docType: "plan",
+      status: "draft", date: "2026-08-10", by: "s-jb", rev: "R1", note: "Site map, SARA 313, and non-storm-water sections done; BMP implementation schedule in revision. Due to be final by 2026-09-21." },
+    { id: "d-anp-04", permitId: "p-ambit-npdes", name: "Reissued NPDES Permit MS0034878 (final)", docType: "correspondence",
+      status: "received", date: "2026-03-25", by: "MDEQ", rev: "R0", note: "Reissued/modified permit effective upon issuance; expires 2031-02-28." },
+    { id: "d-anp-05", permitId: "p-ambit-npdes", name: "2025 Annual SWPPP Evaluation Form", docType: "report",
+      status: "accepted", date: "2025-12-30", by: "s-mh", rev: "R0", note: "Filed on-site; two housekeeping BMP corrections closed in January." },
+
+    /* Ambit Pretreatment — rejection/resubmission thread */
+    { id: "d-apt-01", permitId: "p-ambit-pret", name: "Baseline Monitoring Report — 6-Month BOD5/COD/TSS/NH3-N Study", docType: "report",
+      status: "submitted", date: "2026-05-12", by: "s-jb", rev: "R0", note: "26 weekly grab events (Jun–Nov 2025) summarized per Condition M-1." },
+    { id: "d-apt-02", permitId: "p-ambit-pret", name: "MDEQ Letter — Revision Requested (BMR flow data gap)", docType: "correspondence",
+      status: "revision-requested", date: "2026-06-09", by: "MDEQ", rev: "R0", note: "MDEQ noted batch discharge volumes missing for 5 of 26 events at Outfall 001A; loading calcs cannot be verified without flow." },
+    { id: "d-apt-03", permitId: "p-ambit-pret", name: "Baseline Monitoring Report — Revision 1 (batch flow reconstruction)", docType: "report",
+      status: "resubmitted", date: "2026-07-13", by: "s-jb", rev: "R1", note: "Missing volumes reconstructed from tank strapping charts and pump run-time logs; methodology appendix added." },
+    { id: "d-apt-04", permitId: "p-ambit-pret", name: "MDEQ Letter — BMR Revision 1 Accepted", docType: "correspondence",
+      status: "accepted", date: "2026-08-04", by: "MDEQ", rev: "R1", note: "Study closed; MDEQ reserves reopener to add numeric limits based on the data." },
+    { id: "d-apt-05", permitId: "p-ambit-pret", name: "July 2026 DMR — Outfall 001A", docType: "dmr",
+      status: "submitted", date: "2026-07-24", by: "s-jb", rev: "R0", note: "Two batch events; pH 7.1 / 7.6 SU." },
+
+    /* Amite Title V */
+    { id: "d-amt-01", permitId: "p-amite-tv", name: "Title V Permit 0800-00031 — Issuance Package", docType: "correspondence",
+      status: "received", date: "2026-06-23", by: "MDEQ", rev: "R0", note: "Reissued permit incorporating March 2026 PTC modification (case-by-case MACT)." },
+    { id: "d-amt-02", permitId: "p-amite-tv", name: "RTO/RCO Performance Test Protocol — Outline", docType: "plan",
+      status: "draft", date: "2026-08-03", by: "s-dm", rev: "R0", note: "Method 25A inlet/outlet, OTM-26 VOC factor approach, firebox temp limit derivation; MDEQ submittal targeted 2026-12-15." },
+    { id: "d-amt-03", permitId: "p-amite-tv", name: "Semiannual Monitoring Report (Jan–Jun 2026)", docType: "report",
+      status: "submitted", date: "2026-07-31", by: "s-dm", rev: "R0", note: "Filed 7/31 under Condition 5.A.4; includes CAM summary and bypass-hour totals." },
+    { id: "d-amt-04", permitId: "p-amite-tv", name: "Startup, Shutdown, and Malfunction Plan (rev. 2024-09-27)", docType: "plan",
+      status: "received", date: "2026-07-06", by: "s-tp", rev: "R0", note: "Current SSMP on file, verified against new permit Condition 5.B.2 during calendar rebuild." },
+    { id: "d-amt-05", permitId: "p-amite-tv", name: "Dust Management Plan (March 2025)", docType: "plan",
+      status: "received", date: "2026-07-06", by: "s-tp", rev: "R0", note: "Current DMP on file per Condition 5.B.1; annual dust-control training tracked under 3.D.1(f)." },
+
+    /* Nissan stormwater */
+    { id: "d-nsw-01", permitId: "p-nissan-sw", name: "Certificate of Permit Coverage MSR001603", docType: "correspondence",
+      status: "received", date: "2021-08-17", by: "MDEQ", rev: "R0", note: "Coverage under the 2020 ISGP; general permit expired 2025-11-30 (administratively continued)." },
+    { id: "d-nsw-02", permitId: "p-nissan-sw", name: "2025 Annual Comprehensive SWPPP Evaluation", docType: "report",
+      status: "accepted", date: "2025-12-18", by: "s-mh", rev: "R0", note: "Signed per ACT16 T-9/T-10; no plan amendments required." },
+    { id: "d-nsw-03", permitId: "p-nissan-sw", name: "July 2026 Monthly Inspection & Jar Test Forms", docType: "other",
+      status: "draft", date: "2026-07-28", by: "s-mh", rev: "R0", note: "All outfalls clear; one silt fence repair completed within the 7-day clock." },
+    { id: "d-nsw-04", permitId: "p-nissan-sw", name: "SWPPP — Canton Manufacturing Facility (current)", docType: "plan",
+      status: "received", date: "2024-05-20", by: "s-jb", rev: "R2", note: "Kept current so recoverage under the reissued ISGP will not require resubmittal (ACT3 S-3)." },
+
+    /* ABB SMOP */
+    { id: "d-abb-01", permitId: "p-abb-smop", name: "SMOP 1680-00065 — Issuance Package", docType: "correspondence",
+      status: "received", date: "2026-06-05", by: "MDEQ", rev: "R0", note: "New synthetic minor permit; expires 2031-05-31." },
+    { id: "d-abb-02", permitId: "p-abb-smop", name: "Compliance Calendar & Recordkeeping Audit Workplan", docType: "plan",
+      status: "draft", date: "2026-07-21", by: "s-tp", rev: "R0", note: "Project pr-06: verify coating/metal-working/engine records systems against Conditions 5.2–5.12." },
+    { id: "d-abb-03", permitId: "p-abb-smop", name: "SSWEMP — Baseline Plan", docType: "plan",
+      status: "received", date: "2026-07-02", by: "s-tp", rev: "R0", note: "Baseline Site-Specific Welding Emissions Management Plan established; kept on site per Condition 5.8(c)." },
+    { id: "d-abb-04", permitId: "p-abb-smop", name: "July 2026 Emissions Calculation Workbook (VOC/HAP rolling 12-month)", docType: "other",
+      status: "draft", date: "2026-08-05", by: "s-tp", rev: "R0", note: "Rolling VOC at 61.4 tpy vs 99 tpy cap; max individual HAP 3.1 tpy vs 9 tpy." }
+  ],
+
+  activity: [
+    /* Ergon Title V */
+    { id: "a-001", permitId: "p-ergon-tv", date: "2026-01-28", kind: "submission", text: "2025 Annual Compliance Certification filed to Permit Board and EPA Region IV.", by: "s-dm" },
+    { id: "a-002", permitId: "p-ergon-tv", date: "2026-03-02", kind: "note", text: "Title V renewal project (pr-01) kicked off — scoping call with Ray Thibodeaux; module assignments issued.", by: "s-dm" },
+    { id: "a-003", permitId: "p-ergon-tv", date: "2026-06-02", kind: "reminder", text: "T-90 reminder issued for Title V renewal application (due 2026-08-31).", by: "system" },
+    { id: "a-004", permitId: "p-ergon-tv", date: "2026-06-30", kind: "upload", text: "Emissions inventory module draft uploaded (2021–2025 actuals).", by: "s-tp" },
+    { id: "a-005", permitId: "p-ergon-tv", date: "2026-07-02", kind: "reminder", text: "T-60 reminder issued for Title V renewal application.", by: "system" },
+    { id: "a-006", permitId: "p-ergon-tv", date: "2026-07-28", kind: "submission", text: "Q2 2026 fuel gas H2S CMS report submitted — no exceedances of 230 mg/dscm.", by: "s-dm" },
+    { id: "a-007", permitId: "p-ergon-tv", date: "2026-07-30", kind: "submission", text: "Jan–Jun 2026 semiannual monitoring report submitted (tank VE logs, QQQ certs, LDAR, flare, engine hours).", by: "s-dm" },
+    { id: "a-008", permitId: "p-ergon-tv", date: "2026-08-05", kind: "agency-action", text: "MDEQ acknowledged receipt of the Jan–Jun 2026 SMR.", by: "MDEQ" },
+    { id: "a-009", permitId: "p-ergon-tv", date: "2026-08-08", kind: "upload", text: "Renewal compliance history & certification forms module uploaded; RO signature routing started. Project at 65%.", by: "s-dm" },
+
+    /* Ergon SMOP terminal */
+    { id: "a-010", permitId: "p-ergon-smop", date: "2026-01-27", kind: "submission", text: "2025 annual roof landing report submitted (3 landings, durations and reasons documented).", by: "s-tp" },
+    { id: "a-011", permitId: "p-ergon-smop", date: "2026-02-25", kind: "submission", text: "Tank 6 (AA-026) NSPS Kc semiannual report (Jul–Dec 2025) submitted via CEDRI.", by: "s-tp" },
+    { id: "a-012", permitId: "p-ergon-smop", date: "2026-05-12", kind: "note", text: "Semiannual thermal oxidizer preventive maintenance inspection completed with vendor; pilot heat-sensing device verified.", by: "s-mh" },
+    { id: "a-013", permitId: "p-ergon-smop", date: "2026-07-29", kind: "submission", text: "Jan–Jun 2026 semiannual SMOP monitoring report submitted; throughput at 58% of gasoline cap on rolling basis.", by: "s-dm" },
+    { id: "a-014", permitId: "p-ergon-smop", date: "2026-08-06", kind: "upload", text: "BBBBBB LEL monitoring readiness gap assessment uploaded (project pr-05).", by: "s-tp" },
+    { id: "a-015", permitId: "p-ergon-smop", date: "2026-08-07", kind: "status-change", text: "Q2 cargo-tank vapor-tightness cross-check logs uploaded; obligation moved to engineer review (quarterly-frequency eligibility check).", by: "s-tp" },
+
+    /* Ambit NPDES */
+    { id: "a-016", permitId: "p-ambit-npdes", date: "2026-03-25", kind: "agency-action", text: "MDEQ issued reissued/modified NPDES permit MS0034878 (expires 2031-02-28). 180-day SWPPP update clock started.", by: "MDEQ" },
+    { id: "a-017", permitId: "p-ambit-npdes", date: "2026-04-14", kind: "note", text: "SWPPP update project (pr-03) kicked off; gap review against new permit SWPPP conditions.", by: "s-jb" },
+    { id: "a-018", permitId: "p-ambit-npdes", date: "2026-06-25", kind: "submission", text: "June 2026 DMR submitted via NetDMR — all limits met.", by: "s-jb" },
+    { id: "a-019", permitId: "p-ambit-npdes", date: "2026-07-09", kind: "note", text: "July monthly SWPPP site inspection and jar tests completed; no objectionable characteristics.", by: "s-mh" },
+    { id: "a-020", permitId: "p-ambit-npdes", date: "2026-07-27", kind: "submission", text: "July 2026 DMR submitted via NetDMR.", by: "s-jb" },
+    { id: "a-021", permitId: "p-ambit-npdes", date: "2026-08-10", kind: "reminder", text: "OVERDUE alert: August monthly SWPPP site inspection missed scheduled 8/9 window — reschedule required.", by: "system" },
+    { id: "a-022", permitId: "p-ambit-npdes", date: "2026-08-10", kind: "upload", text: "SWPPP 2026 update draft R1 uploaded (BMP schedule section outstanding).", by: "s-jb" },
+    { id: "a-023", permitId: "p-ambit-npdes", date: "2026-08-13", kind: "status-change", text: "Monthly site inspection obligation marked OVERDUE; escalation copied to J. Breaux and K. Laurent per firm escalation rule.", by: "system" },
+
+    /* Ambit Pretreatment */
+    { id: "a-024", permitId: "p-ambit-pret", date: "2026-05-12", kind: "submission", text: "Baseline Monitoring Report (6-month BOD5/COD/TSS/NH3-N study) submitted to MDEQ.", by: "s-jb" },
+    { id: "a-025", permitId: "p-ambit-pret", date: "2026-06-09", kind: "rejection", text: "MDEQ requested revision of the BMR: batch discharge volumes missing for 5 of 26 events at Outfall 001A — loading calculations could not be verified.", by: "MDEQ" },
+    { id: "a-026", permitId: "p-ambit-pret", date: "2026-06-16", kind: "call", text: "Call with MDEQ pretreatment coordinator: agreed flow reconstruction from tank strapping charts + pump run-time logs is acceptable with a methodology appendix.", by: "s-jb" },
+    { id: "a-027", permitId: "p-ambit-pret", date: "2026-07-13", kind: "revision", text: "BMR Revision 1 resubmitted with reconstructed batch volumes and methodology appendix.", by: "s-jb" },
+    { id: "a-028", permitId: "p-ambit-pret", date: "2026-07-24", kind: "submission", text: "July 2026 DMR (Outfall 001A) submitted via NetDMR.", by: "s-jb" },
+    { id: "a-029", permitId: "p-ambit-pret", date: "2026-08-04", kind: "agency-action", text: "MDEQ accepted BMR Revision 1 — baseline study closed; reopener reserved for numeric limits.", by: "MDEQ" },
+    { id: "a-030", permitId: "p-ambit-pret", date: "2026-08-06", kind: "note", text: "Batch discharge event monitored (flow 0.011 MGD est., pH 7.4 SU); logged for August DMR.", by: "s-mh" },
+
+    /* Amite Title V */
+    { id: "a-031", permitId: "p-amite-tv", date: "2026-06-23", kind: "agency-action", text: "MDEQ issued reissued Title V permit 0800-00031 incorporating the March 2026 case-by-case MACT modification.", by: "MDEQ" },
+    { id: "a-032", permitId: "p-amite-tv", date: "2026-07-06", kind: "note", text: "Compliance calendar rebuilt against the new permit — key dates loaded: RTO/RCO test 2027-04-10, catalyst test 2027-03-17, PM tests 2028-12-03.", by: "s-tp" },
+    { id: "a-033", permitId: "p-amite-tv", date: "2026-07-31", kind: "submission", text: "Jan–Jun 2026 semiannual monitoring report submitted (CAM summary, bypass hours, throughput, engine hours).", by: "s-dm" },
+    { id: "a-034", permitId: "p-amite-tv", date: "2026-08-03", kind: "upload", text: "RTO/RCO stack test protocol outline uploaded (project pr-02); tester RFQ issued to two firms.", by: "s-dm" },
+    { id: "a-035", permitId: "p-amite-tv", date: "2026-08-11", kind: "note", text: "Weekly Method 22 observation on RTO/RCO exhausts completed — no visible emissions.", by: "s-mh" },
+    { id: "a-036", permitId: "p-amite-tv", date: "2026-08-12", kind: "status-change", text: "July baghouse inspection logs flagged for engineer review — two low-side ΔP readings on Hammermill System C.", by: "s-tp" },
+
+    /* Nissan stormwater */
+    { id: "a-037", permitId: "p-nissan-sw", date: "2026-01-08", kind: "note", text: "December 2025 annual training refresher records filed with SWPPP (Employee Training Log).", by: "s-mh" },
+    { id: "a-038", permitId: "p-nissan-sw", date: "2026-02-05", kind: "note", text: "ISGP still administratively continued — added MDEQ reissuance docket to quarterly watch list.", by: "s-jb" },
+    { id: "a-039", permitId: "p-nissan-sw", date: "2026-06-18", kind: "note", text: "Q2 storm-event inspection round completed — jar tests at all outfalls clear (0.4 in. event).", by: "s-mh" },
+    { id: "a-040", permitId: "p-nissan-sw", date: "2026-07-28", kind: "upload", text: "July monthly inspection & jar test forms uploaded; silt fence repair closed within 7-day clock.", by: "s-mh" },
+    { id: "a-041", permitId: "p-nissan-sw", date: "2026-08-06", kind: "call", text: "Called MDEQ Environmental Permits Division re: ISGP reissuance status — draft general permit still in internal review, no public-notice date yet. Recoverage 6-month window has NOT started; coverage MSR001603 remains administratively continued.", by: "s-jb" },
+    { id: "a-042", permitId: "p-nissan-sw", date: "2026-08-07", kind: "note", text: "Recoverage watch memo sent to Priya Natarajan — SWPPP confirmed current so recoverage will not require plan resubmittal.", by: "s-jb" },
+
+    /* ABB SMOP */
+    { id: "a-043", permitId: "p-abb-smop", date: "2026-06-05", kind: "agency-action", text: "MDEQ issued SMOP 1680-00065 (expires 2031-05-31). Compliance systems build-out started.", by: "MDEQ" },
+    { id: "a-044", permitId: "p-abb-smop", date: "2026-07-02", kind: "upload", text: "Baseline SSWEMP uploaded and placed on site; welding observation tier currently weekly after 10 clean daily Method 22 tests.", by: "s-tp" },
+    { id: "a-045", permitId: "p-abb-smop", date: "2026-07-21", kind: "upload", text: "Compliance calendar & recordkeeping audit workplan uploaded (project pr-06).", by: "s-tp" },
+    { id: "a-046", permitId: "p-abb-smop", date: "2026-08-04", kind: "note", text: "Weekly Method 22 welding observation completed — no visible emissions (> 6 min threshold not approached).", by: "s-mh" },
+    { id: "a-047", permitId: "p-abb-smop", date: "2026-08-13", kind: "reminder", text: "OVERDUE alert: weekly welding Method 22 observation due 8/11 not performed (weekend welding shift outside tech visit). Perform ASAP and document gap; reverting question raised to air lead.", by: "system" }
+  ],
+
+  notificationRules: {
+    ladders: {
+      "major-filing": { label: "Renewals & applications", offsets: [180, 90, 60, 30, 14, 7, 1], smsFrom: 30 },
+      "report":       { label: "Recurring reports & DMRs", offsets: [30, 14, 7, 1], smsFrom: 7 },
+      "test":         { label: "Stack tests & sampling events", offsets: [90, 60, 30, 14], smsFrom: 14 },
+      "routine":      { label: "Inspections & routine monitoring", offsets: [7, 1], smsFrom: 1 }
+    },
+    quietHours: "8:00 PM – 7:00 AM CT (SMS held until morning)",
+    digest: "Weekly portfolio digest email, Mondays 7:00 AM",
+    escalation: "Unacknowledged at T-7 → firm principal copied; overdue → daily digest to assignee + PM, client contact copied at +3 days"
+  },
+
+  notifications: [
+    { id: "n-01", date: "2026-06-02", obligationId: "ob-016", permitId: "p-ergon-tv", level: "T-90", channels: ["email"],
+      to: "D. McRae (email)", subject: "T-90: Ergon Title V renewal application due 2026-08-31", status: "sent" },
+    { id: "n-02", date: "2026-07-02", obligationId: "ob-016", permitId: "p-ergon-tv", level: "T-60", channels: ["email"],
+      to: "D. McRae (email)", subject: "T-60: Ergon Title V renewal application due 2026-08-31", status: "sent" },
+    { id: "n-03", date: "2026-08-01", obligationId: "ob-016", permitId: "p-ergon-tv", level: "T-30", channels: ["email", "sms"],
+      to: "D. McRae (email, sms); R. Thibodeaux (email)", subject: "T-30: Ergon Title V renewal application due 2026-08-31 — project at 65%", status: "acknowledged" },
+    { id: "n-04", date: "2026-08-17", obligationId: "ob-016", permitId: "p-ergon-tv", level: "T-14", channels: ["email", "sms"],
+      to: "D. McRae (email, sms); K. Laurent (email)", subject: "T-14: Ergon Title V renewal application due 2026-08-31", status: "scheduled" },
+    { id: "n-05", date: "2026-08-10", obligationId: "ob-035", permitId: "p-ambit-npdes", level: "OVERDUE", channels: ["email", "sms"],
+      to: "M. Hollis (email, sms)", subject: "OVERDUE: Ambit monthly SWPPP site inspection (was due 2026-08-09)", status: "sent" },
+    { id: "n-06", date: "2026-08-13", obligationId: "ob-035", permitId: "p-ambit-npdes", level: "OVERDUE", channels: ["email"],
+      to: "J. Breaux, K. Laurent (email)", subject: "ESCALATION: Ambit monthly SWPPP inspection 4 days overdue — client copy at +3 days triggered", status: "sent" },
+    { id: "n-07", date: "2026-08-12", obligationId: "ob-086", permitId: "p-abb-smop", level: "OVERDUE", channels: ["email", "sms"],
+      to: "M. Hollis (email, sms)", subject: "OVERDUE: ABB weekly welding Method 22 observation (was due 2026-08-11)", status: "sent" },
+    { id: "n-08", date: "2026-08-14", obligationId: "ob-086", permitId: "p-abb-smop", level: "OVERDUE", channels: ["email"],
+      to: "T. Prescott, K. Laurent (email)", subject: "Daily overdue digest: ABB welding VE observation 3 days overdue — document gap in annual report", status: "sent" },
+    { id: "n-09", date: "2026-07-29", obligationId: "ob-031", permitId: "p-ambit-npdes", level: "T-30", channels: ["email"],
+      to: "J. Breaux (email)", subject: "T-30: Ambit NPDES July DMR due 2026-08-28 (NetDMR)", status: "sent" },
+    { id: "n-10", date: "2026-08-14", obligationId: "ob-031", permitId: "p-ambit-npdes", level: "T-14", channels: ["email"],
+      to: "J. Breaux (email)", subject: "T-14: Ambit NPDES July DMR due 2026-08-28 — Aug 28 DMR cluster (also MSP092477)", status: "sent" },
+    { id: "n-11", date: "2027-01-10", obligationId: "ob-061", permitId: "p-amite-tv", level: "T-90", channels: ["email"],
+      to: "D. McRae (email)", subject: "T-90: Amite RTO/RCO HAP destruction performance test due 2027-04-10", status: "scheduled" },
+    { id: "n-12", date: "2026-11-15", obligationId: "ob-063", permitId: "p-amite-tv", level: "T-30", channels: ["email"],
+      to: "D. McRae (email)", subject: "T-30: Amite stack test protocol submittal to MDEQ targeted 2026-12-15", status: "scheduled" },
+    { id: "n-13", date: "2026-08-19", obligationId: "ob-071", permitId: "p-nissan-sw", level: "T-7", channels: ["email"],
+      to: "M. Hollis (email)", subject: "T-7: Nissan Canton monthly site inspection & jar tests due 2026-08-26", status: "scheduled" },
+    { id: "n-14", date: "2026-08-25", obligationId: "ob-060", permitId: "p-amite-tv", level: "T-7", channels: ["email", "sms"],
+      to: "T. Prescott (email, sms); H. Delcambre (email)", subject: "T-7: Amite Title V annual fee payment due 2026-09-01", status: "scheduled" }
+  ]
+};
+
+</script>
+<script>
+/* ═══════════ helpers ═══════════ */
+const D = window.VERDACTA_DATA;
+const TODAY = new Date(D.today + 'T12:00:00');
+const $ = s => document.querySelector(s);
+const esc = s => String(s ?? '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+const idx = (arr) => Object.fromEntries(arr.map(x => [x.id, x]));
+const CLIENTS = idx(D.clients), SITES = idx(D.sites), PERMITS = idx(D.permits), STAFF = idx(D.firm.staff), OBS = idx(D.obligations);
+const MON = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+const AV_COLORS = ['copper','pine','river','plum',''];
+const avColor = sid => AV_COLORS[Math.max(0, D.firm.staff.findIndex(s=>s.id===sid)) % AV_COLORS.length];
+function pd(s){ const [y,m,dd] = s.split('-').map(Number); return new Date(y, m-1, dd, 12); }
+function fmt(s){ if(!s) return '—'; const d = pd(s); return MON[d.getMonth()] + ' ' + d.getDate() + ', ' + d.getFullYear(); }
+function fmtShort(s){ const d = pd(s); return MON[d.getMonth()] + ' ' + d.getDate(); }
+function days(s){ return Math.round((pd(s) - TODAY) / 86400000); }
+function rel(s){
+  if(!s) return '';
+  const n = days(s);
+  if(n === 0) return 'today';
+  if(n === 1) return 'tomorrow';
+  if(n < 0) return (-n) + (n === -1 ? ' day' : ' days') + ' overdue';
+  return 'in ' + n + ' days';
+}
+function relClass(s){ if(!s) return ''; const n = days(s); return n < 0 ? 'red' : (n <= 45 ? 'amber' : ''); }
+function siteOf(p){ return SITES[p.siteId]; }
+function clientOf(p){ return CLIENTS[siteOf(p).clientId]; }
+function permitObs(pid){ return D.obligations.filter(o => o.permitId === pid); }
+function chip(status, label){
+  const lbl = label || {compliant:'Compliant', due:'Due', overdue:'Overdue', review:'In review', superseded:'Superseded'}[status];
+  return `<span class="chip ${status}"><span class="ic"></span>${esc(lbl)}</span>`;
+}
+function obChip(o){
+  if(o.status === 'due' && o.nextDue) return chip('due', 'Due ' + rel(o.nextDue).replace('in ','in '));
+  if(o.status === 'overdue' && o.nextDue) return chip('overdue', 'Overdue · ' + (-days(o.nextDue)) + 'd');
+  return chip(o.status);
+}
+function ptag(prog){ const lbl = {air:'Air', water:'NPDES', stormwater:'Stormwater', pretreatment:'Pretreat'}[prog] || prog; return `<span class="ptag ${prog}">${lbl}</span>`; }
+function cite(c, wrap){ return c ? `<span class="cite ${wrap?'wrap':''}" title="${esc(c)}">${esc(c)}</span>` : ''; }
+function av(sid){ const s = STAFF[sid]; return s ? `<span class="avatar sm ${avColor(sid)}" title="${esc(s.name)} · ${esc(s.role)}">${esc(s.initials)}</span>` : ''; }
+function duecell(s){ if(!s) return '<span class="mono" style="color:var(--lichen)">—</span>'; return `<div class="duecell">${fmt(s)}<span class="rel ${relClass(s)}">${rel(s)}</span></div>`; }
+function urgency(o){ if(!o.nextDue) return 99999; const n = days(o.nextDue); return o.status === 'overdue' ? n - 10000 : n; }
+function go(h){ location.hash = h; }
+function permitPath(p){ const s = siteOf(p), c = clientOf(p); return `${esc(c.name)} · ${esc(s.name)}`; }
+
+/* derived stats */
+const stats = {
+  due30: D.obligations.filter(o => o.nextDue && days(o.nextDue) >= 0 && days(o.nextDue) <= 30).length,
+  due60: D.obligations.filter(o => o.nextDue && days(o.nextDue) >= 0 && days(o.nextDue) <= 60).length,
+  overdue: D.obligations.filter(o => o.status === 'overdue').length,
+  review: D.obligations.filter(o => o.status === 'review').length,
+  openProjects: D.projects.filter(p => p.status !== 'complete').length,
+  awaitingAgency: D.documents.filter(d => d.status === 'submitted' || d.status === 'resubmitted').length
+};
+
+/* ═══════════ rail + topbar ═══════════ */
+function renderRail(route){
+  const navIc = {dash:'▦', cal:'▤', reg:'☰', bell:'◷', proj:'◳'};
+  const clientLinks = D.clients.map(c => {
+    const sites = D.sites.filter(s => s.clientId === c.id).map(s => s.id);
+    const obs = D.obligations.filter(o => { const p = PERMITS[o.permitId]; return sites.includes(p.siteId); });
+    const ovd = obs.filter(o => o.status === 'overdue').length;
+    const due = obs.filter(o => o.status === 'due').length;
+    const badge = ovd ? `<span class="badge">${ovd}</span>` : (due ? `<span class="badge amber">${due}</span>` : '');
+    return `<a class="nav ${route === '#/client/' + c.id ? 'active' : ''}" href="#/client/${c.id}"><span class="ic">◈</span>${esc(c.name.replace(', Inc.','').replace(', LLC',''))}${badge}</a>`;
+  }).join('');
+  $('#rail').innerHTML = `
+    <div class="rail-logo"><span class="wm"><span class="verd">verd</span><span class="acta">acta</span></span></div>
+    <div class="rail-firm">${esc(D.firm.name)}</div>
+    <a class="nav ${route === '#/' || route === '' ? 'active' : ''}" href="#/"><span class="ic">${navIc.dash}</span>Dashboard</a>
+    <a class="nav ${route === '#/calendar' ? 'active' : ''}" href="#/calendar"><span class="ic">${navIc.cal}</span>Calendar</a>
+    <a class="nav ${route === '#/register' ? 'active' : ''}" href="#/register"><span class="ic">${navIc.reg}</span>Register</a>
+    <a class="nav ${route === '#/notifications' ? 'active' : ''}" href="#/notifications"><span class="ic">${navIc.bell}</span>Notifications${stats.overdue ? `<span class="badge">${stats.overdue}</span>` : ''}</a>
+    <div class="rail-firm" style="margin-top:var(--s-5)">Clients</div>
+    ${clientLinks}
+    <div class="rail-bottom">
+      <div class="rail-user"><span class="avatar copper">KL</span><div>Katherine Laurent, PE<br><span style="color:var(--pine-300)">Principal</span></div></div>
+    </div>`;
+}
+function setCrumb(html){ $('#crumb').innerHTML = html; }
+
+/* ═══════════ router ═══════════ */
+function route(){
+  const h = location.hash || '#/';
+  renderRail(h.split('?')[0]);
+  window.scrollTo(0,0);
+  if(h === '#/' || h === '') return viewFirm();
+  if(h.startsWith('#/client/')) return viewClient(h.split('/')[2]);
+  if(h.startsWith('#/site/')) return viewSite(h.split('/')[2]);
+  if(h.startsWith('#/permit/')) return viewPermit(h.split('/')[2], h.split('/')[3] || 'obligations');
+  if(h === '#/calendar') return viewCalendar();
+  if(h === '#/register') return viewRegister();
+  if(h === '#/notifications') return viewNotifications();
+  viewFirm();
+}
+window.addEventListener('hashchange', route);
+
+/* ═══════════ FIRM DASHBOARD ═══════════ */
+function needsAttention(scopeObs, limit){
+  const items = scopeObs.filter(o => o.status === 'overdue' || o.status === 'due').sort((a,b) => urgency(a) - urgency(b)).slice(0, limit);
+  if(!items.length) return `<div class="empty"><div class="glyph">§</div>Nothing needs attention in this window.</div>`;
+  return `<table class="tbl">${items.map(o => {
+    const p = PERMITS[o.permitId];
+    return `<tr class="row-link ${o.status === 'overdue' ? 'ovd' : ''}" onclick="go('#/permit/${p.id}/obligations')">
+      <td style="width:52%"><b>${esc(o.title)}</b><br><span style="color:var(--fieldgray);font-size:var(--fs-micro)">${permitPath(p)} · <span class="mono">${esc(p.number)}</span></span></td>
+      <td>${ptag(p.program)}</td>
+      <td>${duecell(o.nextDue)}</td>
+      <td>${av(o.assignee)}</td>
+      <td style="text-align:right">${obChip(o)}</td>
+    </tr>`;
+  }).join('')}</table>`;
+}
+function renewalRunway(){
+  const rows = D.permits.filter(p => p.expires).sort((a,b) => pd(a.expires) - pd(b.expires)).map(p => {
+    const total = 5*365, remaining = Math.max(0, days(p.expires));
+    const pct = Math.min(100, Math.max(2, Math.round(remaining/total*100)));
+    const color = remaining < 240 ? 'var(--st-overdue)' : remaining < 540 ? 'var(--st-due)' : 'var(--verdigris-500)';
+    const renewTxt = p.renewalDue ? (days(p.renewalDue) >= 0 ? `renewal app due ${fmtShort(p.renewalDue)} · ${rel(p.renewalDue)}` : `renewal app was due ${fmtShort(p.renewalDue)}`) : (p.status === 'admin-continued' ? 'administratively continued — watch for reissuance' : '');
+    return `<div style="margin-bottom:14px">
+      <div style="display:flex;justify-content:space-between;font-size:var(--fs-micro);margin-bottom:3px">
+        <span><a href="#/permit/${p.id}"><b class="mono">${esc(p.number)}</b></a> <span style="color:var(--fieldgray)">${esc(clientOf(p).name.split(',')[0])}</span></span>
+        <span class="mono" style="color:var(--fieldgray)">exp ${fmt(p.expires)}</span>
+      </div>
+      <div class="runway"><div style="width:${pct}%;background:${color}"></div></div>
+      ${renewTxt ? `<div style="font-size:var(--fs-micro);color:${remaining<240 ? 'var(--st-overdue-tx)' : 'var(--fieldgray)'};margin-top:2px">${renewTxt}</div>` : ''}
+    </div>`;
+  }).join('');
+  return rows;
+}
+function activityFeed(items, limit){
+  const list = items.sort((a,b) => pd(b.date) - pd(a.date)).slice(0, limit);
+  return `<ul class="timeline">${list.map(a => {
+    const p = PERMITS[a.permitId];
+    const who = STAFF[a.by] ? STAFF[a.by].name : a.by === 'MDEQ' ? 'MDEQ' : 'Verdacta';
+    return `<li class="k-${a.kind}"><span class="dot"></span>
+      <span class="t-date">${fmt(a.date)}</span>
+      <div class="t-text"><span class="kind-tag ${a.kind}">${a.kind.replace('-',' ')}</span>${esc(a.text)}</div>
+      <div class="t-by">${esc(who)} · <a href="#/permit/${p.id}/activity">${esc(p.number)}</a></div></li>`;
+  }).join('')}</ul>`;
+}
+function programChart(scopeObs){
+  const progs = ['air','water','stormwater','pretreatment'];
+  const counts = progs.map(pr => scopeObs.filter(o => PERMITS[o.permitId].program === pr).length);
+  const max = Math.max(...counts, 1);
+  const lbl = {air:'Air', water:'NPDES', stormwater:'Stormwater', pretreatment:'Pretreatment'};
+  return progs.map((pr,i) => counts[i] ? `<div class="bar-row"><span class="blbl">${lbl[pr]}</span><div class="btrack"><div class="bfill" style="width:${Math.round(counts[i]/max*100)}%"></div></div><span class="bval">${counts[i]}</span></div>` : '').join('');
+}
+function viewFirm(){
+  setCrumb(`<b>${esc(D.firm.name)}</b> · Portfolio dashboard`);
+  const flagship = D.permits.find(p => p.id.includes('ergon-tv')) || D.permits.find(p => p.status === 'expiring');
+  const hero = flagship && flagship.renewalDue && days(flagship.renewalDue) >= 0 && days(flagship.renewalDue) <= 45 ? `
+    <div class="hero-strip">
+      <div style="flex:1;min-width:280px">
+        <div style="font-size:var(--fs-micro);text-transform:uppercase;letter-spacing:.18em;color:var(--verdigris-300);font-weight:700;margin-bottom:4px">Priority filing</div>
+        <h2>Title V renewal application — ${esc(clientOf(flagship).name.split(',')[0])}</h2>
+        <div style="font-size:var(--fs-caption);color:var(--sagegray);margin-top:4px">Permit <span class="mono" style="color:var(--bone)">${esc(flagship.number)}</span> expires ${fmt(flagship.expires)}. MDEQ requires the renewal application at least 6 months prior.</div>
+      </div>
+      <div style="text-align:center">
+        <div style="font-family:var(--font-display);font-size:var(--fs-4xl);font-weight:300;color:var(--st-due);line-height:1">${days(flagship.renewalDue)}</div>
+        <div style="font-size:var(--fs-micro);text-transform:uppercase;letter-spacing:.14em;color:var(--sagegray)">days to file</div>
+      </div>
+      <button class="btn btn-primary" onclick="go('#/permit/${flagship.id}')" style="background:var(--verdigris-500)">Open permit</button>
+    </div>` : '';
+  const portfolio = D.clients.map(c => {
+    const sites = D.sites.filter(s => s.clientId === c.id);
+    return sites.map((s, i) => {
+      const permits = D.permits.filter(p => p.siteId === s.id);
+      return permits.map((p, j) => {
+        const obs = permitObs(p.id);
+        const ovd = obs.filter(o => o.status === 'overdue').length;
+        const due = obs.filter(o => o.status === 'due').length;
+        const next = obs.filter(o => o.nextDue && days(o.nextDue) >= 0).sort((a,b) => pd(a.nextDue) - pd(b.nextDue))[0];
+        return `<tr class="row-link" onclick="go('#/permit/${p.id}')">
+          <td>${i === 0 && j === 0 ? `<a href="#/client/${c.id}" onclick="event.stopPropagation()"><b>${esc(c.name)}</b></a>` : ''}</td>
+          <td>${j === 0 ? `<a href="#/site/${s.id}" onclick="event.stopPropagation()">${esc(s.name)}</a>` : ''}</td>
+          <td><span class="mono">${esc(p.number)}</span></td>
+          <td>${ptag(p.program)}</td>
+          <td class="mono" style="white-space:nowrap">${fmt(p.expires)}</td>
+          <td>${next ? duecell(next.nextDue) : '—'}</td>
+          <td style="text-align:right;white-space:nowrap">${ovd ? chip('overdue', ovd + ' overdue') + ' ' : ''}${due ? chip('due', due + ' due') : (!ovd ? chip('compliant', 'Current') : '')}</td>
+        </tr>`;
+      }).join('');
+    }).join('');
+  }).join('');
+  $('#view').innerHTML = `
+    <div class="pagehead"><div><h1>Portfolio dashboard</h1><div class="sub">${D.clients.length} clients · ${D.sites.length} sites · ${D.permits.length} permits · ${D.obligations.length} tracked obligations</div></div></div>
+    ${hero}
+    <div class="kpis">
+      <div class="kpi ${stats.overdue ? 'alert' : ''}"><div class="lbl">Overdue</div><div class="num ${stats.overdue ? 'red' : ''}">${stats.overdue}</div><div class="sub">needs action now</div></div>
+      <div class="kpi"><div class="lbl">Due ≤ 30 days</div><div class="num amber">${stats.due30}</div><div class="sub">${stats.due60} within 60</div></div>
+      <div class="kpi"><div class="lbl">Active permits</div><div class="num">${D.permits.length}</div><div class="sub">${D.permits.filter(p=>p.status==='expiring').length} in renewal window</div></div>
+      <div class="kpi"><div class="lbl">Open projects</div><div class="num">${stats.openProjects}</div><div class="sub">${D.projects.filter(p=>p.status==='active').length} active</div></div>
+      <div class="kpi"><div class="lbl">Awaiting agency</div><div class="num">${stats.awaitingAgency}</div><div class="sub">submittals pending</div></div>
+      <div class="kpi"><div class="lbl">In review</div><div class="num">${stats.review}</div><div class="sub">engineer sign-off</div></div>
+    </div>
+    <div class="two-col">
+      <div>
+        <div class="section-label">Needs attention · next 45 days</div>
+        <div class="card">${needsAttention(D.obligations, 9)}</div>
+        <div class="section-label" style="margin-top:var(--s-6)">Client portfolio</div>
+        <div class="card" style="overflow-x:auto"><table class="tbl">
+          <thead><tr><th>Client</th><th>Site</th><th>Permit</th><th>Program</th><th>Expires</th><th>Next deadline</th><th style="text-align:right">Status</th></tr></thead>
+          <tbody>${portfolio}</tbody></table></div>
+      </div>
+      <div>
+        <div class="section-label">Renewal runway</div>
+        <div class="card card-pad">${renewalRunway()}</div>
+        <div class="section-label" style="margin-top:var(--s-6)">Obligations by program</div>
+        <div class="card card-pad">${programChart(D.obligations)}<div style="font-size:var(--fs-micro);color:var(--fieldgray);margin-top:6px">${D.obligations.length} active obligations across ${D.permits.length} permits</div></div>
+        <div class="section-label" style="margin-top:var(--s-6)">Recent activity</div>
+        <div class="card card-pad">${activityFeed(D.activity, 6)}</div>
+      </div>
+    </div>`;
+}
+
+/* ═══════════ CLIENT VIEW ═══════════ */
+function viewClient(cid){
+  const c = CLIENTS[cid]; if(!c) return viewFirm();
+  const sites = D.sites.filter(s => s.clientId === cid);
+  const permits = D.permits.filter(p => sites.some(s => s.id === p.siteId));
+  const obs = D.obligations.filter(o => permits.some(p => p.id === o.permitId));
+  const projects = D.projects.filter(pr => sites.some(s => s.id === pr.siteId));
+  setCrumb(`<a href="#/">${esc(D.firm.name)}</a> › <b>${esc(c.name)}</b>`);
+  const siteCards = sites.map(s => {
+    const sp = D.permits.filter(p => p.siteId === s.id);
+    return `<div class="card card-pad">
+      <div style="display:flex;justify-content:space-between;align-items:baseline;gap:10px">
+        <h3 style="font-size:var(--fs-xl)"><a href="#/site/${s.id}">${esc(s.name)}</a></h3>
+        <span style="font-size:var(--fs-micro);color:var(--fieldgray)">${esc(s.city)}, ${esc(s.county)} Co.</span>
+      </div>
+      <p style="font-size:var(--fs-caption);color:var(--slategreen);margin:6px 0 10px">${esc(s.description)}</p>
+      <div style="display:flex;gap:6px;flex-wrap:wrap">${sp.map(p => `<a href="#/permit/${p.id}" style="text-decoration:none">${ptag(p.program)}</a>`).join('')}<span style="font-size:var(--fs-micro);color:var(--fieldgray);align-self:center">${sp.length} permit${sp.length>1?'s':''}</span></div>
+    </div>`;
+  }).join('');
+  const contacts = c.contacts.map(ct => `
+    <div style="display:flex;gap:10px;align-items:flex-start;padding:9px 0;border-top:1px solid var(--ash)">
+      <span class="avatar sm pine">${esc(ct.name.split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase())}</span>
+      <div style="flex:1"><b style="font-size:var(--fs-caption)">${esc(ct.name)}</b><br><span style="font-size:var(--fs-micro);color:var(--fieldgray)">${esc(ct.title)}</span><br>
+      <span class="mono" style="font-size:10px;color:var(--fieldgray)">${esc(ct.email)} · ${esc(ct.phone)}</span></div>
+      <div style="text-align:right;font-size:9px;color:var(--fieldgray)">
+        <span class="toggle ${ct.notify.email?'':'off'}"></span> email<br>
+        <span class="toggle ${ct.notify.sms?'':'off'}" style="margin-top:3px"></span> SMS</div>
+    </div>`).join('');
+  const projRows = projects.length ? projects.map(pr => `
+    <tr class="row-link" onclick="go('#/site/${pr.siteId}')">
+      <td><b>${esc(pr.name)}</b><br><span style="font-size:var(--fs-micro);color:var(--fieldgray)">${esc(SITES[pr.siteId].name)}</span></td>
+      <td><span class="kind-tag">${pr.type}</span></td>
+      <td>${duecell(pr.due)}</td>
+      <td style="width:130px"><div class="progress"><div style="width:${pr.pctComplete}%"></div></div><span style="font-size:var(--fs-micro);color:var(--fieldgray)">${pr.pctComplete}%</span></td>
+      <td>${av(pr.lead)}</td>
+    </tr>`).join('') : '';
+  $('#view').innerHTML = `
+    <div class="breadcrumbs"><a href="#/">Portfolio</a> › ${esc(c.name)}</div>
+    <div class="pagehead"><div><h1>${esc(c.name)}</h1><div class="sub">${esc(c.industry)} · ${sites.length} site${sites.length>1?'s':''} · ${permits.length} permit${permits.length>1?'s':''} · ${obs.length} obligations</div></div></div>
+    <div class="kpis" style="grid-template-columns:repeat(4,1fr)">
+      <div class="kpi ${obs.some(o=>o.status==='overdue')?'alert':''}"><div class="lbl">Overdue</div><div class="num ${obs.some(o=>o.status==='overdue')?'red':''}">${obs.filter(o=>o.status==='overdue').length}</div></div>
+      <div class="kpi"><div class="lbl">Due ≤ 30 days</div><div class="num amber">${obs.filter(o=>o.nextDue&&days(o.nextDue)>=0&&days(o.nextDue)<=30).length}</div></div>
+      <div class="kpi"><div class="lbl">Permits</div><div class="num">${permits.length}</div></div>
+      <div class="kpi"><div class="lbl">Open projects</div><div class="num">${projects.filter(p=>p.status!=='complete').length}</div></div>
+    </div>
+    <div class="two-col">
+      <div>
+        <div class="section-label">Sites</div>
+        <div class="grid" style="grid-template-columns:1fr 1fr">${siteCards}</div>
+        <div class="section-label" style="margin-top:var(--s-6)">Needs attention</div>
+        <div class="card">${needsAttention(obs, 7)}</div>
+        ${projects.length ? `<div class="section-label" style="margin-top:var(--s-6)">Projects</div>
+        <div class="card"><table class="tbl"><thead><tr><th>Project</th><th>Type</th><th>Due</th><th>Progress</th><th>Lead</th></tr></thead><tbody>${projRows}</tbody></table></div>` : ''}
+      </div>
+      <div>
+        <div class="section-label">Notification recipients</div>
+        <div class="card card-pad" style="padding-top:8px">${contacts}
+          <p style="font-size:var(--fs-micro);color:var(--fieldgray);margin-top:10px">Client contacts are copied per the escalation policy: unacknowledged T−7 items and anything overdue 3+ days.</p></div>
+        <div class="section-label" style="margin-top:var(--s-6)">Recent activity</div>
+        <div class="card card-pad">${activityFeed(D.activity.filter(a => permits.some(p => p.id === a.permitId)), 6)}</div>
+      </div>
+    </div>`;
+}
+
+/* ═══════════ SITE VIEW ═══════════ */
+function viewSite(sid){
+  const s = SITES[sid]; if(!s) return viewFirm();
+  const c = CLIENTS[s.clientId];
+  const permits = D.permits.filter(p => p.siteId === sid);
+  const obs = D.obligations.filter(o => permits.some(p => p.id === o.permitId));
+  const projects = D.projects.filter(pr => pr.siteId === sid);
+  const docs = D.documents.filter(d => permits.some(p => p.id === d.permitId)).sort((a,b) => pd(b.date) - pd(a.date)).slice(0,5);
+  setCrumb(`<a href="#/">${esc(D.firm.name)}</a> › <a href="#/client/${c.id}">${esc(c.name)}</a> › <b>${esc(s.name)}</b>`);
+  const permitCards = permits.map(p => {
+    const po = permitObs(p.id);
+    const ovd = po.filter(o => o.status === 'overdue').length, due = po.filter(o => o.status === 'due').length;
+    return `<div class="card card-pad" style="cursor:pointer" onclick="go('#/permit/${p.id}')">
+      <div style="display:flex;justify-content:space-between;gap:8px;align-items:center;margin-bottom:6px">${ptag(p.program)}${ovd ? chip('overdue', ovd + ' overdue') : due ? chip('due', due + ' due') : chip('compliant','Current')}</div>
+      <div class="mono" style="font-size:var(--fs-lg);color:var(--pine-800);font-weight:500">${esc(p.number)}</div>
+      <div style="font-size:var(--fs-caption);color:var(--slategreen)">${esc(p.type)}</div>
+      <div style="font-size:var(--fs-micro);color:var(--fieldgray);margin-top:8px">Expires <b>${fmt(p.expires)}</b>${p.renewalDue ? ` · renewal due ${fmtShort(p.renewalDue)}` : ''}</div>
+      <div style="font-size:var(--fs-micro);color:var(--fieldgray)">${po.length} obligations tracked</div>
+    </div>`;
+  }).join('');
+  const next90 = obs.filter(o => o.nextDue && days(o.nextDue) >= -30 && days(o.nextDue) <= 90).sort((a,b) => pd(a.nextDue) - pd(b.nextDue));
+  const projCards = projects.map(pr => `
+    <div class="card card-pad">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px"><b style="font-size:var(--fs-caption)">${esc(pr.name)}</b><span class="kind-tag">${pr.status}</span></div>
+      <div style="font-size:var(--fs-micro);color:var(--fieldgray);margin-bottom:8px">${pr.permitId ? 'Permit ' + esc(PERMITS[pr.permitId].number) + ' · ' : ''}due ${fmt(pr.due)} · lead ${esc(STAFF[pr.lead].name)}</div>
+      <div class="progress"><div style="width:${pr.pctComplete}%"></div></div>
+      <div style="font-size:var(--fs-micro);color:var(--fieldgray);margin-top:4px">${pr.pctComplete}% · ${esc(pr.notes)}</div>
+    </div>`).join('');
+  $('#view').innerHTML = `
+    <div class="breadcrumbs"><a href="#/">Portfolio</a> › <a href="#/client/${c.id}">${esc(c.name)}</a> › ${esc(s.name)}</div>
+    <div class="pagehead"><div><h1>${esc(s.name)}</h1><div class="sub">${esc(s.city)}, ${esc(s.county)} County, MS${s.receivingStream ? ' · receiving stream: ' + esc(s.receivingStream) : ''} — ${esc(s.description)}</div></div></div>
+    <div class="section-label">Permits at this site</div>
+    <div class="grid" style="grid-template-columns:repeat(${Math.min(permits.length,3)},1fr);margin-bottom:var(--s-6)">${permitCards}</div>
+    <div class="two-col">
+      <div>
+        <div class="section-label">Site deadlines · trailing 30 / next 90 days</div>
+        <div class="card">${needsAttentionRows(next90)}</div>
+      </div>
+      <div>
+        ${projects.length ? `<div class="section-label">Projects</div><div class="grid">${projCards}</div>` : ''}
+        <div class="section-label" style="margin-top:${projects.length ? 'var(--s-6)' : '0'}">Recent documents</div>
+        <div class="card">${docs.map(docRow).join('') || '<div class="empty">No documents yet.</div>'}</div>
+      </div>
+    </div>`;
+}
+function needsAttentionRows(items){
+  if(!items.length) return `<div class="empty"><div class="glyph">§</div>No deadlines in this window.</div>`;
+  return `<table class="tbl">${items.map(o => {
+    const p = PERMITS[o.permitId];
+    return `<tr class="row-link ${o.status === 'overdue' ? 'ovd' : ''}" onclick="go('#/permit/${p.id}/obligations')">
+      <td style="width:56%"><b>${esc(o.title)}</b><br><span style="font-size:var(--fs-micro);color:var(--fieldgray)"><span class="mono">${esc(p.number)}</span> · ${esc(o.frequency)}</span></td>
+      <td>${duecell(o.nextDue)}</td><td>${av(o.assignee)}</td><td style="text-align:right">${obChip(o)}</td></tr>`;
+  }).join('')}</table>`;
+}
+function docRow(d){
+  const who = STAFF[d.by] ? STAFF[d.by].initials + ' — ' + STAFF[d.by].name : d.by;
+  return `<div class="doc-row">
+    <div class="doc-ic">${d.docType === 'dmr' ? 'DMR' : d.docType === 'plan' ? 'PLN' : d.docType === 'test-result' ? 'TST' : d.docType === 'correspondence' ? 'LTR' : d.docType === 'application' ? 'APP' : d.docType === 'certification' ? 'CRT' : 'PDF'}</div>
+    <div style="min-width:0"><div class="doc-name">${esc(d.name)} <span class="mono" style="font-size:10px;color:var(--fieldgray)">${esc(d.rev)}</span></div>
+    <div class="doc-meta">${fmt(d.date)} · ${esc(who)}${d.note ? ' — ' + esc(d.note) : ''}</div></div>
+    <div class="doc-status"><span class="dstat ${d.status}">${d.status.replace('-',' ')}</span></div>
+  </div>`;
+}
+/* ═══════════ PERMIT DETAIL ═══════════ */
+function viewPermit(pid, tab){
+  const p = PERMITS[pid]; if(!p) return viewFirm();
+  const s = siteOf(p), c = clientOf(p);
+  const obs = permitObs(pid);
+  const docs = D.documents.filter(d => d.permitId === pid).sort((a,b) => pd(b.date) - pd(a.date));
+  const acts = D.activity.filter(a => a.permitId === pid).sort((a,b) => pd(b.date) - pd(a.date));
+  const notifs = D.notifications.filter(n => n.permitId === pid).sort((a,b) => pd(b.date) - pd(a.date));
+  const projs = D.projects.filter(pr => pr.permitId === pid);
+  setCrumb(`<a href="#/client/${c.id}">${esc(c.name)}</a> › <a href="#/site/${s.id}">${esc(s.name)}</a> › <b class="mono">${esc(p.number)}</b>`);
+  const statusChip = p.status === 'expiring' ? chip('due','Renewal window open') : p.status === 'admin-continued' ? chip('review','Administratively continued') : chip('compliant','Active');
+  const renewBlock = p.renewalDue ? `<div class="m"><div class="k">Renewal app due</div><div class="v" style="color:${days(p.renewalDue) <= 60 ? 'var(--st-overdue)' : 'var(--ink)'}">${fmt(p.renewalDue)}${days(p.renewalDue) >= 0 ? ' · ' + rel(p.renewalDue) : ''}</div></div>` : '';
+  const tabBtn = (key, lbl, ct) => `<button class="${tab === key ? 'active' : ''}" onclick="go('#/permit/${pid}/${key}')">${lbl}${ct != null ? `<span class="ct">${ct}</span>` : ''}</button>`;
+  let body = '';
+  if(tab === 'obligations') body = tabObligations(p, obs);
+  else if(tab === 'documents') body = tabDocuments(p, docs);
+  else if(tab === 'activity') body = `<div class="card card-pad">${acts.length ? `<ul class="timeline">${acts.map(a => {
+      const who = STAFF[a.by] ? STAFF[a.by].name : a.by === 'MDEQ' ? 'MDEQ — Office of Pollution Control' : 'Verdacta';
+      return `<li class="k-${a.kind}"><span class="dot"></span><span class="t-date">${fmt(a.date)}</span>
+        <div class="t-text"><span class="kind-tag ${a.kind}">${a.kind.replace('-',' ')}</span>${esc(a.text)}</div><div class="t-by">${esc(who)}</div></li>`;
+    }).join('')}</ul>` : '<div class="empty">No activity logged.</div>'}</div>`;
+  else if(tab === 'conditions') body = tabConditions(p);
+  else if(tab === 'notifications') body = tabPermitNotifs(p, obs, notifs);
+  else { tab = 'obligations'; body = tabObligations(p, obs); }
+  $('#view').innerHTML = `
+    <div class="breadcrumbs"><a href="#/">Portfolio</a> › <a href="#/client/${c.id}">${esc(c.name)}</a> › <a href="#/site/${s.id}">${esc(s.name)}</a> › ${esc(p.number)}</div>
+    <div class="card card-pad" style="margin-bottom:var(--s-2)">
+      <div style="display:flex;gap:var(--s-4);align-items:flex-start;flex-wrap:wrap">
+        <div style="flex:1;min-width:300px">
+          <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">${ptag(p.program)}${statusChip}</div>
+          <h1 style="font-family:var(--font-mono);font-weight:500;font-size:var(--fs-2xl);margin-top:8px">${esc(p.number)}</h1>
+          <div style="font-size:var(--fs-base);color:var(--slategreen)">${esc(p.type)}</div>
+          <div style="font-size:var(--fs-caption);color:var(--fieldgray);margin-top:4px">${esc(p.description)}</div>
+          <div style="margin-top:8px">${cite(p.renewalRule, true)}</div>
+        </div>
+        <div style="min-width:120px">${projs.map(pr => `<div class="card card-pad" style="background:var(--pine-100);border-color:var(--pine-300);margin-bottom:8px">
+          <div style="font-size:var(--fs-micro);text-transform:uppercase;letter-spacing:.1em;color:var(--pine-700);font-weight:700">Active project</div>
+          <b style="font-size:var(--fs-caption)">${esc(pr.name)}</b>
+          <div class="progress" style="margin-top:6px"><div style="width:${pr.pctComplete}%"></div></div>
+          <div style="font-size:var(--fs-micro);color:var(--fieldgray);margin-top:3px">${pr.pctComplete}% · due ${fmtShort(pr.due)} · ${esc(STAFF[pr.lead].initials)}</div>
+        </div>`).join('')}</div>
+      </div>
+      <div class="meta-grid">
+        <div class="m"><div class="k">Agency</div><div class="v" style="font-family:var(--font-body)">${esc(p.agency)}</div></div>
+        <div class="m"><div class="k">Issued</div><div class="v">${fmt(p.issued)}</div></div>
+        <div class="m"><div class="k">Effective</div><div class="v">${fmt(p.effective)}</div></div>
+        <div class="m"><div class="k">Expires</div><div class="v">${fmt(p.expires)}</div></div>
+        ${renewBlock}
+      </div>
+    </div>
+    <div class="tabs">
+      ${tabBtn('obligations','Obligations', obs.length)}
+      ${tabBtn('documents','Documents', docs.length)}
+      ${tabBtn('activity','Activity', acts.length)}
+      ${tabBtn('conditions','Limits & conditions', null)}
+      ${tabBtn('notifications','Notifications', notifs.length)}
+    </div>
+    ${body}`;
+}
+function tabObligations(p, obs){
+  const order = {overdue:0, due:1, review:2, compliant:3};
+  const sorted = [...obs].sort((a,b) => (order[a.status] - order[b.status]) || ((a.nextDue?pd(a.nextDue):Infinity) - (b.nextDue?pd(b.nextDue):Infinity)));
+  return `<div class="card" style="overflow-x:auto"><table class="tbl" style="table-layout:fixed;min-width:1000px">
+    <colgroup><col style="width:33%"><col style="width:9%"><col style="width:9%"><col style="width:19%"><col style="width:11%"><col style="width:6%"><col style="width:13%"></colgroup>
+    <thead><tr><th>Obligation</th><th>Category</th><th>Frequency</th><th>Citation</th><th>Next due</th><th>Owner</th><th style="text-align:right">Status</th></tr></thead>
+    <tbody>${sorted.map(o => `<tr class="${o.status === 'overdue' ? 'ovd' : ''}">
+      <td><b>${esc(o.title)}</b><br><span style="font-size:var(--fs-micro);color:var(--fieldgray)">${esc(o.deadlineRule)}</span>${o.notes ? `<br><span style="font-size:var(--fs-micro);color:var(--slategreen);font-style:italic">${esc(o.notes)}</span>` : ''}</td>
+      <td><span class="kind-tag">${esc(o.category)}</span></td>
+      <td style="font-size:var(--fs-micro)">${esc(o.frequency)}</td>
+      <td>${cite(o.citation)}</td>
+      <td>${duecell(o.nextDue)}</td>
+      <td>${av(o.assignee)}</td>
+      <td style="text-align:right">${obChip(o)}</td>
+    </tr>`).join('')}</tbody></table></div>`;
+}
+function tabDocuments(p, docs){
+  return `<div class="two-col"><div class="card">${docs.map(docRow).join('') || '<div class="empty">No documents.</div>'}</div>
+  <div>
+    <div class="card card-pad" style="border-style:dashed;text-align:center;background:var(--verdigris-100);border-color:var(--verdigris-300)">
+      <div style="font-family:var(--font-display);font-size:var(--fs-2xl);color:var(--verdigris-600)">§</div>
+      <b style="font-size:var(--fs-caption);color:var(--pine-800)">Drop submittals, agency letters, or lab data</b>
+      <p style="font-size:var(--fs-micro);color:var(--fieldgray);margin:4px 0 10px">Files are attached to this permit's record and logged to Activity automatically. Originals preserved.</p>
+      <button class="btn btn-primary">Upload document</button>
+    </div>
+    <div class="card card-pad" style="margin-top:var(--s-4)">
+      <div class="section-label" style="margin-bottom:8px">Document workflow</div>
+      <p style="font-size:var(--fs-micro);color:var(--slategreen);line-height:1.6">Draft → Submitted → Accepted, or → Revision requested → Resubmitted (R1, R2…). Rejections and agency comment letters stay attached to the same thread so the whole exchange is auditable.</p>
+    </div>
+  </div></div>`;
+}
+function tabConditions(p){
+  return `<div class="three-col">
+    <div class="card card-pad"><div class="section-label">Emission points / outfalls</div>
+      <ul style="margin:0;padding-left:18px;font-size:var(--fs-caption);color:var(--slategreen);display:flex;flex-direction:column;gap:6px">${(p.emissionPoints||[]).map(e => `<li>${esc(e)}</li>`).join('') || '<li>—</li>'}</ul></div>
+    <div class="card card-pad"><div class="section-label">Key limits</div>
+      <ul style="margin:0;padding-left:18px;font-size:var(--fs-caption);color:var(--slategreen);display:flex;flex-direction:column;gap:6px">${(p.keyLimits||[]).map(e => `<li>${esc(e)}</li>`).join('') || '<li>—</li>'}</ul></div>
+    <div class="card card-pad"><div class="section-label">Special conditions</div>
+      <ul style="margin:0;padding-left:18px;font-size:var(--fs-caption);color:var(--slategreen);display:flex;flex-direction:column;gap:6px">${(p.specialConditions||[]).map(e => `<li>${esc(e)}</li>`).join('') || '<li>—</li>'}</ul></div>
+  </div>`;
+}
+function ladderHtml(key){
+  const l = D.notificationRules.ladders[key];
+  return `<div style="padding:10px 0;border-top:1px solid var(--ash)">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px"><b style="font-size:var(--fs-caption)">${esc(l.label)}</b><span style="font-size:var(--fs-micro);color:var(--fieldgray)">SMS from T−${l.smsFrom}</span></div>
+    <div class="ladder">${l.offsets.map(o => `<span class="rung ${o <= l.smsFrom ? 'sms' : ''}">T−${o}</span>`).join('<span style="color:var(--lichen)">→</span>')}</div>
+  </div>`;
+}
+function notifRow(n){
+  const lvlClass = n.level === 'OVERDUE' ? 'crit' : (n.level === 'T-7' || n.level === 'T-1' || n.level === 'T-14') ? 'warn' : 'info';
+  const p = PERMITS[n.permitId];
+  return `<div class="notif-row">
+    <span class="lvl ${lvlClass}">${esc(n.level)}</span>
+    <div style="flex:1;min-width:0">
+      <b style="font-size:var(--fs-caption)">${esc(n.subject)}</b>
+      <div style="font-size:var(--fs-micro);color:var(--fieldgray);margin-top:2px">${fmt(n.date)} · to ${esc(n.to)} · <a href="#/permit/${p.id}">${esc(p.number)}</a>${n.channels.map(c => `<span class="chan">${c}</span>`).join('')}</div>
+    </div>
+    <span class="dstat ${n.status === 'sent' ? 'submitted' : n.status === 'acknowledged' ? 'accepted' : 'draft'}" style="flex:none">${n.status}</span>
+  </div>`;
+}
+function tabPermitNotifs(p, obs, notifs){
+  return `<div class="two-col">
+    <div><div class="section-label">Sent & scheduled for this permit</div>
+      <div class="card">${notifs.map(notifRow).join('') || '<div class="empty">Nothing sent yet.</div>'}</div></div>
+    <div><div class="section-label">Escalation ladders in effect</div>
+      <div class="card card-pad" style="padding-top:6px">${Object.keys(D.notificationRules.ladders).map(ladderHtml).join('')}
+      <p style="font-size:var(--fs-micro);color:var(--fieldgray);margin-top:10px">${esc(D.notificationRules.escalation)}</p></div></div>
+  </div>`;
+}
+
+/* ═══════════ CALENDAR ═══════════ */
+let calY = 2026, calM = 7; // August 2026
+function calShift(d){ calM += d; if(calM < 0){calM = 11; calY--;} if(calM > 11){calM = 0; calY++;} viewCalendar(); }
+function viewCalendar(){
+  setCrumb(`<b>${esc(D.firm.name)}</b> · Compliance calendar`);
+  const first = new Date(calY, calM, 1);
+  const startDow = first.getDay();
+  const dim = new Date(calY, calM + 1, 0).getDate();
+  const cells = [];
+  const prevDim = new Date(calY, calM, 0).getDate();
+  for(let i = 0; i < startDow; i++) cells.push({d: prevDim - startDow + 1 + i, dim: true});
+  for(let d = 1; d <= dim; d++) cells.push({d, dim: false});
+  while(cells.length % 7) cells.push({d: cells.length - startDow - dim + 1, dim: true});
+  const iso = d => `${calY}-${String(calM+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+  const obsByDay = {};
+  D.obligations.forEach(o => { if(o.nextDue) (obsByDay[o.nextDue] = obsByDay[o.nextDue] || []).push(o); });
+  D.projects.filter(pr => pr.status !== 'complete').forEach(pr => { (obsByDay[pr.due] = obsByDay[pr.due] || []).push({project: true, pr}); });
+  const monthItems = D.obligations.filter(o => o.nextDue && o.nextDue.startsWith(`${calY}-${String(calM+1).padStart(2,'0')}`)).length;
+  const grid = cells.map(c => {
+    if(c.dim) return `<div class="cal-cell dim"><div class="cal-date">${c.d}</div></div>`;
+    const key = iso(c.d);
+    const items = obsByDay[key] || [];
+    const isToday = key === D.today;
+    const pills = items.slice(0,3).map(it => {
+      if(it.project) return `<span class="pill project" onclick="go('#/site/${it.pr.siteId}')" title="${esc(it.pr.name)}">◳ ${esc(it.pr.name)}</span>`;
+      const p = PERMITS[it.permitId];
+      return `<span class="pill ${it.status}" onclick="go('#/permit/${p.id}/obligations')" title="${esc(it.title)} — ${esc(clientOf(p).name)}">${esc(it.title)}</span>`;
+    }).join('');
+    const more = items.length > 3 ? `<span style="color:var(--fieldgray)">+ ${items.length - 3} more</span>` : '';
+    return `<div class="cal-cell ${isToday ? 'today' : ''}"><div class="cal-date">${c.d}</div>${pills}${more}</div>`;
+  }).join('');
+  $('#view').innerHTML = `
+    <div class="pagehead"><div><h1>Compliance calendar</h1><div class="sub">Every dated obligation and project milestone across the portfolio. Click a pill to open its permit.</div></div></div>
+    <div class="cal-head">
+      <span class="cal-title">${['January','February','March','April','May','June','July','August','September','October','November','December'][calM]} ${calY}</span>
+      <span style="font-size:var(--fs-micro);color:var(--fieldgray)">${monthItems} deadline${monthItems === 1 ? '' : 's'} this month</span>
+      <div class="cal-nav">
+        <button class="btn btn-ghost" onclick="calShift(-1)">‹ Prev</button>
+        <button class="btn btn-ghost" onclick="calY=2026;calM=7;viewCalendar()">Today</button>
+        <button class="btn btn-ghost" onclick="calShift(1)">Next ›</button>
+      </div>
+    </div>
+    <div class="cal-grid">
+      ${['Sun','Mon','Tue','Wed','Thu','Fri','Sat'].map(d => `<div class="cal-dow">${d}</div>`).join('')}
+      ${grid}
+    </div>
+    <div style="display:flex;gap:14px;margin-top:var(--s-4);font-size:var(--fs-micro);color:var(--slategreen);flex-wrap:wrap">
+      <span><span class="pill overdue" style="display:inline;padding:1px 8px">&nbsp;</span> overdue</span>
+      <span><span class="pill due" style="display:inline;padding:1px 8px">&nbsp;</span> due window</span>
+      <span><span class="pill compliant" style="display:inline;padding:1px 8px">&nbsp;</span> scheduled</span>
+      <span><span class="pill review" style="display:inline;padding:1px 8px">&nbsp;</span> in review</span>
+      <span><span class="pill project" style="display:inline;padding:1px 8px">&nbsp;</span> project milestone</span>
+    </div>`;
+}
+
+/* ═══════════ REGISTER ═══════════ */
+const regFilter = {client:'', program:'', category:'', status:'', q:''};
+function setReg(k, v){ regFilter[k] = v; viewRegister(); }
+function viewRegister(){
+  setCrumb(`<b>${esc(D.firm.name)}</b> · Obligation register`);
+  let rows = [...D.obligations];
+  if(regFilter.client) rows = rows.filter(o => clientOf(PERMITS[o.permitId]).id === regFilter.client);
+  if(regFilter.program) rows = rows.filter(o => PERMITS[o.permitId].program === regFilter.program);
+  if(regFilter.category) rows = rows.filter(o => o.category === regFilter.category);
+  if(regFilter.status) rows = rows.filter(o => o.status === regFilter.status);
+  if(regFilter.q) rows = rows.filter(o => (o.title + ' ' + o.deadlineRule + ' ' + (o.citation||'')).toLowerCase().includes(regFilter.q.toLowerCase()));
+  rows.sort((a,b) => urgency(a) - urgency(b));
+  const cats = [...new Set(D.obligations.map(o => o.category))].sort();
+  $('#view').innerHTML = `
+    <div class="pagehead"><div><h1>Obligation register</h1><div class="sub">The master list — every requirement, its citation, its clock, and its owner. ${D.obligations.length} obligations across ${D.permits.length} permits.</div></div>
+      <button class="btn btn-ghost" style="margin-left:auto" onclick="alert('Prototype: exports the filtered register to Excel in the production build.')">Export to Excel</button></div>
+    <div class="filterbar">
+      <select onchange="setReg('client', this.value)">
+        <option value="">All clients</option>${D.clients.map(c => `<option value="${c.id}" ${regFilter.client===c.id?'selected':''}>${esc(c.name)}</option>`).join('')}</select>
+      <select onchange="setReg('program', this.value)">
+        <option value="">All programs</option>${['air','water','stormwater','pretreatment'].map(pr => `<option value="${pr}" ${regFilter.program===pr?'selected':''}>${pr}</option>`).join('')}</select>
+      <select onchange="setReg('category', this.value)">
+        <option value="">All categories</option>${cats.map(ct => `<option value="${ct}" ${regFilter.category===ct?'selected':''}>${ct}</option>`).join('')}</select>
+      <select onchange="setReg('status', this.value)">
+        <option value="">All statuses</option>${['overdue','due','review','compliant'].map(st => `<option value="${st}" ${regFilter.status===st?'selected':''}>${st}</option>`).join('')}</select>
+      <input type="text" placeholder="Filter text or citation…" value="${esc(regFilter.q)}" onchange="setReg('q', this.value)" style="width:220px"/>
+      <span style="font-size:var(--fs-micro);color:var(--fieldgray)">${rows.length} shown</span>
+    </div>
+    <div class="card" style="overflow-x:auto"><table class="tbl" style="table-layout:fixed;min-width:1040px">
+      <colgroup><col style="width:30%"><col style="width:13%"><col style="width:9%"><col style="width:17%"><col style="width:11%"><col style="width:6%"><col style="width:14%"></colgroup>
+      <thead><tr><th>Obligation</th><th>Client · permit</th><th>Category</th><th>Citation</th><th>Next due</th><th>Owner</th><th style="text-align:right">Status</th></tr></thead>
+      <tbody>${rows.map(o => { const p = PERMITS[o.permitId];
+        return `<tr class="row-link ${o.status==='overdue'?'ovd':''}" onclick="go('#/permit/${p.id}/obligations')">
+        <td><b>${esc(o.title)}</b><br><span style="font-size:var(--fs-micro);color:var(--fieldgray)">${esc(o.frequency)} — ${esc(o.deadlineRule)}</span></td>
+        <td style="font-size:var(--fs-micro)">${esc(clientOf(p).name.split(',')[0])}<br><span class="mono">${esc(p.number)}</span></td>
+        <td><span class="kind-tag">${esc(o.category)}</span></td>
+        <td>${cite(o.citation)}</td>
+        <td>${duecell(o.nextDue)}</td>
+        <td>${av(o.assignee)}</td>
+        <td style="text-align:right">${obChip(o)}</td></tr>`;}).join('')}</tbody></table></div>`;
+}
+
+/* ═══════════ NOTIFICATIONS ═══════════ */
+function viewNotifications(){
+  setCrumb(`<b>${esc(D.firm.name)}</b> · Notification center`);
+  const feed = [...D.notifications].sort((a,b) => pd(b.date) - pd(a.date));
+  const scheduled = feed.filter(n => n.status === 'scheduled');
+  const r = D.notificationRules;
+  $('#view').innerHTML = `
+    <div class="pagehead"><div><h1>Notification center</h1><div class="sub">Email and SMS reminders on an escalation ladder — early enough to prepare, loud enough to never miss a filing.</div></div></div>
+    <div class="two-col">
+      <div>
+        ${scheduled.length ? `<div class="section-label">Scheduled</div><div class="card" style="margin-bottom:var(--s-6)">${scheduled.map(notifRow).join('')}</div>` : ''}
+        <div class="section-label">Recent</div>
+        <div class="card">${feed.filter(n => n.status !== 'scheduled').map(notifRow).join('')}</div>
+      </div>
+      <div>
+        <div class="section-label">Escalation ladders</div>
+        <div class="card card-pad" style="padding-top:6px">${Object.keys(r.ladders).map(ladderHtml).join('')}</div>
+        <div class="section-label" style="margin-top:var(--s-6)">Delivery rules</div>
+        <div class="card card-pad" style="font-size:var(--fs-caption);color:var(--slategreen);display:flex;flex-direction:column;gap:10px">
+          <div><b>Channels.</b> Email at every rung; SMS joins at the ladder's SMS threshold. Acknowledging an item stops its reminders.</div>
+          <div><b>Quiet hours.</b> ${esc(r.quietHours)}</div>
+          <div><b>Digest.</b> ${esc(r.digest)}</div>
+          <div><b>Escalation.</b> ${esc(r.escalation)}</div>
+        </div>
+        <div class="section-label" style="margin-top:var(--s-6)">Channel defaults</div>
+        <div class="card card-pad" style="font-size:var(--fs-caption)">
+          ${D.firm.staff.map(st => `<div style="display:flex;align-items:center;gap:10px;padding:7px 0;border-top:1px solid var(--ash)">
+            <span class="avatar sm ${avColor(st.id)}">${esc(st.initials)}</span>
+            <div style="flex:1"><b>${esc(st.name)}</b><br><span style="font-size:var(--fs-micro);color:var(--fieldgray)">${esc(st.role)}</span></div>
+            <span style="font-size:9px;color:var(--fieldgray)"><span class="toggle"></span> email</span>
+            <span style="font-size:9px;color:var(--fieldgray)"><span class="toggle ${st.role.includes('Principal') ? 'off' : ''}"></span> SMS</span>
+          </div>`).join('')}
+        </div>
+      </div>
+    </div>`;
+}
+/*__END_VIEWS__*/
+
+/* ═══════════ search ═══════════ */
+const sb = $('#searchbox'), sr = $('#searchresults');
+sb.addEventListener('input', () => {
+  const q = sb.value.trim().toLowerCase();
+  if(q.length < 2){ sr.style.display = 'none'; return; }
+  const hits = [];
+  D.clients.forEach(c => { if(c.name.toLowerCase().includes(q)) hits.push({k:'Client', t:c.name, h:'#/client/'+c.id}); });
+  D.sites.forEach(s => { if(s.name.toLowerCase().includes(q)) hits.push({k:'Site', t:s.name, h:'#/site/'+s.id}); });
+  D.permits.forEach(p => { if((p.number+' '+p.type).toLowerCase().includes(q)) hits.push({k:'Permit', t:p.number+' — '+p.type, h:'#/permit/'+p.id}); });
+  D.obligations.forEach(o => { if(o.title.toLowerCase().includes(q)) hits.push({k:'Obligation', t:o.title, h:'#/permit/'+o.permitId+'/obligations'}); });
+  sr.innerHTML = hits.slice(0,9).map(x => `<a href="${x.h}"><span class="k">${x.k}</span><br>${esc(x.t)}</a>`).join('') || '<a><span class="k">No results</span></a>';
+  sr.style.display = 'block';
+});
+document.addEventListener('click', e => { if(!e.target.closest('.search')) sr.style.display = 'none'; });
+sr.addEventListener('click', () => { sr.style.display = 'none'; sb.value = ''; });
+
+$('#todaychip').textContent = 'Demo date · ' + fmt(D.today);
+route();
+</script>
+</body>
+</html>
