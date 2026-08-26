@@ -4343,7 +4343,9 @@ function applyCleanMode(){
   D.metrics.exceedancesYTD = 0;
   rebuildIdx();
 }
+let RESETTING = false; // once a reset starts, nothing may write the snapshot back before the reload
 function saveState(){
+  if(RESETTING) return;
   try{ localStorage.setItem(stateKey(), JSON.stringify({ v: SNAP_V,
     obligations: D.obligations, documents: D.documents, archivedCompletions: D.archivedCompletions, activity: D.activity,
     notifications: D.notifications, wasteProfiles: D.wasteProfiles, wasteManifests: D.wasteManifests, wasteActivity: D.wasteActivity,
@@ -4364,7 +4366,7 @@ function restoreState(){
   }catch(e){}
 }
 function setDemoMode(m){ localStorage.setItem('verdacta-mode', m); location.reload(); }
-function resetDemo(){ localStorage.removeItem(stateKey()); toast('Demo data reset — reloading'); setTimeout(() => location.reload(), 500); }
+function resetDemo(){ RESETTING = true; localStorage.removeItem(stateKey()); toast('Demo data reset — reloading'); setTimeout(() => location.reload(), 400); }
 if(DEMO_MODE === 'clean') applyCleanMode();
 restoreState();
 applyAirPortals();
