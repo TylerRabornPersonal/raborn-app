@@ -317,33 +317,49 @@ table.tbl{width:100%;border-collapse:collapse;font-size:var(--fs-caption)}
 </style>
 
 <style>
-/* ═══ Ergon workspace theme — overrides the Verdacta default tokens. Swap these values for exact brand hexes. ═══ */
+/* ═══ Ergon workspace theme — overrides the Verdacta default tokens.
+   Ergon yellow sampled from ergon.com (buttons #EDC44C–#F7CF46; band #E9C442). Neutrals: black wordmark, charcoal buttons, light gray surfaces. ═══ */
 :root{
+--ergon-yellow:#F5C842;--ergon-yellow-deep:#E0B321;--ergon-black:#111111;--ergon-charcoal:#4A4A4A;
 --pine-100:#EFEFEF;--pine-200:#DADADA;--pine-300:#B8B8B8;--pine-400:#8C8C8C;--pine-500:#5E5E5E;
---pine-600:#3B3B3B;--pine-700:#262626;--pine-800:#171717;--pine-900:#0B0B0B;
---verdigris-100:#FBE9EC;--verdigris-200:#F5C6CD;--verdigris-300:#EC97A3;--verdigris-400:#DE5F71;
---verdigris-500:#C8102E;--verdigris-600:#A80D27;--verdigris-700:#860A1F;--verdigris-800:#640717;--verdigris-900:#42040F;
+--pine-600:#4A4A4A;--pine-700:#2E2E2E;--pine-800:#171717;--pine-900:#0B0B0B;
+--verdigris-100:#FEF6DA;--verdigris-200:#FBE8A6;--verdigris-300:#F8D96E;--verdigris-400:#F5C842;
+--verdigris-500:#F2BF2A;--verdigris-600:#D9A614;--verdigris-700:#8A6A08;--verdigris-800:#5E4805;--verdigris-900:#3A2C03;
 --copper-200:#E4E1DA;--copper-300:#CFCAC0;--copper-400:#ADA69A;--copper-500:#8A8378;--copper-600:#6C665D;--copper-700:#4F4A43;
 --bone:#FCFCFC;--limestone:#F4F4F4;--ash:#E6E6E6;--sagegray:#D5D5D5;--lichen:#A8A8A8;
 --fieldgray:#737373;--slategreen:#4E4E4E;--ink:#141414;
---chart-1:#C8102E;--chart-2:#4E4E4E;--chart-3:#3D74B8;--chart-4:#B8860B;
+--chart-1:#F2BF2A;--chart-2:#4A4A4A;--chart-3:#3D74B8;--chart-4:#9E4E86;
 --font-display:'Barlow','Public Sans',system-ui,sans-serif;
 --shadow-sm:0 1px 2px rgba(0,0,0,.06);--shadow-md:0 4px 12px rgba(0,0,0,.08),0 1px 3px rgba(0,0,0,.05);
 }
 h1,h2,h3,h4{font-weight:600;letter-spacing:-.01em}
 h1{font-weight:700}
-.rail{background:#111}
-.rail a.nav.active{background:rgba(200,16,46,.22);border-left-color:var(--verdigris-500)}
+a{color:var(--ink);text-decoration:underline;text-decoration-color:var(--verdigris-300);text-decoration-thickness:1px;text-underline-offset:3px}
+a:hover{text-decoration-color:var(--ergon-yellow-deep);text-decoration-thickness:2px}
+.rail a.nav,.rail a{text-decoration:none}
+.rail{background:var(--ergon-black)}
+.rail a.nav.active{background:rgba(245,200,66,.16);border-left-color:var(--ergon-yellow);color:#fff}
 .rail-logo{padding-bottom:14px}
 .ergon-wm{display:flex;flex-direction:column;gap:5px}
 .ergon-wm .mark{font-family:'Barlow',system-ui,sans-serif;font-weight:800;font-size:26px;letter-spacing:.16em;color:#fff;line-height:1;transform:scaleX(1.08);transform-origin:left}
-.ergon-wm .bar{width:44px;height:3px;background:var(--verdigris-500);border-radius:2px}
-.ergon-wm .tag{font-size:8px;letter-spacing:.09em;text-transform:uppercase;color:#8C8C8C;font-weight:600;line-height:1.35;white-space:normal;max-width:190px}
-.powered{font-size:10px;color:#6E6E6E;letter-spacing:.04em;padding:10px 0 2px}
+.ergon-wm .bar{width:44px;height:3px;background:var(--ergon-yellow);border-radius:2px}
+.ergon-wm .tag{font-size:8px;letter-spacing:.09em;text-transform:uppercase;color:#9A9A9A;font-weight:600;line-height:1.35;white-space:normal;max-width:190px}
+.powered{font-size:10px;color:#7A7A7A;letter-spacing:.04em;padding:10px 0 2px}
 .powered .wm{font-size:13px;margin-left:4px}
-.powered .wm .verd{color:#C9C9C9}
-.powered .wm .acta{color:var(--verdigris-400)}
-.avatar{background:var(--verdigris-500)}
+.powered .wm .verd{color:#D0D0D0}
+.powered .wm .acta{color:var(--ergon-yellow)}
+/* buttons: ergon.com pattern — yellow primary with black uppercase-ish text, charcoal secondary */
+.btn-primary{background:var(--ergon-yellow);color:var(--ergon-black);font-weight:700}
+.btn-primary:hover{background:var(--ergon-yellow-deep);color:var(--ergon-black)}
+.avatar{background:var(--ergon-yellow);color:var(--ergon-black)}
+.avatar.copper{background:var(--ergon-charcoal);color:#fff}
+.section-label{color:var(--ink)}
+.section-label::after{background:linear-gradient(90deg,var(--ergon-yellow) 0,var(--ergon-yellow) 28px,var(--ash) 28px)}
+.pagehead h1{position:relative;padding-bottom:10px}
+.pagehead h1::after{content:"";position:absolute;left:0;bottom:0;width:56px;height:3px;background:var(--ergon-yellow);border-radius:2px}
+.tabs button.active{border-bottom-color:var(--ergon-yellow);border-bottom-width:3px}
+.kpi.click:hover{border-color:var(--ergon-yellow)}
+.rung{background:var(--verdigris-100);color:var(--verdigris-800);border-color:var(--verdigris-300)}
 ::selection{background:var(--verdigris-200);color:var(--verdigris-900)}
 </style>
 </head>
