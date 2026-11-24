@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>SchoLehr legal decisions</title>
+<script>(function(){var p=location.pathname,l=p.split("/").pop();if(l&&l.indexOf(".")<0)document.write('<base href="'+p+'/">');})();</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Libre+Caslon+Text:wght@400;700&family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --green:#1C3A30; --deepgreen:#10231D; --green2:#244738; --mint:#EDF2EF; --sage:#A8C0B3;
+  --brass:#A98A4B; --deepbrass:#6E5522; --lightbrass:#DFCB9E; --brasswash:#F7F2E6;
+  --paper:#F7F5EF; --limestone:#ECE9E0; --white:#FFFFFF; --ink:#14181A; --slate:#4B5357; --rule:#DCD8CC;
+  --ok:#2F5646; --warn:#8A5A1C; --err:#A23E3E;
+  --serif:"Libre Caslon Text", Georgia, serif; --sans:"Public Sans", system-ui, -apple-system, "Segoe UI", sans-serif; --mono:"IBM Plex Mono", ui-monospace, Menlo, monospace;
+}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%}
+body{background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.5;-webkit-font-smoothing:antialiased}
+button,input,textarea{font:inherit;color:inherit}
+button{cursor:pointer}
+:focus-visible{outline:2px solid var(--brass);outline-offset:2px}
+.eyebrow{font-size:11px;font-weight:600;letter-spacing:.18em;text-transform:uppercase}
+.mono{font-family:var(--mono)}
+
+/* gate */
+.gate{min-height:100%;display:grid;place-items:center;background:var(--green);padding:24px}
+.gate form{width:100%;max-width:380px;background:var(--paper);border-radius:8px;padding:32px}
+.gate .wm{font-family:var(--serif);font-size:30px;color:var(--green);margin:0 0 2px}
+.gate p{margin:0 0 20px;color:var(--slate)}
+.gate label{display:block;font-weight:600;font-size:13.5px;margin-bottom:6px}
+.gate input{width:100%;padding:11px 12px;border:1px solid var(--rule);border-radius:4px;background:var(--white)}
+.gate button{margin-top:14px;width:100%}
+.gate .bad{color:var(--err);font-size:13.5px;margin-top:10px;min-height:20px}
+
+.btn{border:1px solid var(--green);background:var(--green);color:var(--paper);border-radius:4px;padding:10px 16px;font-weight:600;font-size:14px}
+.btn:hover{background:var(--green2)}
+.btn.ghost{background:transparent;color:var(--green);border-color:var(--rule)}
+.btn.ghost:hover{border-color:var(--green);background:var(--mint)}
+.btn.small{padding:6px 11px;font-size:13px}
+.btn[disabled]{opacity:.5;cursor:default}
+.link{background:none;border:0;padding:0;color:var(--deepbrass);text-decoration:underline;text-underline-offset:2px}
+
+/* shell */
+.app{display:grid;grid-template-columns:316px minmax(0,1fr);min-height:100%}
+aside{background:var(--green);color:var(--paper);position:sticky;top:0;height:100vh;overflow-y:auto;padding:22px 16px 18px;display:flex;flex-direction:column}
+aside .wm{font-family:var(--serif);font-size:24px;margin:0 6px}
+aside .tag{margin:2px 6px 18px;color:var(--sage);font-size:13px}
+.nav{display:flex;flex-direction:column;gap:2px;margin-bottom:18px}
+.nav button,.docrow{display:flex;align-items:center;gap:10px;width:100%;text-align:left;background:transparent;border:0;border-radius:4px;padding:9px 10px;color:var(--paper)}
+.nav button:hover,.docrow:hover{background:rgba(255,255,255,.07)}
+.nav button.on,.docrow.on{background:rgba(255,255,255,.13)}
+.nav .count{margin-left:auto;font-family:var(--mono);font-size:12px;color:var(--lightbrass)}
+.side-h{margin:4px 6px 10px}
+.side-h .eyebrow{display:block;margin-bottom:8px}
+.side-h .eyebrow{color:var(--sage)}
+.seg{display:flex;border:1px solid rgba(255,255,255,.22);border-radius:4px;overflow:hidden}
+.seg button{flex:1;background:transparent;border:0;color:var(--sage);font-size:12.5px;padding:6px 9px;white-space:nowrap}
+.seg button.on{background:var(--paper);color:var(--green);font-weight:600}
+.grp{margin:0 0 12px}
+.grp-h{display:flex;align-items:baseline;gap:8px;padding:6px 10px 3px}
+.grp-h b{font-family:var(--serif);font-weight:400;font-size:15.5px}
+.grp-h span{font-size:12px;color:var(--sage)}
+.grp.open .grp-h b{color:var(--lightbrass)}
+.docrow{padding:6px 10px;font-size:13.5px;align-items:baseline}
+.docrow .n{font-family:var(--mono);font-size:11.5px;color:var(--sage);min-width:18px}
+.docrow .d{margin-left:auto;font-family:var(--mono);font-size:11px;color:var(--sage);white-space:nowrap;padding-left:8px}
+.docrow.dim{color:var(--sage)}
+.sync{margin-top:auto;padding:12px 8px 0;border-top:1px solid rgba(255,255,255,.14);font-size:12.5px;color:var(--sage);display:flex;gap:8px;align-items:center}
+.sync i{width:8px;height:8px;border-radius:50%;background:var(--sage);flex:none}
+.sync.saved i{background:#8FCDB0}.sync.saving i{background:var(--lightbrass)}.sync.error i{background:#E38B8B}
+
+main{min-width:0;padding:34px 40px 90px}
+.col{max-width:800px;margin:0 auto}
+.topbar{display:none}
+h1{font-family:var(--serif);font-weight:400;font-size:34px;line-height:1.12;letter-spacing:-.01em;margin:6px 0 8px}
+h1 em{font-style:normal;color:var(--deepbrass)}
+.lede{color:var(--slate);margin:0 0 20px;max-width:64ch}
+.banner{border-radius:8px;padding:12px 16px;margin:0 0 18px;font-size:14px}
+.banner.preview{background:var(--brasswash);border:1px solid var(--lightbrass);color:var(--warn)}
+.banner.done{background:var(--mint);border:1px solid var(--sage);color:var(--ok)}
+.progress{display:flex;align-items:center;gap:14px;margin:0 0 14px}
+.bar{flex:1;height:8px;background:var(--limestone);border-radius:99px;overflow:hidden}
+.bar i{display:block;height:100%;background:var(--green);border-radius:99px;transition:width .25s}
+.progress .mono{font-size:13px;color:var(--slate);white-space:nowrap}
+.chips{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin:0 0 26px}
+.chips span{font-size:13px;color:var(--slate);margin-right:4px}
+.chip{border:1px solid var(--rule);background:var(--white);border-radius:99px;padding:5px 12px;font-size:13px}
+.chip.on{background:var(--green);border-color:var(--green);color:var(--paper)}
+
+section.sec{margin:0 0 34px}
+.sec-h{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;border-bottom:1px solid var(--rule);padding-bottom:8px;margin-bottom:6px}
+.sec-h h2{font-family:var(--serif);font-weight:400;font-size:22px;margin:0;color:var(--green)}
+.sec-intro{color:var(--slate);font-size:14px;margin:8px 0 14px;max-width:68ch}
+.sec-tools{display:flex;gap:8px;flex:none}
+
+.q{background:var(--white);border:1px solid var(--rule);border-radius:8px;padding:16px 18px;margin:0 0 10px}
+.q.answered{border-left:3px solid var(--green);padding-left:16px}
+.q-top{display:flex;gap:12px;align-items:flex-start;justify-content:space-between}
+.q-label{font-weight:600;font-size:15.5px;margin:0}
+.q-meta{display:flex;flex-wrap:wrap;gap:6px 10px;margin:6px 0 0;font-size:12.5px;color:var(--slate);align-items:center}
+.who{background:var(--limestone);border-radius:99px;padding:2px 9px;font-weight:500;color:var(--ink)}
+.status{font-size:12px;font-weight:600;white-space:nowrap;padding:3px 9px;border-radius:99px;flex:none}
+.status.open{background:var(--brasswash);color:var(--warn)}
+.status.ok{background:var(--mint);color:var(--ok)}
+.help{font-size:13.5px;color:var(--slate);margin:8px 0 0;max-width:68ch}
+.opts{display:grid;gap:6px;margin:12px 0 0}
+.opt{display:flex;gap:10px;align-items:flex-start;border:1px solid var(--rule);border-radius:4px;padding:9px 12px;cursor:pointer;background:var(--white)}
+.opt:hover{border-color:var(--sage)}
+.opt input{margin:3px 0 0;accent-color:var(--green);flex:none}
+.opt.sel{border-color:var(--green);background:var(--mint)}
+.opt.pending{border-style:dashed;border-color:var(--brass);background:var(--brasswash)}
+.rec{font-size:11.5px;font-weight:600;color:var(--deepbrass);white-space:nowrap;margin-left:auto;padding-left:10px}
+.field{display:flex;gap:8px;margin-top:10px}
+.field input{flex:1;min-width:0;padding:9px 11px;border:1px solid var(--rule);border-radius:4px;background:var(--white)}
+textarea{width:100%;min-height:74px;padding:10px 12px;border:1px solid var(--rule);border-radius:4px;background:var(--white);resize:vertical;line-height:1.45}
+.note{margin-top:10px}
+.q-foot{display:flex;gap:14px;align-items:center;margin-top:10px;font-size:13px}
+
+ol.pos{margin:0;padding:0 0 0 22px;background:var(--white);border:1px solid var(--rule);border-radius:8px;padding:14px 18px 14px 38px}
+ol.pos li{margin:0 0 8px;max-width:70ch}
+ol.pos li:last-child{margin:0}
+.terms{background:var(--white);border:1px solid var(--rule);border-radius:8px;overflow:hidden}
+.term{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:14px;padding:9px 16px;border-top:1px solid var(--limestone);align-items:start}
+.term:first-child{border-top:0}
+.term label{font-size:13.5px;padding-top:7px}
+.term label small{display:block;color:var(--deepbrass);font-size:11.5px}
+.term textarea{min-height:36px;height:36px;padding:7px 10px;font-size:13.5px;border-color:transparent;background:var(--paper);resize:none;overflow:hidden}
+.term textarea:hover,.term textarea:focus{border-color:var(--rule);background:var(--white)}
+.term.changed textarea{border-color:var(--brass);background:var(--brasswash)}
+
+.finish{background:var(--green);color:var(--paper);border-radius:8px;padding:24px 26px;margin-top:8px}
+.finish h2{font-family:var(--serif);font-weight:400;font-size:24px;margin:0 0 6px}
+.finish p{margin:0 0 16px;color:var(--mint);max-width:60ch}
+.finish .btn{background:var(--paper);color:var(--green);border-color:var(--paper)}
+.finish .btn.ghost{background:transparent;color:var(--paper);border-color:rgba(255,255,255,.35)}
+.finish .row{display:flex;flex-wrap:wrap;gap:10px}
+
+/* document viewer */
+.doc-meta{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 16px}
+.pill{font-size:12.5px;border:1px solid var(--rule);border-radius:99px;padding:3px 11px;background:var(--white);color:var(--slate)}
+.pill.due{background:var(--green);border-color:var(--green);color:var(--paper)}
+.doc{background:var(--white);border:1px solid var(--rule);border-radius:8px;padding:30px 36px;font-size:15.5px;line-height:1.62}
+.doc h1,.doc h2{font-family:var(--serif);font-weight:400;color:var(--green);font-size:20px;margin:26px 0 8px;line-height:1.25}
+.doc h3,.doc h4{font-size:15.5px;margin:20px 0 6px}
+.doc p{margin:0 0 12px;max-width:72ch}
+.doc ul,.doc ol{margin:0 0 12px;padding-left:22px;max-width:70ch}
+.doc li{margin-bottom:4px}
+.doc em{color:var(--slate)}
+.tw{overflow-x:auto;margin:0 0 14px}
+.doc table{border-collapse:collapse;width:100%;font-size:14px}
+.doc td,.doc th{border:1px solid var(--rule);padding:8px 10px;text-align:left;vertical-align:top}
+.doc th{background:var(--limestone);font-weight:600}
+mark.blank{background:var(--brasswash);color:var(--deepbrass);border-bottom:1px solid var(--brass);padding:0 2px}
+.auto{font-family:var(--mono);font-size:.88em;color:var(--slate)}
+ins{text-decoration:underline;text-decoration-color:#3C8A69;text-decoration-thickness:2px;text-underline-offset:3px;background:var(--mint)}
+.legend{font-size:13px;color:var(--slate);margin:0 0 14px;display:flex;flex-wrap:wrap;gap:6px 18px}
+
+/* activity */
+.day{font-family:var(--serif);font-size:18px;color:var(--green);margin:24px 0 8px}
+.ev{display:grid;grid-template-columns:86px minmax(0,1fr);gap:12px;padding:10px 0;border-top:1px solid var(--rule);font-size:14px}
+.ev time{font-family:var(--mono);font-size:12.5px;color:var(--slate);padding-top:2px}
+.ev b{font-weight:600}
+.ev .chg{color:var(--slate);margin-top:2px;overflow-wrap:anywhere}
+.ev .chg s{color:#8C9296}
+.empty{color:var(--slate);padding:30px 0}
+
+@media (max-width:900px){
+  .app{display:block}
+  aside{position:fixed;inset:0 auto 0 0;width:min(320px,88vw);z-index:20;transform:translateX(-102%);transition:transform .2s}
+  body.menu aside{transform:none;box-shadow:0 0 0 100vmax rgba(16,35,29,.45)}
+  .topbar{display:flex;align-items:center;gap:12px;position:sticky;top:0;z-index:10;background:var(--green);color:var(--paper);padding:10px 16px}
+  .topbar .wm{font-family:var(--serif);font-size:19px}
+  .topbar button{background:transparent;border:1px solid rgba(255,255,255,.3);color:var(--paper);border-radius:4px;padding:5px 10px;font-size:13px}
+  main{padding:22px 16px 80px}
+  h1{font-size:27px}
+  .doc{padding:20px 18px}
+  .term{grid-template-columns:1fr;gap:4px}
+  .sec-h{flex-direction:column;align-items:flex-start}
+  .q-top{flex-direction:column-reverse;gap:6px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+@media print{aside,.topbar,.finish,.chips,.sec-tools{display:none!important}.app{display:block}main{padding:0}}
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script src="config.js"></script>
+<script src="data.js"></script>
+<script>
+(function(){
+'use strict';
+var CFG = window.LEGAL_CONFIG || {}, IN = null, DOCS = [];
+var REMOTE = !!(CFG.supabaseUrl && CFG.supabaseKey);
+var LOCAL_KEY = 'scholehr-legal-v1', COUNTED = ['facts','law','privacy','school','aims','deal','risk'];
+var DUE_SHORT = {dec1:'Dec 1', dec14:'Dec 14', jan1:'Jan 1', feb1:'Feb 1', jun1:'Jun 1', later:''};
+var S = { pass:null, answers:{}, log:[], view:{name:'decisions'}, group:'due', who:'All', sync:'idle', syncMsg:'', notesOpen:{} };
+var ITEMS = {}, DOC = {};
+function index(data){ IN = data.intake; DOCS = data.docs; if(CFG.answerBy) IN.phase.answerBy = CFG.answerBy;
+  IN.sections.forEach(function(s){ s.items.forEach(function(i){ ITEMS[i.id] = i; }); });
+  DOCS.forEach(function(d){ DOC[d.id] = d; }); }
+
+/* The questions and documents ship sealed with the page password. */
+function bytes(b64){ var bin = atob(b64), a = new Uint8Array(bin.length); for(var i = 0; i < bin.length; i++) a[i] = bin.charCodeAt(i); return a; }
+function unseal(p){ var z = window.SEALED, c = window.crypto && window.crypto.subtle;
+  if(!z || !c) return Promise.reject(new Error('unavailable'));
+  return c.importKey('raw', new TextEncoder().encode(p), 'PBKDF2', false, ['deriveKey'])
+    .then(function(k){ return c.deriveKey({name:'PBKDF2', salt:bytes(z.salt), iterations:z.iter, hash:'SHA-256'}, k, {name:'AES-GCM', length:256}, false, ['decrypt']); })
+    .then(function(k){ return c.decrypt({name:'AES-GCM', iv:bytes(z.iv)}, k, bytes(z.ct)); })
+    .then(function(buf){ return JSON.parse(new TextDecoder().decode(buf)); }, function(){ throw new Error('wrong password'); }); }
+var root = document.getElementById('root');
+
+function esc(s){ return String(s == null ? '' : s).replace(/[&<>"']/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
+function ss(k, v){ try{ if(v === undefined) return sessionStorage.getItem(k); sessionStorage.setItem(k, v); }catch(e){ return null; } }
+
+/* ---------- storage ---------- */
+function rpc(fn, body){
+  return fetch(CFG.supabaseUrl.replace(/\/+$/,'') + '/rest/v1/rpc/' + fn, {
+    method:'POST', headers:{ apikey:CFG.supabaseKey, Authorization:'Bearer ' + CFG.supabaseKey, 'Content-Type':'application/json' }, body:JSON.stringify(body)
+  }).then(function(r){ if(!r.ok) return r.text().then(function(t){ var e = new Error(t); e.status = r.status; throw e; }); return r.json(); });
+}
+function localRead(){ try{ return JSON.parse(localStorage.getItem(LOCAL_KEY)) || {answers:{},log:[]}; }catch(e){ return {answers:{},log:[]}; } }
+var store = REMOTE ? {
+  load:function(p){ return rpc('legal_load', {p_pass:p}).then(function(d){
+    var a = {}; Object.keys(d.answers || {}).forEach(function(k){ a[k] = Object.assign({}, d.answers[k].value, {at:d.answers[k].updated_at}); });
+    return {answers:a, log:d.log || []}; }); },
+  save:function(p, key, val, label, o, n){ return rpc('legal_save', {p_pass:p, p_key:key, p_value:val, p_label:label, p_old:o, p_new:n}); }
+} : {
+  load:function(){ return Promise.resolve(localRead()); },
+  save:function(p, key, val, label, o, n){ var d = localRead(), at = new Date().toISOString();
+    d.answers[key] = Object.assign({}, val, {at:at}); d.log.unshift({at:at, key:key, label:label, old_value:o, new_value:n}); d.log = d.log.slice(0, 500);
+    try{ localStorage.setItem(LOCAL_KEY, JSON.stringify(d)); }catch(e){} return Promise.resolve({updated_at:at}); }
+};
+
+/* ---------- answers ---------- */
+function rec(id){ return S.answers[id] || {}; }
+function val(it){ var r = rec(it.id); if(r.v !== undefined && r.v !== null) return r.v; return it.type === 'radio' ? it.rec : (it.def || ''); }
+function optLabel(it, v){ var o = (it.options || []).filter(function(x){ return x.v === v; })[0]; return o ? o.label : ''; }
+function show(it, v){ if(it.type === 'radio') return optLabel(it, v); return v == null ? '' : String(v); }
+function needsAnswer(it){ return it.type === 'radio' || it.type === 'text'; }
+function answered(it){ var r = rec(it.id); if(!needsAnswer(it)) return true; return r.c === true && String(val(it)).trim() !== ''; }
+function counted(){ var out = []; IN.sections.forEach(function(s){ if(COUNTED.indexOf(s.id) >= 0) s.items.forEach(function(i){ out.push(i); }); }); return out; }
+function isDone(){ return rec('_done').v === true; }
+function short(s){ s = String(s || ''); return s.length > 140 ? s.slice(0, 137) + '…' : s; }
+
+var pending = 0, edits = 0;
+function commit(id, patch, label, oldText, newText){
+  var next = Object.assign({}, rec(id), patch); delete next.at;
+  S.answers[id] = Object.assign({}, next, {at:new Date().toISOString()});
+  S.log.unshift({at:S.answers[id].at, key:id, label:label, old_value:oldText, new_value:newText});
+  pending++; edits++; setSync('saving');
+  return store.save(S.pass, id, next, label, oldText, newText).then(function(){
+    pending--; if(!pending) setSync('saved');
+  }).catch(function(){ pending--; setSync('error'); });
+}
+function setSync(state){ S.sync = state; var el = document.querySelector('.sync'); if(!el) return;
+  var t = new Date().toLocaleTimeString([], {hour:'numeric', minute:'2-digit'});
+  var msg = state === 'saving' ? 'Saving…' : state === 'error' ? 'Couldn’t save. Check your connection and change it again.' : state === 'saved' ? 'Saved at ' + t : (REMOTE ? 'Shared across devices' : 'Saved in this browser only');
+  el.className = 'sync ' + state; el.innerHTML = '<i></i><span>' + esc(msg) + '</span>'; }
+
+/* ---------- gate ---------- */
+function gate(msg){
+  root.innerHTML = '<div class="gate"><form><h1 class="wm">SchoLehr</h1><p>Legal decisions for the December 1 launch</p>' +
+    '<label for="pw">Password</label><input id="pw" type="password" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" autofocus>' +
+    '<button class="btn" type="submit">Open</button><div class="bad" role="alert">' + esc(msg || '') + '</div></form></div>';
+  root.querySelector('form').addEventListener('submit', function(e){ e.preventDefault(); open(document.getElementById('pw').value.trim().toLowerCase()); });
+}
+function open(p, quiet){
+  unseal(p).then(function(data){ index(data); return store.load(p); })
+  .then(function(d){ S.pass = p; ss('legal-pass', p); S.answers = d.answers; S.log = d.log; start(); })
+  .catch(function(e){ var m = e.message || '';
+    gate(quiet ? '' : m === 'unavailable' ? 'This page needs a secure (https) connection and a current browser.' : /wrong password/i.test(m) ? 'That password didn’t work.' : 'Couldn’t reach the shared answers. Check the connection and try again.'); });
+}
+
+/* ---------- shell ---------- */
+function start(){
+  root.innerHTML = '<div class="app"><aside id="side"></aside><div><div class="topbar"><button data-act="menu">Menu</button><span class="wm">SchoLehr</span></div><main id="main"></main></div></div>';
+  root.addEventListener('click', onClick); root.addEventListener('change', onChange);
+  root.addEventListener('input', function(e){ if(e.target.closest && e.target.closest('.term')) fit(); }); window.addEventListener('resize', fit);
+  var h = location.hash.replace('#','');
+  if(h.indexOf('doc/') === 0 && DOC[h.slice(4)]) S.view = {name:'doc', id:h.slice(4)}; else if(h === 'activity') S.view = {name:'activity'};
+  render();
+  if(REMOTE) setInterval(poll, 20000);
+  window.addEventListener('hashchange', function(){ var x = location.hash.replace('#','');
+    if(x.indexOf('doc/') === 0 && DOC[x.slice(4)]) go({name:'doc', id:x.slice(4)}, true); else if(x === 'activity') go({name:'activity'}, true); else if(x === '' || x === 'decisions') go({name:'decisions'}, true); });
+}
+function go(view, fromHash){ S.view = view; document.body.classList.remove('menu');
+  if(!fromHash){ var h = view.name === 'doc' ? 'doc/' + view.id : view.name === 'activity' ? 'activity' : 'decisions'; history.replaceState(null, '', location.pathname + location.search + '#' + h); }
+  render(); window.scrollTo(0, 0); if(view.focus){ var el = document.getElementById('sec-' + view.focus); if(el) el.scrollIntoView(); } }
+function render(){ renderSide(); renderMain(); }
+
+function renderSide(){
+  var c = counted(), n = c.filter(answered).length, v = S.view;
+  var h = '<div class="wm">SchoLehr</div><div class="tag">Legal decisions</div><div class="nav">' +
+    '<button data-act="view" data-view="decisions" class="' + (v.name === 'decisions' ? 'on' : '') + '">Decisions due December 1<span class="count">' + n + '/' + c.length + '</span></button>' +
+    '<button data-act="view" data-view="activity" class="' + (v.name === 'activity' ? 'on' : '') + '">Activity<span class="count">' + S.log.length + '</span></button></div>' +
+    '<div class="side-h"><span class="eyebrow">Documents</span><span class="seg" role="group" aria-label="Group documents">' +
+    '<button data-act="group" data-g="due" class="' + (S.group === 'due' ? 'on' : '') + '">By due date</button><button data-act="group" data-g="org" class="' + (S.group === 'org' ? 'on' : '') + '">By organization</button></span></div>';
+  var groups = S.group === 'due' ? IN.due : IN.orgs;
+  groups.forEach(function(g){
+    var list = DOCS.filter(function(d){ return S.group === 'due' ? d.due.indexOf(g.id) >= 0 : d.org === g.id; });
+    if(!list.length) return;
+    h += '<div class="grp' + (g.open ? ' open' : '') + '"><div class="grp-h"><b>' + esc(g.label) + '</b><span>' + esc(g.sub) + '</span></div>';
+    list.forEach(function(d){
+      var dueTxt = d.due.map(function(x){ return DUE_SHORT[x]; }).filter(Boolean).join(' / ');
+      var part = S.group === 'due' && d.id === 'doc13' ? (g.id === 'jan1' ? ', part 1' : ', part 2') : '';
+      h += '<button class="docrow' + (v.name === 'doc' && v.id === d.id ? ' on' : '') + (d.due[0] === 'later' ? ' dim' : '') + '" data-act="doc" data-id="' + d.id + '"><span class="n">' + esc(d.num) + '</span><span>' + esc(d.title + part) + '</span>' +
+        (S.group === 'org' && dueTxt ? '<span class="d">' + esc(dueTxt) + '</span>' : '') + '</button>';
+    });
+    h += '</div>';
+  });
+  h += '<div class="sync"></div>';
+  document.getElementById('side').innerHTML = h; setSync(S.sync);
+}
+
+/* ---------- decisions ---------- */
+function whoMatch(it){ if(S.who === 'All') return true; var w = it.who || ''; return w === 'Anyone' || w.indexOf(S.who) >= 0; }
+function statusChip(it){ if(!needsAnswer(it)) return ''; return answered(it) ? '<span class="status ok">Answered</span>' : '<span class="status open">' + (String(val(it)).trim() ? 'Confirm' : 'Needed') + '</span>'; }
+function metaLine(it){
+  var h = '<div class="q-meta">' + (it.who ? '<span class="who">' + esc(it.who) + '</span>' : '');
+  (it.docs || []).forEach(function(id){ if(DOC[id]) h += '<button class="link" data-act="doc" data-id="' + id + '">' + esc(DOC[id].title) + '</button>'; });
+  if(it.refs) h += '<span>' + esc(it.refs) + '</span>';
+  return h + '</div>';
+}
+function card(it){
+  var r = rec(it.id), v = val(it), ok = answered(it), h = '<div class="q' + (ok && needsAnswer(it) ? ' answered' : '') + '" id="q-' + it.id + '">';
+  h += '<div class="q-top"><div><p class="q-label">' + esc(it.label) + '</p>' + metaLine(it) + '</div>' + statusChip(it) + '</div>';
+  if(it.help) h += '<p class="help">' + esc(it.help) + '</p>';
+  if(it.type === 'radio'){
+    h += '<div class="opts" role="radiogroup" aria-label="' + esc(it.label) + '">';
+    it.options.forEach(function(o){
+      var sel = v === o.v, cls = sel ? (r.c ? ' sel' : ' pending') : '';
+      h += '<label class="opt' + cls + '"><input type="radio" name="' + it.id + '" value="' + esc(o.v) + '"' + (sel && r.c ? ' checked' : '') + ' data-id="' + it.id + '"><span>' + esc(o.label) + '</span>' + (o.v === it.rec ? '<span class="rec">Recommended</span>' : '') + '</label>';
+    });
+    h += '</div>';
+    var open = S.notesOpen[it.id] || (r.n && r.n.length);
+    h += open ? '<div class="note"><textarea data-id="' + it.id + '" data-note="1" placeholder="Note or context (optional)" aria-label="Note for: ' + esc(it.label) + '">' + esc(r.n || '') + '</textarea></div>'
+              : '<div class="q-foot"><button class="link" data-act="note" data-id="' + it.id + '">Add a note</button></div>';
+  } else if(it.type === 'text'){
+    h += '<div class="field"><input type="text" data-id="' + it.id + '" value="' + esc(v) + '" placeholder="' + esc(it.ph || '') + '" aria-label="' + esc(it.label) + '">' +
+      (!ok && String(v).trim() ? '<button class="btn ghost small" data-act="confirm" data-id="' + it.id + '">Looks right</button>' : '') + '</div>';
+  } else if(it.type === 'long'){
+    h += '<div class="note"><textarea data-id="' + it.id + '" aria-label="' + esc(it.label) + '" placeholder="Optional">' + esc(v) + '</textarea></div>';
+  }
+  return h + '</div>';
+}
+function termRow(it){ var v = val(it), changed = rec(it.id).v !== undefined && rec(it.id).v !== it.def;
+  return '<div class="term' + (changed ? ' changed' : '') + '"><label for="t-' + it.id + '">' + esc(it.label) + (it.src ? '<small>' + esc(it.src) + '</small>' : '') + (it.doc && DOC[it.doc] ? '<small>' + esc(DOC[it.doc].title) + '</small>' : '') + '</label>' +
+    '<textarea id="t-' + it.id + '" data-id="' + it.id + '" rows="1">' + esc(v) + '</textarea></div>'; }
+
+function renderMain(){
+  var m = document.getElementById('main'), v = S.view;
+  if(v.name === 'doc') return void(m.innerHTML = docView(DOC[v.id]));
+  if(v.name === 'activity') return void(m.innerHTML = activityView());
+  var c = counted(), n = c.filter(answered).length, left = c.length - n;
+  var h = '<div class="col"><div class="eyebrow" style="color:var(--deepbrass)">Phase 1 · answer by ' + esc(IN.phase.answerBy) + '</div>' +
+    '<h1>' + c.length + ' answers finish <em>four documents</em>.</h1>' +
+    '<p class="lede">You don’t need to read the drafts. Each question has a recommended answer already picked: click it to confirm, or pick another. Everything saves as you go, and anyone with this page sees the same answers.</p>';
+  if(!REMOTE) h += '<div class="banner preview">Preview mode. Answers are saved in this browser only until the shared database is connected.</div>';
+  if(isDone()) h += '<div class="banner done">Marked complete on ' + esc(fmt(rec('_done').at, true)) + '. You can still change an answer. Each change is logged.</div>';
+  h += '<div class="progress"><div class="bar"><i style="width:' + Math.round(n / c.length * 100) + '%"></i></div><span class="mono" id="prog">' + n + ' of ' + c.length + ' answered</span></div>';
+  h += '<div class="chips"><span>Show questions for</span>' + ['All','Trey','John Morgan','Tyler'].map(function(w){ return '<button class="chip' + (S.who === w ? ' on' : '') + '" data-act="who" data-who="' + w + '">' + w + '</button>'; }).join('') + '</div>';
+  IN.sections.forEach(function(s){
+    var items = s.items.filter(whoMatch); if(!items.length && !s.positions) return; if(S.who !== 'All' && s.kind === 'terms') return;
+    var openN = items.filter(function(i){ return needsAnswer(i) && !answered(i) && String(val(i)).trim(); }).length;
+    h += '<section class="sec" id="sec-' + s.id + '"><div class="sec-h"><h2>' + esc(s.title) + '</h2><div class="sec-tools">' +
+      (s.doc ? '<button class="btn ghost small" data-act="doc" data-id="' + s.doc + '">Read the draft</button>' : '') +
+      (openN ? '<button class="btn small" data-act="confirmall" data-sec="' + s.id + '">Confirm ' + openN + ' recommended</button>' : '') + '</div></div>' +
+      '<p class="sec-intro">' + esc(s.intro || '') + '</p>';
+    if(s.positions) h += '<ol class="pos">' + s.positions.map(function(p){ return '<li>' + esc(p) + '</li>'; }).join('') + '</ol><div style="height:10px"></div>';
+    if(s.kind === 'terms') h += '<div class="terms">' + items.map(termRow).join('') + '</div>';
+    else h += items.map(card).join('');
+    h += '</section>';
+  });
+  h += '<div class="finish"><h2>' + (isDone() ? 'Marked complete' : 'When you’re done') + '</h2>' +
+    '<p>' + (isDone() ? 'Tyler has what he needs to finish the documents.' : (left ? left + ' question' + (left === 1 ? ' is' : 's are') + ' still open. Anything you leave open gets the recommended answer, and blank facts come back to you.' : 'Every question is answered.') + ' Marking it complete tells Tyler the documents can be finished.') + '</p><div class="row">' +
+    (isDone() ? '<button class="btn ghost" data-act="reopen">Reopen</button>' : '<button class="btn" data-act="done">Mark December 1 decisions complete</button>') +
+    (isDone() && CFG.notifyEmail ? '<a class="btn" style="text-decoration:none" href="mailto:' + esc(CFG.notifyEmail) + '?subject=' + encodeURIComponent('SchoLehr legal decisions are complete') + '&body=' + encodeURIComponent('The December 1 decisions are marked complete in the tool.') + '">Email Tyler</a>' : '') +
+    '<button class="btn ghost" data-act="export">Download the answers file</button></div></div></div>';
+  m.innerHTML = h; fit();
+}
+function fit(){ [].forEach.call(document.querySelectorAll('.term textarea'), function(t){ t.style.height = '36px'; t.style.height = Math.max(36, t.scrollHeight + 2) + 'px'; }); }
+
+/* ---------- documents ---------- */
+function docView(d){
+  var dueLabels = d.due.map(function(x){ return (IN.due.filter(function(g){ return g.id === x; })[0] || {}).label; });
+  var org = (IN.orgs.filter(function(o){ return o.id === d.org; })[0] || {}).label, phase1 = d.due.indexOf('dec1') >= 0;
+  var sec = IN.sections.filter(function(s){ return s.doc === d.id; })[0];
+  var h = '<div class="col"><div class="eyebrow" style="color:var(--deepbrass)">' + esc(org) + (d.num ? ' · Document ' + esc(d.num) : '') + '</div><h1>' + esc(d.title) + '</h1>' +
+    '<div class="doc-meta"><span class="pill due">' + (d.due[0] === 'later' ? 'Not scheduled' : 'Due ' + esc(dueLabels.join(' and '))) + '</span><span class="pill">' + esc(d.version) + '</span><span class="pill mono">' + d.words.toLocaleString() + ' words</span></div>';
+  if(d.note) h += '<p class="lede">' + esc(d.note) + '</p>';
+  h += phase1 ? '<p class="lede">You don’t need to read this to answer. <button class="link" data-act="view" data-view="decisions" data-focus="' + (sec ? sec.id : '') + '">Go to its questions</button></p>'
+              : '<p class="lede">No decisions are needed on this one yet. Its questions open after December 1.</p>';
+  h += '<div class="legend"><span><mark class="blank">[Bracketed text]</mark> is filled in from the answers</span><span><span class="auto">{braces}</span> are filled in by the platform</span>' + (d.html.indexOf('<ins>') >= 0 ? '<span><ins>Underlined green</ins> changed on November 24</span>' : '') + '</div>';
+  return h + '<article class="doc">' + d.html + '</article></div>';
+}
+
+/* ---------- activity ---------- */
+function fmt(iso, withDate){ var d = new Date(iso); if(isNaN(d)) return ''; var t = d.toLocaleTimeString([], {hour:'numeric', minute:'2-digit'});
+  return withDate ? d.toLocaleDateString([], {month:'long', day:'numeric'}) + ' at ' + t : t; }
+function activityView(){
+  var h = '<div class="col"><div class="eyebrow" style="color:var(--deepbrass)">Activity</div><h1>What changed, and when</h1><p class="lede">Every change to an answer is recorded here, newest first. The page has one shared password, so it doesn’t record who made a change.</p>';
+  if(!S.log.length) return h + '<p class="empty">No changes yet.</p></div>';
+  var day = '';
+  S.log.forEach(function(e){ var d = new Date(e.at), k = d.toLocaleDateString([], {weekday:'long', month:'long', day:'numeric'});
+    if(k !== day){ day = k; h += '<div class="day">' + esc(k) + '</div>'; }
+    h += '<div class="ev"><time>' + esc(fmt(e.at)) + '</time><div><b>' + esc(e.label) + '</b><div class="chg">' + (e.old_value ? '<s>' + esc(e.old_value) + '</s> → ' : '') + esc(e.new_value) + '</div></div></div>'; });
+  return h + '</div>';
+}
+
+/* ---------- events ---------- */
+function refresh(id){ var el = document.getElementById('q-' + id); if(el && ITEMS[id]) el.outerHTML = card(ITEMS[id]); progressOnly(); }
+function progressOnly(){ var c = counted(), n = c.filter(answered).length, p = document.getElementById('prog'); if(p) p.textContent = n + ' of ' + c.length + ' answered';
+  var b = document.querySelector('.bar i'); if(b) b.style.width = Math.round(n / c.length * 100) + '%'; var s = document.querySelector('.nav .count'); if(s) s.textContent = n + '/' + c.length; }
+function confirmItem(it){ var v = val(it); return commit(it.id, {v:v, c:true}, it.label, '', 'Confirmed: ' + short(show(it, v))); }
+
+function onClick(e){
+  var t = e.target.closest('[data-act]');
+  if(document.body.classList.contains('menu') && !e.target.closest('aside') && !(t && t.dataset.act === 'menu')) document.body.classList.remove('menu');
+  if(!t) return; var a = t.dataset.act, id = t.dataset.id;
+  if(a === 'menu') return void document.body.classList.toggle('menu');
+  if(a === 'view') return void go({name:t.dataset.view, focus:t.dataset.focus});
+  if(a === 'doc') return void go({name:'doc', id:id});
+  if(a === 'group'){ S.group = t.dataset.g; return void renderSide(); }
+  if(a === 'who'){ S.who = t.dataset.who; return void renderMain(); }
+  if(a === 'note'){ S.notesOpen[id] = true; refresh(id); var ta = document.querySelector('#q-' + id + ' textarea'); if(ta) ta.focus(); return; }
+  if(a === 'confirm'){ confirmItem(ITEMS[id]); return void refresh(id); }
+  if(a === 'confirmall'){ var sec = IN.sections.filter(function(s){ return s.id === t.dataset.sec; })[0];
+    sec.items.filter(whoMatch).forEach(function(i){ if(needsAnswer(i) && !answered(i) && String(val(i)).trim()) confirmItem(i); }); return void render(); }
+  if(a === 'done'){ commit('_done', {v:true}, 'December 1 decisions', '', 'Marked complete'); return void render(); }
+  if(a === 'reopen'){ commit('_done', {v:false}, 'December 1 decisions', 'Marked complete', 'Reopened'); return void render(); }
+  if(a === 'export') return void exportFile();
+}
+function onChange(e){
+  var t = e.target, id = t.dataset && t.dataset.id; if(!id || !ITEMS[id]) return; var it = ITEMS[id], r = rec(id);
+  if(t.type === 'radio'){ var old = r.c ? show(it, val(it)) : '';
+    commit(id, {v:t.value, c:true}, it.label, short(old), short(show(it, t.value))); refresh(id);
+    var again = document.querySelector('#q-' + id + ' input:checked'); if(again) again.focus(); return; }
+  if(t.dataset.note){ if((r.n || '') === t.value) return; return void commit(id, {n:t.value}, it.label + ' (note)', short(r.n || ''), short(t.value) || 'Note removed'); }
+  var before = String(val(it)), now = t.value.trim(); if(before === now && (r.c || !needsAnswer(it))) return;
+  commit(id, needsAnswer(it) ? {v:now, c:now !== ''} : {v:now}, it.label, short(before), short(now) || 'Cleared');
+  if(it.type === 'term'){ t.closest('.term').classList.toggle('changed', now !== it.def); return; }
+  if(it.type === 'text'){ var card0 = document.getElementById('q-' + id), chip = card0 && card0.querySelector('.status'), btn = card0 && card0.querySelector('[data-act="confirm"]');
+    if(chip){ chip.className = 'status ' + (now ? 'ok' : 'open'); chip.textContent = now ? 'Answered' : 'Needed'; } if(btn) btn.remove(); if(card0) card0.classList.toggle('answered', !!now); progressOnly(); }
+}
+
+/* ---------- sync and export ---------- */
+function same(a, b){ var ka = Object.keys(a), kb = Object.keys(b); if(ka.length !== kb.length) return false;
+  return ka.every(function(k){ if(!b[k]) return false; var x = Object.assign({}, a[k]), y = Object.assign({}, b[k]); delete x.at; delete y.at;
+    return JSON.stringify(x, Object.keys(x).sort()) === JSON.stringify(y, Object.keys(y).sort()); }); }
+function poll(){ if(document.hidden || pending) return; var mark = edits;
+  store.load(S.pass).then(function(d){ if(pending || mark !== edits) return; S.log = d.log; var changed = !same(d.answers, S.answers);
+    if(!changed){ var c = document.querySelectorAll('.nav .count')[1]; if(c) c.textContent = S.log.length; if(S.view.name === 'activity') renderMain(); return; } var el = document.activeElement, busy = el && /^(INPUT|TEXTAREA)$/.test(el.tagName) && el.type !== 'radio';
+    if(busy) return; var y = window.scrollY; S.answers = d.answers; S.log = d.log; render(); window.scrollTo(0, y); }).catch(function(){}); }
+
+function exportFile(){
+  var out = { tool:'SchoLehr legal decisions', phase:IN.phase.id, exported_at:new Date().toISOString(), complete:isDone(), completed_at:isDone() ? rec('_done').at : null, answers:{}, log:S.log };
+  IN.sections.forEach(function(s){ s.items.forEach(function(it){ var r = rec(it.id), v = val(it);
+    out.answers[it.id] = { section:s.title, question:it.label, type:it.type, value:v, value_text:show(it, v), recommended:it.type === 'radio' ? it.rec : (it.def || ''),
+      matches_recommended:it.type === 'radio' ? v === it.rec : v === (it.def || ''), confirmed:needsAnswer(it) ? r.c === true : null, note:r.n || '', documents:it.docs || (it.doc ? [it.doc] : (s.doc ? [s.doc] : [])), refs:it.refs || '', updated_at:r.at || null }; }); });
+  var blob = new Blob([JSON.stringify(out, null, 2)], {type:'application/json'}), a = document.createElement('a');
+  a.href = URL.createObjectURL(blob); a.download = 'scholehr-legal-answers-' + new Date().toISOString().slice(0, 10) + '.json'; document.body.appendChild(a); a.click(); a.remove();
+}
+
+/* ---------- boot ---------- */
+var saved = ss('legal-pass'); if(saved) open(saved, true); else gate();
+})();
+</script>
+</body>
+</html>
